@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200..900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#F4F6F7; }
+  a { color:#D68800; text-decoration:none; }
+  a:hover { color:#B37200; }
+</style>
+</helmet>
+<div dir="rtl" style="font-family:Vazirmatn, system-ui, sans-serif; color:#0F1315; background:#F4F6F7; min-height:100vh">
+
+  <header style="background:#F4F6F7; border-bottom:1px solid #D5DCE0; position:sticky; top:0; z-index:40">
+    <div style="max-width:1240px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:24px; flex-wrap:wrap">
+      <span style="font-size:22px; font-weight:800; letter-spacing:-0.5px">برتراندیش</span>
+      <nav style="display:flex; gap:20px; font-size:14.5px; font-weight:600; flex:1; flex-wrap:wrap">
+        <a href="#" style="color:#0F1315; border-bottom:2px solid #F8B000; padding-bottom:3px">فروشگاه</a>
+        <a href="#" style="color:#3E4950">کتاب‌ها</a>
+        <a href="#" style="color:#3E4950">ابزار کلاس</a>
+        <a href="#" style="color:#3E4950">دوره‌ها</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:8px; border:1px solid #D5DCE0; background:#fff; border-radius:11px; padding:0 14px; height:42px; font-size:13.5px; font-weight:700; color:#3E4950">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.5 12h11L21 7H6"></path></svg>
+        سبد
+        <span style="background:#0F1315; color:#fff; font-size:12px; min-width:20px; height:20px; border-radius:6px; display:flex; align-items:center; justify-content:center; padding:0 5px">{{ cartCount }}</span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1240px; margin:0 auto; padding:24px 20px 72px">
+    <nav style="display:flex; gap:8px; flex-wrap:wrap; font-size:13px; color:#7C909C; margin-bottom:22px">
+      <a href="#" style="color:#5D6E79">فروشگاه</a><span>/</span><a href="#" style="color:#5D6E79">کتاب‌ها</a><span>/</span><span>کتاب کار مدیریت کلاس</span>
+    </nav>
+
+    <div style="background:#fff; border:1px solid #D5DCE0; border-radius:24px; padding:24px; display:flex; flex-wrap:wrap; gap:36px">
+
+      <div style="flex:1 1 380px; min-width:0; display:flex; flex-direction:column; gap:12px">
+        <div style="aspect-ratio:1/1; border-radius:18px; overflow:hidden; background:#F4F6F7; position:relative">
+          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="1">
+            <sc-if value="{{ g.active }}" hint-placeholder-val="{{ true }}">
+              <image-slot id="{{ g.id }}" shape="rounded" radius="18" placeholder="{{ g.label }}"></image-slot>
+            </sc-if>
+          </sc-for>
+          <span style="position:absolute; top:14px; right:14px; font-size:12.5px; font-weight:800; padding:5px 11px; border-radius:8px; background:#0F1315; color:#fff">۲۰٪ تخفیف</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px">
+          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4">
+            <button onClick="{{ g.pick }}" style="aspect-ratio:1/1; padding:0; border-radius:12px; border:2px solid {{ g.border }}; background:#F4F6F7; cursor:pointer; font-family:Vazirmatn,sans-serif; font-size:12px; color:#5D6E79">{{ g.short }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:1 1 380px; min-width:0; display:flex; flex-direction:column; gap:20px">
+        <div style="display:flex; flex-direction:column; gap:10px">
+          <span style="font-size:13px; font-weight:700; color:#B37200">کتاب · ویژه معلم‌ها</span>
+          <h1 style="font-size:clamp(26px, 3.4vw, 34px); line-height:1.5; font-weight:800; letter-spacing:-0.6px; margin:0">کتاب کار مدیریت کلاس</h1>
+          <div style="display:flex; gap:14px; flex-wrap:wrap; font-size:13.5px; color:#5D6E79">
+            <span><span style="color:#F8B000">★</span> <b style="color:#0F1315">۴٫۷</b> (۸۶ نظر)</span>
+            <span>۴۲۰ فروش</span>
+          </div>
+        </div>
+
+        <p style="margin:0; font-size:15px; line-height:2.1; color:#4D5960; text-wrap:pretty">۴۰ برگه تمرین، چک‌لیست و فرم آماده برای برنامه‌ریزی کلاس، ثبت رفتار و گزارش به والدین. مناسب دوره ابتدایی و متوسطه اول.</p>
+
+        <div style="display:flex; flex-direction:column; gap:10px">
+          <span style="font-size:14px; font-weight:800">نوع نسخه</span>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px">
+            <sc-for list="{{ variants }}" as="v" hint-placeholder-count="3">
+              <button onClick="{{ v.pick }}" style="text-align:right; border:2px solid {{ v.border }}; background:{{ v.bg }}; border-radius:14px; padding:12px 14px; cursor:pointer; font-family:Vazirmatn,sans-serif; display:flex; flex-direction:column; gap:4px">
+                <span style="font-size:14.5px; font-weight:800; color:#0F1315">{{ v.label }}</span>
+                <span style="font-size:12.5px; color:#5D6E79">{{ v.note }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px; font-size:13.5px; font-weight:700; color:{{ stockColor }}">
+          <span style="width:8px; height:8px; border-radius:50%; background:{{ stockColor }}"></span>{{ stockText }}
+        </div>
+
+        <div style="background:#F4F6F7; border-radius:18px; padding:18px; display:flex; flex-direction:column; gap:14px">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap">
+            <div style="display:flex; flex-direction:column">
+              <span style="font-size:14px; color:#8A959B; text-decoration:line-through">{{ oldPrice }}</span>
+              <span style="font-size:30px; font-weight:800; letter-spacing:-0.6px">{{ price }} <span style="font-size:14px; font-weight:500; color:#5D6E79">تومان</span></span>
+            </div>
+            <sc-if value="{{ hasQty }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; align-items:center; background:#fff; border:1px solid #D5DCE0; border-radius:12px; height:46px">
+                <button onClick="{{ inc }}" style="width:44px; height:44px; border:none; background:none; font-size:20px; cursor:pointer; color:#0F1315">+</button>
+                <span style="min-width:28px; text-align:center; font-size:16px; font-weight:800">{{ qty }}</span>
+                <button onClick="{{ dec }}" style="width:44px; height:44px; border:none; background:none; font-size:20px; cursor:pointer; color:#0F1315">−</button>
+              </div>
+            </sc-if>
+          </div>
+          <button onClick="{{ addToCart }}" style="height:54px; border:none; border-radius:13px; background:{{ ctaBg }}; color:#fff; font-family:Vazirmatn,sans-serif; font-size:16px; font-weight:800; cursor:pointer">{{ ctaLabel }}</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px">
+          <sc-for list="{{ perks }}" as="p" hint-placeholder-count="3">
+            <div style="border:1px solid #E1E6E9; border-radius:14px; padding:12px 14px; display:flex; flex-direction:column; gap:3px">
+              <span style="font-size:13.5px; font-weight:800">{{ p.title }}</span>
+              <span style="font-size:12.5px; color:#5D6E79; line-height:1.7">{{ p.text }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:28px; display:flex; flex-wrap:wrap; gap:28px; align-items:flex-start">
+      <div style="flex:2 1 560px; min-width:0; background:#fff; border:1px solid #D5DCE0; border-radius:22px; padding:8px 26px 28px">
+        <div style="display:flex; gap:4px; border-bottom:1px solid #E1E6E9; overflow-x:auto; margin-bottom:22px">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.pick }}" style="flex-shrink:0; background:transparent; border:none; border-bottom:3px solid {{ t.line }}; font-family:Vazirmatn,sans-serif; font-size:15px; font-weight:700; color:{{ t.fg }}; padding:14px 16px; cursor:pointer; margin-bottom:-1px">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ isDesc }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:14px; font-size:15.5px; line-height:2.1; color:#3E4950; max-width:68ch">
+            <p style="margin:0">این کتاب کار همراه روزانه معلم است. هر بخش با یک توضیح کوتاه شروع می‌شود و بعد برگه‌های آماده‌ای دارد که می‌توانید مستقیم در کلاس استفاده کنید یا کپی بگیرید.</p>
+            <p style="margin:0">بخش‌ها: برنامه‌ریزی هفتگی، قانون‌های کلاس، جدول ثبت رفتار، فرم گفت‌وگو با دانش‌آموز، گزارش ماهانه به والدین.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isSpecs }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column">
+            <sc-for list="{{ specs }}" as="sp" hint-placeholder-count="6">
+              <div style="display:grid; grid-template-columns:minmax(120px, 200px) 1fr; gap:16px; padding:13px 0; border-bottom:1px solid #F0F2F4; font-size:14.5px">
+                <span style="color:#7C909C">{{ sp.k }}</span><span style="font-weight:700">{{ sp.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isReviews }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:12px">
+            <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+              <div style="border:1px solid #E1E6E9; border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:6px">
+                <div style="display:flex; justify-content:space-between; gap:8px"><b style="font-size:14.5px">{{ r.name }}</b><span style="font-size:12.5px; color:#7C909C">{{ r.ver }}</span></div>
+                <span style="font-size:14.5px; line-height:2; color:#3E4950">{{ r.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+
+      <aside style="flex:1 1 300px; min-width:0; display:flex; flex-direction:column; gap:14px">
+        <div style="background:#2E373C; color:#EAEDEF; border-radius:22px; padding:22px; display:flex; flex-direction:column; gap:12px">
+          <span style="font-size:13px; font-weight:700; color:#A6B4BC">خرید با هم</span>
+          <span style="font-size:18px; font-weight:800; line-height:1.7; color:#fff">کتاب کار + دوره مدیریت کلاس</span>
+          <span style="font-size:14px; line-height:1.9; color:#C1C9CE">اگر هر دو را با هم بخرید، ۱۵٪ کمتر پرداخت می‌کنید.</span>
+          <div style="display:flex; align-items:baseline; gap:8px; margin-top:4px">
+            <span style="font-size:22px; font-weight:800; color:#fff">۵۲۰٬۰۰۰</span>
+            <span style="font-size:13px; color:#8A959B; text-decoration:line-through">۶۱۵٬۰۰۰</span>
+          </div>
+          <a href="#" style="height:48px; border-radius:12px; background:#F8B000; color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800" style-hover="background:#FFBC2B; color:#fff">افزودن هر دو به سبد</a>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top:56px">
+      <h2 style="font-size:24px; font-weight:800; margin:0 0 18px">محصولات مشابه</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px">
+        <sc-for list="{{ related }}" as="p" hint-placeholder-count="4">
+          <article style="background:#fff; border:1px solid #D5DCE0; border-radius:18px; padding:14px; display:flex; flex-direction:column; gap:10px" style-hover="border-color:#F8B000">
+            <div style="aspect-ratio:1/1; border-radius:12px; overflow:hidden; background:#F4F6F7"><image-slot id="{{ p.slot }}" shape="rounded" radius="12" placeholder="تصویر محصول"></image-slot></div>
+            <span style="font-size:12px; font-weight:700; color:#B37200">{{ p.type }}</span>
+            <span style="font-size:15px; font-weight:800; line-height:1.7">{{ p.title }}</span>
+            <span style="font-size:15px; font-weight:800; margin-top:auto">{{ p.price }} <span style="font-size:12px; font-weight:500; color:#5D6E79">تومان</span></span>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#fff; border-top:3px solid #F8B000; color:#3E4950">
+    <div style="max-width:1240px; margin:0 auto; padding:26px 20px; display:flex; align-items:center; gap:24px; flex-wrap:wrap">
+      <span style="font-size:19px; font-weight:800; color:#0F1315">برتراندیش</span>
+      <nav style="display:flex; gap:20px; flex-wrap:wrap; font-size:14px; font-weight:600; flex:1">
+        <a href="#" style="color:#3E4950">فروشگاه</a><a href="#" style="color:#3E4950">شرایط ارسال</a><a href="#" style="color:#3E4950">درباره ما</a><a href="#" style="color:#3E4950">قوانین</a>
+      </nav>
+      <span style="font-size:13px; color:#6B8090">© ۱۴۰۵ برتراندیش</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { img: 0, variant: 'print', qty: 1, tab: 'desc', added: 0 };
+  renderVals() {
+    const s = this.state;
+    const fa = n => n.toLocaleString('fa-IR');
+    const V = {
+      print: { label: 'نسخه چاپی', note: 'ارسال پستی', price: 176000, old: 220000, stock: 'موجود در انبار · ارسال ۲ تا ۴ روز کاری', stockColor: '#1E8E5A', qty: true },
+      pdf: { label: 'نسخه PDF', note: 'دانلود فوری', price: 96000, old: 120000, stock: 'فایل دیجیتال · دانلود بلافاصله پس از پرداخت', stockColor: '#1E8E5A', qty: false },
+      both: { label: 'چاپی + PDF', note: 'هر دو نسخه', price: 216000, old: 270000, stock: 'فقط ۷ عدد باقی مانده', stockColor: '#C0392B', qty: true }
+    };
+    const v = V[s.variant];
+    const q = v.qty ? s.qty : 1;
+    const gal = [['p-img-1', 'جلد', 'تصویر جلد'], ['p-img-2', 'داخل', 'صفحات داخلی'], ['p-img-3', 'نمونه', 'نمونه برگه'], ['p-img-4', 'بسته', 'تصویر بسته‌بندی']];
+    const tabDefs = [['desc', 'توضیحات'], ['specs', 'مشخصات'], ['reviews', 'نظرات (۸۶)']];
+    return {
+      cartCount: fa(2 + s.added),
+      gallery: gal.map(([id, short, label], i) => ({ id, short, label, active: s.img === i, border: s.img === i ? '#F8B000' : '#E1E6E9', pick: () => this.setState({ img: i }) })),
+      variants: Object.entries(V).map(([k, x]) => ({ label: x.label, note: x.note, border: s.variant === k ? '#F8B000' : '#E1E6E9', bg: s.variant === k ? '#FFF8E6' : '#fff', pick: () => this.setState({ variant: k, qty: 1 }) })),
+      stockText: v.stock, stockColor: v.stockColor,
+      price: fa(v.price * q), oldPrice: fa(v.old * q),
+      hasQty: v.qty, qty: fa(s.qty),
+      inc: () => this.setState(st => ({ qty: Math.min(st.qty + 1, 10) })),
+      dec: () => this.setState(st => ({ qty: Math.max(st.qty - 1, 1) })),
+      addToCart: () => this.setState(st => ({ added: st.added + q })),
+      ctaLabel: s.added ? 'افزوده شد · افزودن دوباره' : 'افزودن به سبد خرید',
+      ctaBg: s.added ? '#0F1315' : '#F8B000',
+      perks: [{ title: 'ارسال رایگان', text: 'برای خرید بالای ۳۰۰ هزار تومان' }, { title: 'ضمانت بازگشت', text: 'تا ۷ روز پس از تحویل' }, { title: 'پرداخت امن', text: 'درگاه بانکی و قسطی' }],
+      tabs: tabDefs.map(([k, label]) => ({ label, fg: s.tab === k ? '#0F1315' : '#7C909C', line: s.tab === k ? '#F8B000' : 'transparent', pick: () => this.setState({ tab: k }) })),
+      isDesc: s.tab === 'desc', isSpecs: s.tab === 'specs', isReviews: s.tab === 'reviews',
+      specs: [{ k: 'نویسنده', v: 'نام نویسنده' }, { k: 'تعداد صفحات', v: '۱۲۰ صفحه' }, { k: 'قطع', v: 'رحلی' }, { k: 'نوع جلد', v: 'شومیز، صحافی سیمی' }, { k: 'مقطع', v: 'ابتدایی و متوسطه اول' }, { k: 'نوبت چاپ', v: 'دوم، ۱۴۰۵' }],
+      reviews: [{ name: 'فاطمه', ver: 'نسخه چاپی', text: 'صحافی سیمی خیلی کاربردی است؛ راحت باز می‌ماند و کپی گرفتن آسان است.' }, { name: 'علی', ver: 'نسخه PDF', text: 'فرم گزارش به والدین را هر ماه استفاده می‌کنم.' }],
+      related: [
+        { slot: 'pr-1', type: 'کتاب', title: 'ارتباط مؤثر با والدین', price: '۱۸۰٬۰۰۰' },
+        { slot: 'pr-2', type: 'ابزار کلاس', title: 'کارت‌های تشویقی (۶۰ عدد)', price: '۹۵٬۰۰۰' },
+        { slot: 'pr-3', type: 'پوستر', title: 'پوستر قوانین کلاس', price: '۶۵٬۰۰۰' },
+        { slot: 'pr-4', type: 'بسته', title: 'بسته شروع سال تحصیلی', price: '۳۴۰٬۰۰۰' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

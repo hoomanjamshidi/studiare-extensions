@@ -1,0 +1,833 @@
+/**
+ * Studiare Extensions — about us and contact us widgets.
+ *
+ * Loaded only on pages that use these widgets (handle `stx-builder-pages`).
+ * Colours come from the brand tokens (tokens.css), so every widget follows
+ * the brand colours, the container surfaces and Studiare's dark mode, and
+ * logical properties keep RTL and LTR correct.
+ *
+ * Sections: shared · contact form · map · contact details · timeline ·
+ * phones · dark mode · motion
+ */
+
+/* ==========================================================================
+   Shared
+   ========================================================================== */
+
+/* Without a definite width, Chrome measures these widgets at zero width
+   inside Elementor's wrapping column containers on phones (see home.css). */
+:is(
+	.elementor-widget-stx-contact-form,
+	.elementor-widget-stx-map,
+	.elementor-widget-stx-contact-details,
+	.elementor-widget-stx-timeline
+):not([class*="elementor-widget__width-"]) {
+	width: 100%;
+}
+
+/* ==========================================================================
+   Contact form
+   ========================================================================== */
+
+.stx-cform {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	margin: 0;
+	color: var(--stx-text);
+}
+
+.stx-cform--card {
+	padding: 28px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius-lg);
+	background: var(--stx-card);
+	box-shadow: var(--stx-shadow);
+}
+
+.stx-cform__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 16px;
+}
+
+/* Name, phone and email share a row when there is room for each. */
+.stx-cform--cols .stx-cform__grid {
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+}
+
+.stx-cform__field {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+	min-width: 0;
+	margin: 0;
+}
+
+.stx-cform__field--wide {
+	grid-column: 1 / -1;
+}
+
+.stx-cform__label {
+	color: var(--stx-ink);
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.5;
+}
+
+.stx-cform__req {
+	color: var(--stx-danger);
+}
+
+.stx-cform__optional {
+	color: var(--stx-muted);
+	font-size: 12px;
+	font-weight: 400;
+}
+
+/* Two classes: Studiare styles every text field with its own borders and heights. */
+.stx-cform .stx-cform__input {
+	width: 100%;
+	height: auto;
+	min-height: 50px;
+	margin: 0;
+	padding: 0 14px;
+	border: 1px solid var(--stx-field-line);
+	border-radius: 12px;
+	background: var(--stx-field-bg);
+	box-shadow: none;
+	color: var(--stx-ink);
+	font-family: inherit;
+	/* 16px: iOS zooms into smaller fields on focus. */
+	font-size: 16px;
+	line-height: 1.6;
+	text-align: start;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stx-cform textarea.stx-cform__input {
+	min-height: 140px;
+	padding: 12px 14px;
+	resize: vertical;
+	line-height: 1.8;
+}
+
+.stx-cform .stx-cform__input::placeholder {
+	color: var(--stx-muted);
+	opacity: 1;
+}
+
+.stx-cform--soft .stx-cform__input {
+	border-color: transparent;
+	background: var(--stx-bg);
+}
+
+.stx-cform .stx-cform__input:focus {
+	border-color: var(--stx-accent);
+	outline: 2px solid color-mix(in srgb, var(--stx-accent) 45%, transparent);
+	outline-offset: 1px;
+}
+
+/* Marked by pages.js from the server's answer, or by the browser after the visitor typed. */
+.stx-cform .stx-cform__input[aria-invalid="true"],
+.stx-cform .stx-cform__input:user-invalid {
+	border-color: var(--stx-danger);
+}
+
+.stx-cform__select {
+	position: relative;
+	display: block;
+}
+
+.stx-cform .stx-cform__select select {
+	padding-inline-end: 40px;
+	appearance: none;
+	cursor: pointer;
+}
+
+/* A down chevron is the same in both directions, so its borders stay physical. */
+.stx-cform__select::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	inset-inline-end: 17px;
+	width: 7px;
+	height: 7px;
+	border-right: 2px solid var(--stx-muted);
+	border-bottom: 2px solid var(--stx-muted);
+	transform: translateY(-70%) rotate(45deg);
+	pointer-events: none;
+}
+
+/* Studiare turns every <select> into select2 (global.js, since 13.3); its box
+   is matched to the other fields, and the plain chevron steps aside. */
+.stx-cform__select:has(.select2-container)::after {
+	display: none;
+}
+
+/* Studiare's own select2 rules add padding and move the arrow (`body.rtl …`,
+   specificity 0,4,1); the theme class keeps these one class ahead. */
+.stx-cform .select2-container.select2-container--default .select2-selection--single {
+	height: 50px;
+	padding: 0;
+	border: 1px solid var(--stx-field-line);
+	border-radius: 12px;
+	background: var(--stx-field-bg);
+}
+
+.stx-cform .select2-container.select2-container--default .select2-selection--single .select2-selection__rendered {
+	padding-block: 0;
+	padding-inline: 14px 40px;
+	color: var(--stx-ink);
+	font-size: 16px;
+	line-height: 48px;
+}
+
+.stx-cform .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow {
+	top: 0;
+	height: 48px;
+	margin-inline: 8px;
+}
+
+.stx-cform .select2-container--focus .select2-selection--single,
+.stx-cform .select2-container--open .select2-selection--single {
+	border-color: var(--stx-accent);
+}
+
+.stx-cform .stx-cform__input[aria-invalid="true"] + .select2-container .select2-selection--single {
+	border-color: var(--stx-danger);
+}
+
+.stx-cform__hint {
+	margin: -6px 0 0;
+	color: var(--stx-muted);
+	font-size: 13px;
+	line-height: 1.7;
+}
+
+.stx-cform__foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px 16px;
+}
+
+/* Beats Studiare's `button[type="submit"]`, which paints buttons in its own colour. */
+.stx-cform .stx-btn--accent {
+	background-color: var(--stx-accent);
+	color: var(--stx-on-accent);
+}
+
+.stx-cform .stx-btn--accent:hover {
+	background-color: var(--stx-accent-strong);
+	color: var(--stx-on-accent);
+}
+
+.stx-cform--full-btn .stx-btn {
+	flex: 1 1 100%;
+}
+
+.stx-cform.is-busy .stx-btn {
+	opacity: 0.7;
+	cursor: progress;
+}
+
+.stx-cform__note {
+	flex: 1 1 200px;
+	margin: 0;
+	color: var(--stx-muted);
+	font-size: 13px;
+	line-height: 1.7;
+}
+
+.stx-cform__status {
+	margin: 0;
+	padding: 12px 14px;
+	border-radius: 12px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.8;
+}
+
+.stx-cform__status:empty {
+	display: none;
+}
+
+.stx-cform__status.is-ok {
+	background: color-mix(in srgb, var(--stx-success) 12%, transparent);
+	color: var(--stx-success);
+}
+
+.stx-cform__status.is-error {
+	background: color-mix(in srgb, var(--stx-danger) 10%, transparent);
+	color: var(--stx-danger);
+}
+
+/* Honeypot: out of sight and out of reach for people. */
+.stx-cform__trap {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+/* ==========================================================================
+   Map
+   ========================================================================== */
+
+.stx-map {
+	--stx-map-h: 400px;
+	position: relative;
+}
+
+/* A fixed height before anything loads: the map never shifts the page. */
+.stx-map__frame {
+	position: relative;
+	height: var(--stx-map-h);
+	overflow: hidden;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius-lg);
+	background: var(--stx-bg);
+}
+
+.stx-map__iframe,
+.stx-map__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	object-fit: cover;
+}
+
+.stx-map__facade {
+	display: grid;
+	align-content: center;
+	justify-items: center;
+	gap: 18px;
+	height: 100%;
+	background-color: var(--stx-bg);
+	background-image:
+		linear-gradient(var(--stx-line) 1px, transparent 1px),
+		linear-gradient(90deg, var(--stx-line) 1px, transparent 1px);
+	background-position: center;
+	background-size: 34px 34px;
+}
+
+.stx-map__pin {
+	display: grid;
+	place-items: center;
+	width: 54px;
+	height: 54px;
+	border-radius: 50% 50% 50% 0;
+	background: var(--stx-accent);
+	box-shadow: var(--stx-shadow-pop);
+	color: var(--stx-on-accent);
+	transform: rotate(-45deg);
+}
+
+.stx-map__pin .stx-ico {
+	width: 24px;
+	height: 24px;
+	transform: rotate(45deg);
+}
+
+.stx-map__card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 14px;
+	padding: 20px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+	box-shadow: var(--stx-shadow);
+}
+
+/* On wide screens the card floats on the map's bottom corner. */
+@media (min-width: 1025px) {
+	.stx-map--card .stx-map__card {
+		position: absolute;
+		inset-block-end: 20px;
+		inset-inline-start: 20px;
+		width: min(360px, calc(100% - 40px));
+		margin: 0;
+		box-shadow: var(--stx-shadow-pop);
+	}
+}
+
+.stx-map__title {
+	margin: 0;
+	color: var(--stx-ink);
+	font-family: inherit;
+	font-size: 17px;
+	font-weight: 800;
+	line-height: 1.5;
+}
+
+.stx-map__line {
+	display: flex;
+	gap: 10px;
+	margin: 0;
+	color: var(--stx-text);
+	font-size: 14px;
+	line-height: 1.85;
+}
+
+.stx-map__line .stx-ico {
+	flex: none;
+	width: 18px;
+	height: 18px;
+	margin-top: 4px;
+	color: var(--stx-accent-ink);
+}
+
+.stx-map__routes {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-top: 14px;
+}
+
+.stx-map__card .stx-map__routes {
+	margin-top: 4px;
+	padding-top: 14px;
+	border-top: 1px dashed var(--stx-line);
+}
+
+.stx-map__routes-label {
+	flex-basis: 100%;
+	color: var(--stx-muted);
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.stx-map__route {
+	--stx-link: var(--stx-ink);
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 16px;
+	border: 1px solid var(--stx-line);
+	border-radius: 999px;
+	background: var(--stx-card);
+	color: var(--stx-ink);
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+	transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.stx-map__route:hover,
+.stx-map__route:focus-visible {
+	--stx-link: var(--stx-accent-ink);
+	border-color: var(--stx-accent);
+	color: var(--stx-accent-ink);
+}
+
+.stx-map__route:focus-visible {
+	outline: 2px solid var(--stx-accent);
+	outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Contact details
+   ========================================================================== */
+
+.stx-cdetails {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-cdetails__item {
+	margin: 0;
+}
+
+.stx-cdetails__icon {
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 14px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+}
+
+.stx-cdetails__icon svg {
+	width: 24px;
+	height: 24px;
+}
+
+.has-brand .stx-cdetails__icon {
+	background: var(--stx-brand);
+	color: #ffffff;
+}
+
+.stx-cdetails__body {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.stx-cdetails__title {
+	color: var(--stx-muted);
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.6;
+}
+
+.stx-cdetails__value {
+	color: var(--stx-ink);
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 1.6;
+	overflow-wrap: anywhere;
+}
+
+.stx-cdetails__note {
+	color: var(--stx-muted);
+	font-size: 12.5px;
+	line-height: 1.7;
+}
+
+.stx-cdetails__link {
+	--stx-link: var(--stx-ink);
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Cards: a grid; the whole card follows its link. */
+.stx-cdetails--cards {
+	display: grid;
+	grid-template-columns: repeat(var(--stx-cols, 3), minmax(0, 1fr));
+	gap: 16px;
+}
+
+.stx-cdetails--cards .stx-cdetails__item {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	padding: 20px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+	transition: border-color 0.2s ease, transform 0.2s var(--stx-ease), box-shadow 0.2s ease;
+}
+
+.stx-cdetails--cards .stx-cdetails__link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+}
+
+.stx-cdetails--cards .stx-cdetails__item:has(.stx-cdetails__link:hover) {
+	border-color: var(--stx-accent);
+	box-shadow: var(--stx-shadow);
+	transform: translateY(-2px);
+}
+
+.stx-cdetails--cards .stx-cdetails__link:focus-visible {
+	outline: none;
+}
+
+.stx-cdetails--cards .stx-cdetails__item:has(.stx-cdetails__link:focus-visible) {
+	outline: 2px solid var(--stx-accent);
+	outline-offset: 2px;
+}
+
+/* List: rows divided by dashed lines, for side panels and dark boxes. */
+.stx-cdetails--list {
+	display: flex;
+	flex-direction: column;
+}
+
+.stx-cdetails--list .stx-cdetails__item {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding-block: 14px;
+	border-bottom: 1px dashed var(--stx-line);
+}
+
+.stx-cdetails--list .stx-cdetails__item:first-child {
+	padding-top: 0;
+}
+
+.stx-cdetails--list .stx-cdetails__item:last-child {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.stx-cdetails--list .stx-cdetails__icon {
+	width: 42px;
+	height: 42px;
+	border-radius: 12px;
+}
+
+.stx-cdetails--list .stx-cdetails__link:hover,
+.stx-cdetails--list .stx-cdetails__link:focus-visible {
+	--stx-link: var(--stx-accent-ink);
+	color: var(--stx-accent-ink);
+}
+
+/* Brand buttons: messengers in their own colours. */
+.stx-cdetails--buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: var(--stx-justify, start);
+	gap: 10px;
+}
+
+.stx-cdetails__btn {
+	--stx-link: #ffffff;
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	min-height: 48px;
+	padding-block: 0;
+	padding-inline: 14px 18px;
+	border-radius: 999px;
+	background: var(--stx-brand);
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 800;
+	text-decoration: none;
+	transition: transform 0.2s var(--stx-ease), box-shadow 0.2s ease;
+}
+
+.stx-cdetails__item:not(.has-brand) .stx-cdetails__btn {
+	--stx-link: var(--stx-on-accent);
+	background: var(--stx-accent);
+	color: var(--stx-on-accent);
+}
+
+.stx-cdetails__btn svg {
+	width: 22px;
+	height: 22px;
+}
+
+.stx-cdetails__btn:hover {
+	box-shadow: var(--stx-shadow-pop);
+	color: #ffffff;
+	transform: translateY(-2px);
+}
+
+.stx-cdetails__btn:focus-visible {
+	outline: 2px solid var(--stx-accent);
+	outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Timeline
+   ========================================================================== */
+
+/* Every look starts as a vertical line on the start side (phones); wider
+   screens switch to both sides or a row below. */
+.stx-tl {
+	--stx-tl-accent: var(--stx-accent);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	margin: 0;
+	padding: 0;
+	padding-inline-start: 38px;
+	list-style: none;
+}
+
+.stx-tl::before {
+	content: "";
+	position: absolute;
+	inset-block: 12px;
+	inset-inline-start: 11px;
+	width: 2px;
+	border-radius: 2px;
+	background: var(--stx-line);
+}
+
+.stx-tl__item {
+	position: relative;
+	margin: 0;
+}
+
+.stx-tl__dot {
+	position: absolute;
+	top: 20px;
+	inset-inline-start: -38px;
+	width: 24px;
+	height: 24px;
+	border: 4px solid var(--stx-card);
+	border-radius: 50%;
+	background: var(--stx-tl-accent);
+	box-shadow: 0 0 0 2px var(--stx-tl-accent);
+}
+
+.stx-tl__card {
+	padding: 18px 20px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+}
+
+.stx-tl__year {
+	display: inline-block;
+	margin-bottom: 8px;
+	padding: 2px 12px;
+	border-radius: 999px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+	font-size: 13px;
+	font-weight: 800;
+	line-height: 1.8;
+}
+
+.stx-tl .stx-tl__title {
+	margin: 0 0 6px;
+	color: var(--stx-ink);
+	font-family: inherit;
+	font-size: 17px;
+	font-weight: 800;
+	line-height: 1.6;
+}
+
+.stx-tl__text {
+	margin: 0;
+	color: var(--stx-text);
+	font-size: 14.5px;
+	line-height: 1.9;
+}
+
+/* Both sides of a centred line. */
+@media (min-width: 768px) {
+	.stx-tl--alternate {
+		gap: 0;
+		padding-inline-start: 0;
+	}
+
+	/* Centred by auto margins between both edges: works in either direction
+	   (with left and right both set, RTL would ignore `left`). */
+	.stx-tl--alternate::before {
+		inset-inline: 0;
+		margin-inline: auto;
+	}
+
+	.stx-tl--alternate .stx-tl__item {
+		width: 50%;
+		padding-block: 8px;
+		padding-inline-end: 42px;
+	}
+
+	.stx-tl--alternate .stx-tl__item:nth-child(even) {
+		margin-inline-start: 50%;
+		padding-inline: 42px 0;
+	}
+
+	.stx-tl--alternate .stx-tl__dot {
+		inset-inline: auto -12px;
+	}
+
+	.stx-tl--alternate .stx-tl__item:nth-child(even) .stx-tl__dot {
+		inset-inline: -12px auto;
+	}
+}
+
+/* Steps in a row, the line running along their top. */
+@media (min-width: 1025px) {
+	.stx-tl--row {
+		display: grid;
+		grid-auto-columns: minmax(0, 1fr);
+		grid-auto-flow: column;
+		gap: 20px;
+		padding: 40px 0 0;
+	}
+
+	.stx-tl--row::before {
+		inset-block: 11px auto;
+		inset-inline: 0;
+		width: auto;
+		height: 2px;
+	}
+
+	.stx-tl--row .stx-tl__dot {
+		top: -40px;
+		inset-inline-start: 18px;
+	}
+
+	.stx-tl--row .stx-tl__card {
+		height: 100%;
+	}
+}
+
+/* ==========================================================================
+   Phones
+   ========================================================================== */
+
+@media (max-width: 767px) {
+	.stx-cform {
+		gap: 16px;
+	}
+
+	.stx-cform--card {
+		padding: 20px 16px;
+	}
+
+	.stx-cform--cols .stx-cform__grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.stx-cform .stx-btn {
+		flex: 1 1 100%;
+	}
+
+	.stx-cdetails--cards {
+		gap: 12px;
+	}
+
+	.stx-cdetails--cards .stx-cdetails__item {
+		padding: 16px;
+	}
+
+	.stx-tl__card {
+		padding: 16px;
+	}
+}
+
+/* ==========================================================================
+   Dark mode
+   ========================================================================== */
+
+/* Studiare's dark mode colours every link white (`body.scdarkcolors a:not(…)`,
+   specificity 0,3,5); each link below keeps the colour it gives in --stx-link. */
+body.scdarkcolors a:is(.stx-cdetails__link, .stx-cdetails__btn, .stx-map__route, .stx-map__load) {
+	color: var(--stx-link) !important;
+}
+
+/* The dots' ring matches the card behind them. */
+.scdarkcolors .stx-tl__dot {
+	border-color: var(--stx-card);
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.stx-cform .stx-cform__input,
+	.stx-map__route,
+	.stx-cdetails--cards .stx-cdetails__item,
+	.stx-cdetails__btn {
+		transition: none;
+	}
+
+	.stx-cdetails--cards .stx-cdetails__item:has(.stx-cdetails__link:hover),
+	.stx-cdetails__btn:hover {
+		transform: none;
+	}
+}

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200..900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#F4F6F7; }
+  a { color:#D68800; text-decoration:none; }
+  a:hover { color:#B37200; }
+</style>
+</helmet>
+<div dir="rtl" style="font-family:Vazirmatn, system-ui, sans-serif; color:#0F1315; background:#F4F6F7; min-height:100vh">
+
+  <header style="background:#fff; border-bottom:1px solid #E1E6E9; position:sticky; top:0; z-index:40">
+    <div style="max-width:1240px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:24px; flex-wrap:wrap">
+      <span style="font-size:22px; font-weight:800; letter-spacing:-0.5px">برتراندیش</span>
+      <nav style="display:flex; gap:20px; font-size:14.5px; font-weight:600; flex:1; flex-wrap:wrap">
+        <a href="#" style="color:#3E4950">دوره‌ها</a>
+        <a href="#" style="color:#3E4950">محصولات</a>
+        <a href="#" style="color:#3E4950">مدرسان</a>
+        <a href="#" style="color:#3E4950">وبلاگ</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:10px; background:#FFF5DE; border:1px solid #FBE3A6; border-radius:14px; padding:6px 8px 6px 14px">
+        <span style="width:36px; height:36px; border-radius:10px; background:#F8B000; display:flex; align-items:center; justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg></span>
+        <div style="display:flex; flex-direction:column; line-height:1.5">
+          <span style="font-size:11.5px; color:#B37200">مشاوره و پشتیبانی</span>
+          <span style="font-size:14px; font-weight:800; direction:ltr; text-align:right">۰۹۱۵۴۴۴۵۷۶۷</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1240px; margin:0 auto; padding:24px 20px 72px">
+    <nav style="display:flex; gap:8px; flex-wrap:wrap; font-size:13px; color:#7C909C; margin-bottom:10px">
+      <a href="#" style="color:#5D6E79">خانه</a><span>‹</span><a href="#" style="color:#5D6E79">ویژه معلم‌ها</a><span>‹</span><span>دوره مدیریت کلاس درس</span>
+    </nav>
+    <h1 style="font-size:clamp(26px, 3.6vw, 36px); font-weight:800; letter-spacing:-0.6px; margin:0 0 28px; line-height:1.5">دوره مدیریت کلاس درس</h1>
+
+    <div style="display:flex; flex-wrap:wrap; gap:28px; align-items:flex-start">
+
+      <div style="flex:2 1 560px; min-width:0; display:flex; flex-direction:column; gap:22px">
+
+        <div style="display:flex; flex-direction:column; gap:16px">
+          <p style="margin:0; font-size:15.5px; line-height:2.1; color:#4D5960; text-wrap:pretty">روش‌های عملی برای ساختن کلاسی آرام و منظم؛ از قانون‌گذاری روز اول تا برخورد با رفتارهای چالشی، همراه با نمونه‌های واقعی از کلاس و تمرین‌هایی که همان هفته قابل اجراست.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center">
+            <span style="font-size:12.5px; font-weight:700; padding:5px 11px; border-radius:999px; background:#FDECEC; color:#C0392B">پرطرفدار</span>
+            <span style="font-size:12.5px; font-weight:700; padding:5px 11px; border-radius:999px; background:#EEF0F2; color:#3E4950">گواهینامه</span>
+            <span style="font-size:13.5px; color:#F8B000; letter-spacing:1px">★★★★★</span>
+            <span style="font-size:13px; color:#5D6E79">۴٫۸ از ۳۱۲ نظر</span>
+            <span style="font-size:13px; color:#5D6E79">· سطح متوسط</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; font-size:14px">
+            <span style="color:#7C909C">مدرس</span>
+            <div style="width:32px; height:32px; border-radius:50%; overflow:hidden; background:#E1E6E9"><image-slot id="oy-teacher-mini" shape="circle" placeholder="عکس"></image-slot></div>
+            <a href="#" style="font-weight:700; color:#0F1315">نام مدرس</a>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+            <div style="background:#fff; border:1px solid #E1E6E9; border-radius:16px; padding:16px 18px; display:flex; align-items:center; gap:14px">
+              <span style="width:44px; height:44px; border-radius:12px; background:#FFF5DE; display:flex; align-items:center; justify-content:center; flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D68800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg></span>
+              <div style="display:flex; flex-direction:column; gap:2px">
+                <span style="font-size:12.5px; color:#7C909C">{{ s.label }}</span>
+                <span style="font-size:15.5px; font-weight:800">{{ s.value }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:#fff; border:1.5px solid #F8B000; border-radius:20px; padding:20px 22px; display:flex; flex-direction:column; gap:18px">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap">
+            <span style="font-size:15px; font-weight:700">دریافت مشاوره رایگان قبل از ثبت‌نام</span>
+            <a href="#" style="display:flex; align-items:center; gap:8px; background:#2E373C; color:#fff; border-radius:999px; padding:10px 18px; font-size:15px; font-weight:800; direction:ltr" style-hover="background:#0F1315; color:#fff">۰۹۱۵۴۴۴۵۷۶۷</a>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; padding-top:16px; border-top:1px dashed #F3D58A">
+            <div style="display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700"><span style="width:38px; height:38px; border-radius:11px; background:#F8B000; display:flex; align-items:center; justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M13 3L5 13h6l-1 8 8-10h-6z"></path></svg></span>دسترسی فوری و همیشگی</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700"><span style="width:38px; height:38px; border-radius:11px; background:#F8B000; display:flex; align-items:center; justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"></path></svg></span>پرسش و پاسخ با مدرس</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700"><span style="width:38px; height:38px; border-radius:11px; background:#F8B000; display:flex; align-items:center; justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"></path></svg></span>ضمانت بازگشت وجه</div>
+          </div>
+        </div>
+
+        <div style="background:#FFF8E6; border:1px solid #FBE3A6; border-radius:16px; padding:16px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-size:14px; line-height:1.9">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D68800" stroke-width="2" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"></rect><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S10 8 12 8zm0 0c2-4 6-4 6-1.5S14 8 12 8z"></path></svg>
+          <span>با کد تخفیف <b style="font-family:ui-monospace,monospace; background:#fff; border:1px dashed #D68800; padding:2px 8px; border-radius:6px">TEACH30</b> این دوره را با ۳۰٪ تخفیف تهیه کنید.</span>
+        </div>
+
+        <div style="background:#fff; border:1px solid #E1E6E9; border-radius:22px; padding:0 26px 28px">
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; transform:translateY(-18px)">
+            <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+              <button onClick="{{ t.pick }}" style="border:1px solid {{ t.border }}; background:{{ t.bg }}; color:{{ t.fg }}; font-family:Vazirmatn,sans-serif; font-size:13.5px; font-weight:700; padding:9px 16px; border-radius:11px; cursor:pointer">{{ t.label }}</button>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{ isDesc }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex; flex-direction:column; gap:14px; align-items:center">
+              <div style="position:relative; max-height:{{ descHeight }}; overflow:hidden; font-size:15px; line-height:2.2; color:#3E4950; width:100%">
+                <p style="margin:0 0 12px">این دوره برای معلم‌هایی ساخته شده که می‌خواهند زمان کمتری صرف کنترل کلاس کنند و زمان بیشتری برای آموزش داشته باشند. هر جلسه با یک موقعیت واقعی شروع می‌شود و با یک تمرین کوتاه برای اجرا در کلاس تمام می‌شود.</p>
+                <p style="margin:0 0 12px">در فصل‌های اول، ساختن قانون‌ها و روال‌های ثابت کلاس را یاد می‌گیرید. سپس سراغ رفتارهای چالشی می‌رویم و روش گفت‌وگوی خصوصی، پرهیز از تنبیه جمعی و تشخیص علت رفتار را تمرین می‌کنیم.</p>
+                <p style="margin:0">فصل آخر به ارتباط با والدین اختصاص دارد؛ از جلسه اولیا و مربیان تا پیام‌های کوتاه و منظم در طول سال.</p>
+                <sc-if value="{{ descCollapsed }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute; left:0; right:0; bottom:0; height:70px; background:linear-gradient(to top, #fff, rgba(255,255,255,0))"></div>
+                </sc-if>
+              </div>
+              <button onClick="{{ toggleDesc }}" style="border:1.5px solid #D68800; background:#fff; color:#B37200; font-family:Vazirmatn,sans-serif; font-size:14px; font-weight:700; padding:10px 40px; border-radius:11px; cursor:pointer" style-hover="background:#FFF5DE">{{ descLabel }}</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isReviews }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:12px">
+              <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+                <div style="border:1px solid #E1E6E9; border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:6px">
+                  <div style="display:flex; justify-content:space-between; gap:8px"><b style="font-size:14.5px">{{ r.name }}</b><span style="color:#F8B000; font-size:13px">★★★★★</span></div>
+                  <span style="font-size:14.5px; line-height:2; color:#3E4950">{{ r.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isTicket }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:12px; padding:24px 0; text-align:center">
+              <span style="font-size:15px; color:#3E4950">برای ارسال تیکت پشتیبانی ابتدا دوره را تهیه کنید.</span>
+              <a href="#" style="font-size:14px; font-weight:700">ورود به حساب کاربری</a>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isBuyers }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:24px 0; text-align:center; font-size:15px; color:#3E4950">۱٬۲۴۰ نفر این دوره را تهیه کرده‌اند.</div>
+          </sc-if>
+
+          <div style="margin-top:36px; display:flex; flex-direction:column; gap:14px">
+            <div style="display:flex; align-items:center; gap:12px">
+              <span style="width:48px; height:48px; border-radius:14px; background:#FFF5DE; display:flex; align-items:center; justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D68800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5-10-5z"></path><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"></path></svg></span>
+              <h2 style="margin:0; font-size:21px; font-weight:800">محتوای آموزش</h2>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:13px; color:#5D6E79">
+              <span>۴ فصل · ۱۸ جلسه · ۷ ساعت و ۴۰ دقیقه</span>
+              <button onClick="{{ openAll }}" style="background:none; border:none; font-family:Vazirmatn,sans-serif; font-size:13px; font-weight:700; color:#B37200; cursor:pointer">{{ openAllLabel }}</button>
+            </div>
+            <sc-for list="{{ chapters }}" as="c" hint-placeholder-count="4">
+              <div style="border-radius:14px; overflow:hidden; border:1px solid {{ c.border }}">
+                <button onClick="{{ c.toggle }}" style="width:100%; display:flex; align-items:center; gap:10px; padding:15px 18px; background:{{ c.bg }}; color:{{ c.fg }}; border:none; font-family:Vazirmatn,sans-serif; cursor:pointer; text-align:right">
+                  <span style="font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:6px; background:{{ c.tagBg }}; color:{{ c.tagFg }}">{{ c.tag }}</span>
+                  <span style="flex:1; font-size:15.5px; font-weight:800">{{ c.title }}</span>
+                  <span style="font-size:12.5px; opacity:0.75; white-space:nowrap; flex-shrink:0">{{ c.meta }}</span>
+                  <span style="font-size:16px">{{ c.sign }}</span>
+                </button>
+                <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#fff; padding:4px 18px 10px">
+                    <sc-for list="{{ c.lessons }}" as="l" hint-placeholder-count="2">
+                      <div style="display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid #F0F2F4; font-size:14px; color:#3E4950">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C909C" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M10 8.5v7l5.5-3.5z" fill="#7C909C"></path></svg>
+                        <span style="flex:1">{{ l.name }}</span>
+                        <sc-if value="{{ l.free }}" hint-placeholder-val="{{ false }}"><a href="#" style="font-size:12.5px; font-weight:700">پیش‌نمایش</a></sc-if>
+                        <span style="font-size:12.5px; color:#7C909C">{{ l.time }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#fff; border:1px solid #E1E6E9; border-radius:22px; padding:26px; display:flex; flex-direction:column; gap:22px">
+          <h2 style="margin:0; font-size:21px; font-weight:800">درباره مدرس</h2>
+          <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center">
+            <div style="width:104px; height:104px; border-radius:50%; overflow:hidden; background:#FFF5DE; flex-shrink:0"><image-slot id="oy-teacher" shape="circle" placeholder="عکس مدرس"></image-slot></div>
+            <div style="flex:1; min-width:220px; display:flex; flex-direction:column; gap:6px">
+              <span style="font-size:19px; font-weight:800">نام مدرس</span>
+              <span style="font-size:13.5px; color:#7C909C">کارشناس ارشد روانشناسی تربیتی</span>
+              <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:13px; color:#3E4950; margin-top:6px">
+                <span>۶ دوره</span><span>۲٬۷۵۵ دانشجو</span><span><span style="color:#F8B000">★</span> ۴٫۸ امتیاز</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:13px; color:#7C909C"><span style="flex:1; height:1px; background:#E1E6E9"></span>دوره‌های دیگر این مدرس<span style="flex:1; height:1px; background:#E1E6E9"></span></div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:14px">
+            <sc-for list="{{ otherCourses }}" as="p" hint-placeholder-count="3">
+              <article style="border:1px solid #E1E6E9; border-radius:16px; padding:10px; display:flex; flex-direction:column; gap:10px" style-hover="border-color:#F8B000">
+                <div style="aspect-ratio:16/9; border-radius:11px; overflow:hidden; background:#E1E6E9"><image-slot id="{{ p.slot }}" shape="rounded" radius="11" placeholder="کاور دوره"></image-slot></div>
+                <span style="font-size:14.5px; font-weight:800; line-height:1.7; padding:0 4px">{{ p.title }}</span>
+                <div style="display:flex; align-items:center; gap:8px; padding:0 4px 4px; margin-top:auto">
+                  <span style="font-size:14.5px; font-weight:800">{{ p.price }}</span>
+                  <span style="font-size:12px; color:#5D6E79">تومان</span>
+                  <sc-if value="{{ p.off }}" hint-placeholder-val="{{ false }}"><span style="margin-right:auto; font-size:11.5px; font-weight:800; background:#F8B000; color:#fff; padding:2px 8px; border-radius:999px">{{ p.off }}</span></sc-if>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <aside style="flex:1 1 300px; min-width:0; order:{{ asideOrder }}; position:{{ asidePos }}; top:92px; display:flex; flex-direction:column; gap:16px">
+        <div style="aspect-ratio:16/10; border-radius:18px; overflow:hidden; background:#E1E6E9; box-shadow:0 20px 40px -30px rgba(15,19,21,0.6)"><image-slot id="oy-cover" shape="rounded" radius="18" placeholder="کاور دوره"></image-slot></div>
+        <div style="background:#fff; border:1px solid #E1E6E9; border-radius:18px; padding:22px; display:flex; flex-direction:column; gap:16px">
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <span style="font-size:14px; color:#5D6E79">هزینه آموزش</span>
+            <div style="display:flex; flex-direction:column; align-items:flex-end">
+              <span style="font-size:13px; color:#8A959B; text-decoration:line-through">۶۵۰٬۰۰۰</span>
+              <span style="font-size:24px; font-weight:800">۴۵۵٬۰۰۰ <span style="font-size:12.5px; font-weight:500; color:#5D6E79">تومان</span></span>
+            </div>
+          </div>
+          <sc-if value="{{ enrolled }}" hint-placeholder-val="{{ false }}">
+            <a href="#" style="height:52px; border-radius:13px; background:#0F1315; color:#fff; display:flex; align-items:center; justify-content:center; font-size:15.5px; font-weight:800" style-hover="background:#242B2F; color:#fff">در سبد است · تکمیل ثبت‌نام</a>
+          </sc-if>
+          <sc-if value="{{ notEnrolled }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ enroll }}" style="height:52px; border:none; border-radius:13px; background:#F8B000; color:#fff; font-family:Vazirmatn,sans-serif; font-size:15.5px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px" style-hover="background:#D68800">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.5 12h11L21 7H6"></path></svg>
+              ثبت‌نام در دوره
+            </button>
+          </sc-if>
+          <div style="display:flex; flex-direction:column; gap:10px; padding-top:14px; border-top:1px solid #EEF0F2; font-size:13.5px; color:#3E4950">
+            <div style="display:flex; justify-content:space-between"><span style="color:#7C909C">نوع دسترسی</span><b>آنلاین و دانلودی</b></div>
+            <div style="display:flex; justify-content:space-between"><span style="color:#7C909C">گواهی پایان دوره</span><b>دارد</b></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer style="background:#fff; border-top:3px solid #F8B000; color:#3E4950">
+    <div style="max-width:1240px; margin:0 auto; padding:26px 20px; display:flex; align-items:center; gap:24px; flex-wrap:wrap">
+      <span style="font-size:19px; font-weight:800; color:#0F1315">برتراندیش</span>
+      <nav style="display:flex; gap:20px; flex-wrap:wrap; font-size:14px; font-weight:600; flex:1">
+        <a href="#" style="color:#3E4950">دوره‌ها</a><a href="#" style="color:#3E4950">محصولات</a><a href="#" style="color:#3E4950">درباره ما</a><a href="#" style="color:#3E4950">قوانین</a>
+      </nav>
+      <span style="font-size:13px; color:#6B8090">© ۱۴۰۵ برتراندیش</span>
+    </div>
+  </footer>
+
+  <sc-if value="{{ showMobileBar }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; bottom:0; left:0; right:0; z-index:50; background:#fff; border-top:1px solid #E1E6E9; padding:12px 16px; display:flex; align-items:center; gap:14px; box-shadow:0 -12px 30px -20px rgba(15,19,21,0.5)">
+      <span style="font-size:18px; font-weight:800">۴۵۵٬۰۰۰ <span style="font-size:12px; font-weight:500; color:#5D6E79">تومان</span></span>
+      <button onClick="{{ enroll }}" style="flex:1; height:50px; border:none; border-radius:13px; background:#F8B000; color:#fff; font-family:Vazirmatn,sans-serif; font-size:15px; font-weight:800">{{ mobileCta }}</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mobileBuyBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { tab: 'desc', open: [0], descOpen: false, enrolled: false, narrow: false };
+  componentDidMount() {
+    this.onResize = () => this.setState({ narrow: window.innerWidth < 940 });
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  renderVals() {
+    const s = this.state;
+    const tabDefs = [['desc', 'توضیحات'], ['reviews', 'نظرات (۳۱۲)'], ['ticket', 'تیکت پشتیبانی'], ['buyers', 'لیست خریداران']];
+    const chapters = [
+      { tag: 'پیش‌نمایش', title: 'معرفی و مقدمه دوره', meta: '۲ جلسه', lessons: [{ name: 'این دوره برای چه کسی است', time: '۰۸:۲۰', free: true }, { name: 'چطور از تمرین‌ها استفاده کنیم', time: '۰۶:۱۰', free: true }] },
+      { tag: 'فصل اول', title: 'روز اول کلاس', meta: '۴ جلسه', lessons: [{ name: 'نوشتن قانون‌ها با دانش‌آموزان', time: '۲۴:۱۰' }, { name: 'چیدمان کلاس', time: '۱۸:۳۰' }] },
+      { tag: 'فصل دوم', title: 'رفتارهای چالشی', meta: '۶ جلسه', lessons: [{ name: 'تشخیص علت رفتار', time: '۲۲:۰۰' }, { name: 'گفت‌وگوی خصوصی با دانش‌آموز', time: '۲۶:۲۰' }] },
+      { tag: 'فصل سوم', title: 'ارتباط با والدین', meta: '۶ جلسه', lessons: [{ name: 'جلسه اولیا و مربیان', time: '۲۷:۰۰' }, { name: 'پیام‌های کوتاه و منظم', time: '۱۶:۳۰' }] }
+    ];
+    const allOpen = s.open.length === chapters.length;
+    const toggleIn = i => this.setState(st => ({ open: st.open.includes(i) ? st.open.filter(x => x !== i) : [...st.open, i] }));
+    return {
+      stats: [
+        { icon: 'M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM20 20v-1.5a3.5 3.5 0 0 0-2.5-3.3M15.5 4.2a3.5 3.5 0 0 1 0 6.6', label: 'تعداد دانشجویان', value: '۱٬۲۴۰ دانشجو' },
+        { icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2', label: 'مدت دوره', value: '۷ ساعت و ۴۰ دقیقه' },
+        { icon: 'M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM4 10h16M8 3v4M16 3v4', label: 'آخرین به‌روزرسانی', value: 'شهریور ۱۴۰۵' }
+      ],
+      tabs: tabDefs.map(([k, label]) => {
+        const on = s.tab === k;
+        return { label, bg: on ? '#F8B000' : '#fff', fg: on ? '#fff' : '#3E4950', border: on ? '#F8B000' : '#E1E6E9', pick: () => this.setState({ tab: k }) };
+      }),
+      isDesc: s.tab === 'desc', isReviews: s.tab === 'reviews', isTicket: s.tab === 'ticket', isBuyers: s.tab === 'buyers',
+      descHeight: s.descOpen ? 'none' : '140px',
+      descCollapsed: !s.descOpen,
+      descLabel: s.descOpen ? 'بستن' : 'مشاهده بیشتر',
+      toggleDesc: () => this.setState(st => ({ descOpen: !st.descOpen })),
+      reviews: [{ name: 'مریم، دبیر ابتدایی', text: 'تمرین‌های آخر هر جلسه را همان هفته در کلاس اجرا کردم.' }, { name: 'حسین، معلم متوسطه', text: 'بخش رفتارهای چالشی دقیقاً همان چیزی بود که دنبالش بودم.' }],
+      openAllLabel: allOpen ? 'بستن همه بخش‌ها' : 'باز کردن همه بخش‌ها',
+      openAll: () => this.setState({ open: allOpen ? [] : chapters.map((_, i) => i) }),
+      chapters: chapters.map((c, i) => {
+        const open = s.open.includes(i);
+        return { ...c, open, sign: open ? '−' : '+', bg: open ? '#2E373C' : '#fff', fg: open ? '#fff' : '#0F1315', border: open ? '#2E373C' : '#E1E6E9', tagBg: open ? '#F8B000' : '#FFF5DE', tagFg: open ? '#fff' : '#B37200', toggle: () => toggleIn(i) };
+      }),
+      otherCourses: [
+        { slot: 'oy-o1', title: 'مهارت‌های انگیزشی کلاس', price: '۲۹۰٬۰۰۰', off: '۲۰٪' },
+        { slot: 'oy-o2', title: 'ارزشیابی توصیفی در عمل', price: '۳۶۰٬۰۰۰', off: '' },
+        { slot: 'oy-o3', title: 'ارتباط مؤثر با والدین', price: '۱۸۰٬۰۰۰', off: '۳۵٪' }
+      ],
+      enrolled: s.enrolled, notEnrolled: !s.enrolled,
+      enroll: () => this.setState({ enrolled: true }),
+      mobileCta: s.enrolled ? 'تکمیل ثبت‌نام' : 'ثبت‌نام در دوره',
+      asidePos: s.narrow ? 'static' : 'sticky',
+      asideOrder: s.narrow ? -1 : 0,
+      showMobileBar: (this.props.mobileBuyBar ?? true) && s.narrow
+    };
+  }
+}
+</script>
+</body>
+</html>

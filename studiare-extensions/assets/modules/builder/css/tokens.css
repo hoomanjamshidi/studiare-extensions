@@ -1,0 +1,50 @@
+/**
+ * Studiare Extensions — shared design tokens.
+ *
+ * Derived values and Studiare's dark mode mapping for the brand tokens.
+ * Assets::tokens_css() prints this file inline together with the brand
+ * colours from the settings, before every Studiare+ stylesheet, so a widget
+ * with its own small stylesheet (the slider) does not need builder.css.
+ */
+
+:root {
+	--stx-radius-sm: calc(var(--stx-radius, 18px) * 0.66);
+	--stx-radius-lg: calc(var(--stx-radius, 18px) * 1.22);
+	--stx-shadow: 0 1px 2px rgba(15, 19, 21, 0.04), 0 24px 40px -34px rgba(15, 19, 21, 0.45);
+	--stx-shadow-pop: 0 20px 50px -18px rgba(15, 19, 21, 0.35);
+	--stx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--stx-control-h: 46px;
+	--stx-field-bg: var(--stx-card);
+	--stx-field-line: var(--stx-line);
+	--stx-choice-active: var(--stx-accent);
+	--stx-header-offset: 0px;
+	/* Space the WordPress admin bar takes at the top of the viewport while scrolling. */
+	--stx-admin-bar: var(--wp-admin--admin-bar--height, 0px);
+	/* Amber for text and icons: the strong accent pulled towards the ink colour,
+	   so small text stays readable (WCAG AA) whatever accent is chosen. */
+	--stx-accent-ink: color-mix(in srgb, var(--stx-accent-strong) 66%, var(--stx-ink));
+}
+
+/* Below 600px WordPress lets the admin bar scroll away with the page, but keeps
+   its height variable, so sticky elements would stop 46px short of the top. */
+@media (max-width: 600px) {
+	:root {
+		--stx-admin-bar: 0px;
+	}
+}
+
+/* Studiare's dark mode (class on <html>/<body>). */
+:where(.scdarkcolors) {
+	--stx-bg: var(--dark_secondary_color, #0f1417);
+	--stx-card: var(--dark_primary_color, #171d21);
+	--stx-ink: var(--dark_light_color, #f2f4f5);
+	--stx-text: color-mix(in srgb, var(--dark_light_color, #f2f4f5) 78%, transparent);
+	--stx-muted: color-mix(in srgb, var(--dark_light_color, #f2f4f5) 56%, transparent);
+	--stx-line: rgba(255, 255, 255, 0.1);
+	--stx-accent-soft: color-mix(in srgb, var(--stx-accent) 16%, transparent);
+	--stx-dark: #0b0f11;
+	/* Re-resolve the aliases, or they keep the light values from :root. */
+	--stx-field-bg: var(--stx-card);
+	--stx-field-line: var(--stx-line);
+	--stx-accent-ink: color-mix(in srgb, var(--stx-accent-strong) 66%, var(--stx-ink));
+}

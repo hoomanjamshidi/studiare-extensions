@@ -1,0 +1,876 @@
+/**
+ * Studiare Extensions — Slider widget.
+ *
+ * Loaded only on pages that use the slider, and needs nothing but the brand
+ * tokens printed inline (tokens.css): no builder.css, icon font or carousel
+ * library. Every slide box has its aspect ratio from the first paint, so
+ * the slider never shifts the page (CLS), and motion uses only transform
+ * and opacity, which the browser animates off the main thread. Logical
+ * properties keep RTL and LTR correct.
+ *
+ * Sections: frame · track · slide & picture · text on pictures · arrows ·
+ * dots & tabs · designs · fade · phones · dark mode · motion
+ */
+
+/* ==========================================================================
+   Frame
+   ========================================================================== */
+
+/* Without a definite width, Chrome measures the widget at zero width inside
+   Elementor's wrapping column containers on phones and the aspect-ratio
+   slides collapse (see home.css). A width chosen in Elementor is kept. */
+.elementor-widget-stx-slider:not([class*="elementor-widget__width-"]) {
+	width: 100%;
+}
+
+.stx-sl {
+	--stx-sl-accent: var(--stx-accent);
+	--stx-sl-radius: var(--stx-radius-lg);
+	--stx-sl-gap: 16px;
+	--stx-sl-dot: color-mix(in srgb, var(--stx-ink) 22%, transparent);
+	--stx-sl-arrow-bg: color-mix(in srgb, var(--stx-card) 94%, transparent);
+	--stx-sl-arrow-ink: var(--stx-ink);
+	--stx-sl-ph: color-mix(in srgb, var(--stx-line) 55%, var(--stx-card));
+	/* Aspect ratio measured from the first slide's pictures (inline style). */
+	--stx-sl-auto: var(--stx-sl-auto-d, 3 / 1);
+	/* Where progress bars grow from: the inline start. */
+	--stx-sl-origin: 0 50%;
+	position: relative;
+	color: var(--stx-ink);
+}
+
+[dir="rtl"] .stx-sl {
+	--stx-sl-origin: 100% 50%;
+}
+
+.stx-sl__main,
+.stx-sl__viewport {
+	position: relative;
+	min-width: 0;
+}
+
+/* ==========================================================================
+   Track: a native scroll-snap scroller, so slides swipe without JavaScript
+   ========================================================================== */
+
+.stx-sl__track {
+	display: flex;
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	border-radius: var(--stx-sl-radius);
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+}
+
+.stx-sl__track::-webkit-scrollbar {
+	display: none;
+}
+
+/* A mouse drags the slides (slider.js); links keep their pointer cursor. */
+@media (hover: hover) and (pointer: fine) {
+	.stx-sl.is-ready .stx-sl__track {
+		cursor: grab;
+	}
+}
+
+/* From the first move until the glide to the chosen slide ends: snapping
+   would pull the track back under the pointer. */
+.stx-sl.is-dragging .stx-sl__track {
+	scroll-snap-type: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.stx-sl.is-dragging .stx-sl__track,
+.stx-sl.is-dragging .stx-sl__track * {
+	cursor: grabbing;
+}
+
+/* ==========================================================================
+   Slide & picture
+   ========================================================================== */
+
+/* A grid, so text on the picture can make the slide taller on small
+   screens instead of being cut off. */
+.stx-sl__slide {
+	position: relative;
+	display: grid;
+	flex: 0 0 100%;
+	min-width: 0;
+	aspect-ratio: var(--stx-sl-ar, var(--stx-sl-auto));
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
+
+/* A swipe stops at every slide, but a jump made by slider.js (dots, wrapping
+   around) must pass them: Chrome applies `always` to scripted scrolls too. */
+.stx-sl.is-jumping .stx-sl__slide {
+	scroll-snap-stop: normal;
+}
+
+.stx-sl__frame {
+	position: absolute;
+	inset: 0;
+	display: block;
+	overflow: hidden;
+	background: var(--stx-sl-ph);
+	color: inherit;
+	text-decoration: none;
+}
+
+.stx-sl__pic {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/* Pictures of slides that start off screen are not rendered until slider.js
+   needs them (it removes .is-later one slide ahead). Browsers lazy-load
+   pictures near the screen, and that includes the next slides in a sideways
+   scroller: without this they would download together with the first
+   picture and slow down the Largest Contentful Paint. */
+.stx-sl__slide.is-later .stx-sl__pic {
+	display: none;
+}
+
+/* Two classes: Elementor and Studiare give every image `height: auto`. */
+.stx-sl .stx-sl__img {
+	display: block;
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	margin: 0;
+	border-radius: 0;
+	box-shadow: none;
+	object-fit: cover;
+	-webkit-user-drag: none;
+}
+
+/* ==========================================================================
+   Text on pictures
+   ========================================================================== */
+
+.stx-sl {
+	--stx-sl-on: #ffffff;
+	--stx-sl-shade: rgba(10, 13, 15, 0.74);
+	--stx-sl-shade-half: rgba(10, 13, 15, 0.38);
+	--stx-sl-shade-none: rgba(10, 13, 15, 0);
+	/* Shade grows from the text's side: the inline start by default. */
+	--stx-sl-shade-angle: 90deg;
+}
+
+[dir="rtl"] .stx-sl,
+.stx-sl--text-end {
+	--stx-sl-shade-angle: 270deg;
+}
+
+[dir="rtl"] .stx-sl--text-end {
+	--stx-sl-shade-angle: 90deg;
+}
+
+.stx-sl--tone-dark {
+	--stx-sl-on: #0f1315;
+	--stx-sl-shade: rgba(255, 255, 255, 0.86);
+	--stx-sl-shade-half: rgba(255, 255, 255, 0.5);
+	--stx-sl-shade-none: rgba(255, 255, 255, 0);
+}
+
+.stx-sl__slide.has-body .stx-sl__frame::after {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(var(--stx-sl-shade-angle), var(--stx-sl-shade) 0%, var(--stx-sl-shade-half) 42%, var(--stx-sl-shade-none) 82%);
+	content: "";
+	pointer-events: none;
+}
+
+.stx-sl--text-center .stx-sl__slide.has-body .stx-sl__frame::after {
+	background: var(--stx-sl-shade-half);
+}
+
+/* Above the slide link; clicks on plain text still reach the link below. */
+.stx-sl__body {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	align-self: center;
+	justify-self: start;
+	gap: 14px;
+	box-sizing: border-box;
+	width: min(100%, 640px);
+	padding: clamp(24px, 4.5vw, 64px);
+	color: var(--stx-sl-on);
+	pointer-events: none;
+}
+
+.stx-sl--text-center .stx-sl__body {
+	align-items: center;
+	justify-self: center;
+	text-align: center;
+}
+
+.stx-sl--text-end .stx-sl__body {
+	align-items: flex-end;
+	justify-self: end;
+	text-align: end;
+}
+
+/* Amber keeps dark text: white on amber fails contrast. */
+.stx-sl__badge {
+	padding: 6px 14px;
+	border-radius: 999px;
+	background: var(--stx-sl-accent);
+	color: #0f1315;
+	font-size: 13px;
+	font-weight: 800;
+	line-height: 1.6;
+}
+
+.stx-sl .stx-sl__title {
+	margin: 0;
+	color: inherit;
+	font-family: inherit;
+	font-size: clamp(22px, 3.3vw, 46px);
+	font-weight: 800;
+	line-height: 1.45;
+	text-wrap: balance;
+}
+
+/* Two classes, to drop the theme's highlight background. */
+.stx-sl .stx-sl__title mark {
+	background: none;
+	color: var(--stx-sl-accent);
+}
+
+.stx-sl .stx-sl__text {
+	max-width: 48ch;
+	margin: 0;
+	color: inherit;
+	font-size: clamp(14px, 1.25vw, 17px);
+	line-height: 1.95;
+	opacity: 0.92;
+}
+
+.stx-sl__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 6px;
+	pointer-events: auto;
+}
+
+.stx-sl--text-center .stx-sl__actions {
+	justify-content: center;
+}
+
+/* Links repeat their text colour in --stx-link (see "Dark mode"). */
+.stx-sl .stx-sl__btn {
+	--stx-link: #0f1315;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 48px;
+	padding: 0 26px;
+	border: 1.5px solid transparent;
+	border-radius: 999px;
+	background: var(--stx-sl-accent);
+	color: #0f1315;
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 1.4;
+	text-decoration: none;
+	transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.stx-sl .stx-sl__btn:hover {
+	--stx-link: #0f1315;
+	background: #ffffff;
+	color: #0f1315;
+}
+
+.stx-sl .stx-sl__btn--secondary {
+	--stx-link: var(--stx-sl-on);
+	border-color: color-mix(in srgb, var(--stx-sl-on) 55%, transparent);
+	background: transparent;
+	color: var(--stx-sl-on);
+}
+
+.stx-sl .stx-sl__btn--secondary:hover {
+	--stx-link: var(--stx-sl-on);
+	border-color: var(--stx-sl-on);
+	background: color-mix(in srgb, var(--stx-sl-on) 14%, transparent);
+	color: var(--stx-sl-on);
+}
+
+.stx-sl--tone-dark .stx-sl__btn--primary:hover {
+	--stx-link: #ffffff;
+	background: #0f1315;
+	color: #ffffff;
+}
+
+/* ==========================================================================
+   Arrows
+   ========================================================================== */
+
+.stx-sl .stx-sl__arrow {
+	position: absolute;
+	z-index: 3;
+	top: 50%;
+	display: grid;
+	place-items: center;
+	width: 44px;
+	min-width: 0;
+	height: 44px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 999px;
+	background: var(--stx-sl-arrow-bg);
+	box-shadow: 0 8px 20px -8px rgba(15, 19, 21, 0.45);
+	color: var(--stx-sl-arrow-ink);
+	cursor: pointer;
+	translate: 0 -50%;
+	transition: opacity 0.2s ease, scale 0.2s var(--stx-ease);
+}
+
+.stx-sl .stx-sl__arrow:hover {
+	background: var(--stx-sl-arrow-bg);
+	color: var(--stx-sl-arrow-ink);
+	scale: 1.06;
+}
+
+.stx-sl__arrow--prev {
+	inset-inline-start: 14px;
+}
+
+.stx-sl__arrow--next {
+	inset-inline-end: 14px;
+}
+
+.stx-sl__arrow svg {
+	width: 22px;
+	height: 22px;
+}
+
+/* The chevron points left; "next" (and RTL "previous") points the other way. */
+.stx-sl__arrow--next svg,
+[dir="rtl"] .stx-sl__arrow--prev svg {
+	scale: -1 1;
+}
+
+[dir="rtl"] .stx-sl__arrow--next svg {
+	scale: 1;
+}
+
+.stx-sl--arrows-hover .stx-sl__arrow {
+	opacity: 0;
+}
+
+.stx-sl--arrows-hover .stx-sl__viewport:hover .stx-sl__arrow,
+.stx-sl--arrows-hover .stx-sl__arrow:focus-visible {
+	opacity: 1;
+}
+
+/* Touch screens swipe instead. */
+@media (hover: none) {
+	.stx-sl--arrows-hover .stx-sl__arrow {
+		display: none;
+	}
+}
+
+/* Controls do nothing until slider.js runs; hidden (not removed) so they
+   keep their space and nothing moves when they appear. */
+.stx-sl:not(.is-ready) :is(.stx-sl__arrow, .stx-sl__nav) {
+	visibility: hidden;
+}
+
+/* ==========================================================================
+   Dots & tabs
+   ========================================================================== */
+
+.stx-sl__nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	margin-top: 4px;
+}
+
+/* 44px targets around a thin bar that fills while the slide is shown. */
+.stx-sl .stx-sl__pick,
+.stx-sl .stx-sl__pause {
+	position: relative;
+	flex: 0 0 auto;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
+	color: inherit;
+	font: inherit;
+	letter-spacing: normal;
+	text-transform: none;
+	cursor: pointer;
+}
+
+.stx-sl .stx-sl__dot {
+	width: 44px;
+	height: 44px;
+}
+
+.stx-sl__dot::before,
+.stx-sl__dot .stx-sl__fill {
+	position: absolute;
+	top: 50%;
+	inset-inline: 10px;
+	height: 4px;
+	margin-top: -2px;
+	border-radius: 999px;
+	content: "";
+}
+
+.stx-sl__dot::before {
+	background: var(--stx-sl-dot);
+}
+
+.stx-sl__fill {
+	background: var(--stx-sl-accent);
+	transform: scaleX(0);
+	transform-origin: var(--stx-sl-origin);
+}
+
+.stx-sl__pick.is-active .stx-sl__fill {
+	transform: none;
+}
+
+/* With autoplay the bar fills over the slide's time; hovering pauses both. */
+.stx-sl.is-autoplay .stx-sl__pick.is-active .stx-sl__fill {
+	animation: stx-sl-fill var(--stx-sl-interval, 5s) linear both;
+}
+
+.stx-sl.is-paused .stx-sl__pick.is-active .stx-sl__fill {
+	animation-play-state: paused;
+}
+
+@keyframes stx-sl-fill {
+	from {
+		transform: scaleX(0);
+	}
+
+	to {
+		transform: none;
+	}
+}
+
+.stx-sl .stx-sl__pause {
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	margin-inline-start: 4px;
+	color: var(--stx-ink);
+	opacity: 0.75;
+}
+
+.stx-sl .stx-sl__pause:hover {
+	background: none;
+	color: var(--stx-ink);
+	opacity: 1;
+}
+
+.stx-sl__pause svg {
+	width: 18px;
+	height: 18px;
+}
+
+.stx-sl__ico-play,
+.stx-sl.is-stopped .stx-sl__ico-pause {
+	display: none;
+}
+
+.stx-sl.is-stopped .stx-sl__ico-play {
+	display: block;
+}
+
+/* Title tabs: a bar under the slider; the current tab fills from below. */
+.stx-sl__nav--tabs {
+	justify-content: flex-start;
+	margin-top: 10px;
+	overflow-x: auto;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-sl-radius);
+	background: var(--stx-card);
+	scrollbar-width: none;
+}
+
+.stx-sl__nav--tabs::-webkit-scrollbar {
+	display: none;
+}
+
+.stx-sl .stx-sl__tab {
+	flex: 1 1 0;
+	min-width: 132px;
+	min-height: 56px;
+	padding: 10px 16px;
+	color: var(--stx-muted);
+	font-size: 14.5px;
+	font-weight: 700;
+	line-height: 1.5;
+	transition: color 0.2s ease;
+}
+
+.stx-sl .stx-sl__tab + .stx-sl__tab {
+	border-inline-start: 1px solid var(--stx-line);
+}
+
+.stx-sl .stx-sl__tab:hover,
+.stx-sl .stx-sl__tab.is-active {
+	background: none;
+	color: var(--stx-ink);
+}
+
+.stx-sl__tab-text {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.stx-sl__tab .stx-sl__fill {
+	position: absolute;
+	inset-inline: 14px;
+	bottom: 0;
+	height: 3px;
+	border-radius: 3px 3px 0 0;
+}
+
+.stx-sl__nav--tabs .stx-sl__pause {
+	align-self: stretch;
+	height: auto;
+	margin: 0;
+	padding-inline: 8px;
+	border-inline-start: 1px solid var(--stx-line);
+}
+
+.stx-sl__arrow:focus-visible,
+.stx-sl__pick:focus-visible,
+.stx-sl__pause:focus-visible,
+.stx-sl__btn:focus-visible,
+.stx-sl__tile:focus-visible {
+	outline: 2px solid var(--stx-sl-accent);
+	outline-offset: 2px;
+}
+
+/* Inside the track, which clips anything outside it. */
+.stx-sl__frame:focus-visible {
+	outline: 3px solid var(--stx-sl-accent);
+	outline-offset: -3px;
+}
+
+/* ==========================================================================
+   Designs
+   ========================================================================== */
+
+/* Hero and side banners: dots on the picture, so they add no height. */
+.stx-sl:is(.stx-sl--hero, .stx-sl--side) .stx-sl__nav {
+	--stx-sl-dot: rgba(255, 255, 255, 0.5);
+	position: absolute;
+	z-index: 2;
+	bottom: 6px;
+	inset-inline: 0;
+	margin: 0;
+	pointer-events: none;
+}
+
+.stx-sl:is(.stx-sl--hero, .stx-sl--side) .stx-sl__nav > * {
+	pointer-events: auto;
+}
+
+.stx-sl:is(.stx-sl--hero, .stx-sl--side) .stx-sl__dot::before {
+	box-shadow: 0 0 0 1px rgba(15, 19, 21, 0.12);
+}
+
+.stx-sl:is(.stx-sl--hero, .stx-sl--side) .stx-sl__pause,
+.stx-sl:is(.stx-sl--hero, .stx-sl--side) .stx-sl__pause:hover {
+	color: #ffffff;
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.stx-sl--hero .stx-sl__body {
+	padding-bottom: max(56px, clamp(24px, 4.5vw, 64px));
+}
+
+/* Centre with peeks: spacers let the first and last slides reach the middle
+   (percentages here are of the track, like the slide width). */
+.stx-sl--peek {
+	--stx-sl-w: 76%;
+}
+
+.stx-sl--peek .stx-sl__track,
+.stx-sl--cards .stx-sl__track {
+	gap: var(--stx-sl-gap);
+	border-radius: 0;
+}
+
+.stx-sl--peek .stx-sl__track::before,
+.stx-sl--peek .stx-sl__track::after {
+	flex: 0 0 max(0px, calc((100% - var(--stx-sl-w)) / 2 - var(--stx-sl-gap)));
+	content: "";
+}
+
+.stx-sl--peek .stx-sl__slide {
+	flex-basis: var(--stx-sl-w);
+	scroll-snap-align: center;
+}
+
+.stx-sl--peek .stx-sl__frame,
+.stx-sl--cards .stx-sl__pic {
+	border-radius: var(--stx-sl-radius);
+}
+
+.stx-sl--peek .stx-sl__slide > * {
+	transition: opacity 0.45s ease, scale 0.45s var(--stx-ease);
+}
+
+.stx-sl--peek.is-ready .stx-sl__slide:not(.is-active) > * {
+	opacity: 0.5;
+	scale: 0.93;
+}
+
+/* Cards: several at once, a caption under each picture. */
+.stx-sl--cards {
+	--stx-sl-per: 3;
+}
+
+.stx-sl--cards .stx-sl__slide {
+	display: block;
+	flex-basis: calc((100% - (var(--stx-sl-per) - 1) * var(--stx-sl-gap)) / var(--stx-sl-per));
+	aspect-ratio: auto;
+	scroll-snap-stop: normal;
+}
+
+.stx-sl--cards .stx-sl__frame {
+	position: relative;
+	inset: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: 100%;
+	overflow: visible;
+	background: none;
+}
+
+.stx-sl--cards .stx-sl__pic {
+	height: auto;
+	overflow: hidden;
+	aspect-ratio: var(--stx-sl-ar, var(--stx-sl-auto));
+	background: var(--stx-sl-ph);
+}
+
+.stx-sl__cap {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding-inline: 4px;
+}
+
+.stx-sl__cap-title {
+	color: var(--stx-ink);
+	font-size: 15.5px;
+	font-weight: 800;
+	line-height: 1.6;
+}
+
+.stx-sl__cap-text {
+	color: var(--stx-muted);
+	font-size: 13.5px;
+	line-height: 1.8;
+}
+
+.stx-sl--cards .stx-sl__nav {
+	justify-content: flex-end;
+}
+
+/* Side banners: the slider sets the height; the banners fill it. */
+.stx-sl--side {
+	--stx-sl-side: 32%;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) var(--stx-sl-side);
+	gap: var(--stx-sl-gap);
+}
+
+.stx-sl--side-start .stx-sl__side {
+	order: -1;
+}
+
+.stx-sl__side {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	gap: var(--stx-sl-gap);
+	min-height: 0;
+}
+
+.stx-sl__tile {
+	position: relative;
+	display: block;
+	min-height: 0;
+	overflow: hidden;
+	border-radius: var(--stx-sl-radius);
+	background: var(--stx-sl-ph);
+}
+
+/* Out of the flow, so a banner's own size never stretches the row. */
+.stx-sl .stx-sl__tile .stx-sl__pic {
+	position: absolute;
+	inset: 0;
+}
+
+/* ==========================================================================
+   Fade (slider.js adds .is-fade; without it the slides simply swipe)
+   ========================================================================== */
+
+.stx-sl.is-fade .stx-sl__track {
+	display: grid;
+	overflow: hidden;
+	touch-action: pan-y;
+}
+
+/* Hidden slides are not rendered, so their lazy pictures wait until needed. */
+.stx-sl.is-fade .stx-sl__slide {
+	grid-area: 1 / 1;
+}
+
+.stx-sl.is-fade .stx-sl__slide:not(.is-active, .is-leaving) {
+	display: none;
+}
+
+.stx-sl.is-fade .stx-sl__slide.is-active {
+	z-index: 1;
+}
+
+.stx-sl.is-fade .stx-sl__slide.is-entering {
+	animation: stx-sl-fade 0.7s var(--stx-ease) both;
+}
+
+.stx-sl.is-fade .stx-sl__slide.is-entering .stx-sl__body {
+	animation: stx-sl-rise 0.8s var(--stx-ease) both;
+}
+
+@keyframes stx-sl-fade {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes stx-sl-rise {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+}
+
+/* ==========================================================================
+   Tablets and phones
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+	.stx-sl--cards {
+		--stx-sl-per: 2;
+	}
+
+	.stx-sl--side {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.stx-sl__side {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: none;
+	}
+
+	.stx-sl__tile {
+		aspect-ratio: var(--stx-sl-tile-ar, 2 / 1);
+	}
+}
+
+@media (max-width: 767px) {
+	.stx-sl {
+		--stx-sl-auto: var(--stx-sl-auto-m, var(--stx-sl-auto-d, 2 / 1));
+		--stx-sl-gap: 12px;
+		--stx-sl-radius: var(--stx-radius);
+	}
+
+	.stx-sl--peek {
+		--stx-sl-w: 80%;
+	}
+
+	.stx-sl--cards {
+		--stx-sl-per: 1.25;
+	}
+
+	/* Text sits at the bottom, over a shade rising from below. */
+	.stx-sl__body {
+		align-self: end;
+		gap: 10px;
+		width: 100%;
+		padding: 22px 18px;
+	}
+
+	.stx-sl--hero .stx-sl__body {
+		padding-bottom: 54px;
+	}
+
+	.stx-sl__slide.has-body .stx-sl__frame::after,
+	.stx-sl--text-center .stx-sl__slide.has-body .stx-sl__frame::after {
+		background: linear-gradient(0deg, var(--stx-sl-shade) 0%, var(--stx-sl-shade-half) 48%, var(--stx-sl-shade-none) 88%);
+	}
+
+	.stx-sl .stx-sl__btn {
+		min-height: 44px;
+		padding: 0 20px;
+		font-size: 14px;
+	}
+
+	.stx-sl__arrow--prev {
+		inset-inline-start: 8px;
+	}
+
+	.stx-sl__arrow--next {
+		inset-inline-end: 8px;
+	}
+
+	.stx-sl .stx-sl__tab {
+		flex: 0 0 auto;
+		min-width: 0;
+		max-width: 70vw;
+		min-height: 48px;
+		padding: 8px 16px;
+		font-size: 13.5px;
+	}
+}
+
+/* ==========================================================================
+   Dark mode
+   ========================================================================== */
+
+/* Studiare's dark mode colours every link white with a selector no class can
+   outrank (`body.scdarkcolors a:not(…)`, specificity 0,3,5): dark text on
+   amber buttons would vanish. Buttons keep the colour they give in --stx-link. */
+body.scdarkcolors a:is(.stx-sl__btn) {
+	color: var(--stx-link) !important;
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.stx-sl *,
+	.stx-sl *::before,
+	.stx-sl *::after {
+		animation: none !important;
+		transition: none !important;
+	}
+}

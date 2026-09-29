@@ -1,0 +1,3425 @@
+/**
+ * Studiare Extensions — home page widgets (slides, grids, sections).
+ *
+ * Loaded only on pages that use these widgets. Colours come from the brand
+ * tokens in builder.css, so light/dark mode and the brand settings apply;
+ * the amber surfaces keep dark text for contrast. Logical properties keep
+ * RTL and LTR correct.
+ *
+ * Sections: shared · slides · promo card · product grid · categories ·
+ * posts · features · countdown · offer · testimonials · people · events ·
+ * FAQ · numbers · newsletter · picture/video · phones · dark mode · motion
+ */
+
+/* ==========================================================================
+   Shared
+   ========================================================================== */
+
+/* Without a definite width, Chrome measures these widgets at zero width
+   inside Elementor's wrapping column containers on phones: aspect-ratio
+   pictures collapse (the next section covers the cards) and wrapping rows
+   reserve extra height (as with the product gallery in builder.css). An
+   auto or custom width chosen in Elementor is left alone. */
+:is(
+	.elementor-widget-stx-product-grid,
+	.elementor-widget-stx-post-grid,
+	.elementor-widget-stx-people,
+	.elementor-widget-stx-media,
+	.elementor-widget-stx-category-grid,
+	.elementor-widget-stx-testimonials,
+	.elementor-widget-stx-events,
+	.elementor-widget-stx-features,
+	.elementor-widget-stx-faq,
+	.elementor-widget-stx-newsletter,
+	.elementor-widget-stx-stats:has(.stx-stats--tiles, .stx-stats--band),
+	.elementor-widget-stx-product-spotlight,
+	.elementor-widget-stx-logo-strip,
+	.elementor-widget-stx-pricing-plans
+):not([class*="elementor-widget__width-"]) {
+	width: 100%;
+}
+
+.stx-products__grid,
+.stx-posts,
+.stx-cats,
+.stx-quotes,
+.stx-people,
+.stx-events {
+	display: grid;
+	grid-template-columns: repeat(var(--stx-cols, 4), minmax(0, 1fr));
+	gap: 18px;
+}
+
+.stx-hcard a,
+.stx-post a,
+.stx-promo,
+.stx-cat,
+.stx-person,
+.stx-feat,
+.stx-event a,
+.stx-slides a {
+	text-decoration: none;
+}
+
+/* Striped stand-in for a missing picture. */
+.stx-ph {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	width: 100%;
+	height: 100%;
+	background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--stx-line) 75%, var(--stx-card)) 0 11px, color-mix(in srgb, var(--stx-accent-soft) 70%, var(--stx-card)) 11px 22px);
+	color: var(--stx-muted);
+}
+
+.stx-ph__icon {
+	width: 26px;
+	height: 26px;
+	opacity: 0.7;
+}
+
+.stx-ph__label {
+	padding: 6px 12px;
+	border: 1px solid var(--stx-line);
+	border-radius: 8px;
+	background: var(--stx-card);
+	font-size: 12.5px;
+	line-height: 1.6;
+}
+
+.stx-empty-note {
+	margin: 0;
+	padding: 24px;
+	border: 1px dashed var(--stx-line);
+	border-radius: var(--stx-radius);
+	color: var(--stx-muted);
+	font-size: 14px;
+	text-align: center;
+}
+
+.stx-filter__chip:focus-visible,
+.stx-rail__arrow:focus-visible,
+.stx-hcard__fab:focus-visible,
+.stx-hcard__buy:focus-visible,
+.stx-hcard__title a:focus-visible,
+.stx-post__title a:focus-visible,
+.stx-post__more:focus-visible,
+.stx-post__cover:focus-visible,
+.stx-promo:focus-visible,
+.stx-cat:focus-visible,
+.stx-person:focus-visible,
+.stx-feat:focus-visible,
+.stx-event__link:focus-visible,
+.stx-faq__q:focus-visible,
+.stx-media__play:focus-visible,
+.stx-media__link:focus-visible {
+	outline: 2px solid var(--stx-accent);
+	outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Slides
+   ========================================================================== */
+
+.stx-slides {
+	--stx-slide-pad: 44px 40px 64px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: var(--stx-slides-h, 0);
+	overflow: hidden;
+	border-radius: var(--stx-radius-lg);
+	isolation: isolate;
+}
+
+/* Dark text on amber, as on the gradient container surface. */
+.stx-slides--gradient {
+	--stx-ink: #0f1315;
+	--stx-text: #2b2100;
+	--stx-slide-dot: rgba(15, 19, 21, 0.28);
+	background-color: var(--stx-accent);
+	background-image: linear-gradient(215deg, color-mix(in srgb, var(--stx-accent) 86%, #ffffff) 0%, var(--stx-accent) 48%, var(--stx-accent-strong) 100%);
+}
+
+.stx-slides--dark {
+	--stx-ink: #ffffff;
+	--stx-text: #d9dfe3;
+	--stx-slide-dot: rgba(255, 255, 255, 0.35);
+	background: var(--stx-dark);
+}
+
+.stx-slides--soft {
+	background: var(--stx-accent-soft);
+}
+
+.stx-slides--card {
+	border: 1px solid var(--stx-line);
+	background: var(--stx-card);
+}
+
+.stx-slides__glow {
+	position: absolute;
+	z-index: -1;
+	top: -70px;
+	inset-inline-end: -40px;
+	width: 230px;
+	height: 230px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.14);
+	pointer-events: none;
+}
+
+/* A scroll-snap track: slides swipe natively and work without JavaScript. */
+.stx-slides__track {
+	display: flex;
+	flex: 1;
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+}
+
+.stx-slides__track::-webkit-scrollbar {
+	display: none;
+}
+
+.stx-slides__slide {
+	display: flex;
+	flex: 0 0 100%;
+	align-items: center;
+	gap: 32px;
+	min-width: 0;
+	padding: var(--stx-slide-pad);
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
+
+.stx-slides__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+	min-width: 0;
+}
+
+.stx-slides__badge {
+	padding: 7px 14px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.45);
+	color: var(--stx-ink);
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.6;
+}
+
+.stx-slides--dark .stx-slides__badge {
+	background: var(--stx-accent);
+	color: #0f1315;
+}
+
+.stx-slides--soft .stx-slides__badge,
+.stx-slides--card .stx-slides__badge {
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+}
+
+.stx-slides .stx-slides__title {
+	margin: 0;
+	color: var(--stx-ink);
+	font-family: inherit;
+	font-size: clamp(28px, 3.6vw, 42px);
+	font-weight: 800;
+	letter-spacing: -1px;
+	line-height: 1.5;
+	text-wrap: pretty;
+}
+
+.stx-slides__text {
+	max-width: 46ch;
+	margin: 0;
+	color: var(--stx-text);
+	font-size: 16.5px;
+	line-height: 2;
+}
+
+.stx-slides__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 10px;
+}
+
+.stx-slides__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 52px;
+	padding: 0 30px;
+	border: 1.5px solid transparent;
+	border-radius: 999px;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 1.4;
+	transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Links repeat their text colour in --stx-link (see "Dark mode" below). */
+.stx-slides__btn--primary {
+	--stx-link: #0f1315;
+	background: #ffffff;
+	color: #0f1315;
+}
+
+.stx-slides .stx-slides__btn--primary:hover {
+	--stx-link: #ffffff;
+	background: #0f1315;
+	color: #ffffff;
+}
+
+.stx-slides__btn--secondary {
+	--stx-link: var(--stx-ink);
+	border-color: color-mix(in srgb, var(--stx-ink) 35%, transparent);
+	color: var(--stx-ink);
+}
+
+.stx-slides__btn--secondary:hover {
+	border-color: var(--stx-ink);
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.stx-slides--dark .stx-slides__btn--primary,
+.stx-slides--soft .stx-slides__btn--primary,
+.stx-slides--card .stx-slides__btn--primary {
+	background: var(--stx-accent);
+}
+
+.stx-slides__btn:focus-visible,
+.stx-slides__dot:focus-visible {
+	outline: 2px solid var(--stx-ink);
+	outline-offset: 2px;
+}
+
+.stx-slides__media {
+	flex: 0 0 40%;
+	min-width: 0;
+}
+
+.stx-slides__img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 !important;
+	border-radius: var(--stx-radius);
+}
+
+.stx-slides__dots {
+	position: absolute;
+	bottom: 14px;
+	inset-inline-start: 34px;
+	display: flex;
+}
+
+/* A 44px tall button around a thin bar. */
+.stx-slides__dot {
+	position: relative;
+	width: 22px;
+	height: 44px;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	transition: width 0.3s var(--stx-ease);
+}
+
+.stx-slides__dot::before {
+	position: absolute;
+	top: 50%;
+	inset-inline: 6px;
+	height: 5px;
+	border-radius: 999px;
+	background: var(--stx-slide-dot, color-mix(in srgb, var(--stx-ink) 25%, transparent));
+	content: "";
+	translate: 0 -50%;
+}
+
+.stx-slides__dot.is-active {
+	width: 38px;
+}
+
+.stx-slides__dot.is-active::before {
+	background: var(--stx-ink);
+}
+
+/* ==========================================================================
+   Promo card
+   ========================================================================== */
+
+.elementor-widget-stx-promo-card {
+	display: flex;
+	flex-direction: column;
+}
+
+.stx-promo {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 14px;
+	min-height: 170px;
+	padding: 24px;
+	border: 1px solid transparent;
+	border-radius: var(--stx-radius-lg);
+	color: var(--stx-ink);
+	transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stx-promo--dark {
+	--stx-ink: #ffffff;
+	background: var(--stx-dark);
+}
+
+a.stx-promo--dark:hover {
+	background: color-mix(in srgb, var(--stx-dark) 88%, #ffffff);
+}
+
+.stx-promo--card {
+	border-color: var(--stx-line);
+	background: var(--stx-card);
+}
+
+a.stx-promo--card:hover,
+a.stx-promo--soft:hover {
+	border-color: var(--stx-accent);
+}
+
+.stx-promo--soft {
+	background: var(--stx-accent-soft);
+}
+
+.stx-promo--gradient {
+	--stx-ink: #0f1315;
+	--stx-muted: #5a4500;
+	--stx-accent-ink: #0f1315;
+	background-color: var(--stx-accent);
+	background-image: linear-gradient(215deg, color-mix(in srgb, var(--stx-accent) 86%, #ffffff), var(--stx-accent-strong));
+}
+
+.stx-promo__eyebrow {
+	color: var(--stx-muted);
+	font-size: 12.5px;
+	font-weight: 700;
+}
+
+.stx-promo--dark .stx-promo__eyebrow {
+	color: var(--stx-accent);
+}
+
+.stx-promo__title {
+	font-size: 19px;
+	font-weight: 800;
+	line-height: 1.8;
+}
+
+.stx-promo__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: var(--stx-accent-ink);
+	font-size: 13.5px;
+	font-weight: 700;
+}
+
+.stx-promo--dark .stx-promo__cta {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.stx-promo__arrow {
+	transition: margin 0.25s var(--stx-ease);
+}
+
+a.stx-promo:hover .stx-promo__arrow {
+	margin-inline-start: 4px;
+}
+
+/* ==========================================================================
+   Product grid
+   ========================================================================== */
+
+.stx-products {
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+}
+
+.stx-filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.stx-filter__chip {
+	--stx-link: var(--stx-text);
+	display: inline-flex;
+	align-items: center;
+	min-height: 40px;
+	padding: 0 16px;
+	border: 1px solid var(--stx-line);
+	border-radius: 999px;
+	background: var(--stx-card);
+	color: var(--stx-text);
+	font-size: 13px;
+	font-weight: 700;
+	white-space: nowrap;
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.stx-filter__chip:hover {
+	--stx-link: var(--stx-ink);
+	border-color: var(--stx-ink);
+	color: var(--stx-ink);
+}
+
+.stx-filter__chip.is-active {
+	--stx-link: var(--stx-card);
+	border-color: var(--stx-ink);
+	background: var(--stx-ink);
+	color: var(--stx-card);
+}
+
+@media (pointer: coarse) {
+	.stx-filter__chip {
+		min-height: 44px;
+	}
+}
+
+/* "Slide on every screen": one row with --stx-cols cards in view. On phones
+   the swipe row rules below take over. Positioned, so hidden screen reader
+   text in off-screen cards is clipped instead of widening the page. The
+   bottom padding leaves room for the hover shadow, which a scroller clips. */
+.stx-rail {
+	position: relative;
+}
+
+.stx-rail__track {
+	position: relative;
+	display: flex;
+	padding-block-end: 20px;
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+}
+
+.stx-rail__track::-webkit-scrollbar {
+	display: none;
+}
+
+.stx-rail__track > * {
+	flex: 0 0 calc((100% - (var(--stx-cols, 4) - 1) * var(--stx-gap, 18px)) / var(--stx-cols, 4));
+	scroll-snap-align: start;
+}
+
+/* Dragged with a mouse (home.js): snapping and smooth scrolling would fight
+   the pointer, so they wait until it lets go. */
+.stx-rail__track.is-dragging {
+	cursor: grabbing;
+	scroll-behavior: auto;
+	scroll-snap-type: none;
+	user-select: none;
+}
+
+/* Studiare styles every button, so the look is set in full here. */
+.stx-rail .stx-rail__arrow {
+	position: absolute;
+	z-index: 2;
+	/* The middle of the pictures (home.js), else of the cards. */
+	top: var(--stx-rail-mid, calc(50% - 10px));
+	display: grid;
+	place-items: center;
+	width: 44px;
+	min-width: 0;
+	height: 44px;
+	margin: 0;
+	padding: 0;
+	border: 1px solid var(--stx-line);
+	border-radius: 999px;
+	background: var(--stx-card);
+	box-shadow: 0 8px 20px -8px rgba(15, 19, 21, 0.45);
+	color: var(--stx-ink);
+	cursor: pointer;
+	translate: 0 -50%;
+	transition: opacity 0.2s ease, scale 0.2s var(--stx-ease), border-color 0.2s ease;
+}
+
+.stx-rail .stx-rail__arrow:hover {
+	border-color: var(--stx-ink);
+	background: var(--stx-card);
+	color: var(--stx-ink);
+	scale: 1.06;
+}
+
+.stx-rail .stx-rail__arrow[hidden] {
+	display: none;
+}
+
+/* At either end the arrow fades out; disabled buttons leave the tab order. */
+.stx-rail .stx-rail__arrow:disabled {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.stx-rail__arrow--prev {
+	inset-inline-start: 10px;
+}
+
+.stx-rail__arrow--next {
+	inset-inline-end: 10px;
+}
+
+.stx-rail__arrow svg {
+	width: 22px;
+	height: 22px;
+}
+
+/* The chevron points left; "next" (and RTL "previous") points the other way. */
+.stx-rail__arrow--next svg,
+[dir="rtl"] .stx-rail__arrow--prev svg {
+	scale: -1 1;
+}
+
+[dir="rtl"] .stx-rail__arrow--next svg {
+	scale: 1;
+}
+
+/* Touch screens swipe the row instead. */
+@media (hover: none) {
+	.stx-rail .stx-rail__arrow {
+		display: none;
+	}
+}
+
+/* Product card. Container queries adapt it to its own width, not the screen's. */
+.stx-hcard {
+	container-type: inline-size;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	overflow: hidden;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+	transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stx-hcard:hover {
+	border-color: var(--stx-accent);
+	box-shadow: 0 22px 40px -30px rgba(145, 92, 0, 0.6);
+}
+
+.stx-hcard__top {
+	position: relative;
+}
+
+.stx-hcard__media {
+	display: block;
+	overflow: hidden;
+	background: var(--stx-bg);
+	aspect-ratio: var(--stx-ratio, 16 / 10);
+}
+
+.stx-hcard__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0 !important;
+	object-fit: cover;
+	transition: transform 0.5s var(--stx-ease);
+}
+
+.stx-hcard:hover .stx-hcard__media img {
+	transform: scale(1.04);
+}
+
+.stx-hcard__badge {
+	position: absolute;
+	top: 12px;
+	inset-inline-start: 12px;
+	padding: 5px 10px;
+	border-radius: 7px;
+	background: #171c1f;
+	color: #ffffff;
+	font-size: 11.5px;
+	font-weight: 700;
+	line-height: 1.5;
+}
+
+.stx-hcard--compact .stx-hcard__badge {
+	background: var(--stx-accent);
+	color: #0f1315;
+}
+
+/* Round cart button half over the picture (dark icon on amber for contrast). */
+.stx-hcard__fab {
+	--stx-link: #0f1315;
+	position: absolute;
+	z-index: 1;
+	bottom: -22px;
+	inset-inline-end: 16px;
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 999px;
+	background: var(--stx-accent);
+	box-shadow: 0 10px 20px -10px rgba(205, 130, 0, 0.8);
+	color: #0f1315;
+	transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s var(--stx-ease);
+}
+
+.stx-hcard__fab:hover {
+	--stx-link: #ffffff;
+	background: #171c1f;
+	color: #ffffff;
+}
+
+.stx-hcard__fab .stx-ico,
+.stx-hcard__buy .stx-ico {
+	width: 18px;
+	height: 18px;
+}
+
+/* WooCommerce marks the button `loading`, then `added`. */
+.stx-hcard__done-icon,
+.stx-hcard .added > .stx-hcard__cart-icon {
+	display: none;
+}
+
+.stx-hcard .added > .stx-hcard__done-icon {
+	display: inline-block;
+}
+
+.stx-hcard .loading {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+/* WooCommerce adds a "View cart" link after the button; the cart itself updates. */
+.stx-hcard .added_to_cart {
+	display: none;
+}
+
+.stx-hcard__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 10px;
+	padding: 16px 18px 18px;
+}
+
+.stx-hcard--shop .stx-hcard__body {
+	padding-top: 26px;
+}
+
+.stx-hcard__kind {
+	color: var(--stx-muted);
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.stx-hcard .stx-hcard__title {
+	margin: 0;
+	font-family: inherit;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 1.8;
+}
+
+.stx-hcard__title a {
+	color: var(--stx-ink);
+}
+
+.stx-hcard__title a:hover {
+	color: var(--stx-accent-ink);
+}
+
+.stx-hcard__excerpt {
+	margin: 0;
+	color: var(--stx-muted);
+	font-size: 13.5px;
+	line-height: 1.95;
+}
+
+.stx-hcard__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 6px;
+	color: var(--stx-muted);
+	font-size: 12.5px;
+}
+
+.stx-hcard__rating {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.stx-hcard__star {
+	width: 13px;
+	height: 13px;
+	color: var(--stx-accent);
+}
+
+.stx-hcard__dot {
+	color: var(--stx-line);
+}
+
+.stx-hcard__foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-top: auto;
+	padding-top: 14px;
+	border-top: 1px dashed var(--stx-line);
+}
+
+.stx-hcard--compact .stx-hcard__foot {
+	border-top-style: solid;
+}
+
+.stx-hcard__price {
+	color: var(--stx-accent-ink);
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 1.5;
+}
+
+.stx-hcard--compact .stx-hcard__price {
+	color: var(--stx-ink);
+}
+
+.stx-hcard__price del {
+	margin-inline-end: 6px;
+	color: var(--stx-muted);
+	font-size: 12.5px;
+	font-weight: 500;
+}
+
+/* The theme (and its dark mode) highlight <ins> like a marker pen. */
+.stx-hcard .stx-hcard__price ins,
+.stx-offer .stx-offer__price ins {
+	background: none;
+	text-decoration: none;
+}
+
+.stx-hcard__price .woocommerce-Price-currencySymbol {
+	font-size: 0.8em;
+}
+
+.stx-hcard__more {
+	--stx-link: var(--stx-text);
+	flex: none;
+	color: var(--stx-text);
+	font-size: 13px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.stx-hcard__more:hover {
+	--stx-link: var(--stx-accent-ink);
+	color: var(--stx-accent-ink);
+}
+
+.stx-hcard__buy {
+	--stx-link: var(--stx-accent-ink);
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-height: 38px;
+	padding: 0 14px;
+	border-radius: 10px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+	font-size: 13px;
+	font-weight: 700;
+	white-space: nowrap;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.stx-hcard__buy:hover {
+	--stx-link: #0f1315;
+	background: var(--stx-accent);
+	color: #0f1315;
+}
+
+@media (pointer: coarse) {
+	.stx-hcard__buy {
+		min-height: 44px;
+	}
+}
+
+/* Narrow cards: price above a full-width buy button. */
+@container (max-width: 230px) {
+	.stx-hcard__foot {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.stx-hcard__body {
+		padding-inline: 14px;
+	}
+}
+
+/* Course card: the teacher and course facts, the rating beside the price. */
+.stx-hcard__teacher {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--stx-text);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.stx-hcard .stx-hcard__teacher-img {
+	flex: none;
+	width: 28px;
+	height: 28px;
+	margin: 0 !important;
+	border-radius: 999px;
+	object-fit: cover;
+}
+
+.stx-hcard__teacher-img.stx-avatar--empty {
+	display: inline-grid;
+	place-items: center;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+}
+
+.stx-hcard__teacher-img .stx-ico {
+	width: 15px;
+	height: 15px;
+}
+
+.stx-hcard__facts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 14px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	color: var(--stx-muted);
+	font-size: 12.5px;
+}
+
+.stx-hcard__facts li {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	margin: 0;
+}
+
+.stx-hcard__facts .stx-ico {
+	width: 15px;
+	height: 15px;
+	color: var(--stx-accent-ink);
+}
+
+.stx-hcard__score {
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+	font-size: 12.5px;
+	font-weight: 800;
+}
+
+.stx-hcard--course .stx-hcard__foot {
+	border-top-style: solid;
+}
+
+/* Picture card: the text sits on a dark gradient over the picture. The body
+   lets clicks through to the picture link, except on its own links. */
+.stx-hcard--overlay {
+	position: relative;
+	border: 0;
+	background: #171c1f;
+}
+
+.stx-hcard--overlay .stx-hcard__media {
+	aspect-ratio: var(--stx-ratio, 3 / 4);
+}
+
+.stx-hcard--overlay .stx-hcard__body {
+	position: absolute;
+	inset: auto 0 0;
+	gap: 6px;
+	padding: 64px 18px 16px;
+	background: linear-gradient(to top, rgba(15, 19, 21, 0.94) 35%, rgba(15, 19, 21, 0));
+	pointer-events: none;
+}
+
+.stx-hcard--overlay .stx-hcard__body a {
+	pointer-events: auto;
+}
+
+.stx-hcard--overlay .stx-hcard__kind {
+	color: #ead19a;
+}
+
+.stx-hcard--overlay .stx-hcard__title a {
+	--stx-link: #ffffff;
+	color: #ffffff;
+}
+
+.stx-hcard--overlay .stx-hcard__title a:hover {
+	--stx-link: #ffd270;
+	color: #ffd270;
+}
+
+.stx-hcard--overlay .stx-hcard__foot {
+	padding-top: 2px;
+	border-top: 0;
+}
+
+.stx-hcard--overlay .stx-hcard__price {
+	color: #ffd270;
+}
+
+.stx-hcard--overlay .stx-hcard__price del {
+	color: rgba(255, 255, 255, 0.62);
+}
+
+.stx-hcard--overlay .stx-hcard__fab {
+	top: 12px;
+	bottom: auto;
+	inset-inline-end: 12px;
+}
+
+/* Minimal: no box; the cart button waits on the picture's corner. */
+.stx-hcard--minimal {
+	overflow: visible;
+	border: 0;
+	border-radius: 0;
+	background: none;
+}
+
+.stx-hcard--minimal:hover {
+	box-shadow: none;
+}
+
+.stx-hcard--minimal .stx-hcard__media {
+	border-radius: var(--stx-radius);
+}
+
+.stx-hcard--minimal .stx-hcard__body {
+	gap: 6px;
+	padding: 14px 2px 0;
+}
+
+.stx-hcard--minimal .stx-hcard__foot {
+	margin-top: 2px;
+	padding-top: 0;
+	border-top: 0;
+}
+
+.stx-hcard--minimal .stx-hcard__fab {
+	bottom: 12px;
+	inset-inline-end: 12px;
+}
+
+/* With a mouse the button appears on hover (and stays once added); touch screens always show it. */
+@media (hover: hover) {
+	.stx-hcard--minimal .stx-hcard__fab {
+		opacity: 0;
+		translate: 0 8px;
+		transition: opacity 0.2s ease, translate 0.25s var(--stx-ease), background-color 0.2s ease, color 0.2s ease;
+	}
+
+	.stx-hcard--minimal:hover .stx-hcard__fab,
+	.stx-hcard--minimal .stx-hcard__fab:focus-visible,
+	.stx-hcard--minimal .stx-hcard__fab.added {
+		opacity: 1;
+		translate: 0;
+	}
+}
+
+/* Classic shop card: centred, stars and a full-width buy button. */
+.stx-hcard--classic .stx-hcard__body {
+	align-items: center;
+	gap: 8px;
+	text-align: center;
+}
+
+.stx-hcard--classic .stx-hcard__foot {
+	justify-content: center;
+	padding-top: 0;
+	border-top: 0;
+}
+
+.stx-hcard--classic .stx-rating {
+	font-size: 12px;
+}
+
+.stx-hcard .stx-hcard__buy--block {
+	align-self: stretch;
+	min-height: 44px;
+}
+
+/* Row: small square picture beside the text, round cart button. */
+.stx-hcard--list {
+	display: grid;
+	grid-template-columns: 88px minmax(0, 1fr);
+	gap: 14px;
+	align-items: center;
+	padding: 12px;
+}
+
+.stx-hcard--list .stx-hcard__media {
+	border-radius: 12px;
+	aspect-ratio: 1;
+}
+
+.stx-hcard--list .stx-hcard__badge {
+	top: 6px;
+	inset-inline-start: 6px;
+	padding: 2px 6px;
+	border-radius: 6px;
+	font-size: 10.5px;
+}
+
+.stx-hcard--list .stx-hcard__body {
+	gap: 4px;
+	padding: 0;
+}
+
+.stx-hcard.stx-hcard--list .stx-hcard__title {
+	font-size: 14.5px;
+	line-height: 1.7;
+}
+
+.stx-hcard--list .stx-hcard__foot {
+	margin-top: 0;
+	padding-top: 4px;
+	border-top: 0;
+}
+
+.stx-hcard--list .stx-hcard__price {
+	font-size: 14.5px;
+}
+
+.stx-hcard .stx-hcard__buy--icon {
+	width: 40px;
+	padding: 0;
+	border-radius: 999px;
+}
+
+@media (pointer: coarse) {
+	.stx-hcard .stx-hcard__buy--icon {
+		width: 44px;
+	}
+}
+
+/* Numbered rows ("Top 5"): the number sits on the picture's corner. */
+.stx-products__grid--numbers {
+	counter-reset: stx-product;
+}
+
+.stx-products__grid--numbers .stx-hcard {
+	counter-increment: stx-product;
+}
+
+.stx-products__grid--numbers .stx-hcard__top::after {
+	content: counter(stx-product);
+	position: absolute;
+	bottom: -6px;
+	inset-inline-end: -6px;
+	display: grid;
+	place-items: center;
+	width: 26px;
+	height: 26px;
+	border: 2px solid var(--stx-card);
+	border-radius: 999px;
+	background: var(--stx-ink);
+	color: var(--stx-card);
+	font-size: 12px;
+	font-weight: 800;
+}
+
+:lang(fa) .stx-products__grid--numbers .stx-hcard__top::after {
+	content: counter(stx-product, persian);
+}
+
+/* ==========================================================================
+   Categories
+   ========================================================================== */
+
+.stx-cats {
+	--stx-cols: 3;
+	gap: 16px;
+}
+
+.stx-cat {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	min-width: 0;
+	height: 100%;
+	padding: 20px;
+	border: 1px solid transparent;
+	border-radius: 16px;
+	background: var(--stx-card);
+	box-shadow: 0 16px 30px -26px rgba(115, 73, 0, 0.5);
+	color: var(--stx-ink);
+	transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+a.stx-cat:hover {
+	box-shadow: 0 20px 34px -20px color-mix(in srgb, var(--stx-accent) 45%, transparent);
+	color: var(--stx-ink);
+}
+
+.stx-cat__mark {
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 48px;
+	height: 48px;
+	overflow: hidden;
+	border-radius: 14px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+	font-size: 19px;
+	font-weight: 800;
+}
+
+.stx-cat__mark .stx-ico {
+	width: 21px;
+	height: 21px;
+}
+
+.stx-cat__mark img {
+	width: 28px;
+	height: 28px;
+	margin: 0 !important;
+	object-fit: contain;
+}
+
+.stx-cat__body {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	min-width: 0;
+}
+
+.stx-cat__name {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.5;
+	overflow-wrap: break-word;
+}
+
+.stx-cat__count {
+	color: var(--stx-muted);
+	font-size: 12.5px;
+}
+
+.stx-cats--icon .stx-cat {
+	gap: 10px;
+	padding: 18px 12px;
+	border-color: var(--stx-line);
+	box-shadow: none;
+}
+
+.stx-cats--icon a.stx-cat:hover {
+	border-color: var(--stx-accent);
+	background: color-mix(in srgb, var(--stx-accent-soft) 45%, var(--stx-card));
+	box-shadow: none;
+}
+
+.stx-cats--icon .stx-cat__mark {
+	width: 42px;
+	height: 42px;
+	border-radius: 12px;
+}
+
+.stx-cats--icon .stx-cat__name {
+	color: var(--stx-accent-ink);
+	font-size: 14.5px;
+}
+
+/* ==========================================================================
+   Posts
+   ========================================================================== */
+
+.stx-post {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	overflow: hidden;
+	border-radius: 16px;
+	background: var(--stx-card);
+}
+
+.stx-posts--card .stx-post {
+	box-shadow: 0 18px 34px -30px rgba(115, 73, 0, 0.6);
+}
+
+.stx-posts--simple .stx-post {
+	border: 1px solid var(--stx-line);
+	border-radius: 18px;
+	transition: border-color 0.25s ease;
+}
+
+.stx-posts--simple .stx-post:hover {
+	border-color: var(--stx-accent);
+}
+
+.stx-post__top {
+	position: relative;
+}
+
+.stx-post__media {
+	display: block;
+	overflow: hidden;
+	background: var(--stx-bg);
+	aspect-ratio: var(--stx-ratio, 16 / 9);
+}
+
+.stx-post__media img,
+.stx-post__cover img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0 !important;
+	object-fit: cover;
+	transition: transform 0.5s var(--stx-ease);
+}
+
+.stx-post:hover .stx-post__media img,
+.stx-post__cover:hover img {
+	transform: scale(1.04);
+}
+
+.stx-post__badge {
+	position: absolute;
+	top: 11px;
+	inset-inline-start: 11px;
+	padding: 5px 10px;
+	border-radius: 7px;
+	background: var(--stx-accent);
+	color: #0f1315;
+	font-size: 11.5px;
+	font-weight: 700;
+	line-height: 1.5;
+}
+
+.stx-post__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 12px;
+	padding: 16px 18px 18px;
+}
+
+.stx-posts--simple .stx-post__body {
+	gap: 8px;
+	padding: 18px 20px 20px;
+}
+
+.stx-post .stx-post__title {
+	margin: 0;
+	font-family: inherit;
+	font-size: 15.5px;
+	font-weight: 800;
+	line-height: 1.9;
+}
+
+.stx-posts--simple .stx-post__title {
+	font-size: 16px;
+}
+
+.stx-post__title a {
+	color: var(--stx-ink);
+}
+
+.stx-post__title a:hover {
+	color: var(--stx-accent-ink);
+}
+
+.stx-post__excerpt {
+	margin: 0;
+	color: var(--stx-muted);
+	font-size: 13.5px;
+	line-height: 1.9;
+}
+
+.stx-post__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 14px;
+	color: var(--stx-muted);
+	font-size: 12px;
+}
+
+.stx-post__more {
+	--stx-link: var(--stx-accent-ink);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	margin-top: auto;
+	border-radius: 10px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+	font-size: 13.5px;
+	font-weight: 700;
+	text-align: center;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.stx-post__more:hover {
+	--stx-link: #0f1315;
+	background: var(--stx-accent);
+	color: #0f1315;
+}
+
+.stx-posts--simple .stx-post__more {
+	align-self: flex-start;
+	min-height: 32px;
+	margin-top: 0;
+	background: none;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.stx-posts--simple .stx-post__more:hover {
+	--stx-link: var(--stx-ink);
+	background: none;
+	color: var(--stx-ink);
+}
+
+/* Picture card with a play button (podcasts, videos). */
+.stx-post--media {
+	border-radius: 16px;
+}
+
+.stx-post__cover {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border-radius: 16px;
+	background: var(--stx-bg);
+	color: #ffffff;
+	aspect-ratio: var(--stx-ratio, 4 / 3);
+	transition: box-shadow 0.25s ease;
+}
+
+.stx-post__cover:hover {
+	box-shadow: 0 22px 38px -24px color-mix(in srgb, var(--stx-accent) 55%, transparent);
+}
+
+.stx-post__cover > img,
+.stx-post__cover > .stx-ph {
+	position: absolute;
+	inset: 0;
+}
+
+/* The title is white, so a missing picture gets a dark stand-in. The solid
+   colour matters: Elementor strips background images from sections that
+   have not scrolled into view yet. */
+.stx-post__cover > .stx-ph {
+	background: #2b3338 repeating-linear-gradient(135deg, #2b3338 0 12px, #353e44 12px 24px);
+	color: #96a6b0;
+}
+
+.stx-post__cover > .stx-ph .stx-ph__icon {
+	display: none;
+}
+
+/* Above the middle, so a two-line title never runs under it. */
+.stx-post__play {
+	position: absolute;
+	top: 38%;
+	left: 50%;
+	display: grid;
+	place-items: center;
+	width: 52px;
+	height: 52px;
+	border-radius: 999px;
+	background: rgba(23, 28, 31, 0.85);
+	color: #ffffff;
+	translate: -50% -50%;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.stx-post__play .stx-ico {
+	width: 20px;
+	height: 20px;
+}
+
+.stx-post__cover:hover .stx-post__play {
+	background: var(--stx-accent);
+	color: #0f1315;
+}
+
+.stx-post__overlay {
+	position: absolute;
+	inset: auto 0 0;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 28px 16px 14px;
+	background: linear-gradient(to top, rgba(23, 28, 31, 0.92), rgba(23, 28, 31, 0));
+}
+
+.stx-post--media .stx-post__title {
+	color: #ffffff;
+	font-size: 14.5px;
+	line-height: 1.7;
+}
+
+.stx-post--media .stx-post__meta {
+	color: #ead19a;
+	font-size: 11.5px;
+}
+
+/* Category above the title (editorial, row and highlighted cards). */
+.stx-post__cat {
+	color: var(--stx-accent-ink);
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.6;
+}
+
+/* Editorial, row and compact cards: the "read more" link is plain text. */
+:is(.stx-post--minimal, .stx-post--list) .stx-post__more {
+	align-self: flex-start;
+	min-height: 32px;
+	margin-top: 0;
+	padding: 0;
+	background: none;
+	font-size: 13.5px;
+}
+
+:is(.stx-post--minimal, .stx-post--list) .stx-post__more:hover {
+	--stx-link: var(--stx-ink);
+	background: none;
+	color: var(--stx-ink);
+}
+
+/* Editorial: no box, a rounded picture and a larger title. */
+.stx-post--minimal {
+	overflow: visible;
+	border-radius: 0;
+	background: none;
+}
+
+.stx-post--minimal .stx-post__media {
+	border-radius: var(--stx-radius);
+}
+
+.stx-post--minimal .stx-post__body {
+	gap: 8px;
+	padding: 16px 2px 0;
+}
+
+.stx-post.stx-post--minimal .stx-post__title {
+	font-size: 18px;
+	line-height: 1.75;
+}
+
+/* Row: the picture beside the text. */
+.stx-post--list {
+	display: grid;
+	grid-template-columns: minmax(0, 36%) minmax(0, 1fr);
+	gap: 20px;
+	align-items: center;
+	padding: 14px;
+	border: 1px solid var(--stx-line);
+	transition: border-color 0.25s ease;
+}
+
+.stx-post--list:hover {
+	border-color: var(--stx-accent);
+}
+
+.stx-post--list .stx-post__media {
+	border-radius: var(--stx-radius-sm);
+	aspect-ratio: var(--stx-ratio, 4 / 3);
+}
+
+.stx-post--list .stx-post__body {
+	gap: 8px;
+	padding: 4px 0;
+}
+
+.stx-post.stx-post--list .stx-post__title {
+	font-size: 17px;
+	line-height: 1.8;
+}
+
+/* The highlighted first post spans the row, with a larger picture and title. */
+.stx-posts:not(.stx-posts--magazine) > .stx-post--lead:not(:only-child) {
+	grid-column: 1 / -1;
+}
+
+.stx-post--list.stx-post--lead {
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+	gap: 28px;
+	padding: 18px;
+}
+
+.stx-post--list.stx-post--lead .stx-post__media {
+	aspect-ratio: 16 / 10;
+}
+
+.stx-post.stx-post--lead .stx-post__title {
+	font-size: clamp(19px, 1.2vw + 12px, 24px);
+	line-height: 1.7;
+}
+
+.stx-post--lead .stx-post__excerpt {
+	font-size: 14.5px;
+}
+
+/* Compact list (sidebars): small square picture, title and date, lines between. */
+.stx-posts--mini {
+	gap: 0 24px;
+}
+
+.stx-post--mini {
+	display: grid;
+	grid-template-columns: 68px minmax(0, 1fr);
+	gap: 14px;
+	align-items: center;
+	padding-block: 14px;
+	overflow: visible;
+	border-top: 1px dashed var(--stx-line);
+	border-radius: 0;
+	background: none;
+}
+
+.stx-posts--mini > .stx-post--mini:first-child {
+	padding-block-start: 0;
+	border-top: 0;
+}
+
+.stx-post--mini .stx-post__media {
+	border-radius: 12px;
+	aspect-ratio: 1;
+}
+
+.stx-post--mini .stx-post__body {
+	gap: 4px;
+	padding: 0;
+}
+
+.stx-post.stx-post--mini .stx-post__title {
+	display: -webkit-box;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 1.75;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+.stx-post--mini .stx-post__meta {
+	font-size: 11.5px;
+}
+
+/* Numbered compact list: the number sits on the picture's corner. */
+.stx-posts--numbers {
+	counter-reset: stx-post;
+}
+
+.stx-posts--numbers .stx-post {
+	counter-increment: stx-post;
+}
+
+.stx-posts--numbers .stx-post__top::after {
+	content: counter(stx-post);
+	position: absolute;
+	top: -6px;
+	inset-inline-start: -6px;
+	display: grid;
+	place-items: center;
+	width: 24px;
+	height: 24px;
+	border: 2px solid var(--stx-card);
+	border-radius: 999px;
+	background: var(--stx-accent);
+	color: #0f1315;
+	font-size: 11.5px;
+	font-weight: 800;
+}
+
+:lang(fa) .stx-posts--numbers .stx-post__top::after {
+	content: counter(stx-post, persian);
+}
+
+/* Magazine: the first post large, the others in a list beside it.
+   --stx-rows (set by the widget) is the number of listed posts; the last,
+   flexible row takes the height the large post adds, so the list stays packed. */
+.stx-posts--magazine {
+	grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+	grid-template-rows: repeat(var(--stx-rows, 3), auto) 1fr;
+	gap: 0 32px;
+	align-content: start;
+}
+
+.stx-posts--magazine > .stx-post--lead {
+	grid-column: 1;
+	grid-row: 1 / -1;
+}
+
+.stx-posts--magazine > .stx-post--mini {
+	grid-column: 2;
+}
+
+.stx-posts--magazine > .stx-post--mini:nth-child(2) {
+	padding-block-start: 0;
+	border-top: 0;
+}
+
+.stx-posts--magazine .stx-post--lead .stx-post__media {
+	aspect-ratio: 16 / 10;
+}
+
+/* Page numbers under a blog page's posts. */
+.stx-pages ul {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+	margin: 32px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-pages li {
+	margin: 0;
+}
+
+.stx-pages .page-numbers {
+	--stx-link: var(--stx-text);
+	display: grid;
+	place-items: center;
+	min-width: 44px;
+	height: 44px;
+	padding: 0 12px;
+	border: 1px solid var(--stx-line);
+	border-radius: 12px;
+	background: var(--stx-card);
+	color: var(--stx-text);
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1;
+	text-decoration: none;
+	transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.stx-pages a.page-numbers:hover {
+	--stx-link: var(--stx-ink);
+	border-color: var(--stx-ink);
+	color: var(--stx-ink);
+}
+
+.stx-pages .page-numbers.current {
+	border-color: var(--stx-ink);
+	background: var(--stx-ink);
+	color: var(--stx-card);
+}
+
+.stx-pages .page-numbers.dots {
+	min-width: 24px;
+	padding: 0;
+	border-color: transparent;
+	background: none;
+}
+
+.stx-pages__arrow svg {
+	display: block;
+	width: 18px;
+	height: 18px;
+}
+
+/* The chevron points left; "next" (and RTL "previous") points the other way. */
+.stx-pages__arrow--next svg,
+[dir="rtl"] .stx-pages__arrow:not(.stx-pages__arrow--next) svg {
+	scale: -1 1;
+}
+
+[dir="rtl"] .stx-pages__arrow--next svg {
+	scale: 1;
+}
+
+/* ==========================================================================
+   Features
+   ========================================================================== */
+
+.stx-feats {
+	display: grid;
+	grid-template-columns: repeat(var(--stx-cols, 4), minmax(0, 1fr));
+	gap: 18px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-feats > li {
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.stx-feat {
+	display: flex;
+	align-items: center;
+	gap: 13px;
+	color: var(--stx-text);
+}
+
+.stx-feat__icon {
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 13px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+	font-size: 17px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.stx-feat__icon .stx-ico {
+	width: 21px;
+	height: 21px;
+}
+
+.stx-feats--icon-outline .stx-feat__icon {
+	width: 46px;
+	height: 46px;
+	border: 1px solid var(--stx-line);
+	border-radius: 14px;
+	background: var(--stx-card);
+}
+
+.stx-feat__body {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.stx-feat__title {
+	color: var(--stx-ink);
+	font-size: 14.5px;
+	font-weight: 700;
+	line-height: 1.6;
+}
+
+a.stx-feat:hover .stx-feat__title {
+	color: var(--stx-accent-ink);
+}
+
+.stx-feat__text {
+	color: var(--stx-muted);
+	font-size: 12.5px;
+	line-height: 1.8;
+}
+
+/* One bar with dividers between the items (4 / 2 / 1 columns). */
+.stx-feats--strip {
+	gap: 0;
+	padding: 6px;
+	border-radius: 18px;
+	background: var(--stx-card);
+	box-shadow: 0 18px 34px -32px rgba(115, 73, 0, 0.7);
+}
+
+.stx-feats--strip .stx-feat {
+	padding: 18px 20px;
+}
+
+@media (min-width: 1025px) {
+	.stx-feats--strip > li + li {
+		border-inline-start: 1px solid var(--stx-line);
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	.stx-feats--strip > li:nth-child(even) {
+		border-inline-start: 1px solid var(--stx-line);
+	}
+
+	.stx-feats--strip > li:nth-child(n + 3) {
+		border-top: 1px solid var(--stx-line);
+	}
+}
+
+@media (max-width: 767px) {
+	.stx-feats--strip > li + li {
+		border-top: 1px solid var(--stx-line);
+	}
+
+	.stx-feats--strip .stx-feat {
+		padding: 14px 14px;
+	}
+}
+
+.stx-feats--tiles {
+	gap: 28px;
+}
+
+.stx-feats--tiles .stx-feat {
+	align-items: flex-start;
+	gap: 14px;
+}
+
+.stx-feats--tiles .stx-feat__title {
+	font-size: 17px;
+}
+
+.stx-feats--tiles .stx-feat__text {
+	color: var(--stx-text);
+	font-size: 14px;
+	line-height: 1.9;
+}
+
+.stx-feats--cards .stx-feat {
+	height: 100%;
+	padding: 18px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+}
+
+/* ==========================================================================
+   Countdown
+   ========================================================================== */
+
+.stx-countdown {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.stx-countdown__unit {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+	min-width: 62px;
+	padding: 11px 12px;
+	border: 1px solid var(--stx-line);
+	border-radius: 12px;
+	background: var(--stx-card);
+}
+
+.stx-countdown__num {
+	color: var(--stx-ink);
+	font-size: 20px;
+	font-weight: 800;
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+}
+
+.stx-countdown__label {
+	color: var(--stx-muted);
+	font-size: 11px;
+	line-height: 1.4;
+}
+
+.stx-countdown__ended {
+	margin: 0;
+	color: var(--stx-muted);
+	font-size: 14px;
+}
+
+/* ==========================================================================
+   Offer price
+   ========================================================================== */
+
+.stx-offer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 14px;
+}
+
+.stx-offer--inline {
+	flex-flow: row wrap;
+	align-items: center;
+	gap: 18px;
+}
+
+.stx-offer__prices {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 4px 12px;
+}
+
+.stx-offer__price {
+	color: var(--stx-accent-ink);
+	font-size: 30px;
+	font-weight: 800;
+	line-height: 1.3;
+}
+
+.stx-offer__old {
+	color: var(--stx-muted);
+	font-size: 16px;
+}
+
+/* ==========================================================================
+   Testimonials
+   ========================================================================== */
+
+.stx-quotes {
+	--stx-cols: 3;
+}
+
+.stx-quote {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	min-width: 0;
+	margin: 0;
+	padding: 24px;
+	border: 1px solid var(--stx-line);
+	border-radius: 18px;
+	background: var(--stx-bg);
+}
+
+.stx-quotes--card .stx-quote {
+	background: var(--stx-card);
+}
+
+.stx-quote__stars {
+	display: flex;
+	gap: 3px;
+	color: var(--stx-accent);
+}
+
+.stx-quote__stars svg {
+	width: 14px;
+	height: 14px;
+}
+
+/* Themes style blockquotes heavily (bars, big quote marks, italics). */
+.stx-quote .stx-quote__text {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--stx-text);
+	font-size: 14.5px;
+	font-style: normal;
+	line-height: 2.1;
+	quotes: none;
+}
+
+.stx-quote .stx-quote__text::before,
+.stx-quote .stx-quote__text::after {
+	content: none;
+}
+
+.stx-quote__who {
+	display: flex;
+	align-items: center;
+	gap: 11px;
+	margin-top: auto;
+}
+
+.stx-quote__avatar {
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 40px;
+	height: 40px;
+	margin: 0 !important;
+	border-radius: 999px;
+	background: var(--stx-line);
+	color: var(--stx-muted);
+	font-size: 14px;
+	font-weight: 700;
+	object-fit: cover;
+}
+
+.stx-quote__id {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	min-width: 0;
+}
+
+.stx-quote__name {
+	color: var(--stx-ink);
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.stx-quote__role {
+	color: var(--stx-muted);
+	font-size: 12px;
+}
+
+/* ==========================================================================
+   People
+   ========================================================================== */
+
+.stx-people {
+	gap: 16px;
+}
+
+.stx-person {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border-radius: 16px;
+	background: var(--stx-bg);
+	color: #ffffff;
+	aspect-ratio: var(--stx-ratio, 3 / 4);
+}
+
+.stx-person > img,
+.stx-person > .stx-ph {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0 !important;
+	object-fit: cover;
+	transition: transform 0.5s var(--stx-ease);
+}
+
+a.stx-person:hover > img {
+	transform: scale(1.04);
+}
+
+.stx-person > .stx-ph .stx-ph__icon {
+	width: 40px;
+	height: 40px;
+	margin-bottom: 40px;
+}
+
+.stx-person__text {
+	position: absolute;
+	inset: auto 0 0;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 34px 16px 15px;
+	background: linear-gradient(to top, rgba(23, 28, 31, 0.94), rgba(23, 28, 31, 0));
+}
+
+.stx-person__name {
+	color: #ffffff;
+	font-size: 15.5px;
+	font-weight: 700;
+	line-height: 1.6;
+}
+
+.stx-person__role {
+	color: #ead19a;
+	font-size: 12.5px;
+	line-height: 1.6;
+}
+
+/* ==========================================================================
+   Events
+   ========================================================================== */
+
+.stx-events {
+	--stx-cols: 3;
+}
+
+.stx-event {
+	display: flex;
+	gap: 14px;
+	min-width: 0;
+	padding: 20px;
+	border: 1px solid var(--stx-line);
+	border-radius: 16px;
+	background: var(--stx-card);
+	transition: border-color 0.25s ease;
+}
+
+.stx-event:hover {
+	border-color: var(--stx-accent);
+}
+
+.stx-event__date {
+	display: flex;
+	flex: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	width: 58px;
+	min-height: 76px;
+	border-radius: 12px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+}
+
+.stx-event__date b {
+	font-size: 21px;
+	font-weight: 800;
+	line-height: 1;
+}
+
+.stx-event__date span {
+	font-size: 11.5px;
+}
+
+.stx-event__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 8px;
+	min-width: 0;
+}
+
+.stx-event .stx-event__title {
+	margin: 0;
+	color: var(--stx-ink);
+	font-family: inherit;
+	font-size: 15.5px;
+	font-weight: 800;
+	line-height: 1.8;
+}
+
+.stx-event__detail {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: var(--stx-muted);
+	font-size: 12.5px;
+}
+
+.stx-event__detail .stx-ico {
+	width: 14px;
+	height: 14px;
+}
+
+.stx-event__link {
+	--stx-link: var(--stx-accent-ink);
+	display: inline-flex;
+	align-items: center;
+	align-self: flex-start;
+	gap: 4px;
+	min-height: 36px;
+	margin-top: auto;
+	color: var(--stx-accent-ink);
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.stx-event__link:hover {
+	--stx-link: var(--stx-ink);
+	color: var(--stx-ink);
+}
+
+@media (pointer: coarse) {
+	.stx-event__link {
+		min-height: 44px;
+	}
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+
+.stx-faq {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.stx-faq__item {
+	overflow: hidden;
+	border: 1px solid var(--stx-line);
+	border-radius: 14px;
+	background: var(--stx-card);
+}
+
+.stx-faq__q {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	min-height: 56px;
+	padding: 14px 18px;
+	color: var(--stx-ink);
+	font-size: 14.5px;
+	font-weight: 700;
+	line-height: 1.7;
+	list-style: none;
+	cursor: pointer;
+}
+
+.stx-faq__q::-webkit-details-marker {
+	display: none;
+}
+
+.stx-faq__q::marker {
+	content: "";
+}
+
+/* A plus that turns into a minus. */
+.stx-faq__sign {
+	position: relative;
+	flex: none;
+	width: 24px;
+	height: 24px;
+	border-radius: 999px;
+	background: var(--stx-accent-soft);
+}
+
+.stx-faq__sign::before,
+.stx-faq__sign::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 10px;
+	height: 2px;
+	border-radius: 2px;
+	background: var(--stx-accent-ink);
+	content: "";
+	translate: -50% -50%;
+	transition: rotate 0.25s var(--stx-ease);
+}
+
+.stx-faq__sign::after {
+	rotate: 90deg;
+}
+
+.stx-faq__item[open] .stx-faq__sign::after {
+	rotate: 0deg;
+}
+
+.stx-faq__a {
+	padding: 0 18px 18px;
+	color: var(--stx-text);
+	font-size: 13.5px;
+	line-height: 2.1;
+}
+
+.stx-faq__a > :first-child {
+	margin-top: 0;
+}
+
+.stx-faq__a > :last-child {
+	margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Key numbers
+   ========================================================================== */
+
+.stx-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 26px;
+	margin: 0;
+}
+
+.stx-stats__item {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 3px;
+}
+
+.stx-stats .stx-stats__value {
+	margin: 0;
+	color: var(--stx-ink);
+	font-size: 20px;
+	font-weight: 800;
+	line-height: 1.3;
+}
+
+.stx-stats__label {
+	color: var(--stx-muted);
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.stx-stats--card {
+	gap: 20px;
+	padding: 14px 18px;
+	border-radius: 16px;
+	background: var(--stx-card);
+	box-shadow: 0 20px 40px -26px rgba(75, 48, 0, 0.6);
+}
+
+/* On the amber hero the card stays white, in dark mode too. */
+.stx-surface-gradient .stx-stats--card,
+.stx-surface-accent .stx-stats--card {
+	--stx-ink: #0f1315;
+	--stx-muted: #5d6e79;
+	--stx-line: #dee3e6;
+	background: #ffffff;
+}
+
+.stx-stats--card .stx-stats__item + .stx-stats__item {
+	padding-inline-start: 20px;
+	border-inline-start: 1px solid var(--stx-line);
+}
+
+/* The number keeps one width per digit, so a count-up (home.js) does not
+   wobble; the script also pins its final width while counting. */
+.stx-stats__num {
+	display: inline-block;
+	font-variant-numeric: tabular-nums;
+}
+
+.stx-stats__icon {
+	display: inline-grid;
+	place-items: center;
+	margin-inline-end: 8px;
+	color: var(--stx-accent-ink);
+	vertical-align: -0.15em;
+}
+
+.stx-stats__icon .stx-ico {
+	width: 1em;
+	height: 1em;
+}
+
+/* Tiles and large numbers: a grid with one number per cell, centred. */
+.stx-stats--tiles,
+.stx-stats--band {
+	display: grid;
+	grid-template-columns: repeat(var(--stx-cols, 4), minmax(0, 1fr));
+	gap: 16px;
+	text-align: center;
+}
+
+/* Items stack in reverse (label last in the markup, shown under the number),
+   so flex-end is the top: tiles of one row line up whatever their label length. */
+.stx-stats--tiles .stx-stats__item,
+.stx-stats--band .stx-stats__item {
+	align-items: center;
+	justify-content: flex-end;
+	gap: 6px;
+}
+
+.stx-stats--tiles .stx-stats__value,
+.stx-stats--band .stx-stats__value {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+}
+
+.stx-stats--tiles .stx-stats__icon,
+.stx-stats--band .stx-stats__icon {
+	margin: 0;
+}
+
+.stx-stats--tiles .stx-stats__item {
+	padding: 24px 16px 20px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+}
+
+.stx-stats.stx-stats--tiles .stx-stats__value {
+	font-size: clamp(24px, 2.4vw, 32px);
+	font-weight: 900;
+}
+
+.stx-stats--tiles .stx-stats__icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 14px;
+	background: var(--stx-accent-soft);
+	font-size: 24px;
+}
+
+.stx-stats--tiles .stx-stats__label,
+.stx-stats--band .stx-stats__label {
+	font-size: 14px;
+}
+
+.stx-stats.stx-stats--band .stx-stats__value {
+	font-size: clamp(30px, 3.6vw, 46px);
+	font-weight: 900;
+	line-height: 1.15;
+}
+
+.stx-stats--band .stx-stats__icon {
+	font-size: 28px;
+}
+
+/* One row of large numbers: thin lines between them. */
+@media (min-width: 1025px) {
+	.stx-stats--band .stx-stats__item + .stx-stats__item {
+		border-inline-start: 1px solid var(--stx-line);
+	}
+}
+
+@media (max-width: 767px) {
+	.stx-stats--tiles,
+	.stx-stats--band {
+		gap: 12px;
+	}
+
+	.stx-stats--tiles .stx-stats__item {
+		padding: 18px 10px 16px;
+	}
+
+	.stx-stats--band {
+		row-gap: 22px;
+	}
+}
+
+/* ==========================================================================
+   Newsletter
+   ========================================================================== */
+
+.stx-news {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 0;
+}
+
+/* Beats theme rules such as `input[type="email"]`. */
+.stx-news .stx-news__input {
+	flex: 1 1 200px;
+	min-width: 0;
+	height: auto;
+	min-height: 52px;
+	margin: 0;
+	padding: 0 15px;
+	border: 1px solid var(--stx-line);
+	border-radius: 12px;
+	background: var(--stx-bg);
+	box-shadow: none;
+	color: var(--stx-ink);
+	font-family: inherit;
+	font-size: 14px;
+	text-align: start;
+	/* An address typed in a right-to-left page still reads left to right. */
+	unicode-bidi: plaintext;
+}
+
+.stx-news .stx-news__input:focus {
+	border-color: var(--stx-accent);
+	outline: 2px solid color-mix(in srgb, var(--stx-accent) 45%, transparent);
+	outline-offset: 1px;
+}
+
+.stx-news .stx-btn {
+	min-height: 52px;
+	border-radius: 12px;
+}
+
+/* Beats Studiare's `button[type="submit"]`, which paints buttons in its own colour. */
+.stx-news .stx-btn--accent {
+	background-color: var(--stx-accent);
+	color: var(--stx-on-accent);
+}
+
+.stx-news .stx-btn--accent:hover {
+	background-color: var(--stx-accent-strong);
+}
+
+.stx-news.is-busy .stx-btn {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.stx-news__note {
+	flex-basis: 100%;
+	margin: 0;
+	color: var(--stx-success);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.stx-news__note.is-error {
+	color: var(--stx-danger);
+}
+
+.stx-news__note:empty {
+	display: none;
+}
+
+/* Honeypot: out of sight and out of reach for people. */
+.stx-news__trap {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+/* ==========================================================================
+   Picture / video
+   ========================================================================== */
+
+.stx-media {
+	position: relative;
+}
+
+.stx-media__stage {
+	position: relative;
+	overflow: hidden;
+	border-radius: 16px;
+	background: var(--stx-bg);
+	aspect-ratio: var(--stx-ratio, 16 / 10);
+}
+
+.stx-media__stage img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0 !important;
+	object-fit: cover;
+}
+
+.stx-media__stage > .stx-ph {
+	position: absolute;
+	inset: 0;
+}
+
+.stx-media__link {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.stx-media--card .stx-media__stage {
+	border: 1px solid var(--stx-line);
+	border-radius: 20px;
+}
+
+/* A dark "screen" around a video poster. */
+.stx-media--device {
+	padding: 12px;
+	border-radius: 20px;
+	background: #171c1f;
+	box-shadow: 0 40px 70px -40px rgba(75, 48, 0, 0.7);
+}
+
+.stx-media--device .stx-media__stage {
+	border-radius: 12px;
+	background: #21282c;
+}
+
+.stx-media--device .stx-ph {
+	gap: 14px;
+	background: repeating-linear-gradient(135deg, #2b3338 0 12px, #21282c 12px 24px);
+	color: #96a6b0;
+}
+
+.stx-media--device .stx-ph__icon {
+	box-sizing: content-box;
+	width: 22px;
+	height: 22px;
+	padding: 18px;
+	border-radius: 999px;
+	background: var(--stx-accent);
+	color: #0f1315;
+	opacity: 1;
+}
+
+.stx-media--device .stx-ph__label {
+	border: 0;
+	background: none;
+	color: #96a6b0;
+}
+
+/* With a video, the play button replaces the placeholder's sign. */
+.stx-media.has-video .stx-ph__icon {
+	display: none;
+}
+
+.stx-media.has-video .stx-ph {
+	justify-content: flex-end;
+	padding-bottom: 18px;
+}
+
+.stx-media__play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: grid;
+	place-items: center;
+	width: 64px;
+	height: 64px;
+	padding: 0;
+	border: 0;
+	border-radius: 999px;
+	background: var(--stx-accent);
+	box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
+	color: #0f1315;
+	cursor: pointer;
+	translate: -50% -50%;
+	transition: scale 0.2s var(--stx-ease), background-color 0.2s ease;
+}
+
+.stx-media__play:hover {
+	background: #ffffff;
+	scale: 1.06;
+}
+
+.stx-media__play .stx-ico {
+	width: 24px;
+	height: 24px;
+}
+
+/* ==========================================================================
+   Product spotlight
+   ========================================================================== */
+
+.stx-spot {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: 32px;
+	align-items: center;
+	padding: 22px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius-lg);
+	background: var(--stx-card);
+}
+
+.stx-spot--end .stx-spot__top {
+	order: 2;
+}
+
+.stx-spot__top {
+	position: relative;
+}
+
+.stx-spot__media {
+	display: block;
+	overflow: hidden;
+	border-radius: var(--stx-radius);
+	background: var(--stx-bg);
+	aspect-ratio: var(--stx-ratio, 4 / 3);
+}
+
+.stx-spot__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0 !important;
+	object-fit: cover;
+	transition: transform 0.5s var(--stx-ease);
+}
+
+.stx-spot:hover .stx-spot__media img {
+	transform: scale(1.03);
+}
+
+.stx-spot__badge {
+	position: absolute;
+	top: 14px;
+	inset-inline-start: 14px;
+	padding: 6px 12px;
+	border-radius: 8px;
+	background: var(--stx-danger);
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: 800;
+	line-height: 1.5;
+}
+
+.stx-spot__body {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	min-width: 0;
+	padding: 6px 4px;
+}
+
+.stx-spot__label {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px 12px;
+	border-radius: 999px;
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+	font-size: 12.5px;
+	font-weight: 800;
+}
+
+.stx-spot__label .stx-ico {
+	width: 16px;
+	height: 16px;
+}
+
+.stx-spot__kind {
+	color: var(--stx-muted);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.stx-spot .stx-spot__title {
+	margin: 0;
+	font-family: inherit;
+	font-size: clamp(20px, 1vw + 14px, 26px);
+	font-weight: 800;
+	line-height: 1.6;
+}
+
+.stx-spot__title a {
+	--stx-link: var(--stx-ink);
+	color: var(--stx-ink);
+}
+
+.stx-spot__title a:hover {
+	--stx-link: var(--stx-accent-ink);
+	color: var(--stx-accent-ink);
+}
+
+.stx-spot__excerpt {
+	margin: 0;
+	color: var(--stx-muted);
+	font-size: 14.5px;
+	line-height: 2;
+}
+
+.stx-spot__price {
+	color: var(--stx-accent-ink);
+	font-size: 24px;
+	font-weight: 800;
+	line-height: 1.5;
+}
+
+.stx-spot__price del {
+	margin-inline-end: 8px;
+	color: var(--stx-muted);
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.stx-spot .stx-spot__price ins {
+	background: none;
+	text-decoration: none;
+}
+
+.stx-spot__price .woocommerce-Price-currencySymbol {
+	font-size: 0.7em;
+}
+
+.stx-spot__timer {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.stx-spot__timer-title {
+	color: var(--stx-ink);
+	font-size: 13.5px;
+	font-weight: 700;
+}
+
+.stx-spot__stock {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 100%;
+	max-width: 420px;
+}
+
+.stx-spot__stock-text {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	color: var(--stx-muted);
+	font-size: 13px;
+}
+
+.stx-spot__stock-text span:last-child {
+	color: var(--stx-danger);
+	font-weight: 700;
+}
+
+/* The sold share fills from the start side; a transform, never a width. */
+.stx-spot__bar {
+	display: block;
+	height: 8px;
+	overflow: hidden;
+	border-radius: 999px;
+	background: var(--stx-bg);
+}
+
+.stx-spot__bar > span {
+	display: block;
+	height: 100%;
+	border-radius: inherit;
+	background: linear-gradient(to var(--stx-bar-end, right), var(--stx-accent), var(--stx-danger));
+	transform: scaleX(var(--stx-sold, 0.5));
+	transform-origin: var(--stx-bar-start, left);
+}
+
+[dir="rtl"] .stx-spot__bar > span {
+	--stx-bar-start: right;
+	--stx-bar-end: left;
+}
+
+.stx-spot__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	margin-top: 4px;
+}
+
+.stx-spot__buy .stx-ico {
+	width: 18px;
+	height: 18px;
+}
+
+.stx-spot__buy.loading {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.stx-spot .added_to_cart {
+	--stx-link: var(--stx-accent-ink);
+	color: var(--stx-accent-ink);
+	font-size: 13.5px;
+	font-weight: 700;
+}
+
+/* ==========================================================================
+   Logo strip
+   ========================================================================== */
+
+.stx-logos {
+	--stx-logo-h: 44px;
+	--stx-logos-gap: 16px;
+	position: relative;
+	overflow: hidden;
+}
+
+.stx-logos__list {
+	display: flex;
+	align-items: center;
+	gap: var(--stx-logos-gap);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-logos__item {
+	display: flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	min-height: calc(var(--stx-logo-h) + 32px);
+	margin: 0;
+}
+
+.stx-logos--boxed .stx-logos__item {
+	padding: 16px 26px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+}
+
+.stx-logos .stx-logos__img {
+	display: block;
+	width: auto;
+	max-width: 160px;
+	height: var(--stx-logo-h);
+	margin: 0 !important;
+	object-fit: contain;
+}
+
+.stx-logos__name {
+	color: var(--stx-muted);
+	font-size: 16px;
+	font-weight: 800;
+	white-space: nowrap;
+}
+
+.stx-logos__link {
+	display: flex;
+	align-items: center;
+}
+
+.stx-logos--gray .stx-logos__img {
+	filter: grayscale(1);
+	opacity: 0.7;
+	transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.stx-logos--gray .stx-logos__item:hover .stx-logos__img,
+.stx-logos--gray .stx-logos__link:focus-visible .stx-logos__img {
+	filter: none;
+	opacity: 1;
+}
+
+.stx-logos--grid .stx-logos__list {
+	display: grid;
+	grid-template-columns: repeat(var(--stx-cols, 6), minmax(0, 1fr));
+}
+
+/* Moving row: both lists slide by their own width plus the gap, so the copy
+   takes the first list's place exactly when the loop starts again. */
+.stx-logos--marquee {
+	display: flex;
+	gap: var(--stx-logos-gap);
+	-webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+	mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.stx-logos--marquee .stx-logos__list {
+	flex: none;
+	justify-content: space-around;
+	min-width: 100%;
+	animation: stx-logos var(--stx-logos-time, 30s) linear infinite;
+}
+
+[dir="rtl"] .stx-logos--marquee .stx-logos__list {
+	animation-name: stx-logos-rtl;
+}
+
+.stx-logos--marquee:hover .stx-logos__list,
+.stx-logos--marquee:focus-within .stx-logos__list {
+	animation-play-state: paused;
+}
+
+@keyframes stx-logos {
+	to {
+		transform: translateX(calc(-100% - var(--stx-logos-gap)));
+	}
+}
+
+@keyframes stx-logos-rtl {
+	to {
+		transform: translateX(calc(100% + var(--stx-logos-gap)));
+	}
+}
+
+.stx-logos__link:focus-visible {
+	outline: 2px solid var(--stx-accent);
+	outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Pricing plans
+   ========================================================================== */
+
+.stx-plans {
+	display: grid;
+	grid-template-columns: repeat(var(--stx-cols, 3), minmax(0, 1fr));
+	gap: 20px;
+	align-items: stretch;
+	padding-top: 14px;
+}
+
+.stx-plan {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	min-width: 0;
+	padding: 28px 24px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius-lg);
+	background: var(--stx-card);
+}
+
+.stx-plan--featured {
+	border: 2px solid var(--stx-accent);
+	box-shadow: 0 30px 50px -36px color-mix(in srgb, var(--stx-accent) 70%, transparent);
+}
+
+/* The label sits on the top border, centred. */
+.stx-plan__badge {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	padding: 5px 14px;
+	border-radius: 999px;
+	background: var(--stx-accent);
+	color: #0f1315;
+	font-size: 12px;
+	font-weight: 800;
+	line-height: 1.5;
+	white-space: nowrap;
+	translate: -50% -50%;
+}
+
+.stx-plan .stx-plan__name {
+	margin: 0;
+	color: var(--stx-ink);
+	font-family: inherit;
+	font-size: 19px;
+	font-weight: 800;
+	line-height: 1.6;
+}
+
+.stx-plan__text {
+	margin: 0;
+	color: var(--stx-muted);
+	font-size: 13.5px;
+	line-height: 1.9;
+}
+
+.stx-plan__price {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 4px 8px;
+	padding-block: 6px 16px;
+	border-bottom: 1px dashed var(--stx-line);
+}
+
+.stx-plan__old {
+	color: var(--stx-muted);
+	font-size: 14px;
+}
+
+.stx-plan__amount {
+	color: var(--stx-ink);
+	font-size: 32px;
+	font-weight: 900;
+	line-height: 1.2;
+}
+
+.stx-plan__unit {
+	color: var(--stx-muted);
+	font-size: 13px;
+}
+
+.stx-plan__list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 0 0 6px;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-plan__list li {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	margin: 0;
+	color: var(--stx-text);
+	font-size: 14px;
+	line-height: 1.8;
+}
+
+.stx-plan__list .stx-ico {
+	flex: none;
+	width: 20px;
+	height: 20px;
+	margin-top: 2px;
+	padding: 3px;
+	border-radius: 999px;
+}
+
+.stx-plan__list .is-included .stx-ico {
+	background: color-mix(in srgb, var(--stx-success) 14%, transparent);
+	color: var(--stx-success);
+}
+
+.stx-plan__list .is-missing {
+	color: var(--stx-muted);
+}
+
+.stx-plan__list .is-missing .stx-ico {
+	background: var(--stx-bg);
+	color: var(--stx-muted);
+}
+
+.stx-plan .stx-plan__btn {
+	justify-content: center;
+	width: 100%;
+	margin-top: auto;
+}
+
+/* ==========================================================================
+   Phones
+   ========================================================================== */
+
+@media (max-width: 767px) {
+	.stx-slides {
+		--stx-slide-pad: 28px 22px 60px;
+	}
+
+	.stx-slides__slide {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.stx-slides__media {
+		flex-basis: auto;
+	}
+
+	.stx-slides__text {
+		font-size: 15px;
+	}
+
+	.stx-slides__btn {
+		min-height: 48px;
+		padding: 0 22px;
+		font-size: 15px;
+	}
+
+	.stx-slides__dots {
+		inset-inline-start: 16px;
+		bottom: 8px;
+	}
+
+	.stx-promo {
+		min-height: 0;
+		padding: 20px;
+	}
+
+	.stx-products__head .stx-filter {
+		flex-basis: 100%;
+	}
+
+	/* Category buttons scroll sideways in one line, edge to edge. */
+	.stx-filter {
+		position: relative;
+		flex-wrap: nowrap;
+		margin-inline: calc(var(--stx-bleed, 16px) * -1);
+		padding-inline: var(--stx-bleed, 16px);
+		overflow-x: auto;
+		scrollbar-width: none;
+	}
+
+	.stx-filter::-webkit-scrollbar {
+		display: none;
+	}
+
+	.stx-cat {
+		gap: 10px;
+		padding: 14px;
+	}
+
+	.stx-cat__mark {
+		width: 40px;
+		height: 40px;
+		border-radius: 12px;
+		font-size: 16px;
+	}
+
+	.stx-cat__name {
+		font-size: 14.5px;
+	}
+
+	.stx-person__text {
+		padding: 26px 12px 12px;
+	}
+
+	.stx-person__name {
+		font-size: 14px;
+	}
+
+	.stx-person__role {
+		font-size: 11.5px;
+	}
+
+	.stx-quote {
+		padding: 20px;
+	}
+
+	/* Rows keep a small square picture beside the title; the excerpt waits for wider screens. */
+	.stx-post--list {
+		grid-template-columns: 104px minmax(0, 1fr);
+		gap: 14px;
+		padding: 12px;
+	}
+
+	.stx-post--list .stx-post__media {
+		aspect-ratio: 1;
+	}
+
+	.stx-post.stx-post--list .stx-post__title {
+		font-size: 15px;
+		line-height: 1.75;
+	}
+
+	.stx-post--list:not(.stx-post--lead) :is(.stx-post__excerpt, .stx-post__more) {
+		display: none;
+	}
+
+	.stx-post--list.stx-post--lead {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 14px;
+	}
+
+	.stx-post--list.stx-post--lead .stx-post__media {
+		aspect-ratio: 16 / 10;
+	}
+
+	.stx-posts--magazine {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-rows: none;
+	}
+
+	.stx-posts--magazine > .stx-post--lead {
+		grid-row: auto;
+		margin-block-end: 18px;
+	}
+
+	.stx-posts--magazine > .stx-post--mini {
+		grid-column: auto;
+	}
+
+	.stx-posts--magazine > .stx-post--mini:nth-child(2) {
+		padding-block-start: 14px;
+		border-top: 1px dashed var(--stx-line);
+	}
+
+	.stx-pages .page-numbers {
+		min-width: 40px;
+		height: 44px;
+	}
+
+	.stx-stats {
+		gap: 18px;
+	}
+
+	/* "Swipe row on phones": cards side by side, scrolling edge to edge.
+	   Positioned, so hidden screen reader text in off-screen cards is clipped
+	   too instead of widening the page. */
+	.stx-swipe {
+		position: relative;
+		display: flex;
+		gap: 12px;
+		margin-inline: calc(var(--stx-bleed, 16px) * -1);
+		padding-inline: var(--stx-bleed, 16px);
+		padding-block-end: 8px;
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-padding-inline: var(--stx-bleed, 16px);
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.stx-swipe::-webkit-scrollbar {
+		display: none;
+	}
+
+	.stx-swipe > * {
+		flex: 0 0 min(80%, 300px);
+		scroll-snap-align: start;
+	}
+
+	.stx-spot {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 18px;
+		padding: 14px;
+	}
+
+	.stx-spot--end .stx-spot__top {
+		order: 0;
+	}
+
+	.stx-spot__price {
+		font-size: 21px;
+	}
+
+	.stx-spot__actions > * {
+		flex: 1 1 auto;
+		justify-content: center;
+	}
+
+	.stx-logos {
+		--stx-logo-h: 34px;
+		--stx-logos-gap: 10px;
+	}
+
+	.stx-logos--boxed .stx-logos__item {
+		padding: 12px 18px;
+	}
+
+	.stx-plan {
+		padding: 26px 18px 20px;
+	}
+}
+
+/* ==========================================================================
+   Dark mode
+   ========================================================================== */
+
+/* Studiare's dark mode colours every link white with a selector no class can
+   outrank (`body.scdarkcolors a:not(…)`, specificity 0,3,5): dark text on
+   white or amber buttons would vanish. Each link below keeps the colour it
+   gives in --stx-link. */
+body.scdarkcolors a:is(.stx-slides__btn, .stx-filter__chip, .stx-hcard__fab, .stx-hcard__more, .stx-hcard__buy, .stx-post__more, .stx-event__link, .stx-pages .page-numbers, .stx-hcard--overlay .stx-hcard__title a, .stx-spot__title a, .stx-spot .added_to_cart) {
+	color: var(--stx-link) !important;
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+	.stx-slides__track,
+	.stx-filter,
+	.stx-swipe {
+		scroll-behavior: smooth;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.stx-hcard__media img,
+	.stx-post__media img,
+	.stx-post__cover img,
+	.stx-person > img,
+	.stx-media__play,
+	.stx-slides__dot,
+	.stx-rail__arrow,
+	.stx-faq__sign::before,
+	.stx-faq__sign::after {
+		transition: none;
+	}
+
+	.stx-hcard:hover .stx-hcard__media img,
+	.stx-post:hover .stx-post__media img,
+	.stx-post__cover:hover img,
+	.stx-spot:hover .stx-spot__media img,
+	a.stx-person:hover > img {
+		transform: none;
+	}
+
+	/* The logo row stands still and wraps, without its copy. */
+	.stx-logos--marquee {
+		-webkit-mask-image: none;
+		mask-image: none;
+	}
+
+	.stx-logos--marquee .stx-logos__list {
+		flex: auto;
+		flex-wrap: wrap;
+		justify-content: center;
+		min-width: 0;
+		animation: none;
+	}
+
+	.stx-logos__list--copy {
+		display: none;
+	}
+}

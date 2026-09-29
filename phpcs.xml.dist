@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<ruleset name="Studiare Extensions">
+	<description>WordPress coding standards for the Studiare Extensions plugin.</description>
+
+	<file>./studiare-extensions</file>
+	<exclude-pattern>*/assets/*</exclude-pattern>
+	<exclude-pattern>*/languages/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg value="sp"/>
+	<arg name="colors"/>
+
+	<rule ref="WordPress-Extra">
+		<!-- Classes use PSR-4 file names (includes/Core/Theme_Bridge.php), not class-*.php. -->
+		<exclude name="WordPress.Files.FileName"/>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="studiare-extensions"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="StudiareExt"/>
+				<element value="studiare_ext"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Keep the plugin runnable on PHP 7.4+. -->
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibilityWP"/>
+	<config name="minimum_wp_version" value="6.0"/>
+</ruleset>

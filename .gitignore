@@ -1,0 +1,7 @@
+.DS_Store
+.claude/
+CDesign/.thumbnail
+Log*.txt
+dist/
+*.zip
+node_modules/

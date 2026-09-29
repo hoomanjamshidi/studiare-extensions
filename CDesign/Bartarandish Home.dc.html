@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200..900&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#FFFCF6; }
+  a { color:#D68800; text-decoration:none; }
+  a:hover { color:#A46800; }
+  ::selection { background:#FFE3A8; }
+</style>
+</helmet>
+<div dir="rtl" style="font-family:Vazirmatn, system-ui, sans-serif; background:#FFFCF6; color:#191E21; min-height:100%; overflow-x:hidden">
+
+  <header style="position:sticky; top:0; z-index:50; background:rgba(255,252,246,0.88); backdrop-filter:blur(14px); border-bottom:1px solid #DDE2E5">
+    <div style="max-width:1240px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:28px">
+      <div style="display:flex; align-items:baseline; gap:8px; flex-shrink:0">
+        <span style="font-size:22px; font-weight:800; letter-spacing:-0.4px; color:#191E21">برتراندیش</span>
+        <span style="width:7px; height:7px; border-radius:50%; background:#EDA50A; display:inline-block"></span>
+      </div>
+      <nav style="display:flex; align-items:center; gap:22px; flex:1; flex-wrap:wrap; font-size:15px; font-weight:500; color:#3E4950">
+        <a href="#" style="color:#D68800; font-weight:700">صفحه اصلی</a>
+        <a href="#" style="color:#3E4950">همسرانه</a>
+        <a href="#" style="color:#3E4950">رشد فردی</a>
+        <a href="#" style="color:#3E4950">کتابخانه</a>
+        <a href="#" style="color:#3E4950">نواکست</a>
+        <a href="#" style="color:#3E4950">درباره ما</a>
+        <a href="#" style="color:#3E4950">فروشگاه</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:12px; flex-shrink:0">
+        <span style="font-size:13px; font-family:ui-monospace, monospace; color:#5D6E79; border:1px solid #D6DCE0; border-radius:999px; padding:7px 12px">۰ تومان</span>
+        <a href="#" style="background:#EDA50A; color:#fff; font-size:14px; font-weight:700; padding:10px 20px; border-radius:999px" style-hover="background:#D68800">ثبت نام / ورود</a>
+      </div>
+    </div>
+  </header>
+
+  <section style="max-width:1240px; margin:0 auto; padding:64px 24px 40px; display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr); gap:56px; align-items:center">
+    <div>
+      <span style="display:inline-block; font-size:13px; font-family:ui-monospace, monospace; color:#D68800; background:#FFF5DE; border-radius:999px; padding:7px 14px; margin-bottom:22px">انتخاب اندیشه‌ورزان</span>
+      <h1 style="font-size:52px; line-height:1.35; font-weight:800; letter-spacing:-0.8px; margin:0 0 20px; text-wrap:pretty">
+        <span style="color:#EDA50A">زبان عشق</span>، تنها در لمس و نگاه خلاصه نمی شود؛ کلمات همان پلی هستند که دلها را به هم نزدیکتر می کنند.
+      </h1>
+      <p style="font-size:18px; line-height:2; color:#4D5960; margin:0 0 32px; max-width:52ch; text-wrap:pretty">
+        در دنیای پر از اطلاعات و توصیه‌های تکراری، با نگاهی کاربردی به فرهنگ ایرانی، همراه شماییم.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px">
+        <a href="#" style="background:#EDA50A; color:#fff; font-size:16px; font-weight:700; padding:15px 30px; border-radius:14px" style-hover="background:#D68800">شروع کنید</a>
+        <a href="#" style="border:1.5px solid #CFD6DA; color:#191E21; font-size:16px; font-weight:600; padding:14px 28px; border-radius:14px" style-hover="border-color:#EDA50A; color:#D68800">درباره‌ی ما</a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:36px; margin-top:44px; padding-top:28px; border-top:1px solid #DDE2E5">
+        <div>
+          <div style="font-size:30px; font-weight:800; color:#EDA50A; line-height:1.2">+۷۱</div>
+          <div style="font-size:14px; color:#5D6E79; margin-top:4px">مقاله‌های منتشره</div>
+        </div>
+        <div>
+          <div style="font-size:30px; font-weight:800; color:#EDA50A; line-height:1.2">+۱۵</div>
+          <div style="font-size:14px; color:#5D6E79; margin-top:4px">سال سابقه فعالیت</div>
+        </div>
+        <div>
+          <div style="font-size:30px; font-weight:800; color:#EDA50A; line-height:1.2">+۷</div>
+          <div style="font-size:14px; color:#5D6E79; margin-top:4px">مقاله‌نویس گروه</div>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="position:absolute; inset:-18px -18px auto auto; width:180px; height:180px; border-radius:50%; background:#FFEDC7; filter:blur(6px); opacity:0.7"></div>
+      <div style="position:relative; aspect-ratio:4/5; border-radius:28px; background:repeating-linear-gradient(135deg,#E1E6E9 0 10px,#FEF6E4 10px 20px); border:1px solid #D6DCE0; display:flex; align-items:center; justify-content:center">
+        <span style="font-family:ui-monospace, monospace; font-size:13px; color:#6A7F8C; background:#FFFCF6; padding:8px 14px; border-radius:8px; border:1px solid #D6DCE0">تصویر اصلی صفحه</span>
+      </div>
+      <div style="position:absolute; bottom:24px; right:-22px; background:#fff; border:1px solid #DDE2E5; border-radius:16px; padding:14px 18px; box-shadow:0 18px 40px -24px rgba(115,73,0,0.45); display:flex; align-items:center; gap:12px">
+        <span style="width:38px; height:38px; border-radius:50%; background:#FFF5DE; display:flex; align-items:center; justify-content:center; font-size:18px; color:#EDA50A; font-weight:800">۱۳۹۹</span>
+        <span style="font-size:13px; color:#4D5960; line-height:1.7">آغاز فعالیت رسمی<br>سایت، مهرماه</span>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showQuickLinks }}" hint-placeholder-val="{{ true }}">
+  <section style="max-width:1240px; margin:0 auto; padding:36px 24px 72px">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:14px">
+      <a href="#" style="background:#fff; border:1px solid #DDE2E5; border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:10px" style-hover="border-color:#EDA50A; background:#FFF9EC">
+        <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۰۱</span>
+        <span style="font-size:17px; font-weight:700; color:#191E21">فروشگاه</span>
+        <span style="font-size:13px; color:#5D6E79">مشاهده</span>
+      </a>
+      <a href="#" style="background:#fff; border:1px solid #DDE2E5; border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:10px" style-hover="border-color:#EDA50A; background:#FFF9EC">
+        <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۰۲</span>
+        <span style="font-size:17px; font-weight:700; color:#191E21">مهارت</span>
+        <span style="font-size:13px; color:#5D6E79">مشاهده</span>
+      </a>
+      <a href="#" style="background:#fff; border:1px solid #DDE2E5; border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:10px" style-hover="border-color:#EDA50A; background:#FFF9EC">
+        <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۰۳</span>
+        <span style="font-size:17px; font-weight:700; color:#191E21">وبلاگ</span>
+        <span style="font-size:13px; color:#5D6E79">مشاهده</span>
+      </a>
+      <a href="#" style="background:#fff; border:1px solid #DDE2E5; border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:10px" style-hover="border-color:#EDA50A; background:#FFF9EC">
+        <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۰۴</span>
+        <span style="font-size:17px; font-weight:700; color:#191E21">موزیکست</span>
+        <span style="font-size:13px; color:#5D6E79">مشاهده</span>
+      </a>
+      <a href="#" style="background:#fff; border:1px solid #DDE2E5; border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:10px" style-hover="border-color:#EDA50A; background:#FFF9EC">
+        <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۰۵</span>
+        <span style="font-size:17px; font-weight:700; color:#191E21">درباره ما</span>
+        <span style="font-size:13px; color:#5D6E79">مشاهده</span>
+      </a>
+      <a href="#" style="background:#191E21; border:1px solid #191E21; border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:10px" style-hover="background:#232A2E">
+        <span style="font-family:ui-monospace,monospace; font-size:12px; color:#788D9A">۰۶</span>
+        <span style="font-size:17px; font-weight:700; color:#FFF9EC">تماس با ما</span>
+        <span style="font-size:13px; color:#FFD270">مشاهده</span>
+      </a>
+    </div>
+  </section>
+  </sc-if>
+
+  <section style="background:#FFF6E4; border-top:1px solid #DDE2E6; border-bottom:1px solid #DDE2E6">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 24px">
+      <h2 style="font-size:34px; font-weight:800; margin:0 0 8px; letter-spacing:-0.5px">چرا برتراندیش</h2>
+      <p style="font-size:16px; color:#4D5960; margin:0 0 44px">چهار تعهد ما به هر کسی که وارد این مسیر می‌شود.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:28px">
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <span style="width:44px; height:4px; background:#EDA50A; border-radius:2px"></span>
+          <h3 style="font-size:19px; font-weight:700; margin:6px 0 0">آموزش برخط</h3>
+          <p style="font-size:15px; line-height:2; color:#4D5960; margin:0">با ثبت نام در وبگاه برتراندیش می‌توانید از خدمات رایگان این سایت استفاده نمایید، با اشتراک در خبرنامه وبگاه هم می‌توانید از آخرین مطالب منتشر شده در وبگاه آگاه شوید.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <span style="width:44px; height:4px; background:#EDA50A; border-radius:2px"></span>
+          <h3 style="font-size:19px; font-weight:700; margin:6px 0 0">پرداخت امن با زرین‌پال</h3>
+          <p style="font-size:15px; line-height:2; color:#4D5960; margin:0">با پرداخت وجه کالای خود در همان لحظه می‌توانید محصول سفارش داده شده را از زرین‌پال دریافت نمایید. اگر محصول فیزیکی خرید می‌کنید مشخصات گیرنده و کد پستی را کامل بنویسید.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <span style="width:44px; height:4px; background:#EDA50A; border-radius:2px"></span>
+          <h3 style="font-size:19px; font-weight:700; margin:6px 0 0">پرداخت آسان و راحت</h3>
+          <p style="font-size:15px; line-height:2; color:#4D5960; margin:0">پرداخت در همان لحظه انجام می‌شود و محصول بلافاصله در دسترس شما قرار می‌گیرد؛ بدون واسطه و بدون معطلی.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <span style="width:44px; height:4px; background:#EDA50A; border-radius:2px"></span>
+          <h3 style="font-size:19px; font-weight:700; margin:6px 0 0">تضمین کیفیت خدمات</h3>
+          <p style="font-size:15px; line-height:2; color:#4D5960; margin:0">ما در برتراندیش به جای راه‌حل‌های سطحی و کلی، محتوا، آموزش و مشاوره‌ای هدفمند و تخصصی ارائه می‌دهیم که دقیقاً متناسب با نیازهای فردی، خانوادگی و تربیتی شماست.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px; margin:0 auto; padding:80px 24px; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:56px; align-items:center">
+    <div style="aspect-ratio:1/1; border-radius:24px; background:repeating-linear-gradient(45deg,#E1E6E9 0 10px,#FEF6E4 10px 20px); border:1px solid #D6DCE0; display:flex; align-items:center; justify-content:center">
+      <span style="font-family:ui-monospace, monospace; font-size:13px; color:#6A7F8C; background:#FFFCF6; padding:8px 14px; border-radius:8px; border:1px solid #D6DCE0">تصویر معرفی مجموعه</span>
+    </div>
+    <div>
+      <span style="font-size:13px; font-family:ui-monospace,monospace; color:#D68800">درباره‌ی برتراندیش</span>
+      <h2 style="font-size:36px; font-weight:800; line-height:1.5; margin:14px 0 22px; letter-spacing:-0.6px; text-wrap:pretty">اندیشه‌ای نو به وسعت زندگی</h2>
+      <p style="font-size:17px; line-height:2.2; color:#3E4950; margin:0 0 18px; text-wrap:pretty">
+        از <strong style="color:#D68800; font-weight:700">استعدادیابی کودک و نوجوان</strong> تا <strong style="color:#D68800; font-weight:700">رمز و رازهای زناشویی موفق</strong>، همه چیز با نگاه انسانی، علمی و فرهنگی طراحی شده تا مسیر زندگی روشن‌تر، رابطه‌ها سالم‌تر و تصمیم‌ها آگاهانه‌تر باشند.
+      </p>
+      <p style="font-size:17px; line-height:2.2; color:#3E4950; margin:0 0 30px">برتراندیش؛ اندیشه‌ای نو به وسعت زندگی.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px">
+        <a href="#" style="background:#191E21; color:#FFF9EC; font-size:15px; font-weight:700; padding:14px 28px; border-radius:14px" style-hover="background:#232A2E">درباره‌ی ما</a>
+        <a href="#" style="border:1.5px solid #CFD6DA; color:#191E21; font-size:15px; font-weight:600; padding:13px 26px; border-radius:14px" style-hover="border-color:#EDA50A; color:#D68800">تماس با ما</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#191E21; color:#FFF9EC">
+    <div style="max-width:1240px; margin:0 auto; padding:76px 24px">
+      <h2 style="font-size:32px; font-weight:800; margin:0 0 44px; color:#FFD270; letter-spacing:-0.4px">برتراندیش، اندیشه‌ای به وسعت فردا</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:20px">
+        <div style="background:#1E2428; border:1px solid #2E373C; border-radius:20px; padding:30px 26px">
+          <div style="font-size:44px; font-weight:800; color:#EDA50A; line-height:1; margin-bottom:18px">۱</div>
+          <h3 style="font-size:20px; font-weight:700; margin:0 0 10px">دوره‌های استعدادیابی</h3>
+          <p style="font-size:15px; line-height:2; color:#B9C4CB; margin:0">ارائه خدمات استعدادیابی به زودی</p>
+        </div>
+        <div style="background:#1E2428; border:1px solid #2E373C; border-radius:20px; padding:30px 26px">
+          <div style="font-size:44px; font-weight:800; color:#EDA50A; line-height:1; margin-bottom:18px">۲</div>
+          <h3 style="font-size:20px; font-weight:700; margin:0 0 10px">مقالات آموزشی</h3>
+          <p style="font-size:15px; line-height:2; color:#B9C4CB; margin:0">در حال ترجمه مقالات جدید هستیم</p>
+        </div>
+        <div style="background:#1E2428; border:1px solid #2E373C; border-radius:20px; padding:30px 26px">
+          <div style="font-size:44px; font-weight:800; color:#EDA50A; line-height:1; margin-bottom:18px">۳</div>
+          <h3 style="font-size:20px; font-weight:700; margin:0 0 10px">دوره‌های آموزشی</h3>
+          <p style="font-size:15px; line-height:2; color:#B9C4CB; margin:0">در حال ساخت و آماده‌سازی دوره‌های آموزشی هستیم</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px; margin:0 auto; padding:80px 24px">
+    <div style="background:#FFF6E4; border:1px solid #DDE2E6; border-radius:28px; padding:52px 48px; display:grid; grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr); gap:48px; align-items:center">
+      <div>
+        <h2 style="font-size:30px; font-weight:800; margin:0 0 14px; color:#D68800; letter-spacing:-0.4px">اعتماد شما افتخار ماست</h2>
+        <p style="font-size:16px; line-height:2.1; color:#3E4950; margin:0">باعث افتخارماست که شما همراه ما هستید. ما با وجود شما زنده ایم.</p>
+      </div>
+      <div style="background:#fff; border:1px solid #DDE2E5; border-radius:22px; padding:34px 32px">
+        <div style="font-size:44px; line-height:0.6; color:#FFDB8C; font-weight:800; margin-bottom:18px">”</div>
+        <p style="font-size:17px; line-height:2.2; color:#232A2F; margin:0 0 26px; text-wrap:pretty">
+          <strong style="color:#D68800">نادر اسدی</strong>، مشاور خانواده و یکی از مقاله‌نویسان مجموعه‌ی <strong>برتراندیش</strong>، چهره‌ای آشنا در مسیر رشد فردی و تحکیم روابط انسانی، نادر راه بلد همراهی شماست.
+        </p>
+        <div style="display:flex; align-items:center; gap:14px; padding-top:20px; border-top:1px solid #DDE2E5">
+          <span style="width:48px; height:48px; border-radius:50%; background:repeating-linear-gradient(135deg,#E1E6E9 0 6px,#FEF6E4 6px 12px); border:1px solid #D6DCE0; flex-shrink:0"></span>
+          <div>
+            <div style="font-size:15px; font-weight:700">نادر اسدی</div>
+            <div style="font-size:13px; color:#5D6E79; margin-top:3px">مدرس، نویسنده و مشاور — مقاله‌نویس وبگاه</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px; margin:0 auto; padding:0 24px 84px">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:32px">
+      <div>
+        <h2 style="font-size:32px; font-weight:800; margin:0 0 8px; letter-spacing:-0.5px">مطالب وبلاگ</h2>
+        <p style="font-size:15px; color:#5D6E79; margin:0">به وقت خواندن</p>
+      </div>
+      <a href="#" style="font-size:15px; font-weight:600; color:#D68800">مشاهده همه ←</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:22px">
+      <article style="background:#fff; border:1px solid #DDE2E5; border-radius:20px; overflow:hidden; display:flex; flex-direction:column" style-hover="border-color:#EDA50A">
+        <div style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#E1E6E9 0 10px,#FEF6E4 10px 20px); display:flex; align-items:center; justify-content:center">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#6A7F8C">تصویر مطلب</span>
+        </div>
+        <div style="padding:22px 20px; display:flex; flex-direction:column; gap:12px; flex:1">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۳۱ شهریور ۱۴۰۴</span>
+          <h3 style="font-size:17px; font-weight:700; line-height:1.9; margin:0; text-wrap:pretty">۱۰ مهارت کلیدی زناشویی برای زندگی مشترک پایدار</h3>
+          <a href="#" style="margin-top:auto; font-size:14px; font-weight:600; color:#D68800">مشاهده</a>
+        </div>
+      </article>
+      <article style="background:#fff; border:1px solid #DDE2E5; border-radius:20px; overflow:hidden; display:flex; flex-direction:column" style-hover="border-color:#EDA50A">
+        <div style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#E1E6E9 0 10px,#FEF6E4 10px 20px); display:flex; align-items:center; justify-content:center">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#6A7F8C">تصویر مطلب</span>
+        </div>
+        <div style="padding:22px 20px; display:flex; flex-direction:column; gap:12px; flex:1">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۳۱ شهریور ۱۴۰۴</span>
+          <h3 style="font-size:17px; font-weight:700; line-height:1.9; margin:0; text-wrap:pretty">۴ روش عملی نبرد با کمال‌گرایی با شروع ناقص</h3>
+          <a href="#" style="margin-top:auto; font-size:14px; font-weight:600; color:#D68800">مشاهده</a>
+        </div>
+      </article>
+      <article style="background:#fff; border:1px solid #DDE2E5; border-radius:20px; overflow:hidden; display:flex; flex-direction:column" style-hover="border-color:#EDA50A">
+        <div style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#E1E6E9 0 10px,#FEF6E4 10px 20px); display:flex; align-items:center; justify-content:center">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#6A7F8C">تصویر مطلب</span>
+        </div>
+        <div style="padding:22px 20px; display:flex; flex-direction:column; gap:12px; flex:1">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۳۰ شهریور ۱۴۰۴</span>
+          <h3 style="font-size:17px; font-weight:700; line-height:1.9; margin:0; text-wrap:pretty">۸ عادت سمی که خلاقیت شما را نابود می‌کند</h3>
+          <a href="#" style="margin-top:auto; font-size:14px; font-weight:600; color:#D68800">مشاهده</a>
+        </div>
+      </article>
+      <article style="background:#fff; border:1px solid #DDE2E5; border-radius:20px; overflow:hidden; display:flex; flex-direction:column" style-hover="border-color:#EDA50A">
+        <div style="aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#E1E6E9 0 10px,#FEF6E4 10px 20px); display:flex; align-items:center; justify-content:center">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#6A7F8C">تصویر مطلب</span>
+        </div>
+        <div style="padding:22px 20px; display:flex; flex-direction:column; gap:12px; flex:1">
+          <span style="font-family:ui-monospace,monospace; font-size:12px; color:#8C9DA8">۲۹ شهریور ۱۴۰۴</span>
+          <h3 style="font-size:17px; font-weight:700; line-height:1.9; margin:0; text-wrap:pretty">۳ مهارت مهم زناشویی، نقشه راه زندگی مشترک موفق</h3>
+          <a href="#" style="margin-top:auto; font-size:14px; font-weight:600; color:#D68800">مشاهده</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <sc-if value="{{ showNewsletter }}" hint-placeholder-val="{{ true }}">
+  <section style="max-width:1240px; margin:0 auto; padding:0 24px 84px">
+    <div style="background:#EDA50A; border-radius:28px; padding:52px 48px; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:32px; align-items:center">
+      <div>
+        <h2 style="font-size:30px; font-weight:800; color:#fff; margin:0 0 12px; letter-spacing:-0.4px">عضویت در خبرنامه</h2>
+        <p style="font-size:16px; line-height:2; color:#FFF5DF; margin:0">از آخرین مطالب منتشر شده در وبگاه آگاه شوید.</p>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <input type="email" placeholder="نشانی ایمیل شما" value="{{ email }}" onChange="{{ onEmail }}" style="flex:1; min-width:200px; border:none; border-radius:14px; padding:16px 20px; font-family:Vazirmatn, sans-serif; font-size:15px; color:#191E21; outline:none">
+        <button onClick="{{ onSubscribe }}" style="background:#191E21; color:#FFF9EC; border:none; border-radius:14px; padding:16px 30px; font-family:Vazirmatn, sans-serif; font-size:15px; font-weight:700; cursor:pointer" style-hover="background:#232A2E">{{ subscribeLabel }}</button>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <footer style="background:#FFF6E4; border-top:1px solid #DDE2E6">
+    <div style="max-width:1240px; margin:0 auto; padding:64px 24px 28px">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:36px; padding-bottom:40px; border-bottom:1px solid #D6DCE0">
+        <div>
+          <div style="font-size:20px; font-weight:800; margin-bottom:14px">برتراندیش</div>
+          <p style="font-size:14px; line-height:2.1; color:#4D5960; margin:0">برتراندیش مکانی است برای آنهایی که می‌خواهند با آگاهی بیشتری زندگی کنند؛ اینجا رازهای زناشویی موفق برملا می‌شوند.</p>
+        </div>
+        <div>
+          <div style="font-size:13px; font-family:ui-monospace,monospace; color:#8C9DA8; margin-bottom:14px">شماره تماس</div>
+          <div style="font-size:16px; font-weight:700; direction:ltr; text-align:right; margin-bottom:8px">۰۹۱۵۴۴۴۵۷۶۷</div>
+          <p style="font-size:14px; line-height:2; color:#4D5960; margin:0">تماس و یا ارسال پیام به شماره روبرو</p>
+        </div>
+        <div>
+          <div style="font-size:13px; font-family:ui-monospace,monospace; color:#8C9DA8; margin-bottom:14px">آدرس</div>
+          <p style="font-size:14px; line-height:2; color:#4D5960; margin:0">خراسان رضوی — مشهد — منطقه ابوذر — غفاری ۵ — ساختمان شصت و دو — پلاک ۱۲ — طبقه ۲ — واحد ۶</p>
+        </div>
+        <div>
+          <div style="font-size:13px; font-family:ui-monospace,monospace; color:#8C9DA8; margin-bottom:14px">ساعت کاری</div>
+          <p style="font-size:14px; line-height:2; color:#4D5960; margin:0">پاسخگویی همه روزه از ساعت ۹ تا ۲۰<br>پنجشنبه‌ها از ساعت ۹ تا ۱۸</p>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; padding:26px 0">
+        <nav style="display:flex; flex-wrap:wrap; gap:24px; font-size:14px; font-weight:500">
+          <a href="#" style="color:#3E4950">خبرنامه</a>
+          <a href="#" style="color:#3E4950">درباره ما</a>
+          <a href="#" style="color:#3E4950">تماس با ما</a>
+          <a href="#" style="color:#3E4950">فروشگاه</a>
+        </nav>
+        <div style="display:flex; gap:10px">
+          <span style="font-size:12px; font-family:ui-monospace,monospace; color:#5D6E79; border:1px solid #CFD6DA; border-radius:10px; padding:8px 14px">نماد اعتماد</span>
+          <span style="font-size:12px; font-family:ui-monospace,monospace; color:#5D6E79; border:1px solid #CFD6DA; border-radius:10px; padding:8px 14px">زرین‌پال</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid #D6DCE0; padding-top:22px; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; font-size:13px; color:#5D6E79">
+        <span>آغاز فعالیت رسمی سایت مهرماه ۱۳۹۹</span>
+        <span>کلیه حقوق متعلق به برتراندیش است. انتشار با ذکر منبع بلامانع است.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showQuickLinks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showNewsletter&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { email: "", subscribed: false };
+  renderVals() {
+    return {
+      showQuickLinks: this.props.showQuickLinks ?? true,
+      showNewsletter: this.props.showNewsletter ?? true,
+      email: this.state.email,
+      subscribeLabel: this.state.subscribed ? "ثبت شد ✓" : "عضویت",
+      onEmail: (e) => this.setState({ email: e.target.value, subscribed: false }),
+      onSubscribe: () => this.setState({ subscribed: !!this.state.email })
+    };
+  }
+}
+</script>
+</body>
+</html>

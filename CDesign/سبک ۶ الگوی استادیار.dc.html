@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200..900&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#EEF0F2; }
+  a { color:#D68800; text-decoration:none; }
+  a:hover { color:#B37200; }
+</style>
+</helmet>
+<div dir="rtl" style="font-family:Vazirmatn, system-ui, sans-serif; color:#0F1315; background:#EEF0F2; overflow:hidden">
+
+  <div style="background:#171C1F; color:#B9C4CA; font-size:13px">
+    <div style="max-width:1280px; margin:0 auto; padding:9px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap">
+      <div style="display:flex; gap:18px; flex-wrap:wrap">
+        <a href="#" style="color:#B9C4CA">فروشگاه</a>
+        <a href="#" style="color:#B9C4CA">خبرنامه</a>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <span style="background:#21282C; border-radius:8px; padding:5px 11px; display:flex; align-items:center; gap:7px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F8B000" stroke-width="2" stroke-linecap="round"><path d="M3 6h18v12H3z"></path><path d="m3 7 9 6 9-6"></path></svg>
+          info@bartarandish.com
+        </span>
+        <span style="background:#21282C; border-radius:8px; padding:5px 11px; display:flex; align-items:center; gap:7px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F8B000" stroke-width="2" stroke-linecap="round"><path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a14 14 0 0 1-16-16z"></path></svg>
+          ۰۹۱۵۴۴۴۵۷۶۷
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <header style="background:#fff; box-shadow:0 6px 24px -18px rgba(100,64,0,0.5); position:sticky; top:0; z-index:50">
+    <div style="max-width:1280px; margin:0 auto; padding:12px 22px; display:flex; align-items:center; gap:24px; flex-wrap:wrap">
+      <div style="display:flex; align-items:center; gap:11px">
+        <span style="width:46px; height:46px; border-radius:14px; background:#F8B000; color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800">ب</span>
+        <span style="display:flex; flex-direction:column; line-height:1.25">
+          <span style="font-size:18px; font-weight:800; letter-spacing:-0.4px">برتراندیش</span>
+          <span style="font-size:11px; color:#7A8B96">اندیشه‌ای نو</span>
+        </span>
+      </div>
+      <nav style="display:flex; gap:20px; font-size:14.5px; font-weight:600; flex:1; flex-wrap:wrap; min-width:0">
+        <a href="#" style="color:#F8B000">صفحه اصلی</a>
+        <a href="#" style="color:#39434A">همسرانه</a>
+        <a href="#" style="color:#39434A">رشد فردی</a>
+        <a href="#" style="color:#39434A">کتابخانه</a>
+        <a href="#" style="color:#39434A">نواکست</a>
+        <a href="#" style="color:#39434A">فروشگاه</a>
+        <a href="#" style="color:#39434A">درباره ما</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:9px">
+        <a href="#" style="background:#FFF5E0; color:#D68800; font-size:14px; font-weight:700; padding:11px 18px; border-radius:999px" style-hover="background:#F8B000; color:#fff">ثبت‌نام / ورود</a>
+        <button style="width:42px; height:42px; border-radius:999px; border:1px solid #DCE1E4; background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer" style-hover="border-color:#F8B000">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5D6E79" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        </button>
+        <div style="position:relative; display:flex">
+          <span style="width:42px; height:42px; border-radius:999px; border:1px solid #DCE1E4; display:flex; align-items:center; justify-content:center">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5D6E79" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.5 12h11L21 7H6"></path></svg>
+          </span>
+          <span style="position:absolute; top:-3px; left:-3px; background:#F8B000; color:#fff; font-size:11px; font-weight:700; min-width:19px; height:19px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 4px">{{ cartLabel }}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section style="background:linear-gradient(200deg,#FAB31A 0%,#F8B000 45%,#D68800 100%); border-bottom-left-radius:50% 70px; border-bottom-right-radius:50% 70px; padding:0 0 88px; position:relative">
+    <div style="max-width:1280px; margin:0 auto; padding:60px 22px 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:34px; align-items:center">
+      <div style="min-width:0">
+        <span style="display:inline-block; background:rgba(255,255,255,0.18); color:#fff; font-size:13px; font-weight:700; padding:7px 14px; border-radius:999px; margin-bottom:20px">آغاز فعالیت رسمی از مهرماه ۱۳۹۹</span>
+        <h1 style="font-size:44px; line-height:1.5; font-weight:800; color:#fff; letter-spacing:-1px; margin:0 0 18px; text-wrap:pretty">با برتراندیش<br>مسیر رشد خودت را بساز</h1>
+        <p style="font-size:17px; line-height:2; color:#FFEFCD; margin:0 0 30px; max-width:44ch">دوره، کتاب و کارگاه در سه مسیر همسرانه، رشد فردی و استعدادیابی؛ با نگاهی کاربردی به فرهنگ ایرانی.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a href="#" style="background:#fff; color:#D68800; font-size:16px; font-weight:700; padding:15px 30px; border-radius:999px" style-hover="background:#171C1F; color:#fff">ورود به فروشگاه</a>
+          <a href="#" style="border:1.5px solid rgba(255,255,255,0.6); color:#fff; font-size:16px; font-weight:600; padding:14px 26px; border-radius:999px" style-hover="background:rgba(255,255,255,0.15)">مشاوره بگیرید</a>
+        </div>
+      </div>
+      <div style="min-width:0; position:relative">
+        <div style="background:#171C1F; border-radius:20px; padding:12px; box-shadow:0 40px 70px -40px rgba(75,48,0,0.7)">
+          <div style="aspect-ratio:16/10; border-radius:12px; background:repeating-linear-gradient(135deg,#2B3338 0 12px,#21282C 12px 24px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px">
+            <span style="width:58px; height:58px; border-radius:999px; background:#F8B000; display:flex; align-items:center; justify-content:center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"></path></svg>
+            </span>
+            <span style="font-family:ui-monospace,monospace; font-size:12px; color:#96A6B0">تیزر معرفی برتراندیش</span>
+          </div>
+        </div>
+        <div style="position:absolute; bottom:-26px; right:-10px; background:#fff; border-radius:16px; padding:14px 18px; box-shadow:0 20px 40px -26px rgba(75,48,0,0.6); display:flex; gap:20px">
+          <div>
+            <div style="font-size:19px; font-weight:800">+۷۱</div>
+            <div style="font-size:11.5px; color:#5D6E79; margin-top:2px">مقاله منتشرشده</div>
+          </div>
+          <div style="width:1px; background:#DEE3E6"></div>
+          <div>
+            <div style="font-size:19px; font-weight:800">+۱۵</div>
+            <div style="font-size:11.5px; color:#5D6E79; margin-top:2px">سال سابقه گروه</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px; margin:0 auto; padding:56px 22px 0">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px">
+      <span style="color:#F8B000; font-size:18px; font-weight:800">«</span>
+      <h2 style="font-size:24px; font-weight:800; margin:0; letter-spacing:-0.4px">دسته‌بندی موضوع‌ها</h2>
+      <span style="flex:1; height:1px; background:#D4DBDF"></span>
+      <a href="#" style="font-size:14px; font-weight:700">همه دسته‌ها</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:16px">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+        <a href="#" style="background:#fff; border-radius:16px; padding:20px; display:flex; align-items:center; gap:14px; box-shadow:0 16px 30px -26px rgba(115,73,0,0.5); color:#0F1315" style-hover="box-shadow:0 20px 34px -20px rgba(248,176,0,0.45)">
+          <span style="width:48px; height:48px; border-radius:14px; background:#FFF5E0; color:#D68800; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:19px; font-weight:800">{{ c.mark }}</span>
+          <span style="display:flex; flex-direction:column; gap:5px; min-width:0">
+            <span style="font-size:16px; font-weight:700">{{ c.title }}</span>
+            <span style="font-size:12.5px; color:#5D6E79">{{ c.count }}</span>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-if value="{{ showVideoStrip }}" hint-placeholder-val="{{ true }}">
+    <section style="max-width:1280px; margin:0 auto; padding:52px 22px 0">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+        <span style="color:#F8B000; font-size:18px; font-weight:800">«</span>
+        <h2 style="font-size:24px; font-weight:800; margin:0; letter-spacing:-0.4px">نواکست و موزیکست</h2>
+      </div>
+      <p style="font-size:14.5px; color:#5D6E79; margin:0 0 20px; padding-right:28px">شنیدنی‌های کوتاه برای مسیر رفت‌وآمد</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:16px">
+        <sc-for list="{{ casts }}" as="v" hint-placeholder-count="4">
+          <a href="#" style="position:relative; display:block; aspect-ratio:4/3; border-radius:16px; overflow:hidden; background:repeating-linear-gradient(135deg,#CED5DA 0 12px,#DDE2E5 12px 24px)" style-hover="box-shadow:0 22px 38px -24px rgba(248,176,0,0.55)">
+            <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center">
+              <span style="width:52px; height:52px; border-radius:999px; background:rgba(23,28,31,0.85); display:flex; align-items:center; justify-content:center">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"></path></svg>
+              </span>
+            </span>
+            <span style="position:absolute; inset:auto 0 0 0; background:linear-gradient(to top,rgba(23,28,31,0.92),rgba(23,28,31,0)); padding:18px 16px 14px; display:flex; flex-direction:column; gap:4px">
+              <span style="font-size:14.5px; font-weight:700; color:#fff; line-height:1.7">{{ v.title }}</span>
+              <span style="font-family:ui-monospace,monospace; font-size:11.5px; color:#EAD19A">{{ v.meta }}</span>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <section style="margin-top:52px; background:#fff; padding:44px 0">
+    <div style="max-width:1280px; margin:0 auto; padding:0 22px">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:22px; flex-wrap:wrap">
+        <span style="color:#F8B000; font-size:18px; font-weight:800">«</span>
+        <h2 style="font-size:24px; font-weight:800; margin:0; letter-spacing:-0.4px">محصولات فروشگاه</h2>
+        <span style="flex:1; height:1px; background:#DEE3E6; min-width:20px"></span>
+        <div style="display:flex; gap:8px; flex-wrap:wrap">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.pick }}" style="border-radius:999px; padding:9px 16px; font-family:Vazirmatn,sans-serif; font-size:13px; font-weight:700; cursor:pointer; border:1px solid {{ c.border }}; background:{{ c.bg }}; color:{{ c.fg }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(255px,1fr)); gap:18px">
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="4">
+          <article style="border:1px solid #DEE3E6; border-radius:16px; overflow:hidden; display:flex; flex-direction:column; background:#fff" style-hover="border-color:#F8B000; box-shadow:0 22px 40px -30px rgba(145,92,0,0.6)">
+            <div style="position:relative; aspect-ratio:16/10; background:repeating-linear-gradient(135deg,#DFE3E6 0 11px,#FEF5E1 11px 22px); display:flex; align-items:center; justify-content:center">
+              <span style="font-family:ui-monospace,monospace; font-size:12px; color:#6A7F8C">تصویر محصول</span>
+              <span style="position:absolute; top:12px; right:12px; background:#171C1F; color:#fff; font-size:11px; font-weight:700; padding:5px 10px; border-radius:7px">{{ p.badge }}</span>
+              <button onClick="{{ p.add }}" style="position:absolute; bottom:-18px; left:16px; width:40px; height:40px; border:none; border-radius:999px; background:#F8B000; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 10px 20px -10px rgba(205,130,0,0.8)" style-hover="background:#171C1F">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.5 12h11L21 7H6"></path></svg>
+              </button>
+            </div>
+            <div style="padding:24px 18px 18px; display:flex; flex-direction:column; gap:11px; flex:1">
+              <span style="font-size:12px; font-family:ui-monospace,monospace; color:#7C909C">{{ p.cat }}</span>
+              <h3 style="font-size:16px; font-weight:700; line-height:1.85; margin:0">{{ p.title }}</h3>
+              <p style="font-size:13.5px; line-height:1.95; color:#5C676E; margin:0">{{ p.note }}</p>
+              <div style="display:flex; align-items:center; gap:6px; color:#F8B000; font-size:12.5px">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8z"></path></svg>
+                <span style="color:#5D6E79">{{ p.rating }}</span>
+                <span style="color:#B9C4CA">•</span>
+                <span style="color:#5D6E79">{{ p.length }}</span>
+              </div>
+              <div style="margin-top:auto; padding-top:14px; border-top:1px dashed #DCE1E4; display:flex; align-items:center; justify-content:space-between; gap:10px">
+                <span style="font-size:16.5px; font-weight:800; color:#D68800">{{ p.price }}</span>
+                <a href="#" style="font-size:13px; font-weight:700; color:#39434A" style-hover="color:#F8B000">جزئیات ←</a>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px; margin:0 auto; padding:52px 22px 0">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px">
+      <span style="color:#F8B000; font-size:18px; font-weight:800">«</span>
+      <h2 style="font-size:24px; font-weight:800; margin:0; letter-spacing:-0.4px">نویسندگان و مشاوران</h2>
+      <span style="flex:1; height:1px; background:#D4DBDF"></span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px">
+      <sc-for list="{{ people }}" as="m" hint-placeholder-count="4">
+        <div style="position:relative; aspect-ratio:3/4; border-radius:16px; overflow:hidden; background:repeating-linear-gradient(135deg,#CCD4D9 0 12px,#DCE1E4 12px 24px)">
+          <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:ui-monospace,monospace; font-size:12px; color:#6A7F8C">پرتره</span>
+          <span style="position:absolute; inset:auto 0 0 0; background:linear-gradient(to top,rgba(23,28,31,0.94),rgba(23,28,31,0)); padding:26px 16px 15px; display:flex; flex-direction:column; gap:4px">
+            <span style="font-size:15.5px; font-weight:700; color:#fff">{{ m.name }}</span>
+            <span style="font-size:12.5px; color:#EAD19A">{{ m.role }}</span>
+          </span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1280px; margin:0 auto; padding:52px 22px 0">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap">
+      <span style="color:#F8B000; font-size:18px; font-weight:800">«</span>
+      <h2 style="font-size:24px; font-weight:800; margin:0; letter-spacing:-0.4px">مطالب ویبلاگ</h2>
+      <span style="flex:1; height:1px; background:#D4DBDF; min-width:20px"></span>
+      <a href="#" style="font-size:14px; font-weight:700">مشاهده همه</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:18px">
+      <sc-for list="{{ posts }}" as="a" hint-placeholder-count="4">
+        <article style="background:#fff; border-radius:16px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 18px 34px -30px rgba(115,73,0,0.6)">
+          <div style="position:relative; aspect-ratio:16/9; background:repeating-linear-gradient(135deg,#D4DBDF 0 11px,#E4E8EA 11px 22px); display:flex; align-items:center; justify-content:center">
+            <span style="font-family:ui-monospace,monospace; font-size:12px; color:#6A7F8C">تصویر مطلب</span>
+            <span style="position:absolute; top:11px; right:11px; background:#F8B000; color:#fff; font-size:11px; font-weight:700; padding:5px 10px; border-radius:7px">{{ a.tag }}</span>
+          </div>
+          <div style="padding:16px 18px 18px; display:flex; flex-direction:column; gap:12px; flex:1">
+            <h3 style="font-size:15.5px; font-weight:700; line-height:1.9; margin:0">{{ a.title }}</h3>
+            <div style="display:flex; gap:14px; font-size:12px; color:#5D6E79; flex-wrap:wrap">
+              <span>{{ a.date }}</span>
+              <span>{{ a.author }}</span>
+            </div>
+            <a href="#" style="margin-top:auto; background:#FFF5E0; color:#D68800; font-size:13.5px; font-weight:700; text-align:center; padding:11px; border-radius:10px" style-hover="background:#F8B000; color:#fff">مطالعه بیشتر</a>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-if value="{{ showEvents }}" hint-placeholder-val="{{ true }}">
+    <section style="max-width:1280px; margin:0 auto; padding:52px 22px 0">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px">
+        <span style="color:#F8B000; font-size:18px; font-weight:800">«</span>
+        <h2 style="font-size:24px; font-weight:800; margin:0; letter-spacing:-0.4px">کارگاه‌های پیش‌رو</h2>
+        <span style="flex:1; height:1px; background:#D4DBDF"></span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:18px">
+        <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
+          <article style="background:#fff; border:1px solid #DEE3E6; border-radius:16px; padding:20px; display:flex; gap:14px" style-hover="border-color:#F8B000">
+            <span style="flex-shrink:0; width:56px; background:#FFF5E0; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 0; color:#D68800">
+              <span style="font-size:20px; font-weight:800; line-height:1">{{ e.day }}</span>
+              <span style="font-size:11.5px; margin-top:3px">{{ e.month }}</span>
+            </span>
+            <div style="min-width:0; display:flex; flex-direction:column; gap:8px">
+              <h3 style="font-size:15.5px; font-weight:700; line-height:1.8; margin:0">{{ e.title }}</h3>
+              <span style="font-size:12.5px; color:#5D6E79">{{ e.time }}</span>
+              <span style="font-size:12.5px; color:#5D6E79">{{ e.place }}</span>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <section style="max-width:1280px; margin:0 auto; padding:52px 22px 60px">
+    <div style="background:linear-gradient(210deg,#FAB31A,#D68800); border-radius:22px; padding:38px; display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:24px; align-items:center">
+      <div style="min-width:0">
+        <h2 style="font-size:26px; font-weight:800; color:#fff; margin:0 0 10px; letter-spacing:-0.4px">مطمئن نیستید از کجا شروع کنید؟</h2>
+        <p style="font-size:15px; line-height:2; color:#FFEFCD; margin:0">چند سؤال کوتاه پاسخ دهید تا دو یا سه محصول متناسب با نیاز شما پیشنهاد شود.</p>
+      </div>
+      <div style="min-width:0; display:flex; gap:12px; flex-wrap:wrap">
+        <a href="#" style="background:#fff; color:#D68800; font-size:15px; font-weight:700; padding:14px 26px; border-radius:999px" style-hover="background:#171C1F; color:#fff">شروع راهنمای انتخاب</a>
+        <a href="#" style="border:1.5px solid rgba(255,255,255,0.6); color:#fff; font-size:15px; font-weight:600; padding:13px 24px; border-radius:999px" style-hover="background:rgba(255,255,255,0.15)">تماس با ما</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#171C1F; color:#B9C4CA">
+    <div style="max-width:1280px; margin:0 auto; padding:48px 22px 20px">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:30px; padding-bottom:30px; border-bottom:1px solid #242B2F">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px">
+            <span style="width:40px; height:40px; border-radius:12px; background:#F8B000; color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800">ب</span>
+            <span style="font-size:18px; font-weight:800; color:#fff">برتراندیش</span>
+          </div>
+          <p style="font-size:13.5px; line-height:2; color:#86959E; margin:0">اندیشه‌ای نو به وسعت زندگی؛ آموزش کاربردی در مسیر رشد فردی و روابط انسانی.</p>
+        </div>
+        <div>
+          <div style="font-size:14.5px; font-weight:700; color:#fff; margin-bottom:13px">دسترسی سریع</div>
+          <div style="display:flex; flex-direction:column; gap:9px; font-size:13.5px">
+            <a href="#" style="color:#86959E">فروشگاه</a>
+            <a href="#" style="color:#86959E">ویبلاگ</a>
+            <a href="#" style="color:#86959E">درباره ما</a>
+            <a href="#" style="color:#86959E">تماس با ما</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:14.5px; font-weight:700; color:#fff; margin-bottom:13px">تماس</div>
+          <p style="font-size:13.5px; line-height:2; color:#86959E; margin:0">۰۹۱۵۴۴۴۵۷۶۷<br>مشهد، منطقه ابوذر، غفاری ۵<br>پاسخگویی ۹ تا ۲۰</p>
+        </div>
+        <div>
+          <div style="font-size:14.5px; font-weight:700; color:#fff; margin-bottom:13px">خبرنامه</div>
+          <div style="display:flex; gap:8px">
+            <input placeholder="ایمیل شما" style="flex:1; min-width:0; border:1px solid #242B2F; background:#1E2427; border-radius:10px; padding:11px 12px; color:#fff; font-family:Vazirmatn,sans-serif; font-size:13px; outline:none">
+            <button style="background:#F8B000; border:none; border-radius:10px; padding:11px 16px; color:#fff; font-family:Vazirmatn,sans-serif; font-size:13px; font-weight:700; cursor:pointer">عضویت</button>
+          </div>
+          <div style="margin-top:16px; display:flex; gap:8px">
+            <span style="width:34px; height:34px; border-radius:10px; background:#1E2427; display:flex; align-items:center; justify-content:center; font-size:12px; color:#86959E">in</span>
+            <span style="width:34px; height:34px; border-radius:10px; background:#1E2427; display:flex; align-items:center; justify-content:center; font-size:12px; color:#86959E">tg</span>
+            <span style="width:34px; height:34px; border-radius:10px; background:#1E2427; display:flex; align-items:center; justify-content:center; font-size:12px; color:#86959E">yt</span>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:18px; font-size:12.5px; color:#68767F; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between">
+        <span>آغاز فعالیت رسمی سایت مهرماه ۱۳۹۹</span>
+        <span>کلیه حقوق متعلق به برتراندیش است.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;showVideoStrip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;بخش‌ها&quot;},&quot;showEvents&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;بخش‌ها&quot;},&quot;productCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:4,&quot;min&quot;:3,&quot;max&quot;:6,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;فروشگاه&quot;}}">
+class Component extends DCLogic {
+  state = { cart: 0, filter: "همه" };
+
+  renderVals() {
+    const fa = n => String(n).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+    const add = () => this.setState(s => ({ cart: s.cart + 1 }));
+    const limit = this.props.productCount ?? 4;
+
+    const all = [
+      { cat: "دوره ویدیویی", title: "استعدادیابی کودک و نوجوان", note: "شناخت الگوهای رفتاری و مسیر پرورش آن‌ها.", price: "۳۵۰٬۰۰۰ تومان", rating: "۴٫۷ (۵۲)", length: "۸ ساعت", badge: "ویژه" },
+      { cat: "کتاب دیجیتال", title: "رازهای زناشویی موفق", note: "خواندنی کوتاه با تمرین‌های هفتگی.", price: "۱۴۰٬۰۰۰ تومان", rating: "۴٫۹ (۸۶)", length: "۱۸۰ صفحه", badge: "جدید" },
+      { cat: "دوره ویدیویی", title: "عادت‌سازی و تمرکز در کار روزانه", note: "روش‌های ساده برای پایدار کردن تغییر.", price: "۲۲۰٬۰۰۰ تومان", rating: "۴٫۶ (۴۳)", length: "۴ ساعت", badge: "پیشنهاد ما" },
+      { cat: "کارگاه آنلاین", title: "مهارت‌های ارتباط مؤثر", note: "دو جلسه زنده با پرسش و پاسخ.", price: "۱۹۰٬۰۰۰ تومان", rating: "۴٫۸ (۷۱)", length: "۲ جلسه", badge: "۳۰٪ تخفیف" },
+      { cat: "کتاب دیجیتال", title: "نقشه راه گفت‌وگو با والدین", note: "راهنمای جلسه‌های اولیا و مربیان.", price: "۱۲۰٬۰۰۰ تومان", rating: "۴٫۷ (۳۸)", length: "۱۴۰ صفحه", badge: "کم‌حجم" },
+      { cat: "کارگاه آنلاین", title: "مدیریت کلاس و ارتباط با دانش‌آموز", note: "چهار فصل عملی برای شروع سال تحصیلی.", price: "۲۹۰٬۰۰۰ تومان", rating: "۴٫۸ (۱۲۴)", length: "۶ ساعت", badge: "پرفروش" }
+    ];
+
+    const active = this.state.filter;
+    const chips = ["همه", "دوره ویدیویی", "کتاب دیجیتال", "کارگاه آنلاین"].map(label => ({
+      label,
+      bg: label === active ? "#171C1F" : "#fff",
+      fg: label === active ? "#fff" : "#39434A",
+      border: label === active ? "#171C1F" : "#DCE1E4",
+      pick: () => this.setState({ filter: label })
+    }));
+
+    return {
+      cartLabel: fa(this.state.cart),
+      showVideoStrip: this.props.showVideoStrip ?? true,
+      showEvents: this.props.showEvents ?? true,
+      chips,
+      products: all.filter(p => active === "همه" || p.cat === active).slice(0, limit).map(p => ({ ...p, add })),
+      cats: [
+        { mark: "۰۱", title: "همسرانه", count: "۶ محصول" },
+        { mark: "۰۲", title: "رشد فردی", count: "۹ محصول" },
+        { mark: "۰۳", title: "استعدادیابی", count: "۴ محصول" },
+        { mark: "۰۴", title: "کتابخانه", count: "۱۲ عنوان" },
+        { mark: "۰۵", title: "نواکست", count: "۲۳ قطعه" },
+        { mark: "۰۶", title: "مهارت", count: "۷ کارگاه" }
+      ],
+      casts: [
+        { title: "زبان عشق و پل‌های کوچک", meta: "نواکست • ۱۴ دقیقه" },
+        { title: "شروع ناقص، نبرد با کمال‌گرایی", meta: "نواکست • ۱۹ دقیقه" },
+        { title: "گفت‌وگو بدون قضاوت", meta: "نواکست • ۲۲ دقیقه" },
+        { title: "آرام‌سازی پیش از خواب", meta: "موزیکست • ۳۱ دقیقه" }
+      ],
+      people: [
+        { name: "نادر اسدی", role: "مشاور خانواده و نویسنده" },
+        { name: "عضو تیم برتراندیش", role: "روان‌شناس کودک" },
+        { name: "عضو تیم برتراندیش", role: "مدرس مهارت‌های ارتباطی" },
+        { name: "عضو تیم برتراندیش", role: "پژوهشگر استعدادیابی" }
+      ],
+      posts: [
+        { tag: "همسرانه", title: "۱۰ مهارت کلیدی زناشویی برای زندگی مشترک پایدار", date: "۱۴ مهر ۱۴۰۴", author: "تیم برتراندیش" },
+        { tag: "رشد فردی", title: "۴ روش عملی نبرد با کمال‌گرایی با شروع ناقص", date: "۳ مهر ۱۴۰۴", author: "تیم برتراندیش" },
+        { tag: "رشد فردی", title: "۸ عادت سمی که خلاقیت شما را نابود می‌کند", date: "۲۶ شهریور ۱۴۰۴", author: "تیم برتراندیش" },
+        { tag: "همسرانه", title: "۳ مهارت مهم زناشویی، نقشه راه زندگی مشترک موفق", date: "۱۹ شهریور ۱۴۰۴", author: "تیم برتراندیش" }
+      ],
+      events: [
+        { day: "۱۲", month: "آبان", title: "کارگاه گفت‌وگوی مؤثر با نوجوان", time: "۱۸:۰۰ تا ۲۰:۰۰", place: "آنلاین — اسکای‌روم" },
+        { day: "۲۵", month: "آبان", title: "جلسه پرسش و پاسخ استعدادیابی", time: "۱۷:۰۰ تا ۱۹:۰۰", place: "آنلاین — اسکای‌روم" },
+        { day: "۰۹", month: "آذر", title: "کارگاه حضوری مهارت‌های زناشویی", time: "۹:۰۰ تا ۱۳:۰۰", place: "مشهد، منطقه ابوذر" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

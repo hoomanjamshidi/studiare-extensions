@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200..900&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#FFFDF8; }
+  a { color:#D68800; text-decoration:none; }
+  a:hover { color:#A46800; }
+</style>
+</helmet>
+<div dir="rtl" style="font-family:Vazirmatn, system-ui, sans-serif; color:#3B2600; background:#FFFDF8">
+
+  <div style="background:#3B2600; color:#FFEEC9; font-size:13.5px; text-align:center; padding:10px 24px">پشتیبانی هر روز ۹ تا ۲۰ &nbsp;·&nbsp; <a href="#" style="color:#FFD270; font-weight:700; direction:ltr; display:inline-block">۰۹۱۵۴۴۴۵۷۶۷</a></div>
+
+  <header style="background:#fff; border-bottom:1px solid #DFE4E7; position:sticky; top:0; z-index:40">
+    <div style="max-width:1180px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:18px; flex-wrap:wrap">
+      <span style="font-size:22px; font-weight:800; letter-spacing:-0.3px">برتراندیش</span>
+      <label style="flex:1; min-width:220px; display:flex; align-items:center; gap:10px; background:#FFFAEE; border:1.5px solid #D9DFE3; border-radius:14px; padding:14px 16px" style-focus="border-color:#F8B000">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C909C" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <input placeholder="جستجوی دوره، کتاب یا موضوع" style="border:none; background:transparent; outline:none; font-family:Vazirmatn,sans-serif; font-size:15px; width:100%; color:#3B2600">
+      </label>
+      <div style="display:flex; align-items:center; gap:10px">
+        <a href="#" style="display:flex; align-items:center; gap:9px; min-height:48px; padding:0 16px; border:1.5px solid #D9DFE3; border-radius:14px; font-size:14.5px; font-weight:600; color:#232A2E" style-hover="border-color:#F8B000; color:#D68800">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.5 12h11L21 7H6"></path></svg>
+          سبد خرید ({{ cart }})
+        </a>
+        <a href="#" style="display:flex; align-items:center; min-height:48px; padding:0 22px; background:#F8B000; color:#fff; border-radius:14px; font-size:14.5px; font-weight:700" style-hover="background:#D68800">ورود / ثبت‌نام</a>
+      </div>
+    </div>
+    <nav style="border-top:1px solid #E8ECEE">
+      <div style="max-width:1180px; margin:0 auto; padding:0 24px; display:flex; gap:6px; flex-wrap:wrap">
+        <a href="#products" style="display:flex; align-items:center; gap:8px; padding:14px 14px; font-size:15px; font-weight:700; color:#3B2600; border-bottom:3px solid #F8B000">فروشگاه</a>
+        <a href="#start" style="display:flex; align-items:center; gap:8px; padding:14px 14px; font-size:15px; font-weight:600; color:#3E4950; border-bottom:3px solid transparent" style-hover="color:#D68800; border-bottom-color:#CDD5DA">مسیر شروع</a>
+        <a href="#teachers" style="display:flex; align-items:center; gap:8px; padding:14px 14px; font-size:15px; font-weight:600; color:#3E4950; border-bottom:3px solid transparent" style-hover="color:#D68800; border-bottom-color:#CDD5DA">ویژه معلم‌ها</a>
+        <a href="#faq" style="display:flex; align-items:center; gap:8px; padding:14px 14px; font-size:15px; font-weight:600; color:#3E4950; border-bottom:3px solid transparent" style-hover="color:#D68800; border-bottom-color:#CDD5DA">سوال‌های پرتکرار</a>
+        <a href="#blog" style="display:flex; align-items:center; gap:8px; padding:14px 14px; font-size:15px; font-weight:600; color:#3E4950; border-bottom:3px solid transparent" style-hover="color:#D68800; border-bottom-color:#CDD5DA">مقالات</a>
+      </div>
+    </nav>
+  </header>
+
+  <section style="max-width:1180px; margin:0 auto; padding:48px 24px 8px">
+    <h1 style="font-size:40px; line-height:1.5; font-weight:800; letter-spacing:-0.7px; margin:0 0 12px; max-width:26ch; text-wrap:pretty">بگویید کدام هستید، بقیه‌اش با ما</h1>
+    <p style="font-size:17px; line-height:2; color:#4D5960; margin:0 0 28px; max-width:60ch">یکی از سه گزینه را انتخاب کنید تا فقط محصولات مرتبط با شما نمایش داده شود.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:16px">
+      <sc-for list="{{ audiences }}" as="a" hint-placeholder-count="3">
+        <button onClick="{{ a.pick }}" style="text-align:right; cursor:pointer; font-family:Vazirmatn,sans-serif; background:{{ a.bg }}; border:2px solid {{ a.border }}; border-radius:20px; padding:24px; display:flex; align-items:flex-start; gap:14px; min-height:112px">
+          <span style="width:48px; height:48px; border-radius:14px; background:#FFF5DE; color:#D68800; display:flex; align-items:center; justify-content:center; flex-shrink:0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3 3 7l9 4 9-4-9-4z"></path><path d="M7 10v5c0 1.5 2.5 3 5 3s5-1.5 5-3v-5"></path></svg>
+          </span>
+          <span style="display:block">
+            <span style="display:block; font-size:18px; font-weight:800; color:#3B2600; margin-bottom:6px">{{ a.title }}</span>
+            <span style="display:block; font-size:14.5px; line-height:1.9; color:#4D5960">{{ a.desc }}</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="products" style="max-width:1180px; margin:0 auto; padding:44px 24px 12px">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:6px">
+      <h2 style="font-size:27px; font-weight:800; margin:0; letter-spacing:-0.4px">{{ listTitle }}</h2>
+      <span style="font-size:14.5px; color:#5D6E79">{{ listCount }}</span>
+    </div>
+    <p style="font-size:14.5px; color:#5D6E79; margin:0 0 22px">قیمت‌ها نهایی است و پس از پرداخت، محصول بلافاصله در حساب شما فعال می‌شود.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:18px">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="4">
+        <article style="background:#fff; border:1.5px solid #DFE4E7; border-radius:20px; padding:20px; display:flex; gap:18px" style-hover="border-color:#F8B000">
+          <div style="width:112px; flex-shrink:0; border-radius:14px; background:repeating-linear-gradient(135deg,#DFE3E6 0 10px,#FEF5E1 10px 20px); display:flex; align-items:center; justify-content:center; text-align:center">
+            <span style="font-family:ui-monospace,monospace; font-size:11px; color:#6A7F8C; line-height:1.7">تصویر<br>محصول</span>
+          </div>
+          <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:9px">
+            <span style="font-size:12.5px; font-weight:700; color:#D68800; background:#FFF5DE; padding:5px 10px; border-radius:8px; align-self:flex-start">{{ p.kind }}</span>
+            <h3 style="font-size:17px; font-weight:700; line-height:1.75; margin:0">{{ p.title }}</h3>
+            <p style="font-size:14px; line-height:1.9; color:#4D5960; margin:0">{{ p.forWhom }}</p>
+            <div style="display:flex; align-items:center; gap:14px; font-size:13px; color:#5D6E79">
+              <span style="display:flex; align-items:center; gap:5px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4l3 2"></path></svg>
+                {{ p.meta }}
+              </span>
+              <span style="display:flex; align-items:center; gap:5px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#F8B000"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.9 6.7 19.7l1.1-6.1L3.4 9.4l6-.8z"></path></svg>
+                {{ p.rating }}
+              </span>
+            </div>
+            <div style="margin-top:auto; padding-top:14px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+              <span style="font-size:18px; font-weight:800">{{ p.price }}</span>
+              <div style="display:flex; gap:8px">
+                <a href="#" style="display:flex; align-items:center; min-height:44px; padding:0 16px; border:1.5px solid #D9DFE3; border-radius:12px; font-size:14px; font-weight:600; color:#232A2E" style-hover="border-color:#F8B000; color:#D68800">جزئیات</a>
+                <button onClick="{{ p.add }}" style="min-height:44px; padding:0 20px; background:#3B2600; color:#fff; border:none; border-radius:12px; font-family:Vazirmatn,sans-serif; font-size:14px; font-weight:700; cursor:pointer" style-hover="background:#F8B000">افزودن به سبد</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-if value="{{ showSteps }}" hint-placeholder-val="{{ true }}">
+    <section id="start" style="max-width:1180px; margin:0 auto; padding:52px 24px">
+      <h2 style="font-size:27px; font-weight:800; margin:0 0 8px; letter-spacing:-0.4px">خرید در سه قدم</h2>
+      <p style="font-size:15px; color:#5D6E79; margin:0 0 24px">بدون پیچیدگی، بدون نیاز به مراجعه حضوری.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:16px">
+        <div style="background:#fff; border:1.5px solid #DFE4E7; border-radius:20px; padding:26px">
+          <span style="display:flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:50%; background:#F8B000; color:#fff; font-size:18px; font-weight:800; margin-bottom:16px">۱</span>
+          <h3 style="font-size:17.5px; font-weight:700; margin:0 0 8px">محصول را انتخاب کنید</h3>
+          <p style="font-size:14.5px; line-height:1.95; color:#4D5960; margin:0">با انتخاب دسته خودتان، فهرست کوتاه و مرتبط می‌شود.</p>
+        </div>
+        <div style="background:#fff; border:1.5px solid #DFE4E7; border-radius:20px; padding:26px">
+          <span style="display:flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:50%; background:#F8B000; color:#fff; font-size:18px; font-weight:800; margin-bottom:16px">۲</span>
+          
+</x-dc>
+</body>
+</html>

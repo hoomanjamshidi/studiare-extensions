@@ -1,0 +1,498 @@
+{
+ "icons": [
+  {
+   "key": "home",
+   "label": "خانه",
+   "keywords": "home house خانه",
+   "fa": "fa-home"
+  },
+  {
+   "key": "search",
+   "label": "جستجو",
+   "keywords": "search find جستجو",
+   "fa": "fa-search"
+  },
+  {
+   "key": "cart",
+   "label": "سبد خرید",
+   "keywords": "cart shop سبد خرید",
+   "fa": "fa-shopping-cart"
+  },
+  {
+   "key": "bag",
+   "label": "کیف خرید",
+   "keywords": "bag shopping کیف",
+   "fa": "fa-shopping-bag"
+  },
+  {
+   "key": "basket",
+   "label": "سبد",
+   "keywords": "basket سبد",
+   "fa": "fa-shopping-basket"
+  },
+  {
+   "key": "user",
+   "label": "کاربر",
+   "keywords": "user account profile کاربر حساب",
+   "fa": "fa-user"
+  },
+  {
+   "key": "user-circle",
+   "label": "پروفایل",
+   "keywords": "user circle profile پروفایل",
+   "fa": "fa-user-circle"
+  },
+  {
+   "key": "users",
+   "label": "کاربران",
+   "keywords": "users team community کاربران",
+   "fa": "fa-users"
+  },
+  {
+   "key": "login",
+   "label": "ورود",
+   "keywords": "login sign in ورود",
+   "fa": "fa-sign-in"
+  },
+  {
+   "key": "logout",
+   "label": "خروج",
+   "keywords": "logout sign out خروج",
+   "fa": "fa-sign-out"
+  },
+  {
+   "key": "menu",
+   "label": "منو",
+   "keywords": "menu hamburger منو",
+   "fa": "fa-bars"
+  },
+  {
+   "key": "grid",
+   "label": "دسته‌ها",
+   "keywords": "grid apps categories دسته",
+   "fa": "fa-th-large"
+  },
+  {
+   "key": "more",
+   "label": "بیشتر",
+   "keywords": "more dots ellipsis بیشتر",
+   "fa": "fa-ellipsis-h"
+  },
+  {
+   "key": "more-vertical",
+   "label": "بیشتر (عمودی)",
+   "keywords": "more vertical dots بیشتر",
+   "fa": "fa-ellipsis-v"
+  },
+  {
+   "key": "arrow-up",
+   "label": "بالا",
+   "keywords": "arrow up top بالا",
+   "fa": "fa-arrow-up"
+  },
+  {
+   "key": "chevron-up",
+   "label": "فلش بالا",
+   "keywords": "chevron caret up فلش",
+   "fa": "fa-chevron-up"
+  },
+  {
+   "key": "heart",
+   "label": "علاقه‌مندی",
+   "keywords": "heart wishlist favorite علاقه",
+   "fa": "fa-heart"
+  },
+  {
+   "key": "bell",
+   "label": "اعلان",
+   "keywords": "bell notification اعلان",
+   "fa": "fa-bell"
+  },
+  {
+   "key": "book",
+   "label": "کتاب",
+   "keywords": "book course کتاب دوره",
+   "fa": "fa-book"
+  },
+  {
+   "key": "book-open",
+   "label": "کتاب باز",
+   "keywords": "book open lesson درس",
+   "fa": "fa-book-open"
+  },
+  {
+   "key": "graduation",
+   "label": "آموزش",
+   "keywords": "graduation school academy آموزش دوره",
+   "fa": "fa-graduation-cap"
+  },
+  {
+   "key": "play",
+   "label": "پخش",
+   "keywords": "play video course پخش",
+   "fa": "fa-play-circle"
+  },
+  {
+   "key": "video",
+   "label": "ویدیو",
+   "keywords": "video camera ویدیو",
+   "fa": "fa-video"
+  },
+  {
+   "key": "headphones",
+   "label": "پادکست",
+   "keywords": "headphones podcast audio پادکست",
+   "fa": "fa-headphones"
+  },
+  {
+   "key": "chat",
+   "label": "گفتگو",
+   "keywords": "chat message comment گفتگو پیام",
+   "fa": "fa-comment"
+  },
+  {
+   "key": "support",
+   "label": "پشتیبانی",
+   "keywords": "support headset help پشتیبانی",
+   "fa": "fa-headset"
+  },
+  {
+   "key": "phone",
+   "label": "تماس",
+   "keywords": "phone call تماس تلفن",
+   "fa": "fa-phone"
+  },
+  {
+   "key": "mail",
+   "label": "ایمیل",
+   "keywords": "mail email envelope ایمیل",
+   "fa": "fa-envelope"
+  },
+  {
+   "key": "whatsapp",
+   "label": "واتساپ",
+   "keywords": "whatsapp واتساپ",
+   "fa": "fab fa-whatsapp"
+  },
+  {
+   "key": "telegram",
+   "label": "تلگرام",
+   "keywords": "telegram تلگرام",
+   "fa": "fab fa-telegram-plane"
+  },
+  {
+   "key": "instagram",
+   "label": "اینستاگرام",
+   "keywords": "instagram اینستاگرام",
+   "fa": "fab fa-instagram"
+  },
+  {
+   "key": "x",
+   "label": "ایکس (توییتر)",
+   "keywords": "x twitter توییتر ایکس",
+   "fa": "fab fa-x-twitter"
+  },
+  {
+   "key": "linkedin",
+   "label": "لینکدین",
+   "keywords": "linkedin لینکدین",
+   "fa": "fab fa-linkedin"
+  },
+  {
+   "key": "bookmark",
+   "label": "نشان",
+   "keywords": "bookmark save نشان",
+   "fa": "fa-bookmark"
+  },
+  {
+   "key": "settings",
+   "label": "تنظیمات",
+   "keywords": "settings gear cog تنظیمات",
+   "fa": "fa-cog"
+  },
+  {
+   "key": "moon",
+   "label": "ماه (تاریک)",
+   "keywords": "moon dark night تاریک",
+   "fa": "fa-moon"
+  },
+  {
+   "key": "sun",
+   "label": "خورشید (روشن)",
+   "keywords": "sun light روشن",
+   "fa": "fa-sun"
+  },
+  {
+   "key": "category",
+   "label": "لایه‌ها",
+   "keywords": "category layers stack لایه دسته",
+   "fa": "fa-layer-group"
+  },
+  {
+   "key": "compass",
+   "label": "کاوش",
+   "keywords": "compass explore کاوش",
+   "fa": "fa-compass"
+  },
+  {
+   "key": "fire",
+   "label": "داغ",
+   "keywords": "fire hot trending داغ پرطرفدار",
+   "fa": "fa-fire"
+  },
+  {
+   "key": "star",
+   "label": "ستاره",
+   "keywords": "star rating ستاره",
+   "fa": "fa-star"
+  },
+  {
+   "key": "gift",
+   "label": "هدیه",
+   "keywords": "gift present هدیه",
+   "fa": "fa-gift"
+  },
+  {
+   "key": "tag",
+   "label": "برچسب",
+   "keywords": "tag label برچسب",
+   "fa": "fa-tag"
+  },
+  {
+   "key": "discount",
+   "label": "تخفیف",
+   "keywords": "discount percent sale تخفیف",
+   "fa": "fa-percent"
+  },
+  {
+   "key": "wallet",
+   "label": "کیف پول",
+   "keywords": "wallet money کیف پول",
+   "fa": "fa-wallet"
+  },
+  {
+   "key": "calendar",
+   "label": "تقویم",
+   "keywords": "calendar event تقویم رویداد",
+   "fa": "fa-calendar-alt"
+  },
+  {
+   "key": "clock",
+   "label": "زمان",
+   "keywords": "clock time زمان",
+   "fa": "fa-clock"
+  },
+  {
+   "key": "download",
+   "label": "دانلود",
+   "keywords": "download دانلود",
+   "fa": "fa-download"
+  },
+  {
+   "key": "plus",
+   "label": "افزودن",
+   "keywords": "plus add افزودن",
+   "fa": "fa-plus"
+  },
+  {
+   "key": "info",
+   "label": "اطلاعات",
+   "keywords": "info about درباره اطلاعات",
+   "fa": "fa-info-circle"
+  },
+  {
+   "key": "help",
+   "label": "راهنما",
+   "keywords": "help question faq راهنما سوال",
+   "fa": "fa-question-circle"
+  },
+  {
+   "key": "map-pin",
+   "label": "آدرس",
+   "keywords": "map pin location آدرس نقشه",
+   "fa": "fa-map-marker-alt"
+  },
+  {
+   "key": "ticket",
+   "label": "تیکت",
+   "keywords": "ticket support تیکت",
+   "fa": "fa-ticket-alt"
+  },
+  {
+   "key": "trophy",
+   "label": "جایزه",
+   "keywords": "trophy award جایزه",
+   "fa": "fa-trophy"
+  },
+  {
+   "key": "award",
+   "label": "مدرک",
+   "keywords": "award certificate badge مدرک گواهی",
+   "fa": "fa-award"
+  },
+  {
+   "key": "notes",
+   "label": "مقاله",
+   "keywords": "notes article file document مقاله",
+   "fa": "fa-file-alt"
+  },
+  {
+   "key": "news",
+   "label": "وبلاگ",
+   "keywords": "news blog newspaper وبلاگ اخبار",
+   "fa": "fa-newspaper"
+  },
+  {
+   "key": "list",
+   "label": "فهرست",
+   "keywords": "list items فهرست",
+   "fa": "fa-list-ul"
+  },
+  {
+   "key": "chart",
+   "label": "آمار",
+   "keywords": "chart stats dashboard آمار",
+   "fa": "fa-chart-bar"
+  },
+  {
+   "key": "store",
+   "label": "فروشگاه",
+   "keywords": "store shop فروشگاه",
+   "fa": "fa-store"
+  },
+  {
+   "key": "share",
+   "label": "اشتراک‌گذاری",
+   "keywords": "share اشتراک",
+   "fa": "fa-share-alt"
+  },
+  {
+   "key": "lock",
+   "label": "قفل",
+   "keywords": "lock secure قفل",
+   "fa": "fa-lock"
+  },
+  {
+   "key": "sparkles",
+   "label": "ویژه",
+   "keywords": "sparkles special new ویژه جدید",
+   "fa": "fa-sparkles"
+  },
+  {
+   "key": "close",
+   "label": "بستن",
+   "keywords": "close x بستن",
+   "fa": "fa-times"
+  },
+  {
+   "key": "check",
+   "label": "تیک",
+   "keywords": "check done تیک",
+   "fa": "fa-check"
+  },
+  {
+   "key": "eye",
+   "label": "نمایش",
+   "keywords": "eye view نمایش",
+   "fa": "fa-eye"
+  },
+  {
+   "key": "image",
+   "label": "تصویر",
+   "keywords": "image photo gallery تصویر",
+   "fa": "fa-image"
+  },
+  {
+   "key": "code",
+   "label": "کد",
+   "keywords": "code developer کد",
+   "fa": "fa-code"
+  },
+  {
+   "key": "palette",
+   "label": "رنگ",
+   "keywords": "palette color رنگ",
+   "fa": "fa-palette"
+  },
+  {
+   "key": "sliders",
+   "label": "تنظیم",
+   "keywords": "sliders adjust تنظیم",
+   "fa": "fa-sliders-h"
+  },
+  {
+   "key": "mobile",
+   "label": "موبایل",
+   "keywords": "mobile phone device موبایل",
+   "fa": "fa-mobile-alt"
+  },
+  {
+   "key": "copy",
+   "label": "کپی",
+   "keywords": "copy duplicate کپی",
+   "fa": "fa-copy"
+  },
+  {
+   "key": "trash",
+   "label": "حذف",
+   "keywords": "trash delete حذف",
+   "fa": "fa-trash-alt"
+  },
+  {
+   "key": "grip",
+   "label": "جابجایی",
+   "keywords": "grip drag move جابجایی",
+   "fa": "fa-grip-vertical"
+  },
+  {
+   "key": "chevron-down",
+   "label": "فلش پایین",
+   "keywords": "chevron caret down فلش",
+   "fa": "fa-chevron-down"
+  }
+ ],
+ "packs": {
+  "lucide": {
+   "label": "Lucide",
+   "license": "ISC",
+   "source": "lucide-static@1.47.0",
+   "hasFilled": false,
+   "fallback": "tabler"
+  },
+  "tabler": {
+   "label": "Tabler",
+   "license": "MIT",
+   "source": "@tabler/icons@3.48.0",
+   "hasFilled": true,
+   "fallback": null
+  },
+  "phosphor": {
+   "label": "Phosphor",
+   "license": "MIT",
+   "source": "@phosphor-icons/core@2.1.1",
+   "hasFilled": true,
+   "fallback": "tabler"
+  },
+  "phosphor-duotone": {
+   "label": "Phosphor Duotone",
+   "license": "MIT",
+   "source": "@phosphor-icons/core@2.1.1",
+   "hasFilled": true,
+   "fallback": "tabler"
+  },
+  "heroicons": {
+   "label": "Heroicons",
+   "license": "MIT",
+   "source": "heroicons@2.2.0",
+   "hasFilled": true,
+   "fallback": "tabler"
+  },
+  "bootstrap": {
+   "label": "Bootstrap Icons",
+   "license": "MIT",
+   "source": "bootstrap-icons@1.13.1",
+   "hasFilled": true,
+   "fallback": "tabler"
+  }
+ }
+}

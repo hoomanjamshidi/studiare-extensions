@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300..900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin:0; background:#F4F5F7; }
+  a { color:#3E4950; text-decoration:none; }
+  a:hover { color:#D68800; }
+  input::placeholder { color:#9AA8B2; }
+</style>
+</helmet>
+
+<div dir="rtl" style="font-family:Vazirmatn, system-ui, sans-serif; background:#F4F5F7; color:#171C1F; min-height:100vh; padding:48px 20px">
+  <div style="max-width:720px; margin:0 auto; position:relative">
+
+    <label style="display:flex; align-items:center; gap:12px; background:#FFFFFF; border:1.5px solid #F8B000; border-radius:14px; padding:0 18px; height:58px; box-shadow:0 0 0 4px #FFF5DE">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B8090" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>
+      <input value="{{ query }}" onChange="{{ onInput }}" onKeyDown="{{ onKey }}" placeholder="جست‌وجو در دوره‌ها، مقاله‌ها و پادکست‌ها" style="flex:1; min-width:0; border:none; outline:none; background:transparent; font-family:Vazirmatn, sans-serif; font-size:15.5px; color:#171C1F" />
+      <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ true }}">
+        <span onClick="{{ clear }}" style="width:28px; height:28px; border-radius:8px; background:#F4F5F7; display:flex; align-items:center; justify-content:center; cursor:pointer" style-hover="background:#DCE1E4">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5D6E79" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </span>
+      </sc-if>
+    </label>
+
+    <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ true }}">
+      <div style="margin-top:10px; background:#FFFFFF; border:1px solid #DCE1E4; border-radius:16px; box-shadow:0 18px 40px -22px rgba(23,28,31,0.35); overflow:hidden">
+
+        <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:6px; padding:10px">
+            <sc-for list="{{ skeletons }}" as="s" hint-placeholder-count="3">
+              <div style="display:flex; align-items:center; gap:16px; padding:10px">
+                <span style="width:64px; height:64px; border-radius:14px; background:#EEF0F2; flex-shrink:0"></span>
+                <div style="flex:1; display:flex; flex-direction:column; gap:9px">
+                  <span style="height:13px; width:55%; border-radius:6px; background:#EEF0F2"></span>
+                  <span style="height:10px; width:30%; border-radius:6px; background:#F4F5F7"></span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showResults }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px 6px">
+            <span style="font-size:12.5px; font-weight:700; color:#6B8090">{{ countLabel }}</span>
+            <span style="font-size:12px; color:#9AA8B2">↑ ↓ برای جابه‌جایی</span>
+          </div>
+          <div style="display:flex; flex-direction:column; padding:4px 10px 10px">
+            <sc-for list="{{ results }}" as="r" hint-placeholder-count="3">
+              <a href="#" onMouseEnter="{{ r.onHover }}" style="display:flex; align-items:center; gap:16px; padding:10px; border-radius:12px; background:{{ r.bg }}; color:#171C1F">
+                <span style="width:64px; height:64px; flex-shrink:0; display:block"><image-slot id="{{ r.slotId }}" shape="rounded" radius="14" placeholder="تصویر" style="width:64px; height:64px"></image-slot></span>
+                <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px">
+                  <div style="font-size:15.5px; font-weight:700; color:#171C1F; line-height:1.6; text-wrap:pretty">{{ r.pre }}<sc-if value="{{ r.hasMatch }}" hint-placeholder-val="{{ true }}"><span style="background:#FFF5DE; color:#B37200; border-radius:4px; padding:0 2px">{{ r.match }}</span></sc-if>{{ r.post }}</div>
+                  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:12px; color:#6B8090">
+                    <span style="background:{{ r.tagBg }}; color:{{ r.tagInk }}; font-weight:700; padding:3px 9px; border-radius:999px">{{ r.type }}</span>
+                    <span>{{ r.cat }}</span>
+                    <span style="width:3px; height:3px; border-radius:999px; background:#9AA8B2"></span>
+                    <span>{{ r.meta }}</span>
+                  </div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ r.arrow }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+              </a>
+            </sc-for>
+          </div>
+          <a href="#" style="display:flex; align-items:center; justify-content:center; gap:8px; border-top:1px solid #DCE1E4; padding:14px; font-size:14px; font-weight:700; color:#B37200; background:#FFFFFF" style-hover="background:#FFF5DE; color:#B37200">
+            مشاهده همه نتایج «{{ query }}»
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B37200" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+          </a>
+        </sc-if>
+
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:34px 24px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:10px">
+            <span style="width:52px; height:52px; border-radius:16px; background:#F4F5F7; display:flex; align-items:center; justify-content:center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B8090" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6M8.5 11h5"></path></svg>
+            </span>
+            <div style="font-size:15px; font-weight:700">نتیجه‌ای برای «{{ query }}» پیدا نشد</div>
+            <div style="font-size:13px; color:#5D6E79">یکی از این موضوع‌ها را امتحان کنید:</div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:4px">
+              <sc-for list="{{ suggestions }}" as="sg" hint-placeholder-count="4">
+                <span onClick="{{ sg.pick }}" style="background:#FFF5DE; color:#B37200; font-size:13px; font-weight:700; padding:7px 14px; border-radius:999px; cursor:pointer" style-hover="background:#FFE9B8">{{ sg.label }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { query: 'همسر', loading: false, active: 0 };
+  items = [
+    { t: 'دوره جامع ارتباط مؤثر با همسر', type: 'دوره', cat: 'همسرانه', meta: '۱۲ جلسه' },
+    { t: 'کارگاه حل تعارض‌های همسران', type: 'کارگاه', cat: 'همسرانه', meta: 'حضوری · تهران' },
+    { t: 'پنج زبان عشق در زندگی مشترک', type: 'مقاله', cat: 'همسرانه', meta: '۸ دقیقه مطالعه' },
+    { t: 'انتخاب همسر؛ پیش از ازدواج چه بپرسیم؟', type: 'پادکست', cat: 'پیش از ازدواج', meta: '۴۲ دقیقه' },
+    { t: 'دوره رشد فردی و خودشناسی', type: 'دوره', cat: 'رشد فردی', meta: '۱۸ جلسه' },
+    { t: 'آزمون استعدادیابی نوجوانان', type: 'آزمون', cat: 'استعدادیابی', meta: '۲۰ دقیقه' },
+    { t: 'فرزندپروری مثبت برای والدین شاغل', type: 'دوره', cat: 'فرزندپروری', meta: '۹ جلسه' },
+    { t: 'مدیریت خشم در روابط نزدیک', type: 'مقاله', cat: 'مهارت‌های زندگی', meta: '۶ دقیقه مطالعه' }
+  ];
+  tones = {
+    'دوره': ['#FFF5DE', '#B37200'], 'کارگاه': ['#FFD270', '#5C4100'],
+    'مقاله': ['#EEF0F2', '#3E4950'], 'پادکست': ['#DCE1E4', '#3E4950'], 'آزمون': ['#FFF5DE', '#B37200']
+  };
+  run(q) {
+    clearTimeout(this.t);
+    this.setState({ query: q, loading: !!q.trim(), active: 0 });
+    if (q.trim()) this.t = setTimeout(() => this.setState({ loading: false }), 450);
+  }
+  componentWillUnmount() { clearTimeout(this.t); }
+  renderVals() {
+    const { query, loading, active } = this.state;
+    const q = query.trim();
+    const found = q ? this.items.filter(i => i.t.includes(q) || i.cat.includes(q)).slice(0, 5) : [];
+    const results = found.map((i, idx) => {
+      const k = i.t.indexOf(q);
+      const [tb, ti] = this.tones[i.type] || this.tones['مقاله'];
+      const on = idx === active;
+      return {
+        pre: k >= 0 ? i.t.slice(0, k) : i.t, match: k >= 0 ? q : '', post: k >= 0 ? i.t.slice(k + q.length) : '',
+        hasMatch: k >= 0, slotId: 'search-thumb-' + this.items.indexOf(i),
+        type: i.type, cat: i.cat, meta: i.meta,
+        thumb: tb, thumbInk: ti, tagBg: tb, tagInk: ti,
+        bg: on ? '#F4F5F7' : '#FFFFFF', arrow: on ? '#F8B000' : '#DCE1E4',
+        onHover: () => this.setState({ active: idx })
+      };
+    });
+    return {
+      query, hasQuery: !!q, loading,
+      skeletons: [1, 2, 3],
+      showResults: !!q && !loading && results.length > 0,
+      empty: !!q && !loading && results.length === 0,
+      results, countLabel: `${results.length.toLocaleString('fa-IR')} نتیجه`,
+      suggestions: ['همسرانه', 'رشد فردی', 'فرزندپروری', 'استعدادیابی'].map(label => ({ label, pick: () => this.run(label) })),
+      onInput: e => this.run(e.target.value),
+      onKey: e => {
+        if (!results.length) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); this.setState({ active: (active + 1) % results.length }); }
+        if (e.key === 'ArrowUp') { e.preventDefault(); this.setState({ active: (active - 1 + results.length) % results.length }); }
+      },
+      clear: () => this.run('')
+    };
+  }
+}
+</script>
+</body>
+</html>

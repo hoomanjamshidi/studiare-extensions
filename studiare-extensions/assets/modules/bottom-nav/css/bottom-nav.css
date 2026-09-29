@@ -1,0 +1,1642 @@
+/**
+ * Studiare Extensions — mobile bottom navigation.
+ *
+ * Sections:
+ *   1. Tokens (light + dark, all pointing at Studiare theme variables)
+ *   2. Base bar, items, icons, labels, badges
+ *   3. Styles: classic · floating · notch · bubble · pill
+ *   4. Density (many items), motion and accessibility
+ *   5. Bottom sheets (search, cart, menu, content)
+ *
+ * Colour tokens are layered:
+ *   --stx-bn-l-<slot> / --stx-bn-d-<slot>  admin overrides (inline, may be unset)
+ *   --stx-bn-c-<slot>                      resolved token used by components
+ * Light rules have zero specificity (:where) so dark rules always win without
+ * fighting the inline overrides.
+ */
+
+/* ==========================================================================
+   1. Tokens
+   ========================================================================== */
+
+:where(.stx-bn, .stx-sheet) {
+	--stx-bn-h: 64px;
+	--stx-bn-icon: 24px;
+	--stx-bn-radius: 22px;
+	--stx-bn-offset: 12px;
+	--stx-bn-max-w: 560px;
+	--stx-bn-stroke: 1.75;
+	/* Same stack as Studiare's body; if the theme variable is missing, `font-family` falls back to inheriting. */
+	--stx-bn-font: var(--font_body-font-family), var(--fallback-font, Tahoma, Arial, sans-serif);
+	--stx-bn-font-size: 11px;
+	--stx-bn-font-weight: 500;
+	--stx-bn-z: 9990;
+	--stx-bn-pad: 6px;
+	--stx-bn-dir: 1;
+	--stx-bn-safe: env(safe-area-inset-bottom, 0px);
+
+	/* Motion */
+	--stx-bn-ease: cubic-bezier(0.34, 1.4, 0.64, 1);
+	--stx-bn-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--stx-bn-dur: 420ms;
+
+	/* Colours (light) */
+	--stx-bn-c-bg: var(--stx-bn-l-bg, #ffffff);
+	--stx-bn-c-icon: var(--stx-bn-l-icon, var(--font_body-color, #7d7e7f));
+	--stx-bn-c-label: var(--stx-bn-l-label, var(--stx-bn-c-icon));
+	--stx-bn-c-active: var(--stx-bn-l-active, var(--primary_color, #26a69a));
+	--stx-bn-c-active-bg: var(--stx-bn-l-active-bg, color-mix(in srgb, var(--stx-bn-c-active) 14%, transparent));
+	--stx-bn-c-badge-bg: var(--stx-bn-l-badge-bg, var(--secondary_color, #4ecdc4));
+	--stx-bn-c-badge-text: var(--stx-bn-l-badge-text, #ffffff);
+	--stx-bn-c-border: var(--stx-bn-l-border, rgba(15, 23, 42, 0.07));
+	--stx-bn-c-fab-bg: var(--stx-bn-l-fab-bg, var(--stx-bn-c-active));
+	--stx-bn-c-fab-icon: var(--stx-bn-l-fab-icon, #ffffff);
+	--stx-bn-c-text: #1f2533;
+	--stx-bn-shadow-rgb: 15 23 42;
+	--stx-bn-shadow-a: 0.12;
+}
+
+/* Dark mode follows Studiare's `.scdarkcolors` class on <html>/<body>. */
+:where(.scdarkcolors) :is(.stx-bn, .stx-sheet):not(.stx-no-dark) {
+	--stx-bn-c-bg: var(--stx-bn-d-bg, var(--dark_secondary_color, #11142b));
+	--stx-bn-c-icon: var(--stx-bn-d-icon, color-mix(in srgb, var(--dark_light_color, #ffffff) 60%, transparent));
+	--stx-bn-c-label: var(--stx-bn-d-label, var(--stx-bn-c-icon));
+	--stx-bn-c-active: var(--stx-bn-d-active, var(--stx-bn-l-active, var(--primary_color, #26a69a)));
+	--stx-bn-c-active-bg: var(--stx-bn-d-active-bg, color-mix(in srgb, var(--stx-bn-c-active) 24%, transparent));
+	--stx-bn-c-badge-bg: var(--stx-bn-d-badge-bg, var(--stx-bn-l-badge-bg, var(--secondary_color, #4ecdc4)));
+	--stx-bn-c-badge-text: var(--stx-bn-d-badge-text, var(--stx-bn-l-badge-text, #ffffff));
+	--stx-bn-c-border: var(--stx-bn-d-border, rgba(255, 255, 255, 0.08));
+	--stx-bn-c-fab-bg: var(--stx-bn-d-fab-bg, var(--stx-bn-l-fab-bg, var(--stx-bn-c-active)));
+	--stx-bn-c-fab-icon: var(--stx-bn-d-fab-icon, var(--stx-bn-l-fab-icon, #ffffff));
+	--stx-bn-c-text: var(--dark_light_color, #ffffff);
+	--stx-bn-shadow-rgb: 0 0 0;
+	--stx-bn-shadow-a: 0.4;
+}
+
+/* Browsers without color-mix(): neutral tints instead of accent tints. */
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+	:where(.stx-bn, .stx-sheet) {
+		--stx-bn-c-active-bg: var(--stx-bn-l-active-bg, rgba(127, 127, 127, 0.14));
+	}
+}
+
+:is(.stx-bn, .stx-sheet):dir(rtl),
+[dir="rtl"] :is(.stx-bn, .stx-sheet),
+.rtl :is(.stx-bn, .stx-sheet) {
+	--stx-bn-dir: -1;
+}
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+
+.stx-bn {
+	position: fixed;
+	z-index: var(--stx-bn-z);
+	inset-inline: 0;
+	bottom: 0;
+	height: calc(var(--stx-bn-h) + var(--stx-bn-safe));
+	padding-bottom: var(--stx-bn-safe);
+	margin: 0;
+	box-sizing: border-box;
+	font-family: var(--stx-bn-font);
+	-webkit-tap-highlight-color: transparent;
+	-webkit-font-smoothing: antialiased;
+	transition: transform 0.4s var(--stx-bn-ease-out), opacity 0.25s ease;
+}
+
+.stx-bn *,
+.stx-bn *::before,
+.stx-bn *::after {
+	box-sizing: border-box;
+}
+
+.stx-bn.is-hidden {
+	transform: translateY(calc(100% + var(--stx-bn-offset) + 40px));
+}
+
+.stx-bn__bar {
+	position: absolute;
+	inset: 0;
+	background: var(--stx-bn-c-bg);
+	border-top: 1px solid var(--stx-bn-c-border);
+	box-shadow: 0 -10px 30px -18px rgb(var(--stx-bn-shadow-rgb) / var(--stx-bn-shadow-a));
+	pointer-events: none;
+}
+
+.stx-bn__indicator {
+	display: none;
+	position: absolute;
+	pointer-events: none;
+}
+
+.stx-bn .stx-bn__list {
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	height: var(--stx-bn-h);
+	margin: 0;
+	padding: 0 var(--stx-bn-pad);
+	list-style: none;
+}
+
+.stx-bn .stx-bn__item {
+	position: relative;
+	display: flex;
+	flex: 1 1 0;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-bn .stx-bn__item::before,
+.stx-bn .stx-bn__item::marker {
+	content: none;
+}
+
+/* Reset aggressively: theme styles for `nav a`, `button`, `a:hover` must not leak in. */
+.stx-bn .stx-bn__link,
+.stx-bn .stx-bn__link:hover,
+.stx-bn .stx-bn__link:focus {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	width: 100%;
+	height: 100%;
+	min-width: 0;
+	margin: 0;
+	padding: 6px 2px;
+	border: 0;
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
+	color: var(--stx-bn-c-icon);
+	font: inherit;
+	line-height: 1.2;
+	text-decoration: none;
+	text-transform: none;
+	letter-spacing: normal;
+	cursor: pointer;
+	outline: none;
+	touch-action: manipulation;
+	-webkit-user-select: none;
+	user-select: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.stx-bn .stx-bn__link:focus-visible {
+	outline: 2px solid var(--stx-bn-c-active);
+	outline-offset: -3px;
+	border-radius: 16px;
+}
+
+.stx-bn .stx-bn__item.is-active .stx-bn__link,
+.stx-bn .stx-bn__link[aria-expanded="true"] {
+	color: var(--stx-bn-c-active);
+}
+
+/* Icon */
+.stx-bn__icon {
+	position: relative;
+	isolation: isolate;
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	width: var(--stx-bn-icon);
+	height: var(--stx-bn-icon);
+	transition: transform var(--stx-bn-dur) var(--stx-bn-ease), color 0.2s ease;
+}
+
+.stx-bn__link:active .stx-bn__icon {
+	transform: scale(0.86);
+	transition-duration: 0.12s;
+}
+
+.stx-bn__glyph {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.22s ease, transform 0.35s var(--stx-bn-ease);
+}
+
+.stx-bn__glyph svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+.stx-bn__glyph svg[stroke-width] {
+	stroke-width: var(--stx-bn-stroke);
+}
+
+.stx-bn__glyph i {
+	font-size: calc(var(--stx-bn-icon) * 0.92);
+	line-height: 1;
+	width: auto;
+}
+
+.stx-bn__img,
+.stx-bn__avatar {
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	margin: 0;
+	object-fit: contain;
+	border-radius: 0;
+}
+
+.stx-bn__avatar {
+	object-fit: cover;
+	border-radius: 50%;
+	box-shadow: 0 0 0 2px var(--stx-bn-c-bg), 0 0 0 3.5px transparent;
+	transition: box-shadow 0.25s ease;
+}
+
+.stx-bn__item.is-active .stx-bn__avatar {
+	box-shadow: 0 0 0 2px var(--stx-bn-c-bg), 0 0 0 3.5px var(--stx-bn-c-active);
+}
+
+.stx-bn__glyph--active,
+.stx-bn__glyph--alt {
+	opacity: 0;
+	transform: scale(0.6);
+}
+
+.stx-bn__item.is-active.has-active-icon .stx-bn__glyph--base {
+	opacity: 0;
+	transform: scale(0.6);
+}
+
+.stx-bn__item.is-active.has-active-icon .stx-bn__glyph--active {
+	opacity: 1;
+	transform: none;
+}
+
+/* Dark mode button swaps moon ⇄ sun. */
+.scdarkcolors .stx-bn__item--dark_mode .stx-bn__glyph--base {
+	opacity: 0;
+	transform: rotate(-90deg) scale(0.6);
+}
+
+.scdarkcolors .stx-bn__item--dark_mode .stx-bn__glyph--alt {
+	opacity: 1;
+	transform: none;
+}
+
+/* Label */
+.stx-bn__label {
+	display: block;
+	max-width: 100%;
+	overflow: hidden;
+	color: var(--stx-bn-c-label);
+	font-family: inherit;
+	font-size: var(--stx-bn-font-size);
+	font-weight: var(--stx-bn-font-weight);
+	line-height: 1.25;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	transition: color 0.2s ease, opacity 0.25s ease, transform 0.35s var(--stx-bn-ease);
+}
+
+.stx-bn__item.is-active .stx-bn__label,
+.stx-bn__link[aria-expanded="true"] .stx-bn__label {
+	color: var(--stx-bn-c-active);
+	font-weight: calc(var(--stx-bn-font-weight) + 100);
+}
+
+.stx-bn--labels-never .stx-bn__label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* "Active only": labels sit out of flow so icons stay centred, then the active icon glides up. */
+.stx-bn--labels-active .stx-bn__label {
+	position: absolute;
+	bottom: 7px;
+	inset-inline: 2px;
+	text-align: center;
+	opacity: 0;
+	transform: translateY(6px);
+}
+
+.stx-bn--labels-active .stx-bn__item.is-active .stx-bn__label {
+	opacity: 1;
+	transform: none;
+}
+
+.stx-bn--labels-active .stx-bn__item.is-active:not(.is-featured) .stx-bn__icon {
+	transform: translateY(-8px);
+}
+
+/* Badge */
+.stx-bn__badge {
+	position: absolute;
+	top: -6px;
+	inset-inline-end: -11px;
+	z-index: 2;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border-radius: 9px;
+	background: var(--stx-bn-c-badge-bg);
+	color: var(--stx-bn-c-badge-text);
+	box-shadow: 0 0 0 2px var(--stx-bn-c-bg);
+	font-family: var(--stx-bn-font);
+	font-size: 10px;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	line-height: 18px;
+	text-align: center;
+	white-space: nowrap;
+	transition: transform 0.35s var(--stx-bn-ease), opacity 0.2s ease;
+}
+
+.stx-bn__badge + .stx-bn__badge {
+	top: auto;
+	bottom: -6px;
+}
+
+.stx-bn__badge--text {
+	font-size: 9px;
+}
+
+.stx-bn__badge.is-empty {
+	opacity: 0;
+	transform: scale(0);
+}
+
+.stx-bn__item.is-bumped .stx-bn__badge {
+	animation: stx-bn-bump 0.55s var(--stx-bn-ease);
+}
+
+.stx-bn__item.is-bumped .stx-bn__glyph--base,
+.stx-bn__item.is-bumped .stx-bn__glyph--active {
+	animation: stx-bn-wiggle 0.55s ease;
+}
+
+@keyframes stx-bn-bump {
+	0% { transform: scale(1); }
+	40% { transform: scale(1.4); }
+	100% { transform: scale(1); }
+}
+
+@keyframes stx-bn-wiggle {
+	0%, 100% { rotate: 0deg; }
+	25% { rotate: -12deg; }
+	60% { rotate: 9deg; }
+}
+
+.stx-bn-spacer {
+	height: var(--stx-bn-space, calc(64px + env(safe-area-inset-bottom, 0px)));
+	pointer-events: none;
+}
+
+/* Glass: translucent surface with a frosted backdrop (classic, floating, pill). */
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+	.stx-bn--glass:is(.stx-bn--style-classic, .stx-bn--style-floating, .stx-bn--style-pill) .stx-bn__bar {
+		background: color-mix(in srgb, var(--stx-bn-c-bg) 78%, transparent);
+		-webkit-backdrop-filter: saturate(180%) blur(18px);
+		backdrop-filter: saturate(180%) blur(18px);
+	}
+}
+
+/* Shadow presets */
+.stx-bn--shadow-none .stx-bn__bar {
+	box-shadow: none;
+}
+
+.stx-bn--shadow-none.stx-bn--style-notch .stx-bn__bar,
+.stx-bn--shadow-none.stx-bn--style-bubble .stx-bn__bar {
+	filter: none;
+}
+
+.stx-bn--shadow-medium {
+	--stx-bn-shadow-a: 0.2;
+}
+
+.stx-bn--shadow-strong {
+	--stx-bn-shadow-a: 0.32;
+}
+
+/* ==========================================================================
+   3. Styles
+   ========================================================================== */
+
+/* --- 3.1 Classic: edge-to-edge, tonal pill behind the active icon -------- */
+
+.stx-bn--style-classic .stx-bn__bar {
+	border-radius: min(var(--stx-bn-radius), 28px) min(var(--stx-bn-radius), 28px) 0 0;
+}
+
+.stx-bn--style-classic .stx-bn__icon::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	inset: -5px -18px;
+	border-radius: 999px;
+	background: var(--stx-bn-c-active-bg);
+	opacity: 0;
+	transform: scaleX(0.4);
+	transition: transform var(--stx-bn-dur) var(--stx-bn-ease), opacity 0.2s ease;
+}
+
+.stx-bn--style-classic .stx-bn__item.is-active .stx-bn__icon::before {
+	opacity: 1;
+	transform: scaleX(1);
+}
+
+/* --- 3.2 Floating glass: detached capsule with a sliding highlight ------- */
+
+.stx-bn--style-floating,
+.stx-bn--style-pill {
+	inset-inline: var(--stx-bn-offset);
+	bottom: calc(var(--stx-bn-offset) + var(--stx-bn-safe));
+	height: var(--stx-bn-h);
+	max-width: var(--stx-bn-max-w);
+	margin-inline: auto;
+	padding-bottom: 0;
+}
+
+.stx-bn--style-floating .stx-bn__bar,
+.stx-bn--style-pill .stx-bn__bar {
+	border: 1px solid var(--stx-bn-c-border);
+	border-radius: var(--stx-bn-radius);
+	box-shadow:
+		0 18px 40px -16px rgb(var(--stx-bn-shadow-rgb) / calc(var(--stx-bn-shadow-a) * 2)),
+		0 2px 8px rgb(var(--stx-bn-shadow-rgb) / calc(var(--stx-bn-shadow-a) * 0.5));
+}
+
+.stx-bn--style-floating .stx-bn__indicator {
+	display: block;
+	top: 6px;
+	bottom: 6px;
+	inset-inline-start: var(--stx-bn-pad);
+	width: calc((100% - 2 * var(--stx-bn-pad)) / var(--stx-bn-count, 5));
+	transform: translateX(calc(var(--stx-bn-active, 0) * 100% * var(--stx-bn-dir)));
+	transition: transform var(--stx-bn-dur) var(--stx-bn-ease), opacity 0.25s ease;
+}
+
+.stx-bn--style-floating .stx-bn__indicator::before {
+	content: "";
+	position: absolute;
+	inset: 0 3px;
+	border-radius: max(8px, calc(var(--stx-bn-radius) - 8px));
+	background: var(--stx-bn-c-active-bg);
+}
+
+.stx-bn--style-floating:not(.has-active) .stx-bn__indicator {
+	opacity: 0;
+}
+
+.stx-bn--style-floating .stx-bn__item.is-active .stx-bn__icon {
+	transform: translateY(-1px);
+}
+
+/* --- 3.3 Notch: curved cut-out with a raised featured button ------------- */
+
+.stx-bn--style-notch {
+	--stx-bn-pad: 4px;
+	--stx-bn-fab: calc(var(--stx-bn-icon) + 32px);
+	--stx-bn-notch-r: calc(var(--stx-bn-fab) / 2 + 7px);
+	/* Physical x of the featured slot centre, mirrored for RTL. */
+	--stx-bn-notch-x: calc(
+		50% + var(--stx-bn-dir) * (var(--stx-bn-pad) + (var(--stx-bn-featured, 2) + 0.5) * (100% - 2 * var(--stx-bn-pad)) / var(--stx-bn-count, 5) - 50%)
+	);
+}
+
+.stx-bn--style-notch .stx-bn__bar {
+	background: none;
+	border: 0;
+	box-shadow: none;
+	filter: drop-shadow(0 -4px 12px rgb(var(--stx-bn-shadow-rgb) / var(--stx-bn-shadow-a)));
+}
+
+.stx-bn--style-notch .stx-bn__bar::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: var(--stx-bn-c-bg);
+	border-radius: min(var(--stx-bn-radius), 28px) min(var(--stx-bn-radius), 28px) 0 0;
+	-webkit-mask: radial-gradient(circle at var(--stx-bn-notch-x) 0, transparent calc(var(--stx-bn-notch-r) - 0.5px), #000 var(--stx-bn-notch-r));
+	mask: radial-gradient(circle at var(--stx-bn-notch-x) 0, transparent calc(var(--stx-bn-notch-r) - 0.5px), #000 var(--stx-bn-notch-r));
+}
+
+.stx-bn--style-notch .stx-bn__item.is-featured .stx-bn__link {
+	justify-content: flex-end;
+	padding-bottom: 9px;
+	color: var(--stx-bn-c-fab-icon);
+}
+
+.stx-bn--style-notch .stx-bn__item.is-featured .stx-bn__icon {
+	position: absolute;
+	top: calc(var(--stx-bn-fab) / -2);
+	left: 50%;
+	width: var(--stx-bn-fab);
+	height: var(--stx-bn-fab);
+	margin-left: calc(var(--stx-bn-fab) / -2);
+	border-radius: 50%;
+	background: linear-gradient(150deg, color-mix(in srgb, var(--stx-bn-c-fab-bg) 72%, #ffffff), var(--stx-bn-c-fab-bg) 60%);
+	background-color: var(--stx-bn-c-fab-bg);
+	color: var(--stx-bn-c-fab-icon);
+	box-shadow: 0 12px 24px -8px color-mix(in srgb, var(--stx-bn-c-fab-bg) 70%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.stx-bn--style-notch .stx-bn__item.is-featured .stx-bn__link:active .stx-bn__icon {
+	transform: scale(0.92);
+}
+
+.stx-bn--style-notch .stx-bn__item.is-featured .stx-bn__glyph {
+	inset: calc((var(--stx-bn-fab) - var(--stx-bn-icon)) / 2);
+}
+
+.stx-bn--style-notch .stx-bn__item.is-featured .stx-bn__label {
+	color: var(--stx-bn-c-label);
+}
+
+.stx-bn--style-notch .stx-bn__item.is-featured.is-active .stx-bn__label {
+	color: var(--stx-bn-c-active);
+}
+
+.stx-bn--style-notch .stx-bn__item.is-featured .stx-bn__badge {
+	box-shadow: 0 0 0 2px var(--stx-bn-c-fab-bg);
+}
+
+/* Non-featured active items: colour + a small dot. */
+.stx-bn--style-notch .stx-bn__item:not(.is-featured) .stx-bn__link::after {
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: 50%;
+	width: 5px;
+	height: 5px;
+	margin-left: -2.5px;
+	border-radius: 50%;
+	background: var(--stx-bn-c-active);
+	opacity: 0;
+	transform: scale(0);
+	transition: transform var(--stx-bn-dur) var(--stx-bn-ease), opacity 0.2s ease;
+}
+
+.stx-bn--style-notch .stx-bn__item.is-active:not(.is-featured) .stx-bn__link::after {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* --- 3.4 Bubble: the active icon pops into a gliding bubble --------------- */
+
+.stx-bn--style-bubble {
+	--stx-bn-pad: 4px;
+	--stx-bn-bubble: calc(var(--stx-bn-icon) + 26px);
+	--stx-bn-ring: 6px;
+	--stx-bn-fillet: 11px;
+	/* Bubble centre sits slightly below the bar's top edge. */
+	--stx-bn-bubble-y: 4px;
+}
+
+/* Square top corners: the bump's shoulders can reach the screen edge when an edge item is active. */
+.stx-bn--style-bubble .stx-bn__bar {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	filter: drop-shadow(0 -3px 12px rgb(var(--stx-bn-shadow-rgb) / var(--stx-bn-shadow-a)));
+}
+
+.stx-bn--style-bubble .stx-bn__indicator {
+	display: block;
+	top: 0;
+	inset-inline-start: var(--stx-bn-pad);
+	width: calc((100% - 2 * var(--stx-bn-pad)) / var(--stx-bn-count, 5));
+	height: 0;
+	transform: translateX(calc(var(--stx-bn-active, 0) * 100% * var(--stx-bn-dir)));
+	transition: transform var(--stx-bn-dur) var(--stx-bn-ease), opacity 0.25s ease;
+}
+
+/* The bubble: accent circle wrapped in a ring of the bar colour (the "bump"). */
+.stx-bn--style-bubble .stx-bn__indicator::before {
+	content: "";
+	position: absolute;
+	top: calc(var(--stx-bn-bubble-y) - var(--stx-bn-bubble) / 2 - var(--stx-bn-ring));
+	left: 50%;
+	width: calc(var(--stx-bn-bubble) + 2 * var(--stx-bn-ring));
+	height: calc(var(--stx-bn-bubble) + 2 * var(--stx-bn-ring));
+	margin-left: calc(var(--stx-bn-bubble) / -2 - var(--stx-bn-ring));
+	border: var(--stx-bn-ring) solid var(--stx-bn-c-bg);
+	border-radius: 50%;
+	background: var(--stx-bn-c-active);
+	background-clip: padding-box;
+	box-shadow: inset 0 -8px 16px -8px rgb(0 0 0 / 0.18);
+}
+
+/* Concave fillets joining the bump to the bar edge. */
+.stx-bn--style-bubble .stx-bn__indicator::after {
+	--stx-bn-span: calc(var(--stx-bn-bubble) / 2 + var(--stx-bn-ring) - 2px + var(--stx-bn-fillet));
+	content: "";
+	position: absolute;
+	top: calc(var(--stx-bn-fillet) * -1 + 0.5px);
+	left: 50%;
+	width: calc(var(--stx-bn-span) * 2);
+	height: var(--stx-bn-fillet);
+	margin-left: calc(var(--stx-bn-span) * -1);
+	background:
+		radial-gradient(circle at 0 0, transparent calc(var(--stx-bn-fillet) - 0.5px), var(--stx-bn-c-bg) var(--stx-bn-fillet)) left bottom / calc(var(--stx-bn-fillet) + 3px) 100% no-repeat,
+		radial-gradient(circle at 100% 0, transparent calc(var(--stx-bn-fillet) - 0.5px), var(--stx-bn-c-bg) var(--stx-bn-fillet)) right bottom / calc(var(--stx-bn-fillet) + 3px) 100% no-repeat;
+	z-index: -1;
+}
+
+.stx-bn--style-bubble:not(.has-active) .stx-bn__indicator {
+	opacity: 0;
+}
+
+.stx-bn--style-bubble .stx-bn__link {
+	justify-content: center;
+}
+
+.stx-bn--style-bubble .stx-bn__label {
+	position: absolute;
+	bottom: 7px;
+	inset-inline: 2px;
+	text-align: center;
+	opacity: 0;
+	transform: translateY(6px);
+}
+
+.stx-bn--style-bubble .stx-bn__item.is-active .stx-bn__label {
+	opacity: 1;
+	transform: none;
+}
+
+.stx-bn--style-bubble .stx-bn__item.is-active .stx-bn__icon {
+	color: var(--stx-bn-c-fab-icon);
+	transform: translateY(calc(var(--stx-bn-bubble-y) - var(--stx-bn-h) / 2));
+}
+
+.stx-bn--style-bubble .stx-bn__item.is-active .stx-bn__link:active .stx-bn__icon {
+	transform: translateY(calc(var(--stx-bn-bubble-y) - var(--stx-bn-h) / 2)) scale(0.9);
+}
+
+.stx-bn--style-bubble .stx-bn__item.is-active .stx-bn__badge {
+	box-shadow: 0 0 0 2px var(--stx-bn-c-active);
+}
+
+/* --- 3.5 Pill: icons only, the active item expands with its label -------- */
+
+.stx-bn--style-pill {
+	--stx-bn-pad: 8px;
+}
+
+.stx-bn--style-pill .stx-bn__item {
+	transition: flex-grow var(--stx-bn-dur) var(--stx-bn-ease);
+}
+
+.stx-bn--style-pill .stx-bn__item.is-active {
+	flex-grow: 2.3;
+}
+
+.stx-bn--style-pill .stx-bn__link {
+	flex-direction: row;
+	gap: 0;
+	padding: 9px 3px;
+}
+
+.stx-bn--style-pill .stx-bn__link::before {
+	content: "";
+	position: absolute;
+	inset: 9px 3px;
+	border-radius: 999px;
+	background: var(--stx-bn-c-active-bg);
+	opacity: 0;
+	transform: scale(0.6);
+	transition: transform var(--stx-bn-dur) var(--stx-bn-ease), opacity 0.2s ease;
+}
+
+.stx-bn--style-pill .stx-bn__item.is-active .stx-bn__link::before {
+	opacity: 1;
+	transform: none;
+}
+
+.stx-bn--style-pill .stx-bn__label {
+	max-width: 0;
+	opacity: 0;
+	font-size: calc(var(--stx-bn-font-size) + 1px);
+	transition: max-width var(--stx-bn-dur) var(--stx-bn-ease), opacity 0.2s ease, margin 0.3s ease;
+}
+
+.stx-bn--style-pill .stx-bn__item.is-active .stx-bn__label {
+	max-width: 120px;
+	margin-inline-start: 7px;
+	opacity: 1;
+}
+
+/* ==========================================================================
+   4. Density, motion, accessibility
+   ========================================================================== */
+
+/* Many items: tighten type and icons so every label still fits. */
+.stx-bn:is([data-count="6"], [data-count="7"], [data-count="8"]) {
+	--stx-bn-pad: 2px;
+}
+
+.stx-bn:is([data-count="6"], [data-count="7"], [data-count="8"]) .stx-bn__label {
+	font-size: max(9px, calc(var(--stx-bn-font-size) - 1px));
+}
+
+.stx-bn:is([data-count="7"], [data-count="8"]) .stx-bn__icon:not(.stx-bn__item.is-featured *) {
+	width: calc(var(--stx-bn-icon) - 2px);
+	height: calc(var(--stx-bn-icon) - 2px);
+}
+
+.stx-bn--style-pill:is([data-count="6"], [data-count="7"], [data-count="8"]) .stx-bn__item.is-active {
+	flex-grow: 1.7;
+}
+
+.stx-bn--style-classic:is([data-count="6"], [data-count="7"], [data-count="8"]) .stx-bn__icon::before {
+	inset-inline: -12px;
+}
+
+/* Few items on wide phones: keep items from drifting too far apart. */
+.stx-bn:is([data-count="1"], [data-count="2"], [data-count="3"]):not(.stx-bn--style-floating, .stx-bn--style-pill) .stx-bn__list {
+	max-width: calc(var(--stx-bn-count, 3) * 132px);
+	margin-inline: auto;
+}
+
+.stx-bn:is([data-count="1"], [data-count="2"], [data-count="3"]):is(.stx-bn--style-floating, .stx-bn--style-pill) {
+	max-width: min(var(--stx-bn-max-w), calc(var(--stx-bn-count, 3) * 110px));
+}
+
+.stx-bn--motion-smooth,
+.stx-bn--motion-smooth ~ .stx-sheet {
+	--stx-bn-ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--stx-bn-dur: 320ms;
+}
+
+.stx-bn--motion-none,
+.stx-bn--motion-none * {
+	transition-duration: 1ms !important;
+	animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.stx-bn,
+	.stx-bn *,
+	.stx-sheet,
+	.stx-sheet *,
+	.stx-sheet *::after {
+		transition-duration: 1ms !important;
+		animation: none !important;
+	}
+}
+
+/* ==========================================================================
+   5. Bottom sheets
+   ========================================================================== */
+
+html.stx-sheet-open,
+html.stx-sheet-open body {
+	overflow: hidden !important;
+}
+
+.stx-sheet {
+	position: fixed;
+	inset: 0;
+	z-index: calc(var(--stx-bn-z) + 10);
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	font-family: var(--stx-bn-font);
+	-webkit-tap-highlight-color: transparent;
+}
+
+.stx-sheet[hidden] {
+	display: none;
+}
+
+.stx-sheet *,
+.stx-sheet *::before,
+.stx-sheet *::after {
+	box-sizing: border-box;
+}
+
+.stx-sheet__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgb(6 8 20 / 0.5);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.stx-sheet.is-open .stx-sheet__backdrop {
+	opacity: 1;
+}
+
+.stx-sheet__panel {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 640px;
+	max-height: 86vh;
+	max-height: 86dvh;
+	padding-bottom: env(safe-area-inset-bottom, 0px);
+	border-radius: 26px 26px 0 0;
+	background: var(--stx-bn-c-bg);
+	color: var(--stx-bn-c-text);
+	box-shadow: 0 -16px 48px rgb(0 0 0 / 0.2);
+	outline: none;
+	transform: translateY(105%);
+	transition: transform 0.45s var(--stx-bn-ease-out);
+	will-change: transform;
+}
+
+.stx-sheet.is-open .stx-sheet__panel {
+	transform: none;
+}
+
+.stx-sheet__grip {
+	display: flex;
+	justify-content: center;
+	padding: 10px 0 4px;
+	cursor: grab;
+	touch-action: none;
+}
+
+.stx-sheet__grip span {
+	width: 42px;
+	height: 5px;
+	border-radius: 3px;
+	background: currentColor;
+	opacity: 0.16;
+}
+
+.stx-sheet__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 4px 20px 12px;
+	touch-action: none;
+}
+
+.stx-sheet .stx-sheet__title {
+	margin: 0;
+	padding: 0;
+	color: inherit;
+	font-family: inherit;
+	font-size: 17px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+.stx-sheet .stx-sheet__close {
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 38px;
+	height: 38px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: color-mix(in srgb, currentColor 8%, transparent);
+	color: inherit;
+	box-shadow: none;
+	cursor: pointer;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.stx-sheet .stx-sheet__close:active {
+	transform: scale(0.92);
+}
+
+.stx-sheet .stx-sheet__close:focus-visible {
+	outline: 2px solid var(--stx-bn-c-active);
+	outline-offset: 2px;
+}
+
+.stx-sheet__close svg {
+	width: 20px;
+	height: 20px;
+}
+
+.stx-sheet__body {
+	flex: 1 1 auto;
+	padding: 4px 20px 24px;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+
+/* --- Search ---------------------------------------------------------------- */
+
+.stx-sheet .stx-search {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+}
+
+.stx-sheet .stx-search__field {
+	position: relative;
+	display: flex;
+	flex: 1;
+	align-items: center;
+	height: 52px;
+	padding-inline: 14px 8px;
+	border: 1.5px solid transparent;
+	border-radius: 16px;
+	background: color-mix(in srgb, currentColor 6%, transparent);
+	transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.stx-sheet .stx-search__field:focus-within {
+	border-color: var(--stx-bn-c-active);
+	background: transparent;
+}
+
+.stx-sheet .stx-search__icon {
+	position: relative;
+	display: flex;
+	flex: none;
+	width: 20px;
+	height: 20px;
+	opacity: 0.5;
+}
+
+.stx-sheet .stx-search__icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.stx-sheet .stx-search__input,
+.stx-sheet .stx-search__input:focus {
+	flex: 1;
+	min-width: 0;
+	height: 100%;
+	margin: 0;
+	padding: 0 10px;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	color: inherit;
+	font: inherit;
+	font-size: 16px; /* ≥16px prevents the iOS zoom-on-focus. */
+	line-height: normal;
+	outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.stx-sheet .stx-search__input::placeholder {
+	color: inherit;
+	opacity: 0.45;
+}
+
+.stx-sheet .stx-search__submit {
+	flex: none;
+	height: 52px;
+	margin: 0;
+	padding: 0 20px;
+	border: 0;
+	border-radius: 16px;
+	background: var(--stx-bn-c-active);
+	color: var(--stx-bn-c-fab-icon);
+	box-shadow: none;
+	font: inherit;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1;
+	cursor: pointer;
+	transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+.stx-sheet .stx-search__submit:active {
+	transform: scale(0.96);
+}
+
+/* --- Live search results ---------------------------------------------------- */
+
+/* A fixed height keeps the field still while the number of results changes. */
+.stx-sheet--live-search .stx-sheet__panel {
+	height: min(86vh, 720px);
+	height: min(86dvh, 720px);
+}
+
+.stx-sheet .stx-search.is-loading .stx-search__icon svg {
+	opacity: 0;
+}
+
+.stx-sheet .stx-search.is-loading .stx-search__icon::after {
+	content: "";
+	position: absolute;
+	inset: 1px;
+	border: 2px solid currentColor;
+	border-inline-end-color: transparent;
+	border-radius: 50%;
+	animation: stx-spin 0.7s linear infinite;
+}
+
+@keyframes stx-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.stx-sheet .stx-results-area {
+	padding-top: 18px;
+	transition: opacity 0.2s ease;
+}
+
+/* Newer results are on the way: keep the old ones readable but quiet. */
+.stx-sheet .stx-results-area.is-loading:has(a.stx-results__link) {
+	opacity: 0.5;
+}
+
+/* Hint, empty and error states */
+.stx-sheet .stx-results-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 40px 16px 16px;
+	text-align: center;
+}
+
+.stx-sheet .stx-results-state__icon {
+	display: grid;
+	place-items: center;
+	width: 64px;
+	height: 64px;
+	margin-bottom: 8px;
+	border-radius: 50%;
+	background: var(--stx-bn-c-active-bg);
+	color: var(--stx-bn-c-active);
+}
+
+.stx-sheet .stx-results-state__icon svg {
+	width: 28px;
+	height: 28px;
+}
+
+.stx-sheet .stx-results-state__title {
+	margin: 0;
+	padding: 0;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.7;
+}
+
+.stx-sheet .stx-results-state__text {
+	max-width: 280px;
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+	line-height: 1.8;
+	opacity: 0.6;
+}
+
+/* Heading row: "Results" and the count */
+.stx-sheet .stx-results__head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 6px;
+	padding-inline: 2px;
+}
+
+.stx-sheet .stx-results__heading {
+	font-size: 13px;
+	font-weight: 700;
+	opacity: 0.55;
+}
+
+.stx-sheet .stx-results__count {
+	min-width: 22px;
+	padding: 0 7px;
+	border-radius: 999px;
+	background: var(--stx-bn-c-active-bg);
+	color: var(--stx-bn-c-active);
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 22px;
+	text-align: center;
+}
+
+/* List */
+.stx-sheet .stx-results {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-sheet .stx-results__item {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	animation: stx-result-in 0.36s var(--stx-bn-ease-out) both;
+	animation-delay: calc(var(--stx-i, 0) * 40ms);
+}
+
+.stx-sheet .stx-results__item::before,
+.stx-sheet .stx-results__item::marker {
+	content: none;
+}
+
+/* Divider that starts after the image column, like native lists. */
+.stx-sheet .stx-results__item + .stx-results__item::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	inset-inline: 108px 8px;
+	border-top: 1px solid var(--stx-bn-c-border);
+}
+
+@keyframes stx-result-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+}
+
+.stx-sheet .stx-results__link {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	min-height: 76px;
+	margin-inline: -8px;
+	padding: 10px 8px;
+	border-radius: 16px;
+	color: inherit;
+	text-decoration: none;
+	transition: background 0.2s ease;
+}
+
+.stx-sheet a.stx-results__link:hover,
+.stx-sheet a.stx-results__link:active {
+	background: color-mix(in srgb, currentColor 5%, transparent);
+	color: inherit;
+}
+
+.stx-sheet a.stx-results__link:focus-visible {
+	outline: 2px solid var(--stx-bn-c-active);
+	outline-offset: -2px;
+}
+
+/* Landscape frame: course covers are 16:9-ish. */
+.stx-sheet .stx-results__media {
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 88px;
+	height: 56px;
+	overflow: hidden;
+	border-radius: 12px;
+	background: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.stx-sheet .stx-results__media.is-placeholder {
+	background: var(--stx-bn-c-active-bg);
+	color: var(--stx-bn-c-active);
+}
+
+.stx-sheet .stx-results__media img {
+	display: block;
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	margin: 0;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	object-fit: cover;
+}
+
+.stx-sheet .stx-results__media svg {
+	width: 24px;
+	height: 24px;
+}
+
+.stx-sheet .stx-results__text {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.stx-sheet .stx-results__title {
+	display: -webkit-box;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.75;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+/* Colour only: a weight change mid-word would break Persian letter joining. */
+.stx-sheet mark.stx-results__match {
+	padding: 0;
+	background: none;
+	color: var(--stx-bn-c-active);
+	font-weight: inherit;
+}
+
+.stx-sheet .stx-results__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 8px;
+	font-size: 12px;
+	line-height: 1.6;
+}
+
+.stx-sheet .stx-results__type {
+	padding: 1px 8px;
+	border-radius: 6px;
+	background: color-mix(in srgb, currentColor 7%, transparent);
+	font-size: 11px;
+	font-weight: 600;
+	opacity: 0.8;
+}
+
+.stx-sheet .stx-results__date {
+	opacity: 0.55;
+}
+
+/* Price sits at the far end of the row so prices line up down the list;
+ * a sale stacks the old price above the new one. */
+.stx-sheet .stx-results__price {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin-inline-start: auto;
+	line-height: 1.5;
+	color: var(--stx-bn-c-active);
+	font-size: 13px;
+	font-weight: 800;
+	white-space: nowrap;
+}
+
+.stx-sheet .stx-results__price :is(.amount, bdi, ins, del) {
+	color: inherit;
+	font: inherit;
+	background: none;
+}
+
+.stx-sheet .stx-results__price .woocommerce-Price-currencySymbol {
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.stx-sheet .stx-results__price del {
+	order: -1;
+	font-size: 11px;
+	font-weight: 500;
+	opacity: 0.5;
+}
+
+.stx-sheet .stx-results__price ins {
+	text-decoration: none;
+}
+
+/* See all results */
+.stx-sheet .stx-results__all {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	min-height: 48px;
+	margin-top: 12px;
+	border-radius: 16px;
+	background: var(--stx-bn-c-active-bg);
+	color: var(--stx-bn-c-active);
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+	transition: transform 0.15s ease;
+}
+
+.stx-sheet .stx-results__all:hover {
+	color: var(--stx-bn-c-active);
+}
+
+.stx-sheet .stx-results__all:active {
+	transform: scale(0.98);
+}
+
+.stx-sheet .stx-results__all:focus-visible {
+	outline: 2px solid var(--stx-bn-c-active);
+	outline-offset: 2px;
+}
+
+/* Chevron pointing to the inline end (left in RTL). */
+.stx-sheet .stx-results__all::after {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-top: 2px solid currentColor;
+	border-right: 2px solid currentColor;
+	transform: scaleX(var(--stx-bn-dir, 1)) rotate(45deg);
+}
+
+/* Loading placeholders */
+.stx-sheet .stx-results--skeleton .stx-results__item {
+	animation: none;
+}
+
+.stx-sheet .stx-results--skeleton :is(.stx-results__media, .stx-skeleton) {
+	background: color-mix(in srgb, currentColor 8%, transparent);
+	animation: stx-pulse 1.2s ease-in-out infinite;
+}
+
+.stx-sheet .stx-skeleton {
+	display: block;
+	width: 85%;
+	height: 12px;
+	border-radius: 6px;
+}
+
+.stx-sheet .stx-skeleton--short {
+	width: 40%;
+}
+
+@keyframes stx-pulse {
+	50% {
+		opacity: 0.45;
+	}
+}
+
+/* --- Menu ------------------------------------------------------------------ */
+
+.stx-sheet .stx-menu__list,
+.stx-sheet .stx-menu__list ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-sheet .stx-menu__list li {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid var(--stx-bn-c-border);
+	list-style: none;
+}
+
+.stx-sheet .stx-menu__list li:last-child {
+	border-bottom: 0;
+}
+
+.stx-sheet .stx-menu__list a {
+	display: flex;
+	align-items: center;
+	min-height: 52px;
+	padding: 6px 4px;
+	padding-inline-end: 48px;
+	color: inherit;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 1.5;
+	text-decoration: none;
+}
+
+.stx-sheet .stx-menu__list .current-menu-item > a,
+.stx-sheet .stx-menu__list .current_page_item > a {
+	color: var(--stx-bn-c-active);
+	font-weight: 700;
+}
+
+.stx-sheet .stx-menu__list .sub-menu {
+	display: none;
+	padding-inline-start: 14px;
+	border-top: 1px solid var(--stx-bn-c-border);
+}
+
+.stx-sheet .stx-menu__list .sub-menu a {
+	font-size: 14px;
+	opacity: 0.85;
+}
+
+.stx-sheet .stx-menu__list li.is-open > .sub-menu {
+	display: block;
+}
+
+.stx-sheet .stx-menu__toggle {
+	position: absolute;
+	top: 6px;
+	inset-inline-end: 0;
+	display: grid;
+	place-items: center;
+	width: 40px;
+	height: 40px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 12px;
+	background: color-mix(in srgb, currentColor 6%, transparent);
+	color: inherit;
+	box-shadow: none;
+	cursor: pointer;
+}
+
+.stx-sheet .stx-menu__toggle span {
+	width: 8px;
+	height: 8px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: translateY(-2px) rotate(45deg);
+	transition: transform 0.3s var(--stx-bn-ease);
+}
+
+.stx-sheet .stx-menu__list li.is-open > .stx-menu__toggle span {
+	transform: translateY(2px) rotate(225deg);
+}
+
+/* --- Cart (WooCommerce mini cart) -----------------------------------------
+ * Handles both WooCommerce's default markup (link = image + name) and
+ * Studiare's override (.cart-item-image + .cart-item-content), and undoes
+ * theme rules written for its own full-height off-canvas panel.
+ * ------------------------------------------------------------------------- */
+
+.stx-sheet--cart .widget_shopping_cart_content {
+	display: block;
+	height: auto;
+	overflow: visible;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item {
+	position: relative;
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 2px 12px;
+	margin: 0;
+	padding: 12px 0;
+	border: 0;
+	border-bottom: 1px solid var(--stx-bn-c-border);
+	border-radius: 0;
+	box-shadow: none;
+	list-style: none;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item::after {
+	content: none;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item > .remove {
+	grid-row: 1 / span 2;
+	grid-column: 3;
+	display: grid;
+	place-items: center;
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: color-mix(in srgb, currentColor 7%, transparent);
+	color: inherit !important;
+	font-size: 18px;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item > .remove svg {
+	width: 16px;
+	height: 18px;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item > .cart-item-image {
+	grid-row: 1 / span 2;
+	grid-column: 1;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item > .cart-item-content {
+	grid-row: 1 / span 2;
+	grid-column: 2;
+	min-width: 0;
+}
+
+/* WooCommerce default: one link wraps image and name. */
+.stx-sheet--cart .woocommerce-mini-cart-item > a:not(.remove):not(.cart-item-image) {
+	grid-column: 1 / span 2;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item > .quantity {
+	grid-column: 1 / span 2;
+	padding-inline-start: 76px;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item img {
+	display: block;
+	flex: none;
+	float: none;
+	width: 64px;
+	height: 48px;
+	margin: 0;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item a,
+.stx-sheet--cart .cart-item-content .product-title {
+	display: block;
+	color: inherit;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.6;
+	text-decoration: none;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart-item .quantity {
+	display: block;
+	margin: 2px 0 0;
+	padding-block: 0;
+	border: 0;
+	background: none;
+	font-size: 13px;
+	opacity: 0.75;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart__footer {
+	width: 100%;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart__total {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 16px 0;
+	padding: 0;
+	border: 0;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart__buttons {
+	display: flex;
+	gap: 10px;
+	margin: 0;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart__buttons a.button {
+	display: flex;
+	flex: 1 1 0;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: 50px;
+	margin: 0;
+	padding: 0 12px;
+	border: 0;
+	border-radius: 16px;
+	background: var(--stx-bn-c-active-bg);
+	color: var(--stx-bn-c-active);
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart__buttons a.checkout {
+	background: var(--stx-bn-c-active);
+	color: var(--stx-bn-c-fab-icon);
+}
+
+.stx-sheet--cart .cart_empty_content {
+	padding: 12px 0 4px;
+	text-align: center;
+}
+
+.stx-sheet--cart .cart_empty_icon svg {
+	width: 120px;
+	height: auto;
+}
+
+.stx-sheet--cart .woocommerce-mini-cart__empty-message {
+	margin: 0 0 20px;
+	padding-top: 12px;
+	font-size: 15px;
+	text-align: center;
+	opacity: 0.7;
+}
