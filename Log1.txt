@@ -1,0 +1,2249 @@
+میخوام صفحه درباره ما و تماس با ما در سه دیزاین متفاوت بسازی
+ و این رو هم اضافه کنی به این افزونه (بخش امار هم باشه حتما توی درباره ما)
+
+
+Let me first get a look at the project structure and the Builder module.
+
+
+Another session appears to be editing the Builder module right now (the blog files were changed within the last minute). Let me check for it before I touch any shared files.
+
+
+A peer session (studiare-extentions-fb) has been busy for 31 minutes, most likely on the blog designs. I'll tell it what I'm starting so we don't overwrite each other's work in shared files.
+
+
+While that message waits, I'll keep reading. Next: the preset DSL, the existing Stats widget and the home designs.
+
+
+Now the module wiring: Schema, Module labels, Library, Library_Ajax and Integration.
+
+
+Now the admin side: how the Home pages tab lists designs and creates pages.
+
+
+Admin view and builder-admin.js remain untouched by the blog session, making them the likeliest collision points. Next I'll examine reusable components: the newsletter form, support button channels, preset thumbnails, and assets.
+The blog session answered, so the ownership split is clear. I'll confirm the plan and ask for the one extra file I need (Assets.php, to register a page stylesheet and script).
+
+
+While the blog session finishes, I'll keep reading the pieces I'll build on: the rest of Channels, the support button settings, and the widgets I'll reuse in the designs.
+
+
+Assets.php is free now. Before I add anything, I'll check how design previews are rendered, because Resolver is theirs and home designs are previewed through it.
+
+
+Integration.php is free too. I'll consolidate the repeated 'home' special-casing into a single Schema::PAGE_TYPES constant, starting by reading Schema.php and Module.php.
+Now I'll ask the blog session to switch the two 'home' checks in its files over to the new constant.
+
+
+Next I'll check the reference designs for any about/contact material, plus the helpers I need (plugin module access, icon keys, screen-reader class).
+
+
+Resolver.php is done on their side, Library.php is mine for the page-kind line, and the admin files are free. Updating Library::insert_post():
+
+
+Home_Pages will now create about and contact pages too, so its name would mislead. I'll rename it to Design_Pages and generalise it, then update its callers.
+
+
+Now the page-kind checks in Library.php and Library_Ajax.php:
+
+
+Next I need the right deep-link formats for Iranian map apps (Neshan, Balad) for the Map widget's route buttons. I'll check them rather than guess.
+
+
+Neither app documents a public link format. I'll test the formats I remember against the live sites before relying on them.
+
+
+Both sites are single-page apps that answer 200 for any path, so I'll look for the route patterns inside their JavaScript bundles.
+
+
+The Neshan bundle confirms neshan.org/maps/routing/car/destination/LAT,LNG. Balad has a /Location page; checking which query parameters it reads:
+
+
+I've confirmed the link formats for Balad, Neshan, Google Maps, and Waze. Before writing the presets, I want to check with you on moving Home.php's private layout helpers into the shared Blocks class so the about/contact presets can reuse them.
+While that's pending I'll build the backend. First, the admin menu structure, so I know where a messages inbox can live:
+
+
+Home.php is free, and the blog session wants to reuse these helpers too, so I'll do this refactor now.
+
+
+Home.php now calls Blocks::. Next I'll add the moved helpers to Blocks.php as public statics.
+
+
+Here's the updated Blocks.php with the helper functions relocated, while the existing heading, text, button, buy_card, related, perk, and facts methods remain unchanged aside from now reusing link(), shop_url(), and arrow().
+Quick sanity check that Home.php now builds exactly the same designs. I need the shared test site's path for WP-CLI:
+
+
+I'll pull the pre-refactor Home.php/Blocks.php from the last release zip into a separate namespace so I can compare the three home designs against these post-refactor hashes.
+The zip's Home.php (36854 bytes) and Blocks.php (5225 bytes) match the pre-refactor sizes I saw earlier.
+
+
+The three home designs build byte-for-byte identical after the refactor. I'll tell the blog session the final helper signatures:
+
+
+I'll build a shared base class for public cached forms—handling honeypot checks, per-visitor rate limiting, JSON-or-redirect responses, and CSV export—so both the newsletter and new contact form can reuse this logic instead of duplicating it.
+Now the newsletter handler on top of the base (same behaviour, less code). Re-reading it first:
+
+
+The newsletter now extends Public_Form. Before writing the contact handler, let me check which Persian digit helpers already exist in Core:
+
+
+Persian::latin_digits() covers what the phone field needs. Now the contact-message store and form handler:
+
+
+Now the admin inbox: the messages list under Studiare+, with a "new" count in the menu.
+
+
+Let me confirm the current screen is already set when load-edit.php fires:
+
+
+Screen is set at line 217, before the load-* hooks. Now I'll wire both classes into Module::register():
+
+
+Noted: Catalog.php is free, and I'll only need Thumbs.php once my presets exist. Now the widgets. Checking how the blog widgets' base is set up so mine follow the same pattern:
+
+
+I'll create a Page_Base following the same pattern, moving the columns/gap helpers from Home_Base up into Base so Contact_Details can use them too, while home widgets keep inheriting them unchanged.
+Now the contact form widget. The form's options (fields, topics, recipient) are read back from the saved widget by the handler, so the markup only carries IDs.
+
+
+One fix before moving on: field() runs the control markup through sprintf(), so a % in a placeholder or topic would break it. A plain {attrs} token with str_replace is safer.
+
+
+Now the Map widget: OpenStreetMap by default (no API key), Google Maps, or a pasted Neshan/Balad embed, with optional click-to-load and route buttons for Neshan, Balad, Google Maps and Waze.
+
+
+Two small cleanups in Map.php: a stale docblock on ROUTE_URLS, and importing Persian properly.
+
+
+Next, the Contact details widget. It can reuse the floating support button's channels, so let me check how that module is identified and how its frontend lists ready channels:
+
+
+I'll refactor the private Frontend::channels() logic into a public Channels::ready() method so both it and the support button share a single implementation.
+Now the Contact details widget itself:
+
+
+Using one rule for "the value is a pasted link" in both item sources (usernames and numbers never contain a slash, but addresses can):
+
+
+Now the Timeline widget (for the "our story" section of the about pages):
+
+
+Checking the width rule and brand surface colors in home.css so the new Stats looks (count-up, icons, two styles) work correctly on dark and accent backgrounds.
+I'll update add_columns_control() to accept extra control args for a condition, then update Stats accordingly.
+Now Stats.php: per-number icons, tiles and band looks, columns and count-up.
+
+
+Now the count-up script in home.js (Stats already loads it). It keeps the number's final width while counting, so nothing around it moves, and screen readers get the real number:
+
+
+You've hit your session limit · resets 11:40pm (Asia/Tehran)
+
+ادامه بده
+حالا استایل بخش آمار را در home.css بررسی می‌کنم (چون این فایل مشترک است، فقط ویرایش‌های دقیق اعمال می‌کنم)؛ ابتدا بخش «Numbers» را دوباره می‌خوانم.
+Since home.css is shared, I'll scope my changes to the "Key numbers" section with its own phone media query rather than editing the shared phone block—adding Stats to the width list and inserting the new styles.
+Stats styles are in. Next, pages.css for the four new widgets. First let me match the existing field, button and dark-mode link conventions:
+
+
+I have the conventions (--stx-link for dark-mode links, 0,2,0 selectors to beat Studiare's form styles, 16px inputs so iOS doesn't zoom). Writing pages.css:
+
+
+I noticed the dir="ltr" on the value span would break number alignment on RTL pages, so I'll fix it by using an inline <bdi dir="ltr"> instead, which keeps numbers left-to-right while aligning correctly with the page.
+حالا pages.js: ارسال فرم تماس در پس‌زمینه (با علامت‌گذاری فیلدهای مشکل‌دار) و بارگذاری نقشه با کلیک.
+
+
+Now registering the stx-builder-pages handle in Assets.php (released by the blog session). Re-reading it first:
+
+
+The form's error texts would otherwise live in two places (the widget's no-JS status and the script's strings), so I'll define them once in Contact_Messages and use them in both:
+
+
+حالا ثبت ویجت‌ها در Integration.php (دوباره می‌خوانمش):
+
+
+ویجت‌ها ثبت شدند. حالا قبل از نوشتن دیزاین‌ها، کلاس‌های کمکی موجود مثل stx-overlap و stx-curve را بررسی می‌کنم تا در طرح‌ها ازشان استفاده کنم.
+دیزاین‌ها را با ابزارهای مشترک Blocks می‌نویسم و ابتدا نام کنترل‌های تراز و اندازهٔ ویجت‌های Heading/Text/Features/Media را برای اطمینان از صحت تنظیمات پیش‌فرض بررسی می‌کنم.
+در حال نوشتن سه دیزاین «درباره ما» در فایل Presets/About.php هستم که ویجت‌ها، فرم تماس، صندوق پیام‌ها و استایل‌ها آماده شده‌اند. بعد از آن سراغ سه دیزاین «تماس با ما»، ثبت در کاتالوگ، افزودن تب «صفحه‌ها» در پنل و تست روی موبایل و دسکتاپ می‌روم.
+چند اصلاح کوچک در About.php اعمال کردم: وارد کردن درست کلاس Persian و به‌روزرسانی اعداد نمونه با جداکننده و علامت درصد فارسی (۱۲٬۰۰۰ و ۹۸٪). حالا بررسی می‌کنم Persian::number چه خروجی تولید می‌کند.
+حالا سه دیزاین «تماس با ما» (Presets/Contact.php):
+
+
+حالا ثبت شش دیزاین در Catalog.php (بعد از post-cover طبق هماهنگی). دوباره می‌خوانمش:
+
+
+دیزاین‌ها ثبت شدند. قبل از ادامه، ساخت هر شش دیزاین را با WP-CLI امتحان می‌کنم تا خطای اجرایی نداشته باشند:
+
+
+هر شش دیزاین بدون خطا ساخته شدند (هشدارها مربوط به اسکریپت تست خودم بود، نه افزونه). حالا برای بررسی تصویرک دیزاین‌ها در پنل، ساختار فایل Thumbs.php را می‌خوانم.
+چند تصویرک طرح‌گونه (wireframe) برای شش دیزاین، هم‌سبک با بقیه و راست‌چین، در یک بخش جدید Thumbs.php:
+
+
+حالا تب «صفحه‌های اصلی» پنل مدیریت را به تب «صفحه‌ها» با سه گروه (اصلی، درباره ما، تماس با ما) و کارت «پیام‌های تماس» تبدیل می‌کنم. برای این کار ابتدا نسخهٔ فعلی فایل‌ها را دوباره می‌خوانم.
+از کلاس‌های موجود stx-lib-group و stx-home-designs استفاده می‌کنم تا نیازی به CSS جدید نباشد. حالا فایل views/admin.php را ویرایش می‌کنم.
+حالا داده‌های تب «صفحه‌ها» برای اسکریپت پنل (Module::admin_script_data):
+
+
+Now the admin script. Reading the current version of the page functions:
+
+
+I'll update the three page functions in builder-admin.js: designs grouped by kind, a kind chip in the pages list, and the "home page" switch only for home designs.
+
+
+فایل تغییری نکرده (ویرایش به‌خاطر تفاوت تورفتگی متوقف شد). با ویرایش‌های دقیق جداگانه انجامش می‌دهم:
+
+
+Groups need the same vertical spacing as the library. One small rule in builder-admin.css:
+
+
+فایل حذف افزونه هم باید پیام‌های تماس را پاک کند:
+
+
+حالا بررسی استاندارد کدنویسی با phpcs. مسیرش را پیدا می‌کنم:
+
+
+phpcs روی همهٔ فایل‌های تغییرکرده صفر خطا و صفر هشدار نشان می‌دهد. حالا بررسی می‌کنم که Asset::url بدون فایل min چطور رفتار می‌کند و آیا minify.mjs دست‌نخورده مانده تا فایل‌های .min قبل از تست در مرورگر ساخته شوند.
+متوجه شدم Asset وقتی نسخهٔ min نباشد به فایل اصلی برمی‌گردد، اما home.min.js/css قدیمی‌اند و تغییرات آمار را ندارند. حالا نتیجه را به بخش وبلاگ اطلاع می‌دهم و فهرست تغییرات مشترک را ارائه می‌کنم.
+کدها تکمیل شد و phpcs بدون خطا اجرا شد. حالا روی سایت تست (پورت ۸۸۸۸) صفحه‌های نمونه می‌سازم تا شش دیزاین را روی موبایل و دسکتاپ بررسی کنم و فرم تماس را هم امتحان کنم.
+صفحه‌ها ساخته شدند. حالا Playwright را برای گرفتن اسکرین‌شات آماده می‌کنم:
+
+
+Add pages to minify list:
+
+
+No overflow and no console errors on any of the 12 page/device combinations. Now let me actually look at the screenshots, starting with About · Story on a phone:
+
+
+The phone shots are tall, so I'll slice them into readable pieces:
+
+
+The story design looks right on desktop (text still English because the new strings aren't translated yet; that comes last). The count-up tiles show Persian digits correctly. Next section:
+
+
+Found the bug: in RTL, an absolutely positioned box with both left and right set ignores left, so left: 50% was overridden and the "both sides" timeline line ended up at the right edge instead of centered. Fixing it by using inset-inline: 0 with margin-inline: auto, which centers correctly in both directions.
+The rest of the desktop page is fine (the color-mix warning is the same pattern home.css and tokens.css already use). Now the phone view:
+
+
+On the phone, the number tiles in one row don't line up: the items are column-reverse, so flex-start is the bottom, and a tile with a shorter label drops lower. Aligning them to the top:
+
+
+Story design is fine on the phone apart from the tile fix. Next, About · Minimal:
+
+
+Two problems in the minimal hero: with the heading centred, the small label ("About us") and the subtitle stay at the start edge. Let me look at how the Heading widget styles those:
+
+
+I noticed the plain text label and xl subtitle don't follow --stx-justify like the pill and outline labels do, leaving them misaligned when a heading is centered. I'll fix this in builder.css so they follow the heading's alignment as well.
+builder.css warnings are all on existing lines, not the new rule. Minimal looks good on the phone. Now About · Academy:
+
+
+Academy looks right on desktop (the row timeline, dark number band and CTA all render as intended). Quick check of its phone version:
+
+
+The row-alignment fix will apply here too. Now the contact designs, starting with Cards on desktop:
+
+
+Found a layout bug: the form column should be 62% wide but rendered at ~38% because the side column lacks an explicit width, defaulting to 100% flex basis—this same mistake appears in three other places. I'll fix it by giving every column an explicit width.
+Second problem: the OpenStreetMap iframe was blank in the screenshot. Let me check whether it's a real failure or only a screenshot-timing issue:
+
+
+The map works (Azadi Square with Persian labels and the pin). The blank was only screenshot timing. I'll rebuild the test pages with the width fixes and re-shoot everything:
+
+
+Bash Rebuild test pages and re-shoot all designs
+IN
+ME=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad; cd $ME && ./wp.sh eval-file mkpages.php >/dev/null 2>&1; cd pw && sed -i '' 's/await page.waitForTimeout(1800);/await page.waitForTimeout(4000);/' shoot.mjs && node shoot.mjs stx-test-about-story stx-test-about-minimal stx-test-about-academy stx-test-contact-cards stx-test-contact-split stx-test-contact-support 2>&1 | tail -12 && cd shots && rm -f cut/* && python3 - <<'EOF'
+from PIL import Image
+import glob
+for f in sorted(glob.glob('stx-*.png')):
+    im=Image.open(f); w,h=im.size; step=1700 if w<1000 else 1400
+    for i,y in enumerate(range(0,h,step)):
+        im.crop((0,y,w,min(h,y+step))).save(f'cut/{f[:-4]}-{i}.png')
+EOF
+
+OUT
+stx-test-about-story phone: overflow=0px errors=none
+stx-test-about-minimal phone: overflow=0px errors=none
+stx-test-about-academy phone: overflow=0px errors=none
+stx-test-contact-cards phone: overflow=0px errors=none
+stx-test-contact-split phone: overflow=0px errors=none
+stx-test-contact-support phone: overflow=0px errors=none
+stx-test-about-story desktop: overflow=0px errors=none
+stx-test-about-minimal desktop: overflow=0px errors=none
+stx-test-about-academy desktop: overflow=0px errors=none
+stx-test-contact-cards desktop: overflow=0px errors=none
+stx-test-contact-split desktop: overflow=0px errors=none
+stx-test-contact-support desktop: overflow=0px errors=none
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Read stx-test-contact-cards-desktop-0.png
+Read stx-test-contact-split-desktop-0.png
+The layout widths are now fixed. I'll check the computed styles to see why the Topic select is shorter than the other inputs, likely a theme-forced height on select.
+Bash Inspect the select's computed height
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && cat > sel.mjs <<'EOF'
+// Prints the computed box of the topic select and which rules set its height.
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+await page.goto('http://127.0.0.1:8888/stx-test-contact-split/', { waitUntil: 'networkidle' });
+const info = await page.evaluate(() => {
+  const s = document.querySelector('.stx-cform select');
+  const cs = getComputedStyle(s);
+  const rules = [];
+  for (const sheet of document.styleSheets) {
+    let list; try { list = sheet.cssRules; } catch (e) { continue; }
+    for (const r of list) {
+      if (r.selectorText && s.matches(r.selectorText) && /height|padding|line-height/.test(r.style.cssText)) rules.push((sheet.href || 'inline').split('/').pop() + ' :: ' + r.selectorText + ' { ' + r.style.cssText + ' }');
+    }
+  }
+  return { h: s.getBoundingClientRect().height, height: cs.height, minH: cs.minHeight, maxH: cs.maxHeight, pad: cs.padding, lh: cs.lineHeight, rules };
+});
+console.log(JSON.stringify(info, null, 1));
+await browser.close();
+EOF
+node sel.mjs
+
+OUT
+{
+ "h": 50,
+ "height": "50px",
+ "minH": "50px",
+ "maxH": "none",
+ "pad": "0px",
+ "lh": "25.6px",
+ "rules": [
+  "select2.css?ver=11.1.2 :: .select2-hidden-accessible { border: 0px !important; clip: rect(0px, 0px, 0px, 0px) !important; height: 1px !important; margin: -1px !important; overflow: hidden !important; padding: 0px !important; position: absolute !important; width: 1px !important; }",
+  "studiare.css?ver=13.4 :: :not(.wp-core-ui) button, input, select, textarea { line-height: 2; }",
+  "studiare.css?ver=13.4 :: input, button, select, optgroup, textarea { font-family: inherit; font-size: inherit; line-height: inherit; margin: 0px; }",
+  "studiare.css?ver=13.4 :: input[type=\"text\"], input[type=\"password\"], input[type=\"username\"], input[type=\"number\"], input[type=\"date\"], input[type=\"datetime\"], input[type=\"datetime-local\"], input[type=\"time\"], input[type=\"month\"], input[type=\"week\"], input[type=\"email\"], input[type=\"search\"], input[type=\"tel\"], input[type=\"url\"], input.input-text, select, textarea { appearance: none; border: 1px solid rgb(220, 220, 220); border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 3px 0px; font-family: inherit; font-weight: inherit; line-height: 2; outline: 0px; padding: 8px 10px; transition: 0.2s; width: 100%; }",
+  "pages.css?ver=1.5.0 :: .stx-cform .stx-cform__input { width: 100%; height: auto; min-height: 50px; margin: 0px; padding: 0px 14px; border: 1px solid var(--stx-field-line); border-radius: 12px; background: var(--stx-field-bg); box-shadow: none; color: var(--stx-ink); font-family: inherit; font-size: 16px; line-height: 1.6; text-align: start; transition: border-color 0.2s, box-shadow 0.2s; }",
+  "pages.css?ver=1.5.0 :: .stx-cform .stx-cform__select select { padding-inline-end: 40px; appearance: none; cursor: pointer; }"
+ ]
+}
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+The select field is actually 50px, but Select2 has replaced it with its own widget, causing the visual difference. I'll look into how Studiare applies Select2 so this field can opt out.
+Bash Find the theme's select2 initialisation
+IN
+WP=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp; grep -rhoE ".{0,120}\.select2\(.{0,80}" $WP/wp-content/themes/studiare --include=*.js 2>/dev/null | grep -v "\.min\.js" | head -10; grep -rlE "\.select2\(|selectWoo\(" $WP/wp-content/themes/studiare --include=*.js | head
+
+OUT
+(eval):1: no matches found: --include=*.js
+(eval):1: no matches found: --include=*.js
+Bash Search the theme for select2 calls
+IN
+WP=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp; grep -rlE "select2\(|selectWoo\(" $WP/wp-content/themes/studiare $WP/wp-content/plugins/redux-framework 2>/dev/null | grep -v node_modules | head; for f in $(grep -rlE "select2\(" $WP/wp-content/themes/studiare 2>/dev/null | grep "\.js$" | head -5); do echo "== $f"; grep -oE ".{0,140}select2\(.{0,60}" "$f" | head -5; done
+
+OUT
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/assets/js/global.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/assets/js/vendor/select2.min.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/extensions/color_scheme/color_scheme/redux-color-scheme.min.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/extensions/color_scheme/color_scheme/redux-color-scheme.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/lib/gradient-filters/gradient-filters.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/lib/gradient-filters/gradient-filters.min.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/fields/border/redux-border.min.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/fields/background/redux-background.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/fields/border/redux-border.js
+/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/redux-framework/redux-core/inc/fields/background/redux-background.min.js
+== /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/assets/js/global.js
+ugrep: error: error at position 86
+0-\xbf][\x80-\xbf]*){0,60}
+                          \___exceeds complexity limits
+
+
+== /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/assets/js/vendor/select2.min.js
+ugrep: error: error at position 86
+0-\xbf][\x80-\xbf]*){0,60}
+                          \___exceeds complexity limits
+Bash Read the select2 call in the theme's global.js
+IN
+WP=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp; python3 - "$WP/wp-content/themes/studiare/assets/js/global.js" <<'EOF'
+import sys,re
+s=open(sys.argv[1],encoding='utf-8',errors='ignore').read()
+for m in re.finditer(r'select2\(', s):
+    print(s[max(0,m.start()-300):m.end()+80].replace('\n',' '))
+    print('----')
+EOF
+
+OUT
+       init: function() {                 this.studiare_preloader();                 this.header_search();                 this.dropdwon_arrow();                 this.back_to_top();                 this.off_canvas_navigation();                 this.modal_login_form();                 this.select_to_select2();                 this.courses_layout_switch();                 this.sticky_sid
+----
+);                     // ajaxContainer.html('');                 });              },               /**              * Transform Select to Select2              */             select_to_select2: function () {                 if (jQuery.fn.select2) { //since version 13.3                   $('select').select2({                       width: '100%',                   })                 }   
+----
+چون قالب استادیار همهٔ selectها را select2 می‌کند، به‌جای مقابله با آن، ظاهرش را در فرم تماس هم‌شکل بقیهٔ فیلدها می‌کنم و رفتار ریست/فوکوس فرم را با آن هماهنگ می‌کنم.
+Edit pages.css
+Added 34 lines
+Edit pages.js
+Added 8 lines
+Edit pages.js
+Modified
+الان فرم تماس رو واقعی تست می‌کنم: خطای «تلفن یا ایمیل»، ارسال موفق با اعداد فارسی، ذخیره در صندوق پیام‌ها، محدودیت تعداد ارسال، و حالت بدون جاوااسکریپت.
+Bash Test contact form flows in the browser
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && ./wp.sh eval 'global $wpdb; echo $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE \"%stx_contact_%\"" );' 2>/dev/null | tail -1; cd pw && cat > form.mjs <<'EOF'
+// Contact form flows: missing way to reach, success (Persian digits), select2 reset, rate limit, no-JS post.
+import { chromium } from 'playwright';
+const url = 'http://127.0.0.1:8888/stx-test-contact-cards/';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+const errors = [];
+page.on('pageerror', (e) => errors.push(String(e)));
+await page.goto(url, { waitUntil: 'networkidle' });
+const form = page.locator('form[data-stx-contact]');
+const status = form.locator('.stx-cform__status');
+const choose = async (text) => {
+  // Studiare's select2 box, as a visitor would use it.
+  await form.locator('.select2-selection').click();
+  await page.locator('.select2-results__option', { hasText: text }).click();
+};
+await form.locator('[name=name]').fill('علی تستی');
+await choose('Technical support');
+await form.locator('[name=message]').fill('سلام، ویدیو جلسه ۳ پخش نمی‌شود.');
+await form.locator('button[type=submit]').click();
+await page.waitForTimeout(1500);
+console.log('1 no phone/email:', JSON.stringify(await status.textContent()), 'invalid:', await form.locator('[aria-invalid=true]').evaluateAll((els) => els.map((e) => e.name)));
+await form.locator('[name=phone]').fill('۰۹۱۲ ۳۴۵ ۶۷۸۹');
+await form.locator('button[type=submit]').click();
+await page.waitForTimeout(1500);
+console.log('2 with phone:', JSON.stringify(await status.textContent()), 'class:', await status.getAttribute('class'));
+console.log('  after reset: name=', JSON.stringify(await form.locator('[name=name]').inputValue()), 'select2 shows=', JSON.stringify(await form.locator('.select2-selection__rendered').textContent()));
+await page.screenshot({ path: 'shots/form-ok-phone.png', clip: await form.boundingBox() });
+for (let i = 3; i <= 4; i++) {
+  await form.locator('[name=name]').fill('تست ' + i);
+  await choose('Working with us');
+  await form.locator('[name=email]').fill('t' + i + '@example.com');
+  await form.locator('[name=message]').fill('پیام شماره ' + i);
+  await form.locator('button[type=submit]').click();
+  await page.waitForTimeout(1500);
+  console.log(i + ':', JSON.stringify(await status.textContent()));
+}
+console.log('errors:', errors.length ? errors : 'none');
+// Without JavaScript: a plain post that comes back to the form.
+const ctx = await browser.newContext({ javaScriptEnabled: false });
+const plain = await ctx.newPage();
+await plain.goto(url, { waitUntil: 'load' });
+const f2 = plain.locator('form[data-stx-contact]');
+await f2.locator('[name=name]').fill('No JS');
+await f2.locator('[name=email]').fill('nojs@example.com');
+await f2.locator('select[name=topic]').selectOption({ index: 1 });
+await f2.locator('[name=message]').fill('Plain post');
+await Promise.all([plain.waitForNavigation(), f2.locator('button[type=submit]').click()]);
+console.log('no-JS landed on:', plain.url(), 'status:', JSON.stringify(await plain.locator('.stx-cform__status').first().textContent()));
+await browser.close();
+EOF
+node form.mjs
+
+OUT
+Exit code 1
+)]
+1 no phone/email: "Please check the highlighted fields and try again." invalid: [ 'phone', 'email' ]
+2 with phone: "Thank you! Your message was sent. We will get back to you soon." class: stx-cform__status is-ok
+  after reset: name= "" select2 shows= "Choose…"
+3: "Thank you! Your message was sent. We will get back to you soon."
+4: "Thank you! Your message was sent. We will get back to you soon."
+errors: none
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForNavigation: Timeout 30000ms exceeded.
+=========================== logs ===========================
+waiting for navigation until "load"
+============================================================
+    at /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw/form.mjs:47:26 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v24.9.0
+فرم به‌درستی کار می‌کند: خطای «تلفن یا ایمیل» فیلدها را مشخص می‌کند، ارسال با اعداد فارسی موفق است و ریست همراه select2 هم درست انجام می‌شود. فقط تست حالت بدون جاوااسکریپت منتظر ناوبری مانده که الان بررسی می‌کنم.
+Bash Debug the no-JavaScript form post
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && cat > nojs.mjs <<'EOF'
+// Plain (no-JS) post of the contact form.
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 900 } });
+const page = await ctx.newPage();
+page.on('request', (r) => { if (r.method() === 'POST') console.log('POST', r.url()); });
+page.on('response', (r) => { if (r.status() >= 300 && r.status() < 400) console.log('redirect', r.status(), r.headers().location); });
+await page.goto('http://127.0.0.1:8888/stx-test-contact-cards/', { waitUntil: 'load' });
+const f = page.locator('form[data-stx-contact]');
+await f.locator('[name=name]').fill('No JS');
+await f.locator('[name=email]').fill('nojs@example.com');
+await f.locator('select[name=topic]').selectOption({ index: 1 });
+await f.locator('[name=message]').fill('Plain post');
+console.log('valid:', await f.evaluate((el) => el.checkValidity()));
+const button = f.locator('button[type=submit]');
+console.log('button visible:', await button.isVisible(), 'topic visible:', await f.locator('select[name=topic]').isVisible());
+await button.click();
+await page.waitForTimeout(4000);
+console.log('url:', page.url());
+console.log('status:', JSON.stringify(await page.locator('.stx-cform__status').first().textContent()));
+await browser.close();
+EOF
+node nojs.mjs
+
+OUT
+Exit code 1
+valid: true
+button visible: true topic visible: true
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('form[data-stx-contact]').locator('button[type=submit]')
+    - locator resolved to <button type="submit" class="stx-btn stx-btn--accent stx-btn--lg">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not stable
+    - retrying click action
+    - waiting 20ms
+
+    at /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw/nojs.mjs:17:14 {
+  log: [
+    "  - waiting for locator('form[data-stx-contact]').locator('button[type=submit]')",
+    '    - locator resolved to <button type="submit" class="stx-btn stx-btn--accent stx-btn--lg">…</button>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is not stable',
+    '    - retrying click action',
+    '    - waiting 20ms'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.9.0
+The button is "not stable" only because something on the theme page keeps animating when JS is off (not related to the form). I'll submit through the form directly:
+
+
+Bash Submit the no-JS form with requestSubmit
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && sed -i '' "s/await button.click();/await Promise.all([page.waitForNavigation(), f.evaluate((el) => el.requestSubmit())]);/" nojs.mjs && node nojs.mjs
+
+OUT
+valid: true
+button visible: true topic visible: true
+POST http://127.0.0.1:8888/wp-admin/admin-post.php
+redirect 302 http://127.0.0.1:8888/stx-test-contact-cards/?stx_contact=busy#stx-cform-38c1e89
+url: http://127.0.0.1:8888/stx-test-contact-cards/?stx_contact=busy#stx-cform-38c1e89
+status: "Too many messages in a short time. Please try again in a few minutes."
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+The plain-post path works and confirms the rate limit kicks in on the 4th message within 10 minutes. Next I'll clear the limit and check the stored data from the successful post, the honeypot, a forged form ID, and the notification email.
+Bash Test honeypot, forged IDs and stored messages
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && ./wp.sh eval 'global $wpdb; $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE \"%stx_contact_%\"" );' >/dev/null 2>&1; cd pw && node nojs.mjs 2>&1 | tail -2; cd .. && FORM=$(curl -s http://127.0.0.1:8888/stx-test-contact-cards/ | grep -o 'name="form" value="[a-z0-9]*"' | head -1 | cut -d'"' -f4); DOC=$(curl -s http://127.0.0.1:8888/stx-test-contact-cards/ | grep -o 'name="document" value="[0-9]*"' | head -1 | cut -d'"' -f4); echo "doc=$DOC form=$FORM"
+echo "honeypot:"; curl -s -X POST http://127.0.0.1:8888/wp-admin/admin-ajax.php -d "action=stx_contact&document=$DOC&form=$FORM&name=Bot&email=bot@example.com&message=spam&topic=Working%20with%20us&stx_website=http://spam" ; echo
+echo "forged form id:"; curl -s -X POST http://127.0.0.1:8888/wp-admin/admin-ajax.php -d "action=stx_contact&document=$DOC&form=abcdef1&name=X&email=x@example.com&message=hello&topic=Working%20with%20us"; echo
+echo "select topic not in list:"; curl -s -X POST http://127.0.0.1:8888/wp-admin/admin-ajax.php -d "action=stx_contact&document=$DOC&form=$FORM&name=X&email=x@example.com&message=hello&topic=HACK"; echo
+./wp.sh eval '
+foreach ( get_posts( array( "post_type" => "stx_message", "post_status" => "private", "posts_per_page" => 10 ) ) as $p ) {
+	printf( "#%d %s | %s | %s | %s | page %d | %s\n", $p->ID, $p->post_title, get_post_meta( $p->ID, "_stx_email", true ), get_post_meta( $p->ID, "_stx_phone", true ), get_post_meta( $p->ID, "_stx_topic", true ), get_post_meta( $p->ID, "_stx_source", true ), str_replace( "\n", " ", $p->post_content ) );
+}' 2>/dev/null | grep "^#"
+
+OUT
+url: http://127.0.0.1:8888/stx-test-contact-cards/?stx_contact=ok#stx-cform-38c1e89
+status: "Thank you! Your message was sent. We will get back to you soon."
+doc=179 form=38c1e89
+honeypot:
+{"success":true,"data":{"status":"ok"}}
+forged form id:
+{"success":false,"data":{"status":"error"}}
+select topic not in list:
+{"success":false,"data":{"fields":["topic"],"status":"invalid"}}
+#209 No JS | nojs@example.com |  | Choosing a course | page 179 | Plain post
+#206 تست 4 | t4@example.com |  | Working with us | page 179 | پیام شماره 4
+#205 تست 3 | t3@example.com |  | Working with us | page 179 | پیام شماره 3
+#204 علی تستی |  | 0912 345 6789 | Technical support | page 179 | سلام، ویدیو جلسه ۳ پخش نمی‌شود.
+#0: Elementor\Core\Logger\Manager -> shutdown()
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+همه‌چیز درست است: هانی‌پات پیام را ذخیره نمی‌کند، شناسهٔ جعلی فرم رد می‌شود، موضوع خارج از فهرست رد می‌شود و شمارهٔ فارسی با ارقام لاتین ذخیره شده. حالا ایمیل اطلاع‌رسانی را با گرفتن خروجی wp_mail به‌جای ارسال واقعی بررسی می‌کنم.
+Bash Capture the notification email via WP-CLI
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && cat > mail.php <<'EOF'
+<?php
+// Sends one message through the real handler and prints the email instead of sending it.
+add_filter( 'pre_wp_mail', function ( $return, $atts ) {
+	echo "TO: ", implode( ', ', (array) $atts['to'] ), "\nSUBJECT: ", $atts['subject'], "\nHEADERS: ", implode( ' | ', (array) $atts['headers'] ), "\n---\n", $atts['message'], "\n";
+	return true;
+}, 10, 2 );
+add_filter( 'wp_redirect', function ( $location ) { echo "REDIRECT: $location\n"; return false; } );
+$_POST = array(
+	'action'   => 'stx_contact',
+	'document' => '179',
+	'form'     => $args[0],
+	'source'   => '179',
+	'name'     => 'مریم کاظمی',
+	'email'    => 'maryam@example.com',
+	'phone'    => '',
+	'topic'    => 'Orders and payment',
+	'message'  => "سلام\nپرداخت انجام شد ولی دوره را نمی‌بینم.",
+);
+$_SERVER['REMOTE_ADDR'] = '10.0.0.' . wp_rand( 2, 250 );
+do_action( 'admin_post_nopriv_stx_contact' );
+EOF
+FORM=$(curl -s http://127.0.0.1:8888/stx-test-contact-cards/ | grep -o 'name="form" value="[a-z0-9]*"' | head -1 | cut -d'"' -f4); ./wp.sh eval-file mail.php $FORM --user=0 2>/dev/null | grep -v "^#0\|Logger"
+
+OUT
+(Bash completed with no output)
+Bash Show the captured email output and errors
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && FORM=$(curl -s http://127.0.0.1:8888/stx-test-contact-cards/ | grep -o 'name="form" value="[a-z0-9]*"' | head -1 | cut -d'"' -f4); ./wp.sh eval-file mail.php $FORM 2>&1 | grep -v "Undefined array key\|_load_textdomain\|atomic-global\|^#0\|^',\|^)\]\|trace\|^PHP:\|Logger" | tail -30
+
+OUT
+سلام
+پرداخت انجام شد ولی دوره را نمی‌بینم.
+
+—
+All messages: http://127.0.0.1:8888/wp-admin/edit.php?post_type=stx_message
+REDIRECT: http://127.0.0.1:8888/?stx_contact=ok
+#1 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/plugin.php(206): WP_Hook->apply_filters('http://127.0.0....', Array)
+#2 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/pluggable.php(1500): apply_filters('wp_redirect', 'http://127.0.0....', 302)
+#3 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/pluggable.php(1649): wp_redirect('http://127.0.0....', 302, 'WordPress')
+#4 /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions/includes/Modules/Builder/Public_Form.php(106): wp_safe_redirect('http://127.0.0....')
+#5 /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions/includes/Modules/Builder/Contact_Messages.php(232): StudiareExt\Modules\Builder\Public_Form->respond('ok')
+#6 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/class-wp-hook.php(353): StudiareExt\Modules\Builder\Contact_Messages->handle('')
+#7 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/class-wp-hook.php(377): WP_Hook->apply_filters('', Array)
+#8 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/plugin.php(523): WP_Hook->do_action(Array)
+#9 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/eval-command/src/EvalFile_Command.php(85) : eval()'d code(20): do_action('admin_post_nopr...')
+#10 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/eval-command/src/EvalFile_Command.php(85): eval()
+#11 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/eval-command/src/EvalFile_Command.php(59): EvalFile_Command::execute_eval('mail.php', Array, false)
+#12 [internal function]: EvalFile_Command->__invoke(Array, Array)
+#13 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Dispatcher/CommandFactory.php(100): call_user_func(Array, Array, Array)
+#14 [internal function]: WP_CLI\Dispatcher\CommandFactory::{closure:WP_CLI\Dispatcher\CommandFactory::create_subcommand():97}(Array, Array)
+#15 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Dispatcher/Subcommand.php(497): call_user_func(Object(Closure), Array, Array)
+#16 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php(470): WP_CLI\Dispatcher\Subcommand->invoke(Array, Array, Array)
+#17 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php(493): WP_CLI\Runner->run_command(Array, Array)
+#18 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php(136): WP_CLI\Runner->run_command_and_exit()
+#19 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php(1228): WP_CLI\Runner->do_early_invoke('before_wp_load')
+#20 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Bootstrap/LaunchRunner.php(28): WP_CLI\Runner->start()
+#21 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/bootstrap.php(84): WP_CLI\Bootstrap\LaunchRunner->process(Object(WP_CLI\Bootstrap\BootstrapState))
+#22 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/vendor/wp-cli/wp-cli/php/wp-cli.php(35): WP_CLI\bootstrap()
+#23 phar:///private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar/php/boot-phar.php(20): include('phar:///private...')
+#24 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/dl/wp-cli.phar(4): include('phar:///private...')
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+The stack trace comes from my test's own redirect filter in CLI, not from the plugin. The top of the output has the email headers:
+
+
+Bash Show the captured email headers
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && FORM=$(curl -s http://127.0.0.1:8888/stx-test-contact-cards/ | grep -o 'name="form" value="[a-z0-9]*"' | head -1 | cut -d'"' -f4); ./wp.sh eval-file mail.php $FORM 2>&1 | grep -A12 "^TO:"; ./wp.sh eval 'echo get_option("admin_email");' 2>/dev/null | tail -1
+
+OUT
+TO: admin@example.com
+SUBJECT: [آکادمی تست] New message: Orders and payment
+HEADERS: Reply-To: maryam@example.com
+---
+New message from the contact form on آکادمی تست.
+
+نام: مریم کاظمی
+ایمیل: maryam@example.com
+Topic: Orders and payment
+Page: http://127.0.0.1:8888/stx-test-contact-cards/
+
+سلام
+پرداخت انجام شد ولی دوره را نمی‌بینم.
+)]
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+ایمیل به‌درستی به آدرس مدیر سایت ساخته می‌شود (چون گیرندهٔ ویجت خالی بود) با Reply-To فرستنده و موضوع در عنوان. حالا به پنل مدیریت می‌روم تا تب «صفحه‌ها»، پنجرهٔ ساخت صفحه و صندوق پیام‌ها را بررسی کنم.
+Bash Screenshot the Pages tab, dialog and inbox
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && cat > admin.mjs <<'EOF'
+// Admin: the Pages tab, the create-page dialog of an about design, and the messages list.
+import { chromium } from 'playwright';
+const base = 'http://127.0.0.1:8888';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const errors = [];
+page.on('pageerror', (e) => errors.push(String(e)));
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+await page.goto(base + '/wp-login.php');
+await page.fill('#user_login', 'admin');
+await page.fill('#user_pass', 'admin');
+await Promise.all([page.waitForNavigation(), page.click('#wp-submit')]);
+await page.goto(base + '/wp-admin/admin.php?page=studiare-ext-builder&stx_tab=home', { waitUntil: 'networkidle' });
+await page.click('[data-stx-tab="home"]');
+await page.waitForTimeout(500);
+await page.screenshot({ path: 'shots/admin-pages.png', fullPage: true });
+const groups = await page.locator('[data-stx-home-designs] .stx-lib-group h3').allTextContents();
+console.log('groups:', groups);
+// Create-page dialog of the first about design: page name and no "home page" switch.
+const aboutCard = page.locator('[data-stx-home-designs] .stx-lib-group').nth(1).locator('[data-home-create]').first();
+await aboutCard.click();
+await page.waitForTimeout(300);
+const dialog = page.locator('dialog[open]');
+console.log('dialog name:', await dialog.locator('input[name=title]').inputValue(), '| front switch:', await dialog.locator('input[name=front]').count());
+await dialog.screenshot({ path: 'shots/admin-dialog.png' });
+await dialog.locator('button[value=cancel]').click();
+await page.goto(base + '/wp-admin/edit.php?post_type=stx_message', { waitUntil: 'networkidle' });
+await page.screenshot({ path: 'shots/admin-inbox.png', fullPage: true });
+console.log('menu:', (await page.locator('#toplevel_page_studiare-ext .wp-submenu a').allTextContents()).join(' | '));
+console.log('errors:', errors.length ? errors : 'none');
+await browser.close();
+EOF
+node admin.mjs
+
+OUT
+groups: [
+  'صفحه‌های اصلی 3',
+  'صفحه اصلی · کامل',
+  'صفحه اصلی · الگوی استادیار',
+  'صفحه اصلی · فروشگاهی روشن',
+  'About us pages 3',
+  'About · Story',
+  'About · Minimal',
+  'About · Academy',
+  'Contact us pages 3',
+  'Contact · Cards',
+  'Contact · Split',
+  'Contact · Support centre'
+]
+dialog name: About us | front switch: 0
+menu: Contact messages | پیشخوان | منوی پایین موبایل | قالب‌ساز صفحات | دکمه شناور پشتیبانی
+errors: [
+  'Error: <rect> attribute height: A negative value is not valid. ("-2")',
+  'Error: <rect> attribute height: A negative value is not valid. ("-16")',
+  'Error: <rect> attribute height: A negative value is not valid. ("-2")',
+  'Error: <rect> attribute height: A negative value is not valid. ("-16")'
+]
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Found two issues: form_card() produces negative values for short boxes causing console errors, and "Contact messages" appears before "Dashboard" in the Studiare+ menu due to WordPress's default ordering—I'll fix this by manually registering the submenu after the plugin's items. Let me check the screenshots first.
+Read admin-pages.png
+Read admin-inbox.png
+Pages tab, the create-page dialog, and the inbox are all working correctly, including the "New" badges, reply link, and 6-message badge. Now I'll fix the menu order issue.
+Bash Check the admin menu hook priority
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions/includes && grep -n "admin_menu" Admin/Admin.php
+
+OUT
+38:		add_action( 'admin_menu', array( $this, 'register_menu' ) );
+Bash Add the messages menu item after the modules
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions/includes/Modules/Builder && python3 - <<'EOF'
+def edit(p, pairs):
+    s=open(p,encoding='utf-8').read()
+    for o,n in pairs:
+        assert s.count(o)==1,(p,o[:70])
+        s=s.replace(o,n)
+    open(p,'w',encoding='utf-8').write(s)
+edit('Contact_Messages.php', [("""				'show_ui'             => true,
+				'show_in_menu'        => Admin::MENU_SLUG,""","""				'show_ui'             => true,
+				// Contact_Inbox adds the menu item itself, after the modules.
+				'show_in_menu'        => false,""")])
+edit('Contact_Inbox.php', [(""" * The contact messages screen: WordPress's own list table for the
+ * `stx_message` posts (search, paging, trash for free), shown under the
+ * Studiare+ menu with a count of messages that arrived since an admin last
+ * opened it. Messages are read in the list itself, so the edit screen is
+ * never used.""",""" * The contact messages screen: WordPress's own list table for the
+ * `stx_message` posts (search, paging, trash for free), shown last in the
+ * Studiare+ menu with a count of messages that arrived since an admin last
+ * opened it. Messages are read in the list itself, so the edit screen is
+ * never used."""),
+("""		add_action( 'load-post.php', array( $this, 'redirect_edit_screen' ) );""","""		add_action( 'load-post.php', array( $this, 'redirect_edit_screen' ) );
+		// After Admin::register_menu(): a post type's own menu item would come before the dashboard.
+		add_action( 'admin_menu', array( $this, 'add_menu' ), 20 );"""),
+("""	/**
+	 * @param string[] $columns Default columns.""","""	public function add_menu(): void {
+		add_submenu_page(
+			Admin::MENU_SLUG,
+			__( 'Contact messages', 'studiare-extensions' ),
+			__( 'Contact messages', 'studiare-extensions' ),
+			Admin::CAPABILITY,
+			'edit.php?post_type=' . Contact_Messages::POST_TYPE
+		);
+	}
+
+	/**
+	 * @param string[] $columns Default columns.""")])
+EOF
+php -l Contact_Messages.php && php -l Contact_Inbox.php; grep -n "Admin::" Contact_Messages.php | head
+
+OUT
+No syntax errors detected in Contact_Messages.php
+No syntax errors detected in Contact_Inbox.php
+56:		$cap = Admin::CAPABILITY;
+Now the thumbnail form box, which must never draw negative heights:
+
+
+Edit Thumbs.php
+Added 7 lines
+Checking all six thumbnails for invalid values and looking at them side by side:
+
+
+Bash Render the six thumbnails and check values
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && ./wp.sh eval '$h = "<html dir=rtl><body style=\"display:grid;grid-template-columns:repeat(3,360px);gap:12px;background:#fff;padding:12px\">"; foreach ( array( "about-story", "about-minimal", "about-academy", "contact-cards", "contact-split", "contact-support" ) as $k ) { $svg = \StudiareExt\Modules\Builder\Thumbs::svg( $k ); if ( preg_match( "/(width|height)=\"-/", $svg ) ) { echo "NEGATIVE in $k\n"; } $h .= "<div style=\"border:1px solid #ddd;border-radius:10px;overflow:hidden\">" . str_replace( "<svg ", "<svg width=360 height=225 ", $svg ) . "</div>"; } file_put_contents( "thumbs.html", $h ); echo "ok\n";' 2>/dev/null | grep -v "^#\|Logger\|^)"; cd pw && node -e "
+import('playwright').then(async ({chromium})=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1130,height:500}});await p.goto('file://$PWD/../thumbs.html');await p.screenshot({path:'shots/thumbs.png',fullPage:true});await b.close();});"
+
+OUT
+ok
+PHP: 2026-09-28 21:46:25 [notice X 0][/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/modules/global-classes/atomic-global-styles.php::410] Elementor\Modules\GlobalClasses\Atomic_Global_Styles::get_cache_root_key(): Implicitly marking parameter $key as nullable is deprecated, the explicit nullable type must be used instead [array (
+  'trace' => '
+',
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Bash Find where the thumbs file was written
+IN
+ls -la /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/thumbs.html /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/thumbs.html 2>&1 | head
+
+OUT
+ls: /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/thumbs.html: No such file or directory
+-rw-r--r--  1 hooman  wheel  17520 Sep 29 01:16 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/thumbs.html
+Read thumbs.png
+Thumbnails are clean. Now re-shooting the contact pages on the phone (with the width, select2 and tile fixes) and viewing them:
+
+
+Bash Re-shoot contact pages and slice
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && node shoot.mjs stx-test-contact-cards stx-test-contact-split stx-test-contact-support stx-test-about-story 2>&1 | tail -8 && cd shots && rm -f cut/* && python3 - <<'EOF'
+from PIL import Image
+import glob
+for f in sorted(glob.glob('stx-*.png')):
+    im=Image.open(f); w,h=im.size; step=1700 if w<1000 else 1400
+    for i,y in enumerate(range(0,h,step)):
+        im.crop((0,y,w,min(h,y+step))).save(f'cut/{f[:-4]}-{i}.png')
+EOF
+ls cut | grep contact-.*phone
+
+OUT
+stx-test-contact-cards phone: overflow=0px errors=none
+stx-test-contact-split phone: overflow=0px errors=none
+stx-test-contact-support phone: overflow=0px errors=none
+stx-test-about-story phone: overflow=0px errors=none
+stx-test-contact-cards desktop: overflow=0px errors=none
+stx-test-contact-split desktop: overflow=0px errors=none
+stx-test-contact-support desktop: overflow=0px errors=none
+stx-test-about-story desktop: overflow=0px errors=none
+(eval):9: no matches found: contact-.*phone
+Read stx-test-contact-cards-phone-0.png
+Read stx-test-contact-cards-phone-1.png
+The select box now has the right height, but its text sits low and the arrow sits high, so the theme's select2 rules still win somewhere. Inspecting:
+
+
+Bash Inspect select2 styles inside the form
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && cat > s2.mjs <<'EOF'
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+await page.goto('http://127.0.0.1:8888/stx-test-contact-cards/', { waitUntil: 'networkidle' });
+const out = await page.evaluate(() => {
+  const pick = (sel) => {
+    const el = document.querySelector(sel);
+    const cs = getComputedStyle(el);
+    const r = el.getBoundingClientRect();
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let list; try { list = sheet.cssRules; } catch (e) { continue; }
+      for (const rule of list) {
+        if (rule.selectorText && el.matches(rule.selectorText)) rules.push((sheet.href || 'inline').split('/').pop().split('?')[0] + ' :: ' + rule.selectorText.slice(0, 90) + ' { ' + rule.style.cssText.slice(0, 160) + ' }');
+      }
+    }
+    return { sel, top: r.top, h: r.height, pad: cs.padding, lh: cs.lineHeight, pos: cs.position, topv: cs.top, rules };
+  };
+  return [ pick('.stx-cform .select2-selection--single'), pick('.stx-cform .select2-selection__rendered'), pick('.stx-cform .select2-selection__arrow') ];
+});
+console.log(JSON.stringify(out, null, 1));
+await browser.close();
+EOF
+node s2.mjs
+
+OUT
+[
+ {
+  "sel": ".stx-cform .select2-selection--single",
+  "top": 1447.546875,
+  "h": 50,
+  "pad": "0px 10px",
+  "lh": "23.8px",
+  "pos": "static",
+  "topv": "auto",
+  "rules": [
+   "select2.css :: .select2-container .select2-selection--single { box-sizing: border-box; cursor: pointer; display: block; height: 28px; margin: 0px 0px -4px; user-select: none; }",
+   "select2.css :: .select2-container--default .select2-selection--single { background-color: rgb(255, 255, 255); border: 1px solid rgb(170, 170, 170); border-radius: 4px; }",
+   "studiare.css :: html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, { border: 0px; box-sizing: border-box; font-family: inherit; font-size: 100%; font-style: inherit; font-weight: inherit; outline: 0px; padding: 0px; vertical-alig }",
+   "studiare.css :: *, ::before, ::after { box-sizing: border-box; }",
+   "studiare.css :: .select2-container--default .select2-selection--single { border-color: rgb(229, 229, 229); border-radius: 0px; line-height: 1.7; min-height: 50px; outline: 0px; padding: 0px 10px; transition: 0.2s ease-in-out; }",
+   "studiare.css :: .select2-container--default .select2-selection--single { border-radius: 5px; }",
+   "studiare.css :: body.rtl .select2-container--default .select2-selection--single { min-height: 39px; }",
+   "frontend.css :: .elementor *, .elementor ::before, .elementor ::after { box-sizing: border-box; }",
+   "pages.css :: .stx-cform .select2-container .select2-selection--single { height: 50px; border: 1px solid var(--stx-field-line); border-radius: 12px; background: var(--stx-field-bg); }"
+  ]
+ },
+ {
+  "sel": ".stx-cform .select2-selection__rendered",
+  "top": 1448.546875,
+  "h": 60,
+  "pad": "6px 0px",
+  "lh": "48px",
+  "pos": "static",
+  "topv": "auto",
+  "rules": [
+   "select2.css :: .select2-container .select2-selection--single .select2-selection__rendered { display: block; padding-left: 8px; padding-right: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }",
+   "select2.css :: .select2-container[dir=\"rtl\"] .select2-selection--single .select2-selection__rendered { padding-right: 8px; padding-left: 20px; }",
+   "select2.css :: .select2-container--default .select2-selection--single .select2-selection__rendered { color: rgb(68, 68, 68); line-height: 28px; }",
+   "studiare.css :: html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, { border: 0px; box-sizing: border-box; font-family: inherit; font-size: 100%; font-style: inherit; font-weight: inherit; outline: 0px; padding: 0px; vertical-alig }",
+   "studiare.css :: *, ::before, ::after { box-sizing: border-box; }",
+   "studiare.css :: .select2-container--default .select2-selection--single .select2-selection__rendered { color: inherit; line-height: inherit; padding: 12px 0px; }",
+   "studiare.css :: body.rtl .select2-container--default .select2-selection--single .select2-selection__render { padding: 6px 0px; }",
+   "frontend.css :: .elementor *, .elementor ::before, .elementor ::after { box-sizing: border-box; }",
+   "pages.css :: .stx-cform .select2-container .select2-selection--single .select2-selection__rendered { padding-inline: 14px 40px; color: var(--stx-ink); font-size: 16px; line-height: 48px; }"
+  ]
+ },
+ {
+  "sel": ".stx-cform .select2-selection__arrow",
+  "top": 1455.546875,
+  "h": 48,
+  "pad": "0px",
+  "lh": "23.8px",
+  "pos": "absolute",
+  "topv": "8px",
+  "rules": [
+   "select2.css :: .select2-container--default .select2-selection--single .select2-selection__arrow { height: 26px; position: absolute; top: 1px; right: 1px; width: 20px; }",
+   "select2.css :: .select2-container--default[dir=\"rtl\"] .select2-selection--single .select2-selection__arro { left: 1px; right: auto; }",
+   "studiare.css :: html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, { border: 0px; box-sizing: border-box; font-family: inherit; font-size: 100%; font-style: inherit; font-weight: inherit; outline: 0px; padding: 0px; vertical-alig }",
+   "studiare.css :: *, ::before, ::after { box-sizing: border-box; }",
+   "studiare.css :: .select2-container--default .select2-selection--single .select2-selection__arrow { right: 10px; top: 12px; }",
+   "studiare.css :: body.rtl .select2-container--default .select2-selection--single .select2-selection__arrow { top: 8px; }",
+   "frontend.css :: .elementor *, .elementor ::before, .elementor ::after { box-sizing: border-box; }",
+   "pages.css :: .stx-cform .select2-container .select2-selection--single .select2-selection__arrow { height: 48px; margin-inline: 6px; }"
+  ]
+ }
+]
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Studiare adds vertical padding to the rendered text and top: 8px to the arrow. Zeroing those inside our form:
+
+
+Edit pages.css
+Added 4 lines
+Read stx-test-contact-cards-phone-2.png
+Read stx-test-contact-cards-phone-3.png
+The phone view shows the address card under the map with 44px route buttons — the blank map is just a screenshot timing issue, since it loads correctly otherwise. Now checking the Split and Support centre views on the phone.
+Read stx-test-contact-split-phone-1.png
+Read stx-test-contact-support-phone-0.png
+I noticed the fourth messenger button wraps to its own row at the start edge instead of centering in the hero. I'll add an alignment control to Contact details (matching Heading and Text) that also governs button row wrapping, then set it to centered.
+Bash Add alignment to contact details buttons
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions && python3 - <<'EOF'
+def edit(p, pairs):
+    s=open(p,encoding='utf-8').read()
+    for o,n in pairs:
+        assert s.count(o)==1,(p,o[:70])
+        s=s.replace(o,n)
+    open(p,'w',encoding='utf-8').write(s)
+edit('includes/Modules/Builder/Elementor/Widgets/Contact_Details.php', [("""		$this->add_columns_control( '.stx-cdetails', array( 3, 2, 1 ) );
+""","""		$this->add_columns_control( '.stx-cdetails', array( 3, 2, 1 ) );
+		$this->add_align_control( 'align', '.stx-cdetails' );
+""")])
+edit('includes/Modules/Builder/Presets/Contact.php', [("""					self::details( 'buttons', array( 'telegram', 'whatsapp', 'bale', 'eitaa' ), 0, array( '_element_width' => 'auto' ) ),""","""					self::details( 'buttons', array( 'telegram', 'whatsapp', 'bale', 'eitaa' ), 0, array( 'align' => 'center' ) ),""")])
+edit('assets/modules/builder/css/pages.css', [(""".stx-cdetails--buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}""",""".stx-cdetails--buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: var(--stx-justify, start);
+	gap: 10px;
+}""")])
+EOF
+php -l includes/Modules/Builder/Presets/Contact.php >/dev/null && php -l includes/Modules/Builder/Elementor/Widgets/Contact_Details.php
+
+OUT
+No syntax errors detected in includes/Modules/Builder/Elementor/Widgets/Contact_Details.php
+Now the dark-mode check. I'll rebuild the pages, turn on Studiare's dark mode class and screenshot the key sections:
+
+
+Bash Screenshot new widgets in dark mode
+IN
+ME=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad; cd $ME && ./wp.sh eval-file mkpages.php >/dev/null 2>&1; cd pw && cat > dark.mjs <<'EOF'
+// Dark mode (Studiare's `scdarkcolors` class) screenshots of the new widgets.
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+for (const [slug, sels] of [['stx-test-contact-cards', ['.elementor-widget-stx-contact-details', '.elementor-widget-stx-contact-form']], ['stx-test-about-story', ['.elementor-widget-stx-stats >> nth=1', '.elementor-widget-stx-timeline']], ['stx-test-contact-support', ['.elementor-widget-stx-contact-details >> nth=0']]]) {
+  await page.goto('http://127.0.0.1:8888/' + slug + '/', { waitUntil: 'networkidle' });
+  await page.evaluate(() => { document.documentElement.classList.add('scdarkcolors'); document.body.classList.add('scdarkcolors'); });
+  let i = 0;
+  for (const sel of sels) {
+    const el = page.locator(sel).first();
+    await el.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(2200);
+    await el.screenshot({ path: `shots/dark-${slug}-${i++}.png` });
+  }
+}
+await browser.close();
+EOF
+node dark.mjs && ls shots | grep dark
+
+OUT
+dark-stx-test-about-story-0.png
+dark-stx-test-about-story-1.png
+dark-stx-test-contact-cards-0.png
+dark-stx-test-contact-cards-1.png
+dark-stx-test-contact-support-0.png
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+My strings are final (the dark-mode review can only change CSS), so I'll give the blog session the go-ahead:
+
+
+SendMessage
+IN
+{
+  "to": "studiare-extentions-fb",
+  "summary": "Go for make-pot; agree on 1.6.0",
+  "message": "go. My strings are final. 1.6.0 for both is fine. After update-po, tell me and I'll translate my entries in the fa_IR .po with targeted Edits only. I'll send the changelog lines and CLAUDE.md notes in my next message. One heads-up: I also touched builder.css (2 small rules in the Heading section: .stx-heading__eyebrow gets justify-content: var(--stx-justify, start), and .stx-heading__sub gets align-self: var(--stx-justify, auto), so a centred heading also centres its text label and its narrower xl subtitle) and builder-admin.css (.stx-page-designs shares the .stx-library flex column). tools/minify.mjs now lists pages.css/pages.js.",
+  "type": "message",
+  "recipient": "studiare-extentions-fb",
+  "content": "go. My strings are final. 1.6.0 for both is fine.…"
+}
+OUT
+{"success":true,"message":"“Go for make-pot; agree on 1.6.0” → studiare-extentions-fb (another Claude session on this machine; queued there — a [Cross-session delivery notice] follows if that session holds it (different permission mode: its user must approve first) or refuses it)","msg_id":"9f285a65-d693-4c82-a3b6-11489520b6cb"}
+
+Read dark-stx-test-contact-cards-0.png
+Read dark-stx-test-contact-cards-1.png
+Dark mode looks right for the cards and the form (brand icons, borders, placeholder and label contrast). The other two:
+
+
+Read dark-stx-test-about-story-0.png
+Read dark-stx-test-about-story-1.png
+Dark mode and timeline centering look good, but I noticed the start-side cards have mirrored text alignment, which looks off for Persian paragraphs. I'll switch all cards to align consistently to the start.
+Edit pages.css
+Removed 5 lines
+Read dark-stx-test-contact-support-0.png
+The centred buttons work. Now the Elementor editor: I'll open a contact page in the editor and check for errors, and check the site's debug.log for any PHP notices from the new code:
+
+
+Bash Check debug.log for plugin notices
+IN
+WP=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp; ls -la $WP/wp-content/debug.log 2>/dev/null; grep -n "studiare-extensions" $WP/wp-content/debug.log 2>/dev/null | grep -iv "deprecated.*elementor" | tail -20; grep -n "WP_DEBUG" $WP/wp-config.php
+
+OUT
+-rw-r--r--  1 hooman  wheel  158090 Sep 29 01:23 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/debug.log
+76:define( 'WP_DEBUG', true );
+77:define( 'WP_DEBUG_LOG', true );
+78:define( 'WP_DEBUG_DISPLAY', false );
+88: * It is strongly recommended that plugin and theme developers use WP_DEBUG
+96:if ( ! defined( 'WP_DEBUG' ) ) {
+97:	define( 'WP_DEBUG', false );
+debug.log has nothing from the plugin. Now the editor:
+
+
+Bash Load the new designs in the Elementor editor
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && cat > editor.mjs <<'EOF'
+// Opens a contact page and an about design in Elementor, reports errors and screenshots the canvas.
+import { chromium } from 'playwright';
+const base = 'http://127.0.0.1:8888';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const errors = [];
+page.on('pageerror', (e) => errors.push('page: ' + String(e).slice(0, 200)));
+page.on('console', (m) => { if (m.type() === 'error') errors.push('console: ' + m.text().slice(0, 200)); });
+await page.goto(base + '/wp-login.php');
+await page.fill('#user_login', 'admin');
+await page.fill('#user_pass', 'admin');
+await Promise.all([page.waitForNavigation(), page.click('#wp-submit')]);
+for (const id of [179, 162]) {
+  await page.goto(`${base}/wp-admin/post.php?post=${id}&action=elementor`, { waitUntil: 'load', timeout: 90000 });
+  await page.waitForSelector('#elementor-preview-iframe', { timeout: 60000 });
+  const frame = page.frameLocator('#elementor-preview-iframe');
+  await frame.locator('.elementor-widget-stx-contact-form, .elementor-widget-stx-stats').first().waitFor({ timeout: 60000 });
+  await page.waitForTimeout(3000);
+  const counts = await page.frame({ url: /elementor-preview/ }).evaluate(() => ['stx-contact-form', 'stx-contact-details', 'stx-map', 'stx-timeline', 'stx-stats'].map((w) => w + '=' + document.querySelectorAll('.elementor-widget-' + w).length).join(' '));
+  console.log(id, counts);
+  await page.screenshot({ path: `shots/editor-${id}.png` });
+}
+// Open the contact form's panel to make sure its controls build.
+const formWidget = page.frameLocator('#elementor-preview-iframe').locator('.elementor-widget-stx-stats').first();
+await formWidget.click();
+await page.waitForTimeout(1500);
+console.log('panel title:', await page.locator('#elementor-panel-header-title').textContent());
+console.log('errors:', errors.length ? errors : 'none');
+await browser.close();
+EOF
+node editor.mjs
+
+OUT
+Exit code 1
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForSelector: Timeout 60000ms exceeded.
+Call log:
+  - waiting for locator('#elementor-preview-iframe') to be visible
+
+    at /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw/editor.mjs:15:14 {
+  log: [
+    "  - waiting for locator('#elementor-preview-iframe') to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.9.0
+Bash Debug the Elementor editor load
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && cat > editor2.mjs <<'EOF'
+import { chromium } from 'playwright';
+const base = 'http://127.0.0.1:8888';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const errors = [];
+page.on('pageerror', (e) => errors.push('page: ' + String(e).slice(0, 300)));
+page.on('console', (m) => { if (m.type() === 'error') errors.push('console: ' + m.text().slice(0, 300)); });
+await page.goto(base + '/wp-login.php');
+await page.fill('#user_login', 'admin');
+await page.fill('#user_pass', 'admin');
+await Promise.all([page.waitForNavigation(), page.click('#wp-submit')]);
+await page.goto(`${base}/wp-admin/post.php?post=179&action=elementor`, { waitUntil: 'load', timeout: 90000 });
+await page.waitForTimeout(20000);
+console.log('url:', page.url(), 'title:', await page.title());
+console.log('iframes:', await page.locator('iframe').count());
+await page.screenshot({ path: 'shots/editor-raw.png' });
+console.log('errors:', errors.slice(0, 10));
+await browser.close();
+EOF
+node editor2.mjs
+
+OUT
+url: http://127.0.0.1:8888/wp-admin/post.php?post=179&action=elementor title: Edit "Test contact-cards" with Elementor
+iframes: 0
+errors: [
+  'console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)'
+]
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+The editor fails on a request that returns 500. Let me find which request and the PHP error behind it:
+
+
+Bash Capture the failing request and its error
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && sed -i '' "s#page.on('console', (m) => { if (m.type() === 'error') errors.push('console: ' + m.text().slice(0, 300)); });#page.on('console', (m) => { if (m.type() === 'error') errors.push('console: ' + m.text().slice(0, 300)); }); page.on('response', async (r) => { if (r.status() >= 500) { errors.push('500 ' + r.url()); try { errors.push((await r.text()).replace(/<[^>]+>/g, ' ').slice(0, 900)); } catch (e) {} } });#" editor2.mjs && node editor2.mjs 2>&1 | tail -8; tail -5 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/debug.log | cut -c1-400
+
+OUT
+    '\t\t#error-page .wp-die-message {\n' +
+    '\t\t\tfont-size: 14px;\n' +
+    '\t\t\tline-height: 1.5;\n' +
+    '\t\t\tmargin: 25px 0 20px;\n' +
+    '\t\t}\n' +
+    '\t\t#error-page code {\n' +
+    '\t\t\tfont-family: Consolas, Monaco, '
+]
+[28-Sep-2026 21:57:44 UTC] PHP Warning:  Undefined array key "sc_floating_btn_color3" in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/inc/backend_panels/floating.php on line 60
+[28-Sep-2026 21:57:44 UTC] PHP Warning:  Undefined array key "sc_floating_btn_color3_darkmode" in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/inc/backend_panels/floating.php on line 70
+[28-Sep-2026 21:57:44 UTC] PHP Warning:  Undefined array key "sc_contact_floating_btn_bg" in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/inc/backend_panels/floating.php on line 107
+[28-Sep-2026 21:57:44 UTC] PHP Warning:  Undefined array key "sc_contact_floating_btn_brdr" in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/themes/studiare/inc/backend_panels/floating.php on line 117
+[28-Sep-2026 21:57:44 UTC] PHP Deprecated:  Elementor\Modules\GlobalClasses\Atomic_Global_Styles::get_cache_root_key(): Implicitly marking parameter $key as nullable is deprecated, the explicit nullable type must be used instead in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/modules/global
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Bash Find the 500 URL and any fatal error
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && node editor2.mjs 2>&1 | grep -E "^ *'500|500 http" ; node editor2.mjs 2>&1 | grep -oE "wp-die-message\">[^<]{0,600}|There has been a critical error[^']{0,200}|Fatal[^']{0,400}" | head -5; grep -n "PHP Fatal" /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/debug.log | tail -5 | cut -c1-600
+
+OUT
+  '500 http://127.0.0.1:8888/wp-admin/post.php?post=179&action=elementor',
+543:[28-Sep-2026 21:55:33 UTC] PHP Fatal error:  Uncaught TypeError: Elementor\Controls_Stack::sanitize_settings(): Argument #1 ($settings) must be of type array, null given, called in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php on line 1161 and defined in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php:2529
+626:[28-Sep-2026 21:56:57 UTC] PHP Fatal error:  Uncaught TypeError: Elementor\Controls_Stack::sanitize_settings(): Argument #1 ($settings) must be of type array, null given, called in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php on line 1161 and defined in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php:2529
+709:[28-Sep-2026 21:57:43 UTC] PHP Fatal error:  Uncaught TypeError: Elementor\Controls_Stack::sanitize_settings(): Argument #1 ($settings) must be of type array, null given, called in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php on line 1161 and defined in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php:2529
+792:[28-Sep-2026 21:58:26 UTC] PHP Fatal error:  Uncaught TypeError: Elementor\Controls_Stack::sanitize_settings(): Argument #1 ($settings) must be of type array, null given, called in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php on line 1161 and defined in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php:2529
+875:[28-Sep-2026 21:58:50 UTC] PHP Fatal error:  Uncaught TypeError: Elementor\Controls_Stack::sanitize_settings(): Argument #1 ($settings) must be of type array, null given, called in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php on line 1161 and defined in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php:2529
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+A real fatal error when the editor opens. Stack trace:
+
+
+Bash Read the fatal error stack trace
+IN
+sed -n 875,900p /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/debug.log | cut -c1-260
+
+OUT
+[28-Sep-2026 21:58:50 UTC] PHP Fatal error:  Uncaught TypeError: Elementor\Controls_Stack::sanitize_settings(): Argument #1 ($settings) must be of type array, null given, called in /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d86
+Stack trace:
+#0 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php(1161): Elementor\Controls_Stack->sanitize_settings(NULL)
+#1 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php(2274): Elementor\Controls_Stack->get_data('settings')
+#2 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/base/base-object.php(143): Elementor\Controls_Stack->get_init_settings()
+#3 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/base/base-object.php(40): Elementor\Core\Base\Base_Object->ensure_settings()
+#4 /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions/includes/Modules/Builder/Elementor/Widgets/Contact_Details.php(50): Elementor\Core\Base\Base_Object->get_settings('source')
+#5 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/widget-base.php(385): StudiareExt\Modules\Builder\Elementor\Widgets\Contact_Details->is_d
+#6 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php(1071): Elementor\Widget_Base->get_initial_config()
+#7 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/managers/widgets.php(381): Elementor\Controls_Stack->get_config()
+#8 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/base/document.php(757): Elementor\Widgets_Manager->get_widget_types_config()
+#9 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/base/controls-stack.php(1071): Elementor\Core\Base\Document->get_initial_config()
+#10 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/editor/loader/editor-scripts-settings.php(40): Elementor\Controls_Stack->get_config()
+#11 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/editor/loader/editor-loader.php(176): Elementor\Core\Editor\Loader\Editor_Scripts_Settings::get()
+#12 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/editor/editor.php(417): Elementor\Core\Editor\Loader\Editor_Loader->enqueue_scripts()
+#13 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/class-wp-hook.php(353): Elementor\Core\Editor\Editor->enqueue_scripts('')
+#14 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/class-wp-hook.php(377): WP_Hook->apply_filters('', Array)
+#15 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/plugin.php(523): WP_Hook->do_action(Array)
+#16 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/script-loader.php(2340): do_action('wp_enqueue_scri...')
+#17 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/class-wp-hook.php(353): wp_enqueue_scripts('')
+#18 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/class-wp-hook.php(377): WP_Hook->apply_filters('', Array)
+#19 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/plugin.php(523): WP_Hook->do_action(Array)
+#20 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-includes/general-template.php(3441): do_action('wp_head')
+#21 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/includes/editor-templates/editor-wrapper.php(35): wp_head()
+#22 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/editor/loader/editor-loader.php(216): include('/private/tmp/cl...')
+#23 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/core/editor/editor.php(163): Elementor\Core\Editor\Loader\Editor_Loader->print_root_template()
+Found the bug: Contact_Details::is_dynamic_content() fails when Elementor calls it on the bare widget type with no settings, breaking the editor for every page. I'll fix it by removing the override and reverting to the base class's default "always dynamic" behavior.
+Edit Contact_Details.php
+Removed 5 lines
+Bash Check other overrides and reload the editor
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions && grep -rn "function is_dynamic_content" -A 3 includes/Modules/Builder/Elementor/Widgets/{Contact_Form,Contact_Details,Map,Timeline,Stats,Page_Base}.php; cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && node editor.mjs
+
+OUT
+includes/Modules/Builder/Elementor/Widgets/Stats.php:35:	protected function is_dynamic_content(): bool {
+includes/Modules/Builder/Elementor/Widgets/Stats.php-36-		return false;
+includes/Modules/Builder/Elementor/Widgets/Stats.php-37-	}
+includes/Modules/Builder/Elementor/Widgets/Stats.php-38-
+includes/Modules/Builder/Elementor/Widgets/Timeline.php:35:	protected function is_dynamic_content(): bool {
+includes/Modules/Builder/Elementor/Widgets/Timeline.php-36-		return false;
+includes/Modules/Builder/Elementor/Widgets/Timeline.php-37-	}
+includes/Modules/Builder/Elementor/Widgets/Timeline.php-38-
+179 stx-contact-form=1 stx-contact-details=2 stx-map=1 stx-timeline=0 stx-stats=0
+162 stx-contact-form=0 stx-contact-details=0 stx-map=0 stx-timeline=1 stx-stats=2
+panel title: Edit آمار کلیدی
+errors: none
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+The editor loads cleanly now, with all new widgets rendering in the canvas and the widget panel working correctly. I'll let them know it's fixed, then verify my catalog entries are still intact after their latest edit.
+Bash Confirm the six catalog entries remain
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions && grep -c "About::class\|Contact::class" includes/Modules/Builder/Presets/Catalog.php
+
+OUT
+6
+SendMessage
+IN
+{
+  "to": "studiare-extentions-fb",
+  "summary": "Fixed an editor fatal from my widget",
+  "message": "FYI in case you saw it: for about 40 minutes the Elementor editor gave a 500 on every page (fatal \"Controls_Stack::sanitize_settings(): null given\"). It was my Contact_Details::is_dynamic_content(), which read settings, and Elementor also calls that on the bare widget type while building the editor config. It's removed now, and the editor loads cleanly (checked pages 179 and 162, no console errors). If you tested the editor in that window, please re-check. debug.log has no other plugin entries from my side.",
+  "type": "message",
+  "recipient": "studiare-extentions-fb",
+  "content": "FYI in case you saw it: for about 40 minutes the …"
+}
+OUT
+{"success":true,"message":"“Fixed an editor fatal from my widget” → studiare-extentions-fb (another Claude session on this machine; queued there — a [Cross-session delivery notice] follows if that session holds it (different permission mode: its user must approve first) or refuses it)","msg_id":"e4aba47c-f23b-49bd-8b6f-88dee31d1501"}
+
+Read editor-179.png
+The editor canvas confirms the new design renders correctly (the popup shown is just Elementor's promo overlay). Now I'll run regression checks on the two refactors: the newsletter migration to Public_Form and the floating support button's switch to Channels::ready().
+Bash Regression-test newsletter and support button
+IN
+U=http://127.0.0.1:8888/wp-admin/admin-ajax.php; echo "valid:"; curl -s -X POST $U -d "action=stx_subscribe&email=reg-test-$RANDOM@example.com&source=0"; echo; echo "invalid:"; curl -s -X POST $U -d "action=stx_subscribe&email=not-an-email"; echo; echo "honeypot:"; curl -s -X POST $U -d "action=stx_subscribe&email=bot@example.com&stx_website=x"; echo; echo "plain post:"; curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" -X POST -e "http://127.0.0.1:8888/stx-test-about-story/" http://127.0.0.1:8888/wp-admin/admin-post.php -d "action=stx_subscribe&email=plain-$RANDOM@example.com&anchor=stx-news-abc"
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && ./wp.sh eval '$m = \StudiareExt\Plugin::instance()->module( "support_button" ); $s = $m->settings(); echo "enabled=", var_export( $s["enabled"], true ), " ready=", count( \StudiareExt\Modules\Support_Button\Channels::ready( $s ) ), "\n"; foreach ( \StudiareExt\Modules\Support_Button\Channels::ready( $s ) as $c ) { echo $c["id"], " ", $c["url"], "\n"; }' 2>/dev/null | grep -v "^#\|Logger\|^)" ; curl -s http://127.0.0.1:8888/ | grep -o 'class="stx-sb[^"]*"' | head -3
+
+OUT
+valid:
+{"success":true,"data":{"status":"ok"}}
+invalid:
+{"success":false,"data":{"status":"invalid"}}
+honeypot:
+{"success":true,"data":{"status":"ok"}}
+plain post:
+302 http://127.0.0.1:8888/stx-test-about-story/?stx_news=ok#stx-news-abc
+enabled=true ready=0
+PHP: 2026-09-28 22:00:56 [notice X 0][/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/39d8658e-102c-459e-8627-4c84fa576d75/scratchpad/wp/wp-content/plugins/elementor/modules/global-classes/atomic-global-styles.php::410] Elementor\Modules\GlobalClasses\Atomic_Global_Styles::get_cache_root_key(): Implicitly marking parameter $key as nullable is deprecated, the explicit nullable type must be used instead [array (
+  'trace' => '
+',
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+You've hit your session limit · resets 5:40am (Asia/Tehran)
+
+ادامه بده
+ادامه بده
+خبرنامه بعد از بازنویسی کاملاً مثل قبل کار می‌کند. حالا چون دکمهٔ پشتیبانی روی این سایت کانال پرشده‌ای ندارد، Channels::ready() را با مقادیر آزمایشی در حافظه (بدون تغییر تنظیمات سایت) امتحان می‌کنم.
+Bash Test Channels::ready with sample values
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && cat > sb.php <<'EOF'
+<?php
+// Channels::ready() with sample values (in memory only), and the floating button's markup built from them.
+use StudiareExt\Modules\Support_Button\Channels;
+$values = array( 'telegram' => '@studiare_support', 'whatsapp' => '۰۹۱۲ ۳۴۵ ۶۷۸۹', 'bale' => 'https://ble.ir/studiare', 'eitaa' => '', 'phone' => '021-12345678' );
+add_filter(
+	'option_studiare_ext_support_button',
+	static function ( $stored ) use ( $values ) {
+		$stored = is_array( $stored ) ? $stored : array();
+		foreach ( $values as $id => $value ) {
+			$stored['channels'][ $id ] = array( 'enabled' => true, 'value' => $value, 'label' => '', 'note' => '', 'message' => '', 'icon' => 'chat' );
+		}
+		return $stored;
+	}
+);
+$module = \StudiareExt\Plugin::instance()->module( 'support_button' );
+foreach ( Channels::ready( $module->settings() ) as $c ) {
+	printf( "%-9s %-38s value=%s brand=%s\n", $c['id'], $c['url'], $c['value'], $c['brand'] );
+}
+EOF
+./wp.sh eval-file sb.php 2>/dev/null | grep -v "^#\|Logger\|^)\|^'\|^PHP"
+
+OUT
+  'trace' => '
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+The module had already cached its settings before my filter, so I'll build the settings array directly instead:
+
+
+Bash Test ready channels with in-memory settings
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && cat > sb.php <<'EOF'
+<?php
+// Channels::ready() with sample values built in memory (the site's settings are not touched).
+use StudiareExt\Modules\Support_Button\Channels;
+use StudiareExt\Modules\Support_Button\Schema;
+$settings = Schema::defaults();
+foreach ( array( 'telegram' => '@studiare_support', 'whatsapp' => '۰۹۱۲ ۳۴۵ ۶۷۸۹', 'bale' => 'https://ble.ir/studiare', 'eitaa' => '', 'phone' => '021-12345678' ) as $id => $value ) {
+	$settings['channels'][ $id ]['enabled'] = true;
+	$settings['channels'][ $id ]['value']   = $value;
+}
+foreach ( Channels::ready( $settings ) as $c ) {
+	printf( "%-9s %-38s value=%s brand=%s ext=%s\n", $c['id'], $c['url'], $c['value'], $c['brand'], $c['external'] ? 'yes' : 'no' );
+}
+EOF
+./wp.sh eval-file sb.php 2>/dev/null | grep -E "^(telegram|whatsapp|bale|eitaa|phone|email|instagram|link) "
+
+OUT
+telegram  https://t.me/studiare_support          value=@studiare_support brand=#229ed9 ext=yes
+whatsapp  https://wa.me/989123456789             value=۰۹۱۲ ۳۴۵ ۶۷۸۹ brand=#1da851 ext=yes
+bale      https://ble.ir/studiare                value=https://ble.ir/studiare brand=#00a383 ext=yes
+phone     tel:02112345678                        value=021-12345678 brand= ext=no
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+ادامه بده
+\u200FChannels::ready() درست کار می‌کند: کانال خالی ایتا حذف شد و شماره فارسی به لینک wa.me با کد ۹۸ تبدیل شد. حالا phpcs نهایی را اجرا می‌کنم و فایل‌های min را می‌سازم.
+Bash Final phpcs, JS syntax check and minify
+IN
+PHPCS=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/44892009-4eba-4c5e-a287-da46f43e6534/scratchpad/qa/vendor/bin/phpcs; B=studiare-extensions/includes/Modules/Builder; $PHPCS --standard=phpcs.xml.dist --report=summary $B/Design_Pages.php $B/Public_Form.php $B/Newsletter.php $B/Contact_Messages.php $B/Contact_Inbox.php $B/Library.php $B/Library_Ajax.php $B/Module.php $B/Schema.php $B/Assets.php $B/Header_Footer.php $B/Thumbs.php $B/views/admin.php $B/Presets $B/Elementor studiare-extensions/includes/Modules/Support_Button studiare-extensions/uninstall.php 2>&1 | tail -6; for f in studiare-extensions/assets/modules/builder/js/{pages,home,builder-admin}.js; do node --check $f || echo "FAIL $f"; done; node tools/minify.mjs 2>&1 | grep -c "min\."
+
+OUT
+............................................................  60 / 108 (56%)
+................................................             108 / 108 (100%)
+
+
+Time: 13.24 secs; Memory: 50MB
+
+14
+phpcs روی هر ۱۰۸ فایل بدون خطا یا هشدار اجرا شد و فایل‌های min از جمله pages ساخته شدند. حالا changelog و یادداشت‌های CLAUDE.md را برای ثبت در نسخهٔ 1.6.0 به‌روزرسانی می‌کنم.
+SendMessage
+IN
+{
+  "to": "studiare-extentions-fb",
+  "summary": "Changelog lines and CLAUDE.md notes for 1.6.0",
+  "message": "Changelog lines and CLAUDE.md notes for my part of 1.6.0. Everything is tested on 8888 (phone 390 and desktop 1440, dark mode, Elementor editor, no console errors, nothing in debug.log), phpcs is 0/0, and I've just run minify.\n\nreadme.txt, 1.6.0 changelog (add after yours):\n* New: About us and contact us pages. Page templates → Pages (formerly \"Home pages\") has three about designs (Story, Minimal, Academy) and three contact designs (Cards, Split, Support centre). \"Create page\" makes a normal Elementor page from any of them.\n* New: Contact form widget. Messages are kept in Studiare+ → Contact messages (a list with a \"new\" count, reply by email, CSV download, WordPress privacy tools) and can also be emailed to an address set on the widget. Works without JavaScript and on cached pages (honeypot + rate limit, no nonce). A form plugin's shortcode can replace it.\n* New: Map widget: OpenStreetMap or Google Maps with no API key, or a pasted Neshan/Balad embed. Optional \"load on click\", an address card, and directions buttons for Neshan, Balad, Google Maps and Waze.\n* New: Contact details widget (phone, email, address, hours, Telegram, WhatsApp, Bale, Eitaa, Instagram) as cards, a list or brand buttons. It can show the floating support button's channels, so they are typed once.\n* New: Timeline widget (line, both sides, or steps in a row).\n* Improved: Key numbers widget: icons, \"Tiles\" and \"Large numbers\" looks, columns, and a count-up that keeps the layout still and leaves the real number for search engines and screen readers.\n* Fix: a centred Heading now also centres its small label and its (narrower) subtitle.\nDescription section: add \"about us and contact us pages\" next to home pages, and add contact form, map, contact details, timeline to the widget list (51 widgets: 47 + 4, before your new ones).\n\nCLAUDE.md:\n- Layout: replace the Home_Pages.php line with \"Design_Pages.php  pages made from page designs (home, about, contact): create, front page switch, list for the admin\". Add: \"Public_Form.php  shared base of the public forms (honeypot, rate limit, JSON or redirect answer, CSV export)\", \"Contact_Messages.php  contact form handler + `stx_message` store, email copy, privacy tools\", \"Contact_Inbox.php  the messages list under Studiare+ (new-message badge)\". Presets: About.php, Contact.php. Assets: pages.css / pages.js (handle `stx-builder-pages`, widgets extend Widgets\\Page_Base).\n- Rename the section \"Home pages: key contracts\" → \"Page designs (home, about, contact): key contracts\", first bullet: \"A page design is an `stx_template` of a kind in `Schema::PAGE_TYPES` (home, about, contact) … `Design_Pages::create()` …\". Only home designs offer \"Use as home page\".\n- New section \"About & contact: key contracts\":\n  • Contact form: the handler reads the widget's options from the saved Elementor data (document ID + element ID in the form), never from the request, so a post cannot choose the recipient or the fields. Public cached form: no nonce; honeypot `stx_website`, 3 messages per visitor per 10 minutes. When phone and email are both optional, one of them is required. Messages are private `stx_message` posts; the admin list is WordPress's list table (Contact_Inbox), the edit screen redirects to it.\n  • Studiare turns every <select> into select2 (global.js); pages.css matches the select2 box to our fields, and pages.js fires `change` after reset so select2 shows the reset value.\n  • Map: pasted embeds are accepted only from google.com, neshan.org, balad.ir, openstreetmap.org, map.ir over https. Route links: Neshan `neshan.org/maps/routing/car/destination/LAT,LNG`, Balad `balad.ir/location?latitude=&longitude=` (both taken from their web apps' routes), Google `maps/dir/?api=1&destination=`, Waze `ul?ll=…&navigate=yes`.\n  • Contact details \"support\" source uses Support_Button\\Channels::ready(), the same list the floating button shows. Numbers/usernames are wrapped in <bdi dir=\"ltr\"> so they read left to right but still align with the page.\n  • Never read widget settings in is_dynamic_content(): Elementor calls it on the bare widget type when building the editor config (it broke the editor once).\n  • Key numbers count-up (home.js): parses the digits (Latin, Persian or Arabic) and separators of the final text, pins its width, hides the moving copy from screen readers, and does nothing with reduced motion, in the editor or without IntersectionObserver.\n  • In presets, give every column in a row an explicit width: a container with only `fill` keeps Elementor's 100% basis and squeezes its neighbour (Blocks::band() & co. now hold the shared layout helpers).\n- Studiare integration table: add \"select2 on every select | theme global.js `select_to_select2` (13.3+)\".\n- Testing: add \"contact form (JS and plain post, invalid fields, rate limit, honeypot, email copy), map click-to-load, Contact messages list\".",
+  "type": "message",
+  "recipient": "studiare-extentions-fb",
+  "content": "Changelog lines and CLAUDE.md notes for my part o…"
+}
+OUT
+{"success":true,"message":"“Changelog lines and CLAUDE.md notes for 1.6.0” → studiare-extentions-fb (another Claude session on this machine; queued there — a [Cross-session delivery notice] follows if that session holds it (different permission mode: its user must approve first) or refuses it)","msg_id":"feafd149-dd1c-4c1c-adc5-eb954c7687d4"}
+
+در انتظار دریافت فایل po. هستم؛ در همین حین فهرست رشته‌های جدید را استخراج و ترجمه‌ها را آماده می‌کنم.
+Bash List my untranslated strings
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions && ME=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && python3 - <<'EOF' > $ME/my-strings.txt
+import re,glob
+B='includes/Modules/Builder/'
+files=[B+f for f in ['Design_Pages.php','Contact_Messages.php','Contact_Inbox.php','Public_Form.php','Module.php','Presets/About.php','Presets/Contact.php','Presets/Catalog.php','views/admin.php','Elementor/Widgets/Contact_Form.php','Elementor/Widgets/Contact_Details.php','Elementor/Widgets/Map.php','Elementor/Widgets/Timeline.php','Elementor/Widgets/Stats.php','Elementor/Widgets/Page_Base.php']]
+po=open('languages/studiare-extensions-fa_IR.po',encoding='utf-8').read()
+known=set(re.findall(r'^msgid "(.*)"$',po,re.M))
+seen=set()
+for f in files:
+    s=open(f,encoding='utf-8').read()
+    for m in re.finditer(r"(?:__|esc_html__|esc_attr__|esc_html_e|esc_attr_e|_e)\(\s*'((?:[^'\\]|\\.)*)'\s*,\s*'studiare-extensions'",s):
+        t=m.group(1).replace("\\'","'")
+        if t in seen: continue
+        seen.add(t)
+        key=t.replace('"','\\"').replace('\n','\\n')
+        if key not in known: print(t.replace('\n','\\n'))
+EOF
+wc -l $ME/my-strings.txt; cat $ME/my-strings.txt
+
+OUT
+       0 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/my-strings.txt
+هیچ رشتهٔ ناشناخته‌ای پیدا نکردم و به نظر می‌رسد update-po اجرا شده و رشته‌ها در فایل موجودند. حالا بررسی می‌کنم کدام رشته‌ها هنوز ترجمه نشده‌اند.
+Bash Find my empty or fuzzy translations
+IN
+ME=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && ls -la languages/ && python3 - <<'EOF' > $ME/my-empty.txt
+import re
+B='includes/Modules/Builder/'
+files=[B+f for f in ['Design_Pages.php','Contact_Messages.php','Contact_Inbox.php','Public_Form.php','Module.php','Presets/About.php','Presets/Contact.php','Presets/Catalog.php','views/admin.php','Elementor/Widgets/Contact_Form.php','Elementor/Widgets/Contact_Details.php','Elementor/Widgets/Map.php','Elementor/Widgets/Timeline.php','Elementor/Widgets/Stats.php','Elementor/Widgets/Page_Base.php']]
+po=open('languages/studiare-extensions-fa_IR.po',encoding='utf-8').read()
+entries={}
+for m in re.finditer(r'(?:^#, fuzzy\n)?(?:^#.*\n)*^msgid ((?:".*"\n)+)msgstr ((?:".*"\n)+)',po,re.M):
+    mid=''.join(re.findall(r'"(.*)"',m.group(1)))
+    mstr=''.join(re.findall(r'"(.*)"',m.group(2)))
+    entries[mid]=(mstr, '#, fuzzy' in m.group(0))
+seen=set()
+for f in files:
+    s=open(f,encoding='utf-8').read()
+    for m in re.finditer(r"(?:__|esc_html__|esc_attr__|esc_html_e|esc_attr_e|_e)\(\s*'((?:[^'\\]|\\.)*)'\s*,\s*'studiare-extensions'",s):
+        t=m.group(1).replace("\\'","'")
+        key=t.replace('"','\\"').replace('\n','\\n')
+        if key in seen: continue
+        seen.add(key)
+        e=entries.get(key)
+        if e is None: print('MISSING\t'+key)
+        elif e[0]=='' or e[1]: print(('FUZZY\t' if e[1] else 'EMPTY\t')+key+('\t=> '+e[0] if e[1] else ''))
+EOF
+wc -l < $ME/my-empty.txt; grep -c FUZZY $ME/my-empty.txt; grep -c MISSING $ME/my-empty.txt
+
+OUT
+total 1472
+drwxr-xr-x  5 hooman  staff     160 Sep 24 23:44 .
+drwxr-xr-x  8 hooman  staff     256 Sep 25 23:25 ..
+-rw-r--r--@ 1 hooman  staff  137053 Sep 25 23:25 studiare-extensions-fa_IR.mo
+-rw-r--r--  1 hooman  staff  346995 Sep 29 06:34 studiare-extensions-fa_IR.po
+-rw-r--r--  1 hooman  staff  264826 Sep 29 01:30 studiare-extensions.pot
+     261
+0
+0
+۲۶۱ رشته بدون ترجمه در فایل po. یافتم. چون فایل هم‌اکنون در حال ویرایش است، ترجمه‌ها را جداگانه آماده می‌کنم و پس از آزاد شدن فایل، یک‌جا اعمالشان می‌کنم.
+Bash Show the strings to translate (part 1)
+IN
+cut -f2 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/my-empty.txt | nl | sed -n 1,140p
+
+OUT
+     1	About us
+     2	Contact messages
+     3	Contact message
+     4	Search messages
+     5	No messages yet. Messages sent through the Contact form widget appear here.
+     6	No messages in the trash.
+     7	Choosing a course
+     8	Technical support
+     9	Orders and payment
+    10	Working with us
+    11	Please check the highlighted fields and try again.
+    12	Too many messages in a short time. Please try again in a few minutes.
+    13	Your message could not be sent. Please try again.
+    14	New message from the contact form on %s.
+    15	Topic
+    16	Page
+    17	All messages: %s
+    18	[%1$s] New message: %2$s
+    19	Contact messages (Studiare+)
+    20	Sent on
+    21	From
+    22	Received
+    23	%s ago
+    24	Re: %s
+    25	Reply by email
+    26	Ready-made Elementor designs for course pages, product pages, headers, footers, home, about us and contact us pages, and the blog — per category and per device.
+    27	About us page
+    28	Contact us page
+    29	About us pages
+    30	Contact us pages
+    31	Our numbers
+    32	What years of teaching have added up to.
+    33	How we got here
+    34	What we care about
+    35	The people behind it
+    36	We make learning simple, practical and within reach
+    37	A small team of teachers, designers and developers who believe a good course should change what you do on Monday morning.
+    38	A photo of your team or classroom
+    39	What we believe
+    40	Three ideas behind every course, every answer to a message and every price we set.
+    41	Milestones
+    42	Questions about us
+    43	Studiare+ in numbers
+    44	Updated every season.
+    45	Why learners choose us
+    46	Our path so far
+    47	In their words
+    48	We help people learn skills that <mark>change their lives</mark>
+    49	Since our first class, we have kept one promise: short, practical lessons from people who do the work, and real answers when you get stuck.
+    50	A photo of your team
+    51	About the academy
+    52	Video courses, books and live workshops by experienced teachers, with support that stays after you buy.
+    53	Browse the courses
+    54	Talk to us
+    55	A short video about the academy
+    56	Courses and workshops
+    57	Say they would recommend us
+    58	Years of teaching
+    59	The first class
+    60	Twelve learners in a rented room, and a promise to keep lessons short and useful.
+    61	Going online
+    62	Our first video course, so people in every city could learn with us.
+    63	A growing team
+    64	New teachers joined, and support became a team of its own.
+    65	Today
+    66	Thousands of learners, live workshops every month and new courses every season.
+    67	Practical first
+    68	Every lesson ends with something you can do the same day.
+    69	Real support
+    70	Questions get answers from people, not bots, every day.
+    71	Fair prices
+    72	Clear prices, no surprises, and a refund if a course is not for you.
+    73	Always current
+    74	Courses are reviewed and updated as the field changes.
+    75	Less theory, more practice
+    76	We cut what you will never use and keep what you will use this week.
+    77	Teachers who do the work
+    78	Everyone who teaches here does the job they teach, every day.
+    79	Learning does not end at checkout
+    80	Updates, answers and a community stay with you after the course.
+    81	Experienced teachers
+    82	People who practise what they teach.
+    83	Learn at your pace
+    84	Short videos you can watch on any device.
+    85	Answers when you are stuck
+    86	Ask under any lesson and get a reply.
+    87	Certificate of completion
+    88	Show what you have learned.
+    89	Yours for good
+    90	Lifetime access, with every update.
+    91	Safe payment
+    92	A trusted gateway and a clear refund policy.
+    93	Founder and teacher
+    94	Head of education
+    95	Support lead
+    96	Course designer
+    97	Team member
+    98	I wrote to support at midnight and had an answer before class the next morning.
+    99	Neda A.
+   100	Learning with us for two years
+   101	The lessons are short and to the point. I used the first one at work the same week.
+   102	Reza M.
+   103	Project manager
+   104	It feels like a small school where the teachers know you, even online.
+   105	Sara K.
+   106	Workshop participant
+   107	Who teaches the courses?
+   108	Teachers who work in the field they teach. Each course page introduces its teacher.
+   109	Do I get a certificate?
+   110	Yes. When you finish a course, you can download a certificate of completion from your account.
+   111	Can organisations train their teams with you?
+   112	Yes. Write to us and we will suggest a plan with group prices.
+   113	How can I teach here?
+   114	Send us a short introduction and a sample lesson through the contact page.
+   115	Ready to learn something new?
+   116	Start with a free lesson, or tell us what you need and we will suggest a course.
+   117	We are here to help
+   118	Questions about a course, an order or working together? Pick the way that suits you; we answer every message.
+   119	Prefer messengers?
+   120	Message us in the app you use every day. We usually reply within an hour during working hours.
+   121	Thursdays until 13
+   122	Find us
+   123	Maybe your answer is here
+   124	Send a message and we will get back to you within one working day.
+   125	Other ways to reach us
+   126	Call during working hours or write any time.
+   127	How can we help you?
+   128	Support centre
+   129	The fastest answer is one message away. Choose a messenger, call the right team, or send us the form below.
+   130	Talk to the right team
+   131	Quick answers
+   132	Still need help?
+   133	Visit us
+   134	Visits by appointment
+   135	Closed on public holidays
+   136	Course advice
+   137	Not sure which course fits? Call us, Saturday to Wednesday, 9 to 17.
+   138	Trouble with a video, a download or your account.
+   139	Teaching, partnerships and training for organisations.
+   140	Send us a message
+فایل ترجمه را دارم و حدود ۲۸۵ رشتهٔ جدید را با رعایت گیومه، نیم‌فاصله و ارقام فارسی ترجمه می‌کنم، سپس CLAUDE.md و گزارش نهایی را آماده می‌کنم.
+Bash List all empty entries and those outside my file list
+IN
+ME=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && python3 - <<'EOF'
+import re,json
+po=open('languages/studiare-extensions-fa_IR.po',encoding='utf-8').read()
+blocks=po.split('\n\n')
+empty=[]
+for b in blocks:
+    if 'msgid_plural' in b: 
+        if re.search(r'msgstr\[0\] ""\s*$',b,re.M): print('PLURAL EMPTY', b[:200])
+        continue
+    m=re.search(r'^msgid ((?:".*"\n?)+)^msgstr ((?:".*"\n?)+)',b,re.M)
+    if not m: continue
+    mid=''.join(re.findall(r'"(.*)"',m.group(1)))
+    mstr=''.join(re.findall(r'"(.*)"',m.group(2)))
+    if mid and not mstr:
+        refs=' '.join(re.findall(r'^#: (.*)$',b,re.M))
+        empty.append((mid,refs,'#, fuzzy' in b))
+print(len(empty), 'fuzzy:', sum(1 for e in empty if e[2]))
+json.dump(empty,open('/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/empty.json','w'),ensure_ascii=False,indent=0)
+EOF
+python3 -c "
+import json;e=json.load(open('$ME/empty.json'))
+mine=set(l.split('\t')[1] for l in open('$ME/my-empty.txt',encoding='utf-8').read().splitlines())
+for i,(m,r,f) in enumerate(e):
+    if m not in mine: print(i,m,'||',r[:120])
+"
+
+OUT
+263 fuzzy: 0
+0 Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers and footers, and a floating support button. || studiare-extensions.php
+149 An online academy\nbuilt around you || includes/Modules/Builder/Presets/About.php:323
+۲۶۳ ورودی خالی، همه مربوط به کار من (به‌علاوهٔ توضیح خود افزونه). بقیهٔ فهرست:
+
+
+Bash Show the strings to translate (part 2)
+IN
+cut -f2 /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/my-empty.txt | nl | sed -n 141,261p
+
+OUT
+   141	Fields marked with * are required.
+   142	How soon will I get an answer?
+   143	Messages sent on working days are answered the same day; others on the next working day.
+   144	I paid but cannot see my course. What should I do?
+   145	Log in with the email or mobile number you used to pay and open \"My courses\". If it is not there, send us your order number.
+   146	Do you offer group or company training?
+   147	Yes. Choose \"Working with us\" as the topic in the form and tell us a little about your team.
+   148	About · Story
+   149	Hero with a team photo, number tiles that count up, a timeline, values, the team, reviews and a call to action.
+   150	About · Minimal
+   151	Centred title, a wide photo, large numbers, what you believe, milestones and questions.
+   152	About · Academy
+   153	Curved accent hero with a video, a dark band of large numbers, six reasons, milestones in a row and the teachers.
+   154	Contact · Cards
+   155	Four contact cards, the form beside messenger buttons, a map with directions and common questions.
+   156	Contact · Split
+   157	A dark panel with every way to reach you beside the form, then a map that loads on request.
+   158	Contact · Support centre
+   159	Accent hero with messenger buttons, one card per team, questions beside the form, and a map.
+   160	Ready-made pages
+   161	Home, about us and contact us pages. Pick a design and create a new page from it. The page is a normal Elementor page: change the texts and pictures, move or remove sections, add your own. Products, categories, posts and teachers come from your site automatically.
+   162	Messages sent through the Contact form widget. They are kept here even when email does not work on your host, and each one can also be emailed to you (set the address on the widget).
+   163	Read the messages
+   164	Contact form
+   165	Required
+   166	Optional
+   167	Studiare+ form
+   168	Name field
+   169	Your name
+   170	Phone field
+   171	Phone field label
+   172	Mobile number
+   173	Email field
+   174	When phone and email are both optional, visitors must fill in at least one, so you can answer.
+   175	Email field label
+   176	Topic field
+   177	Choose from a list
+   178	Free text (optional)
+   179	Topic field label
+   180	Topics
+   181	One per line. The chosen topic is shown with the message and in the email subject.
+   182	Message field label
+   183	Your message
+   184	Message placeholder
+   185	How can we help?
+   186	Send message
+   187	Text beside the button
+   188	We usually answer within one working day.
+   189	Thank you! Your message was sent. We will get back to you soon.
+   190	Messages
+   191	Every message is saved in Studiare+ → Contact messages, even when email does not work on your host.
+   192	Also send each message by email
+   193	Send to
+   194	Separate several addresses with commas. Empty: the site's admin email.
+   195	Fields only (for a box you style)
+   196	Fields
+   197	With border
+   198	Short fields side by side
+   199	Name, phone and email share a row on wide screens. Phones always show one field per row.
+   200	Paste the shortcode of your form plugin's form.
+   201	Leave a phone number or an email address so we can answer.
+   202	(optional)
+   203	Choose…
+   204	Contact details
+   205	Address
+   206	Opening hours
+   207	The list below
+   208	The floating support button's ways to reach us
+   209	The second choice shows what you set in Studiare+ → Floating support button, so you type your numbers and usernames once.
+   210	Type
+   211	Empty: the type's name
+   212	Number, address or username
+   213	Phones and messengers become links: a number (Persian digits work), @username or a link.
+   214	Small text below
+   215	For an address: a link to your place on a map.
+   216	Brand buttons
+   217	Messengers in their own colours; off uses the accent colour for all.
+   218	Switch on and fill in some ways to reach you in Studiare+ → Floating support button.
+   219	Add a phone number, email or messenger.
+   220	Map
+   221	Neshan
+   222	Balad
+   223	Google Maps
+   224	Waze
+   225	OpenStreetMap
+   226	Embed code (Neshan, Balad…)
+   227	A picture of the map
+   228	To find the numbers, right-click your place in Google Maps or Neshan and copy its coordinates, e.g. 35.6997, 51.3380.
+   229	Latitude
+   230	Longitude
+   231	Zoom
+   232	Embed code or link
+   233	Paste the \"embed\" code from Neshan, Balad, Google Maps, OpenStreetMap or Map.ir.
+   234	When scrolled into view
+   235	When the visitor asks for it (fastest page)
+   236	On click, the map shows a light placeholder with a button until the visitor opens it.
+   237	Title for screen readers
+   238	Our location on the map
+   239	Address and directions
+   240	Address card
+   241	Sits on the map on wide screens and under it on phones.
+   242	Our office
+   243	Your full address goes here, with the building, floor and unit.
+   244	Directions buttons
+   245	Open your location in the visitor's navigation app. Uses the latitude and longitude above.
+   246	Paste the embed code of a map from Neshan, Balad, Google Maps, OpenStreetMap or Map.ir.
+   247	Enter the latitude and longitude of your place.
+   248	Show the map
+   249	Directions with
+   250	Timeline
+   251	Year or date
+   252	Milestone
+   253	Line on the side
+   254	Both sides of the line
+   255	Steps in a row
+   256	Title tag
+   257	Line and dots
+   258	Year
+   259	Large numbers
+   260	Count up
+   261	Numbers count up from zero when they scroll into view.
+قبل از ترجمه، اصطلاحات جاافتادهٔ فایل را چک می‌کنم تا یکدست بمانم:
+
+
+Bash Check existing translation terms
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions/languages && python3 - <<'EOF'
+import re
+po=open('studiare-extensions-fa_IR.po',encoding='utf-8').read()
+d={}
+for m in re.finditer(r'^msgid ((?:".*"\n)+)msgstr ((?:".*"\n)+)',po,re.M):
+    d[''.join(re.findall(r'"(.*)"',m.group(1)))]=''.join(re.findall(r'"(.*)"',m.group(2)))
+for k in ['Studiare+','Page templates','Floating support button','Home pages','Key numbers','Pages','Blog','Home page','Download CSV','Newsletter subscribers','Card','Plain','Tiles','Email','Phone','Name','Message','Contact us','Tablet','Create page','Edit with Elementor','Templates','Accent','Floating card with dividers','Number','Label','Icon','Search posts','Page name','Hero','Timeline','Support','Online support','Call us','Support page',"Emails sent through the Newsletter widget's built-in form. Download them to import into your email service."]:
+    print(repr(k),'=>',d.get(k))
+refs=[k for k,v in d.items() if 'Studiare+ →' in k][:3]
+for k in refs: print(k,'=>',d[k])
+EOF
+
+OUT
+'Studiare+' => استادیار+
+'Page templates' => قالب‌ساز صفحات
+'Floating support button' => دکمه شناور پشتیبانی
+'Home pages' => صفحه‌های اصلی
+'Key numbers' => آمار کلیدی
+'Pages' => صفحه‌ها
+'Blog' => وبلاگ
+'Home page' => صفحه اصلی
+'Download CSV' => دریافت فایل CSV
+'Newsletter subscribers' => مشترکان خبرنامه
+'Card' => کارت
+'Plain' => ساده
+'Tiles' => کاشی
+'Email' => ایمیل
+'Phone' => تلفن
+'Name' => نام
+'Message' => پیام
+'Contact us' => تماس با ما
+'Tablet' => تبلت
+'Create page' => ساخت برگه
+'Edit with Elementor' => ویرایش با المنتور
+'Templates' => قالب‌ها
+'Accent' => رنگ اصلی
+'Floating card with dividers' => کارت شناور با جداکننده
+'Number' => عدد
+'Label' => عنوان
+'Icon' => آیکون
+'Search posts' => None
+'Page name' => نام برگه
+'Hero' => None
+'Timeline' => 
+'Support' => پشتیبانی
+'Online support' => پشتیبانی آنلاین
+'Call us' => تماس تلفنی
+'Support page' => صفحه پشتیبانی
+"Emails sent through the Newsletter widget's built-in form. Download them to import into your email service." => ایمیل‌هایی که از فرم داخلی ابزارک خبرنامه ثبت شده‌اند. آن‌ها را دریافت کنید تا در سرویس ایمیل خود وارد کنید.
+Uses the brand colours from Studiare+ → Page templates, including dark mode. A background set in the Style tab still wins. => از رنگ‌های برند در استادیار+ ← قالب‌ساز صفحات (همراه با حالت تاریک) استفاده می‌کند. پس‌زمینه‌ای که در تب استایل تنظیم شود اولویت دارد.
+Shows the product being viewed. While editing, a sample course/product is used — pick it in Studiare+ → Page templates. => محصولی را که در حال مشاهده است نشان می‌دهد. هنگام ویرایش از یک دوره یا محصول نمونه استفاده می‌شود که در استادیار+ ← قالب‌ساز صفحات انتخاب می‌کنید.
+Download the list in Studiare+ → Page templates → Home pages. => فهرست را از استادیار+ ← قالب‌ساز صفحات ← صفحه‌های اصلی دریافت کنید.
+قوانین یکدستی را مشخص کردم (برگه، ابزارک، ← به‌جای →، ارقام فارسی، و راه‌های ارتباطی به‌جای کانال) و حالا ترجمه‌ها را بر همین اساس انجام می‌دهم.
+Bash Write the Persian translations table
+IN
+cat > /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/fa.py <<'PYEOF'
+# msgid (as written in the .po, escapes included) -> Persian msgstr.
+T = {
+"Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers and footers, and a floating support button.": "امکانات بیشتر برای قالب آموزشی استادیار: نوار پایین موبایل قابل‌تنظیم، قالب‌های المنتور برای دوره‌ها، محصولات، هدر و فوتر، و دکمه شناور پشتیبانی.",
+"About us": "درباره ما",
+"Contact messages": "پیام‌های تماس",
+"Contact message": "پیام تماس",
+"Search messages": "جستجوی پیام‌ها",
+"No messages yet. Messages sent through the Contact form widget appear here.": "هنوز پیامی نرسیده است. پیام‌هایی که از ابزارک «فرم تماس» فرستاده شوند اینجا دیده می‌شوند.",
+"No messages in the trash.": "زباله‌دان خالی است.",
+"Choosing a course": "انتخاب دوره",
+"Technical support": "پشتیبانی فنی",
+"Orders and payment": "سفارش و پرداخت",
+"Working with us": "همکاری با ما",
+"Please check the highlighted fields and try again.": "لطفاً فیلدهای مشخص‌شده را بررسی کنید و دوباره بفرستید.",
+"Too many messages in a short time. Please try again in a few minutes.": "در مدت کوتاهی پیام‌های زیادی فرستاده شده است. لطفاً چند دقیقه دیگر دوباره امتحان کنید.",
+"Your message could not be sent. Please try again.": "پیام شما فرستاده نشد. لطفاً دوباره امتحان کنید.",
+"New message from the contact form on %s.": "پیام تازه از فرم تماس سایت %s.",
+"Topic": "موضوع",
+"Page": "برگه",
+"All messages: %s": "همه پیام‌ها: %s",
+"[%1$s] New message: %2$s": "[%1$s] پیام تازه: %2$s",
+"Contact messages (Studiare+)": "پیام‌های تماس (استادیار+)",
+"Sent on": "تاریخ ارسال",
+"From": "فرستنده",
+"Received": "زمان دریافت",
+"%s ago": "%s پیش",
+"Re: %s": "پاسخ: %s",
+"Reply by email": "پاسخ با ایمیل",
+"Ready-made Elementor designs for course pages, product pages, headers, footers, home, about us and contact us pages, and the blog — per category and per device.": "طرح‌های آماده المنتور برای صفحه دوره، صفحه محصول، هدر، فوتر، صفحه اصلی، درباره ما، تماس با ما و وبلاگ؛ برای هر دسته‌بندی و هر دستگاه.",
+"About us page": "صفحه درباره ما",
+"Contact us page": "صفحه تماس با ما",
+"About us pages": "صفحه‌های درباره ما",
+"Contact us pages": "صفحه‌های تماس با ما",
+"Our numbers": "آمار ما",
+"What years of teaching have added up to.": "حاصل سال‌ها آموزش، در چند عدد.",
+"How we got here": "مسیری که آمدیم",
+"What we care about": "آنچه برایمان مهم است",
+"The people behind it": "آدم‌های پشت این مجموعه",
+"We make learning simple, practical and within reach": "یادگیری را ساده، کاربردی و در دسترس می‌کنیم",
+"A small team of teachers, designers and developers who believe a good course should change what you do on Monday morning.": "تیمی کوچک از مدرس‌ها، طراح‌ها و برنامه‌نویس‌ها که باور دارند یک دوره خوب باید کار فردای شما را تغییر دهد.",
+"A photo of your team or classroom": "عکسی از تیم یا کلاس شما",
+"What we believe": "باورهای ما",
+"Three ideas behind every course, every answer to a message and every price we set.": "سه اصل که پشت هر دوره، هر پاسخ به پیام و هر قیمتی است که تعیین می‌کنیم.",
+"Milestones": "نقطه‌های عطف",
+"Questions about us": "پرسش‌هایی درباره ما",
+"Studiare+ in numbers": "ما به زبان اعداد",
+"Updated every season.": "هر فصل به‌روز می‌شود.",
+"Why learners choose us": "چرا یادگیرنده‌ها ما را انتخاب می‌کنند",
+"Our path so far": "مسیر ما تا امروز",
+"In their words": "از زبان خودشان",
+"We help people learn skills that <mark>change their lives</mark>": "کمک می‌کنیم مهارت‌هایی یاد بگیرید که <mark>زندگی‌تان را تغییر می‌دهد</mark>",
+"Since our first class, we have kept one promise: short, practical lessons from people who do the work, and real answers when you get stuck.": "از اولین کلاس یک قول داده‌ایم و پایش مانده‌ایم: درس‌های کوتاه و کاربردی از کسانی که خودشان این کار را انجام می‌دهند، و پاسخ واقعی هر جا که گیر کردید.",
+"A photo of your team": "عکسی از تیم شما",
+"About the academy": "درباره آکادمی",
+"An online academy\\nbuilt around you": "آکادمی آنلاینی\\nکه برای شما ساخته شده",
+"Video courses, books and live workshops by experienced teachers, with support that stays after you buy.": "دوره‌های ویدیویی، کتاب و کارگاه زنده با مدرس‌های باتجربه، همراه با پشتیبانی که بعد از خرید هم ادامه دارد.",
+"Browse the courses": "مشاهده دوره‌ها",
+"Talk to us": "با ما صحبت کنید",
+"A short video about the academy": "ویدیویی کوتاه درباره آکادمی",
+"Courses and workshops": "دوره و کارگاه",
+"Say they would recommend us": "ما را به دیگران پیشنهاد می‌کنند",
+"Years of teaching": "سال سابقه آموزش",
+"The first class": "اولین کلاس",
+"Twelve learners in a rented room, and a promise to keep lessons short and useful.": "دوازده یادگیرنده در یک اتاق اجاره‌ای، و قولی که درس‌ها کوتاه و کاربردی بمانند.",
+"Going online": "آنلاین شدیم",
+"Our first video course, so people in every city could learn with us.": "اولین دوره ویدیویی ما، تا در هر شهری بتوان با ما یاد گرفت.",
+"A growing team": "تیمی که بزرگ‌تر شد",
+"New teachers joined, and support became a team of its own.": "مدرس‌های تازه به ما پیوستند و پشتیبانی برای خودش یک تیم شد.",
+"Today": "امروز",
+"Thousands of learners, live workshops every month and new courses every season.": "هزاران یادگیرنده، کارگاه زنده در هر ماه و دوره‌های تازه در هر فصل.",
+"Practical first": "اول، کاربردی بودن",
+"Every lesson ends with something you can do the same day.": "هر درس با کاری تمام می‌شود که همان روز می‌توانید انجامش دهید.",
+"Real support": "پشتیبانی واقعی",
+"Questions get answers from people, not bots, every day.": "پاسخ پرسش‌ها را هر روز آدم‌ها می‌دهند، نه ربات‌ها.",
+"Fair prices": "قیمت منصفانه",
+"Clear prices, no surprises, and a refund if a course is not for you.": "قیمت شفاف، بدون هزینه پنهان، و بازگشت وجه اگر دوره مناسب شما نبود.",
+"Always current": "همیشه به‌روز",
+"Courses are reviewed and updated as the field changes.": "دوره‌ها هم‌پای تغییرات هر حوزه بازبینی و به‌روز می‌شوند.",
+"Less theory, more practice": "تئوری کمتر، تمرین بیشتر",
+"We cut what you will never use and keep what you will use this week.": "آنچه هرگز به کارتان نمی‌آید حذف می‌کنیم و آنچه همین هفته به کار می‌برید نگه می‌داریم.",
+"Teachers who do the work": "مدرس‌هایی که خودشان اهل کارند",
+"Everyone who teaches here does the job they teach, every day.": "هر کس اینجا درس می‌دهد، هر روز همان کاری را انجام می‌دهد که آموزش می‌دهد.",
+"Learning does not end at checkout": "یادگیری با خرید تمام نمی‌شود",
+"Updates, answers and a community stay with you after the course.": "به‌روزرسانی‌ها، پاسخ پرسش‌ها و یک جمع هم‌دل بعد از دوره هم کنار شما می‌مانند.",
+"Experienced teachers": "مدرس‌های باتجربه",
+"People who practise what they teach.": "کسانی که آنچه را درس می‌دهند خودشان به کار می‌بندند.",
+"Learn at your pace": "با سرعت خودتان یاد بگیرید",
+"Short videos you can watch on any device.": "ویدیوهای کوتاه که روی هر دستگاهی دیده می‌شوند.",
+"Answers when you are stuck": "پاسخ، هر جا گیر کردید",
+"Ask under any lesson and get a reply.": "زیر هر درس بپرسید و پاسخ بگیرید.",
+"Certificate of completion": "گواهی پایان دوره",
+"Show what you have learned.": "آموخته‌هایتان را نشان دهید.",
+"Yours for good": "برای همیشه مال شما",
+"Lifetime access, with every update.": "دسترسی دائمی، همراه با همه به‌روزرسانی‌ها.",
+"Safe payment": "پرداخت امن",
+"A trusted gateway and a clear refund policy.": "درگاه معتبر و قانون روشن برای بازگشت وجه.",
+"Founder and teacher": "بنیان‌گذار و مدرس",
+"Head of education": "مدیر آموزش",
+"Support lead": "مسئول پشتیبانی",
+"Course designer": "طراح دوره",
+"Team member": "عضو تیم",
+"I wrote to support at midnight and had an answer before class the next morning.": "نیمه‌شب به پشتیبانی پیام دادم و صبح، پیش از کلاس، جوابم را گرفته بودم.",
+"Neda A.": "ندا ا.",
+"Learning with us for two years": "دو سال است با ما یاد می‌گیرد",
+"The lessons are short and to the point. I used the first one at work the same week.": "درس‌ها کوتاه و سرراست‌اند. اولی را همان هفته سر کار به کار بردم.",
+"Reza M.": "رضا م.",
+"Project manager": "مدیر پروژه",
+"It feels like a small school where the teachers know you, even online.": "حس یک مدرسه کوچک را دارد که مدرس‌ها می‌شناسندت، حتی آنلاین.",
+"Sara K.": "سارا ک.",
+"Workshop participant": "شرکت‌کننده کارگاه",
+"Who teaches the courses?": "دوره‌ها را چه کسانی تدریس می‌کنند؟",
+"Teachers who work in the field they teach. Each course page introduces its teacher.": "مدرس‌هایی که در همان حوزه کار می‌کنند. در صفحه هر دوره، مدرس آن معرفی شده است.",
+"Do I get a certificate?": "گواهی می‌گیرم؟",
+"Yes. When you finish a course, you can download a certificate of completion from your account.": "بله. وقتی دوره را تمام کنید، گواهی پایان دوره را از حساب کاربری‌تان دریافت می‌کنید.",
+"Can organisations train their teams with you?": "سازمان‌ها هم می‌توانند تیمشان را با شما آموزش دهند؟",
+"Yes. Write to us and we will suggest a plan with group prices.": "بله. به ما پیام دهید تا برنامه‌ای با قیمت گروهی پیشنهاد کنیم.",
+"How can I teach here?": "چطور می‌توانم اینجا تدریس کنم؟",
+"Send us a short introduction and a sample lesson through the contact page.": "یک معرفی کوتاه و یک درس نمونه از طریق صفحه تماس برای ما بفرستید.",
+"Ready to learn something new?": "آماده یادگیری چیزی تازه هستید؟",
+"Start with a free lesson, or tell us what you need and we will suggest a course.": "با یک درس رایگان شروع کنید، یا بگویید چه می‌خواهید تا دوره مناسب را پیشنهاد کنیم.",
+"We are here to help": "ما اینجاییم تا کمک کنیم",
+"Questions about a course, an order or working together? Pick the way that suits you; we answer every message.": "درباره دوره، سفارش یا همکاری سؤالی دارید؟ هر راهی را که راحت‌ترید انتخاب کنید؛ ما به همه پیام‌ها پاسخ می‌دهیم.",
+"Prefer messengers?": "پیام‌رسان را ترجیح می‌دهید؟",
+"Message us in the app you use every day. We usually reply within an hour during working hours.": "در همان برنامه‌ای که هر روز استفاده می‌کنید پیام دهید. در ساعت کاری معمولاً ظرف یک ساعت پاسخ می‌دهیم.",
+"Thursdays until 13": "پنجشنبه‌ها تا ساعت ۱۳",
+"Find us": "ما را پیدا کنید",
+"Maybe your answer is here": "شاید پاسختان همین‌جا باشد",
+"Send a message and we will get back to you within one working day.": "پیام بفرستید؛ ظرف یک روز کاری پاسخ می‌دهیم.",
+"Other ways to reach us": "راه‌های دیگر ارتباط",
+"Call during working hours or write any time.": "در ساعت کاری تماس بگیرید یا هر وقت خواستید پیام بدهید.",
+"How can we help you?": "چطور می‌توانیم کمکتان کنیم؟",
+"Support centre": "مرکز پشتیبانی",
+"The fastest answer is one message away. Choose a messenger, call the right team, or send us the form below.": "سریع‌ترین پاسخ فقط یک پیام با شما فاصله دارد. پیام‌رسانی را انتخاب کنید، با تیم مربوط تماس بگیرید یا فرم زیر را بفرستید.",
+"Talk to the right team": "با تیم مربوط صحبت کنید",
+"Quick answers": "پاسخ‌های سریع",
+"Still need help?": "هنوز به کمک نیاز دارید؟",
+"Visit us": "به ما سر بزنید",
+"Visits by appointment": "مراجعه حضوری با هماهنگی قبلی",
+"Closed on public holidays": "تعطیلات رسمی تعطیل است",
+"Course advice": "مشاوره انتخاب دوره",
+"Not sure which course fits? Call us, Saturday to Wednesday, 9 to 17.": "نمی‌دانید کدام دوره مناسب شماست؟ شنبه تا چهارشنبه، ۹ تا ۱۷ تماس بگیرید.",
+"Trouble with a video, a download or your account.": "مشکل در پخش ویدیو، دانلود یا حساب کاربری.",
+"Teaching, partnerships and training for organisations.": "تدریس، همکاری و آموزش سازمانی.",
+"Send us a message": "برای ما پیام بفرستید",
+"Fields marked with * are required.": "پر کردن فیلدهای ستاره‌دار (*) لازم است.",
+"How soon will I get an answer?": "چقدر طول می‌کشد تا پاسخ بگیرم؟",
+"Messages sent on working days are answered the same day; others on the next working day.": "پیام‌های روزهای کاری همان روز پاسخ می‌گیرند؛ بقیه در اولین روز کاری بعد.",
+"I paid but cannot see my course. What should I do?": "پرداخت کرده‌ام اما دوره را نمی‌بینم. چه کنم؟",
+"Log in with the email or mobile number you used to pay and open \\\"My courses\\\". If it is not there, send us your order number.": "با همان ایمیل یا شماره موبایلی که با آن پرداخت کرده‌اید وارد شوید و «دوره‌های من» را باز کنید. اگر آنجا نبود، شماره سفارش را برای ما بفرستید.",
+"Do you offer group or company training?": "آموزش گروهی یا سازمانی هم دارید؟",
+"Yes. Choose \\\"Working with us\\\" as the topic in the form and tell us a little about your team.": "بله. در فرم، موضوع «همکاری با ما» را انتخاب کنید و کمی درباره تیمتان بنویسید.",
+"About · Story": "درباره ما · داستان",
+"Hero with a team photo, number tiles that count up, a timeline, values, the team, reviews and a call to action.": "بخش آغازین با عکس تیم، کاشی‌های آمار با شمارش خودکار، خط زمانی، ارزش‌ها، تیم، نظرات و دعوت به اقدام.",
+"About · Minimal": "درباره ما · مینیمال",
+"Centred title, a wide photo, large numbers, what you believe, milestones and questions.": "عنوان وسط‌چین، یک عکس عریض، اعداد بزرگ، باورها، نقطه‌های عطف و پرسش‌ها.",
+"About · Academy": "درباره ما · آکادمی",
+"Curved accent hero with a video, a dark band of large numbers, six reasons, milestones in a row and the teachers.": "بخش آغازین رنگی با لبه منحنی و ویدیو، نوار تیره اعداد بزرگ، شش دلیل، نقطه‌های عطف در یک ردیف و مدرس‌ها.",
+"Contact · Cards": "تماس با ما · کارتی",
+"Four contact cards, the form beside messenger buttons, a map with directions and common questions.": "چهار کارت تماس، فرم در کنار دکمه‌های پیام‌رسان، نقشه با مسیریابی و پرسش‌های پرتکرار.",
+"Contact · Split": "تماس با ما · دوستونه",
+"A dark panel with every way to reach you beside the form, then a map that loads on request.": "پنلی تیره با همه راه‌های ارتباطی در کنار فرم، و نقشه‌ای که با درخواست بازدیدکننده باز می‌شود.",
+"Contact · Support centre": "تماس با ما · مرکز پشتیبانی",
+"Accent hero with messenger buttons, one card per team, questions beside the form, and a map.": "بخش آغازین رنگی با دکمه‌های پیام‌رسان، یک کارت برای هر تیم، پرسش‌ها در کنار فرم، و نقشه.",
+"Ready-made pages": "برگه‌های آماده",
+"Home, about us and contact us pages. Pick a design and create a new page from it. The page is a normal Elementor page: change the texts and pictures, move or remove sections, add your own. Products, categories, posts and teachers come from your site automatically.": "صفحه اصلی، درباره ما و تماس با ما. یک طرح را انتخاب کنید و از آن برگه تازه بسازید. برگه یک برگه عادی المنتور است: متن‌ها و تصویرها را عوض کنید، بخش‌ها را جابه‌جا یا حذف کنید و بخش‌های خودتان را بیفزایید. محصولات، دسته‌ها، نوشته‌ها و مدرس‌ها خودکار از سایت شما خوانده می‌شوند.",
+"Messages sent through the Contact form widget. They are kept here even when email does not work on your host, and each one can also be emailed to you (set the address on the widget).": "پیام‌هایی که از ابزارک «فرم تماس» فرستاده می‌شوند. حتی اگر ایمیل روی هاست شما کار نکند اینجا نگه داشته می‌شوند، و هر کدام می‌تواند به ایمیل شما هم فرستاده شود (نشانی را در تنظیمات ابزارک وارد کنید).",
+"Read the messages": "خواندن پیام‌ها",
+"Contact form": "فرم تماس",
+"Required": "الزامی",
+"Optional": "اختیاری",
+"Studiare+ form": "فرم استادیار+",
+"Name field": "فیلد نام",
+"Your name": "نام شما",
+"Phone field": "فیلد تلفن",
+"Phone field label": "عنوان فیلد تلفن",
+"Mobile number": "شماره موبایل",
+"Email field": "فیلد ایمیل",
+"When phone and email are both optional, visitors must fill in at least one, so you can answer.": "وقتی تلفن و ایمیل هر دو اختیاری باشند، بازدیدکننده باید دست‌کم یکی را پر کند تا بتوانید پاسخ دهید.",
+"Email field label": "عنوان فیلد ایمیل",
+"Topic field": "فیلد موضوع",
+"Choose from a list": "انتخاب از فهرست",
+"Free text (optional)": "متن آزاد (اختیاری)",
+"Topic field label": "عنوان فیلد موضوع",
+"Topics": "موضوع‌ها",
+"One per line. The chosen topic is shown with the message and in the email subject.": "هر موضوع در یک خط. موضوع انتخاب‌شده کنار پیام و در عنوان ایمیل نشان داده می‌شود.",
+"Message field label": "عنوان فیلد پیام",
+"Your message": "پیام شما",
+"Message placeholder": "متن راهنمای فیلد پیام",
+"How can we help?": "چه کمکی از ما برمی‌آید؟",
+"Send message": "ارسال پیام",
+"Text beside the button": "متن کنار دکمه",
+"We usually answer within one working day.": "معمولاً ظرف یک روز کاری پاسخ می‌دهیم.",
+"Thank you! Your message was sent. We will get back to you soon.": "ممنون! پیام شما فرستاده شد. به‌زودی پاسخ می‌دهیم.",
+"Messages": "پیام‌ها",
+"Every message is saved in Studiare+ → Contact messages, even when email does not work on your host.": "هر پیام در استادیار+ ← پیام‌های تماس ذخیره می‌شود، حتی اگر ایمیل روی هاست شما کار نکند.",
+"Also send each message by email": "هر پیام به ایمیل هم فرستاده شود",
+"Send to": "ارسال به",
+"Separate several addresses with commas. Empty: the site's admin email.": "چند نشانی را با ویرگول انگلیسی (,) جدا کنید. خالی: ایمیل مدیر سایت.",
+"Fields only (for a box you style)": "فقط فیلدها (برای کادری که خودتان طراحی می‌کنید)",
+"Fields": "فیلدها",
+"With border": "با حاشیه",
+"Short fields side by side": "فیلدهای کوتاه کنار هم",
+"Name, phone and email share a row on wide screens. Phones always show one field per row.": "در صفحه‌های عریض، نام، تلفن و ایمیل در یک ردیف قرار می‌گیرند. روی گوشی همیشه هر فیلد در یک ردیف است.",
+"Paste the shortcode of your form plugin's form.": "کد کوتاه فرم افزونه فرم‌ساز خود را اینجا بگذارید.",
+"Leave a phone number or an email address so we can answer.": "برای دریافت پاسخ، شماره تلفن یا ایمیل خود را وارد کنید.",
+"(optional)": "(اختیاری)",
+"Choose…": "انتخاب کنید…",
+"Contact details": "راه‌های ارتباطی",
+"Address": "نشانی",
+"Opening hours": "ساعت کاری",
+"The list below": "فهرست زیر",
+"The floating support button's ways to reach us": "راه‌های ارتباطی دکمه شناور پشتیبانی",
+"The second choice shows what you set in Studiare+ → Floating support button, so you type your numbers and usernames once.": "گزینه دوم همان راه‌هایی را نشان می‌دهد که در استادیار+ ← دکمه شناور پشتیبانی تنظیم کرده‌اید؛ این‌طور شماره‌ها و نام‌های کاربری را فقط یک بار وارد می‌کنید.",
+"Type": "نوع",
+"Empty: the type's name": "خالی: نام همان نوع",
+"Number, address or username": "شماره، نشانی یا نام کاربری",
+"Phones and messengers become links: a number (Persian digits work), @username or a link.": "تلفن و پیام‌رسان‌ها لینک می‌شوند: شماره (با ارقام فارسی هم درست است)، \u200E@username یا یک لینک.",
+"Small text below": "متن کوچک زیر آن",
+"For an address: a link to your place on a map.": "برای نشانی: لینک مکان شما روی نقشه.",
+"Brand buttons": "دکمه‌های رنگ برند",
+"Messengers in their own colours; off uses the accent colour for all.": "هر پیام‌رسان با رنگ خودش؛ در حالت خاموش همه با رنگ اصلی نمایش داده می‌شوند.",
+"Switch on and fill in some ways to reach you in Studiare+ → Floating support button.": "در استادیار+ ← دکمه شناور پشتیبانی چند راه ارتباطی را روشن و پر کنید.",
+"Add a phone number, email or messenger.": "یک شماره تلفن، ایمیل یا پیام‌رسان اضافه کنید.",
+"Map": "نقشه",
+"Neshan": "نشان",
+"Balad": "بلد",
+"Google Maps": "گوگل مپ",
+"Waze": "ویز",
+"OpenStreetMap": "اوپن‌استریت‌مپ",
+"Embed code (Neshan, Balad…)": "کد جاسازی (نشان، بلد…)",
+"A picture of the map": "تصویر نقشه",
+"To find the numbers, right-click your place in Google Maps or Neshan and copy its coordinates, e.g. 35.6997, 51.3380.": "برای پیدا کردن این عددها، در گوگل مپ یا نشان روی مکان خود راست‌کلیک کنید و مختصات آن را کپی کنید؛ مثلاً 35.6997, 51.3380.",
+"Latitude": "عرض جغرافیایی",
+"Longitude": "طول جغرافیایی",
+"Zoom": "بزرگ‌نمایی",
+"Embed code or link": "کد جاسازی یا لینک",
+"Paste the \\\"embed\\\" code from Neshan, Balad, Google Maps, OpenStreetMap or Map.ir.": "کد «جاسازی» (embed) را از نشان، بلد، گوگل مپ، اوپن‌استریت‌مپ یا Map.ir اینجا بگذارید.",
+"When scrolled into view": "وقتی به آن برسد",
+"When the visitor asks for it (fastest page)": "وقتی بازدیدکننده بخواهد (سریع‌ترین حالت)",
+"On click, the map shows a light placeholder with a button until the visitor opens it.": "در حالت کلیک، تا بازدیدکننده نقشه را باز نکرده، یک پیش‌نمایش سبک با دکمه نمایش داده می‌شود.",
+"Title for screen readers": "عنوان برای صفحه‌خوان‌ها",
+"Our location on the map": "موقعیت ما روی نقشه",
+"Address and directions": "نشانی و مسیریابی",
+"Address card": "کارت نشانی",
+"Sits on the map on wide screens and under it on phones.": "در صفحه‌های عریض روی نقشه و در گوشی زیر آن قرار می‌گیرد.",
+"Our office": "دفتر ما",
+"Your full address goes here, with the building, floor and unit.": "نشانی کامل شما اینجا قرار می‌گیرد، با پلاک، طبقه و واحد.",
+"Directions buttons": "دکمه‌های مسیریابی",
+"Open your location in the visitor's navigation app. Uses the latitude and longitude above.": "مکان شما را در برنامه مسیریاب بازدیدکننده باز می‌کند. از عرض و طول جغرافیایی بالا استفاده می‌شود.",
+"Paste the embed code of a map from Neshan, Balad, Google Maps, OpenStreetMap or Map.ir.": "کد جاسازی نقشه را از نشان، بلد، گوگل مپ، اوپن‌استریت‌مپ یا Map.ir اینجا بگذارید.",
+"Enter the latitude and longitude of your place.": "عرض و طول جغرافیایی مکان خود را وارد کنید.",
+"Show the map": "نمایش نقشه",
+"Directions with": "مسیریابی با",
+"Timeline": "خط زمانی",
+"Year or date": "سال یا تاریخ",
+"Milestone": "نقطه عطف",
+"Line on the side": "خط در کنار",
+"Both sides of the line": "دو طرف خط",
+"Steps in a row": "مرحله‌ها در یک ردیف",
+"Title tag": "تگ عنوان",
+"Line and dots": "خط و نقطه‌ها",
+"Year": "سال",
+"Large numbers": "اعداد بزرگ",
+"Count up": "شمارش خودکار",
+"Numbers count up from zero when they scroll into view.": "وقتی به اعداد می‌رسید، از صفر تا عدد اصلی شمرده می‌شوند.",
+}
+PYEOF
+echo ok
+
+OUT
+ok
+ترجمه‌ها آماده‌اند. حالا فقط خطوط msgstr خالیِ همین ورودی‌ها را در فایل po. پر می‌کنم و با msgfmt -c بررسی می‌کنم:
+
+
+Bash Fill my translations and validate the .po
+IN
+ME=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad && cp studiare-extensions-fa_IR.po $ME/po-before.po && python3 - <<'EOF'
+import re,sys
+sys.path.insert(0,'/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad')
+from fa import T
+p='studiare-extensions-fa_IR.po'
+s=open(p,encoding='utf-8').read()
+blocks=s.split('\n\n')
+done=set(); out=[]
+for b in blocks:
+    m=re.search(r'^msgid ((?:".*"\n)+)msgstr ""$',b,re.M)
+    if m and 'msgid_plural' not in b:
+        mid=''.join(re.findall(r'"(.*)"',m.group(1)))
+        if mid in T:
+            val=T[mid]
+            assert '"' not in val.replace('\\"',''), mid
+            b=b[:m.end()-len('msgstr ""')]+'msgstr "'+val+'"'+b[m.end():]
+            done.add(mid)
+    out.append(b)
+open(p,'w',encoding='utf-8').write('\n\n'.join(out))
+missing=[k for k in T if k not in done]
+print('filled',len(done),'unused keys',missing)
+EOF
+msgfmt -c -o /dev/null studiare-extensions-fa_IR.po && echo MSGFMT_OK; diff $ME/po-before.po studiare-extensions-fa_IR.po | grep -c "^>"; diff $ME/po-before.po studiare-extensions-fa_IR.po | grep "^[<>]" | grep -v "msgstr" | head
+
+OUT
+filled 263 unused keys []
+MSGFMT_OK
+263
+همهٔ ۲۶۳ ورودی پر شد و msgfmt -c بدون خطاست. یک متن قدیمی همچنان به تب «صفحه‌های اصلی» اشاره می‌کند در حالی که نام تب حالا «صفحه‌ها» است؛ منبع و ترجمهٔ آن را اصلاح می‌کنم.
+Bash Find references to the old tab name
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions && grep -rn "Page templates → Home pages" includes | head; grep -n "Page templates → Home pages" -A1 languages/studiare-extensions-fa_IR.po
+
+OUT
+includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:51:				'description' => __( 'Download the list in Studiare+ → Page templates → Home pages.', 'studiare-extensions' ),
+5063:msgid "Download the list in Studiare+ → Page templates → Home pages."
+5064-msgstr "فهرست را از استادیار+ ← قالب‌ساز صفحات ← صفحه‌های اصلی دریافت کنید."
+Bash Rename the tab in the newsletter help text
+IN
+sed -i '' "s/'Download the list in Studiare+ → Page templates → Home pages.'/'Download the list in Studiare+ → Page templates → Pages.'/" includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php && python3 - <<'EOF'
+p='languages/studiare-extensions-fa_IR.po'
+s=open(p,encoding='utf-8').read()
+o='msgid "Download the list in Studiare+ → Page templates → Home pages."\nmsgstr "فهرست را از استادیار+ ← قالب‌ساز صفحات ← صفحه‌های اصلی دریافت کنید."'
+n='msgid "Download the list in Studiare+ → Page templates → Pages."\nmsgstr "فهرست را از استادیار+ ← قالب‌ساز صفحات ← صفحه‌ها دریافت کنید."'
+assert s.count(o)==1
+open(p,'w',encoding='utf-8').write(s.replace(o,n))
+EOF
+grep -n "→ Pages" includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php; msgfmt -c -o /dev/null languages/studiare-extensions-fa_IR.po && echo OK
+
+OUT
+51:				'description' => __( 'Download the list in Studiare+ → Page templates → Pages.', 'studiare-extensions' ),
+OK
+Handing the .po back to the blog session:
+
+
+SendMessage
+IN
+{
+  "to": "studiare-extentions-fb",
+  "summary": ".po translated, ready for make-mo",
+  "message": "The .po is yours again: all 263 empty entries are filled (only msgstr lines changed, WP-CLI format kept), and `msgfmt -c -o /dev/null` passes. One source-string change after your make-pot: Newsletter_Form.php's help text now says \"Download the list in Studiare+ → Page templates → Pages.\" (the tab was renamed). In the .po I changed that one msgid + msgstr to match. So please regenerate the .pot (or re-run make-pot) before make-mo. I'm now doing my CLAUDE.md edits (targeted), and I'll message when they're done.",
+  "type": "message",
+  "recipient": "studiare-extentions-fb",
+  "content": "The .po is yours again: all 263 empty entries are…"
+}
+OUT
+{"success":true,"message":"“.po translated, ready for make-mo” → studiare-extentions-fb (another Claude session on this machine; queued there — a [Cross-session delivery notice] follows if that session holds it (different permission mode: its user must approve first) or refuses it)","msg_id":"8b21a346-4764-49b6-b04d-845805f85c48"}
+
+Now my CLAUDE.md notes. Reading its current version:
+
+
+Bash Locate CLAUDE.md sections to edit
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions && grep -n "Home_Pages\|Home pages: key contracts\|^## \|Presets/ \|Elementor/  \|assets/\|modules/builder/\|Designs vs pages\|Widgets\.\*\*\|Newsletter\.\*\*\|blog:\|no console errors\|Login popup\|Category icon" CLAUDE.md
+
+OUT
+10:## Non-negotiable rules
+21:## Layout
+61:│       ├── Presets/                 ready-made designs written in PHP (El::box/El::w), registered in Catalog.php (Home.php = home pages,
+64:│       ├── Home_Pages.php           creates real pages from `home` designs, front page switch, list for the admin
+70:│       └── Elementor/               Integration, Parts (shared markup), Cards (product/post cards), Picture (slider/featured image <picture>
+73:├── assets/
+78:│   └── modules/builder/             tokens.css (derived tokens + dark mode, printed inline), builder.css (widgets, layers),
+87:## Adding a new feature (module)
+95:## Bottom navigation: key contracts
+105:## Support button: key contracts
+113:## Page templates (Builder): key contracts
+127:## Slider widget: key contracts
+137:## Home pages: key contracts
+139:- **Designs vs pages.** A home design is an `stx_template` of kind `home` (presets in `Presets/Home.php`, upgraded like the others). "Create page" (`Home_Pages::create()`) copies its Elementor data into a new `page` with `_stx_design`, Elementor's `elementor_header_footer` template and Studiare's `_studiare_disable_title` / `_studiare_disable_breadcrumbs`. Editing a page never touches the design.
+140:- **Widgets.** Home widgets extend `Widgets\Home_Base` (loads `stx-builder-home` CSS/JS only where used). Product and post cards live in `Elementor\Cards`.
+147:- **Newsletter.** Public, cached form: no nonce; honeypot `stx_website` and 5 sign-ups per visitor per 15 minutes. Plain posts go to admin-post.php and redirect back with `?stx_news=` and the form anchor.
+149:## Blog: key contracts
+160:## Product cards and newer home widgets
+166:## Studiare integration points (verified against theme 13.4)
+177:| Login popup | `.register-modal-opener` |
+182:| Category icon | term meta `sc_studi_cat_icon` (attachment ID) |
+186:## Workflows
+200:## Testing (what "done" means)
+209:- blog: each archive design on the posts page, a category, a tag, an author, page 2 and a blog search; each post design with a table (scrolls on phones), code, a long title, no picture, and comments; table of contents jumps and highlights; copy link; dark mode
+210:- no console errors, and nothing new in `wp-content/debug.log`
+Read CLAUDE.md (lines 57-86)
+Read CLAUDE.md (lines 137-211)
+Now the targeted CLAUDE.md edits (layout, the renamed page-designs section, a new about/contact section, integration table and testing):
+
+
+Edit CLAUDE.md
+Added 4 lines
+Edit CLAUDE.md
+Added 1 line
+Edit CLAUDE.md
+Added 1 line
+Edit CLAUDE.md
+Added 1 line
+Edit CLAUDE.md
+Added 10 lines
+Edit CLAUDE.md
+Added 1 line
+Edit CLAUDE.md
+Added 1 line
+CLAUDE.md is updated. Last round: rebuild the min files and one final visual check of the fixes (number tiles aligned, timeline, select2 box, centred buttons):
+
+
+Bash Minify and take final check screenshots
+IN
+node tools/minify.mjs >/dev/null 2>&1; ME=/private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad; cd $ME && ./wp.sh eval-file mkpages.php >/dev/null 2>&1; cd pw && cat > final.mjs <<'EOF'
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+await page.goto('http://127.0.0.1:8888/stx-test-about-story/', { waitUntil: 'networkidle' });
+const tiles = page.locator('.stx-stats--tiles').first();
+await tiles.scrollIntoViewIfNeeded(); await page.waitForTimeout(2500);
+await tiles.screenshot({ path: 'shots/final-tiles.png' });
+await page.goto('http://127.0.0.1:8888/stx-test-contact-cards/', { waitUntil: 'networkidle' });
+const sel = page.locator('.stx-cform__select').first();
+await sel.scrollIntoViewIfNeeded(); await page.waitForTimeout(500);
+await sel.screenshot({ path: 'shots/final-select.png' });
+await browser.close();
+EOF
+node final.mjs && echo done
+
+OUT
+done
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Read final-tiles.png
+Read final-select.png
+The tiles and Persian text now render correctly, but the select still lacks side padding because Studiare's RTL rule outranks mine in specificity. I'll fix this by increasing my rule's specificity, adding the wrapper and select2's --default class.
+Tiles now line up and show the Persian translations. The select2 box still has its text touching the edge and sitting low, so I'll check which rule still wins:
+
+
+Bash Recheck select2 styles in the form
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && node s2.mjs | python3 -c "
+import json,sys
+for e in json.load(sys.stdin):
+    print(e['sel'],'h',e['h'],'pad',e['pad'],'lh',e['lh'],'top',e['topv'])
+    for r in e['rules']:
+        if 'pages' in r or 'rtl' in r: print('   ',r[:230])
+"
+
+OUT
+.stx-cform .select2-selection--single h 50 pad 0px lh 23.8px top auto
+    studiare.css :: body.rtl .select2-container--default .select2-selection--single { min-height: 39px; }
+    pages.min.css :: .stx-cform .select2-container .select2-selection--single { height: 50px; padding: 0px; border: 1px solid var(--stx-field-line); border-radius: 12px; background: var(--stx-field-bg); }
+.stx-cform .select2-selection__rendered h 60 pad 6px 0px lh 48px top auto
+    select2.css :: .select2-container[dir="rtl"] .select2-selection--single .select2-selection__rendered { padding-right: 8px; padding-left: 20px; }
+    studiare.css :: body.rtl .select2-container--default .select2-selection--single .select2-selection__render { padding: 6px 0px; }
+    pages.min.css :: .stx-cform .select2-container .select2-selection--single .select2-selection__rendered { padding-block: 0px; padding-inline: 14px 40px; color: var(--stx-ink); font-size: 16px; line-height: 48px; }
+.stx-cform .select2-selection__arrow h 48 pad 0px lh 23.8px top 8px
+    select2.css :: .select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arro { left: 1px; right: auto; }
+    studiare.css :: body.rtl .select2-container--default .select2-selection--single .select2-selection__arrow { top: 8px; }
+    pages.min.css :: .stx-cform .select2-container .select2-selection--single .select2-selection__arrow { top: 0px; height: 48px; margin-inline: 8px; }
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Studiare's body.rtl … rules (specificity 0,4,1) outrank mine (0,4,0). Adding the --default theme class to my selectors (0,5,0) fixes it without !important:
+
+
+Bash Raise select2 selector specificity and recheck
+IN
+cd /Users/hooman/Documents/Codes/Studiare-Extentions/studiare-extensions/assets/modules/builder/css && python3 - <<'EOF'
+p='pages.css'
+s=open(p,encoding='utf-8').read()
+old_c="/* Studiare's own select2 rules add padding and move the arrow; reset them here. */"
+new_c="/* Studiare's own select2 rules add padding and move the arrow (`body.rtl …`,\n   specificity 0,4,1); the theme class keeps these one class ahead. */"
+assert s.count(old_c)==1; s=s.replace(old_c,new_c)
+for part in ['.select2-selection--single {','.select2-selection--single .select2-selection__rendered {','.select2-selection--single .select2-selection__arrow {']:
+    o='.stx-cform .select2-container '+part
+    assert s.count(o)==1,o
+    s=s.replace(o,'.stx-cform .select2-container.select2-container--default '+part)
+open(p,'w',encoding='utf-8').write(s)
+EOF
+cd /Users/hooman/Documents/Codes/Studiare-Extentions && node tools/minify.mjs >/dev/null 2>&1; cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && node final.mjs && node s2.mjs | python3 -c "
+import json,sys
+for e in json.load(sys.stdin): print(e['sel'],'h',e['h'],'pad',e['pad'],'top',e['topv'])"
+
+OUT
+.stx-cform .select2-selection--single h 50 pad 0px top auto
+.stx-cform .select2-selection__rendered h 48 pad 0px 14px 0px 40px top auto
+.stx-cform .select2-selection__arrow h 48 pad 0px top 0px
+Shell cwd was reset to /Users/hooman/Documents/Codes/Studiare-Extentions
+Read final-select.png
+The text is fixed. The small arrow still sits high; checking its inner <b>:
+
+
+Bash Inspect the select2 arrow glyph styles
+IN
+cd /private/tmp/claude-501/-Users-hooman-Documents-Codes-Studiare-Extentions/978db68a-b14d-4bae-874a-2a757765bc48/scratchpad/pw && sed -i '' "s#pick('.stx-cform .select2-selection__arrow') \]#pick('.stx-cform .select2-selection__arrow'), pick('.stx-cform .select2-selection__arrow b') ]#" s2.mjs && node s2.mjs | python3 -c "
+import json,sys
+e=json.load(sys.stdin)[-1]; print(e['h'],e['topv'],e['pos'])
+for r in e['rules']: print('  ',r[:200])"
+
+OUT
+24.796875 50% static
+   select2.css :: .select2-container--default .select2-selection--single .select2-selection__arrow b { border-color: rgb(136, 136, 136) transparent transparent; border-style: solid; border-width: 5px 4px
+   studiare.css :: *, ::before, ::after { box-sizing: border-box; }
+   studiare.css :: b, strong { font-weight: 800; }
+   studiare.css :: body .select2-container--default .select2-selectio

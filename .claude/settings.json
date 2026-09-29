@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip -l studiare-online-learning-wordpress-theme-update-13.4.zip)",
+      "Read(//Users/hooman/.claude/skills/**)",
+      "Read(//Users/hooman/.claude/plugins/**)",
+      "Bash(awk '{print $4}')",
+      "Bash(grep -v '/$')",
+      "Bash(unzip -p studiare-online-learning-wordpress-theme-update-13.4.zip studiare/inc/mobile_btm_menu.php)",
+      "Bash(unzip -p studiare-online-learning-wordpress-theme-update-13.4.zip studiare/assets/css/mobile-btm-menu.css)",
+      "Bash(unzip -p studiare-online-learning-wordpress-theme-update-13.4.zip studiare/assets/js/mobile-btm-menu.js)",
+      "Bash(zipgrep -n 'mobile_btm_menu\\\\|mobile-btm-menu\\\\|show_mobile_bottom_navbar\\\\|mobile-button-nav-blocks\\\\|mobile_more_menu\\\\|btm_account_link\\\\|mobileMenuData' studiare-online-learning-wordpress-theme-update-13.4.zip)",
+      "Bash(zipgrep -n show_mobile_bottom_navbar studiare-online-learning-wordpress-theme-update-13.4.zip studiare/inc/backend_panels/header.php)",
+      "Bash(echo \"rc=$?\")",
+      "Bash(zipgrep -n -E 'mobile_btm_menu|mobile-btm-menu|show_mobile_bottom_navbar|mobile-button-nav-blocks|mobile_more_menu|btm_account_link|mobileMenuData' studiare-online-learning-wordpress-theme-update-13.4.zip studiare/*.php)",
+      "Bash(unzip -p studiare-online-learning-wordpress-theme-update-13.4.zip studiare/inc/backend_panels/header.php)"
+    ]
+  }
+}
