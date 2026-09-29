@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Studiare Extensions
  * Description:       Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers and footers, and a floating support button.
- * Version:           1.6.0
+ * Version:           1.7.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Hooman Jamshidi
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'STUDIARE_EXT_VERSION', '1.6.0' );
+define( 'STUDIARE_EXT_VERSION', '1.7.0' );
 define( 'STUDIARE_EXT_FILE', __FILE__ );
 define( 'STUDIARE_EXT_DIR', plugin_dir_path( __FILE__ ) );
 define( 'STUDIARE_EXT_URL', plugin_dir_url( __FILE__ ) );

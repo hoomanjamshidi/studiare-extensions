@@ -3986,6 +3986,43 @@ body.stx-bn-on.stx-bn-is-hidden .stx-buybar {
 	font-weight: 500;
 }
 
+/* The drawer lives outside .stx-nav (it moves to <body>), so --stx-nav-active is
+   only set when the widget's colour control is used. Five classes also keep the
+   colour over Studiare's dark mode link rule (0,3,5). */
+.stx-menu--drawer .stx-menu__item:is(.is-current, .is-ancestor) > .stx-menu__row > .stx-menu__link {
+	color: var(--stx-nav-active, var(--stx-accent-ink));
+}
+
+/* Second menu: two equal tabs above the lists. Their line replaces the head's. */
+.stx-drawer__head:has(+ .stx-drawer__tabs) {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.stx-drawer__tabs .stx-tabs__nav {
+	gap: 0;
+	margin-bottom: 4px;
+	overflow: visible;
+	border-bottom: 3px solid var(--stx-line);
+}
+
+.stx-drawer__tabs .stx-tabs__tab {
+	flex: 1 1 0;
+	min-width: 0;
+	min-height: 48px;
+	margin-bottom: -3px;
+	padding: 10px 8px;
+	text-align: center;
+}
+
+.stx-drawer__tabs .stx-tabs__tab.is-active {
+	color: var(--stx-accent-ink);
+}
+
+.stx-drawer__tabs .stx-tabs__panel {
+	gap: 0;
+}
+
 .stx-drawer__cta {
 	margin-top: auto;
 }

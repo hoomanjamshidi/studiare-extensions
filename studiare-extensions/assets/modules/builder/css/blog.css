@@ -6,7 +6,8 @@
  * Studiare's dark mode apply. Logical properties keep RTL and LTR correct;
  * every tap target is at least 44px on touch screens.
  *
- * Sections: page · page title · categories & tags · post title · details ·
+ * Sections: page · page title · categories & tags · category cards · post
+ * title · details ·
  * featured image · content · table of contents · share · author · previous
  * & next · comments · reading progress · phones · dark mode · motion
  */
@@ -35,6 +36,11 @@
 }
 
 .stx-terms__link:focus-visible,
+.stx-terms__toggle:focus-visible,
+a.stx-bcat:focus-visible,
+.stx-bcat__name a:focus-visible,
+.stx-bcat__post:focus-visible,
+.stx-bcat__more:focus-visible,
 .stx-tags__tag:focus-visible,
 .stx-posttitle__cat:focus-visible,
 .stx-pmeta a:focus-visible,
@@ -182,14 +188,24 @@
 	color: inherit;
 }
 
-/* Sidebar list: full-width rows with the count at the end. */
-.stx-terms--list .stx-terms__list {
+/* A dot in the category's own colour (Studiare's "Featured Color"). */
+.stx-terms__link.has-color::before {
+	content: "";
+	flex: none;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--stx-cat);
+}
+
+/* Sidebar lists and the drop-down: full-width rows with the count at the end. */
+.stx-terms:is(.stx-terms--list, .stx-terms--tree, .stx-terms--dropdown) .stx-terms__list {
 	flex-direction: column;
+	flex-wrap: nowrap;
 	gap: 2px;
 }
 
-.stx-terms--list .stx-terms__link {
-	justify-content: space-between;
+.stx-terms:is(.stx-terms--list, .stx-terms--tree, .stx-terms--dropdown) .stx-terms__link {
 	width: 100%;
 	min-height: 44px;
 	padding: 0 12px;
@@ -200,19 +216,189 @@
 	white-space: normal;
 }
 
-.stx-terms--list .stx-terms__link:hover {
+.stx-terms:is(.stx-terms--list, .stx-terms--tree, .stx-terms--dropdown) .stx-terms__name {
+	flex: 1;
+	min-width: 0;
+}
+
+.stx-terms:is(.stx-terms--list, .stx-terms--tree, .stx-terms--dropdown) .stx-terms__link:hover {
 	border-color: transparent;
 	background: var(--stx-bg);
 }
 
-.stx-terms--list .stx-terms__link.is-active {
+.stx-terms:is(.stx-terms--list, .stx-terms--tree, .stx-terms--dropdown) .stx-terms__link.is-active {
 	--stx-link: var(--stx-accent-ink);
 	background: var(--stx-accent-soft);
 	color: var(--stx-accent-ink);
 }
 
-.stx-terms--list .stx-terms__link.is-active .stx-terms__count {
+.stx-terms:is(.stx-terms--list, .stx-terms--tree, .stx-terms--dropdown) .stx-terms__link.is-active .stx-terms__count {
 	background: var(--stx-card);
+}
+
+/* Subcategories: indented under their category, a little quieter. */
+.stx-terms__sub {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin: 2px 0 6px;
+	margin-inline-start: 18px;
+	padding: 0;
+	padding-inline-start: 8px;
+	border-inline-start: 1px dashed var(--stx-line);
+	list-style: none;
+}
+
+.stx-terms__sub li {
+	margin: 0;
+}
+
+.stx-terms--tree .stx-terms__sub .stx-terms__link {
+	--stx-link: var(--stx-muted);
+	min-height: 40px;
+	color: var(--stx-muted);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.stx-terms--tree .stx-terms__sub .stx-terms__link:hover {
+	--stx-link: var(--stx-ink);
+	color: var(--stx-ink);
+}
+
+/* Tabs: text links over a line; the current one is underlined in its colour. */
+.stx-terms--tabs .stx-terms__list {
+	flex-wrap: nowrap;
+	justify-content: safe var(--stx-justify, flex-start);
+	gap: 4px;
+	overflow-x: auto;
+	border-block-end: 1px solid var(--stx-line);
+	scrollbar-width: none;
+}
+
+.stx-terms--tabs .stx-terms__list::-webkit-scrollbar {
+	display: none;
+}
+
+.stx-terms--tabs .stx-terms__link {
+	--stx-link: var(--stx-muted);
+	position: relative;
+	min-height: 48px;
+	padding: 0 14px;
+	border: 0;
+	border-radius: 0;
+	background: none;
+	color: var(--stx-muted);
+}
+
+.stx-terms--tabs .stx-terms__link.has-color::before {
+	display: none;
+}
+
+.stx-terms--tabs .stx-terms__link::after {
+	content: "";
+	position: absolute;
+	inset-inline: 10px;
+	inset-block-end: 0;
+	height: 3px;
+	border-radius: 3px 3px 0 0;
+	background: var(--stx-cat, var(--stx-accent));
+	transform: scaleX(0);
+	transition: transform 0.25s var(--stx-ease);
+}
+
+.stx-terms--tabs .stx-terms__link:hover,
+.stx-terms--tabs .stx-terms__link.is-active {
+	--stx-link: var(--stx-ink);
+	background: none;
+	color: var(--stx-ink);
+}
+
+.stx-terms--tabs .stx-terms__link.is-active::after {
+	transform: scaleX(1);
+}
+
+.stx-terms--tabs .stx-terms__link.is-active .stx-terms__count {
+	background: var(--stx-accent-soft);
+	color: var(--stx-accent-ink);
+}
+
+/* Drop-down: a native <details>; the list opens over the content below. */
+.stx-terms--dropdown {
+	display: flex;
+	justify-content: var(--stx-justify, flex-start);
+}
+
+.stx-terms__menu {
+	position: relative;
+	width: min(100%, 340px);
+}
+
+.stx-terms__toggle {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 48px;
+	padding: 0 16px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius-sm);
+	background: var(--stx-card);
+	color: var(--stx-ink);
+	font-size: 14px;
+	font-weight: 700;
+	list-style: none;
+	cursor: pointer;
+	transition: border-color 0.2s ease;
+}
+
+.stx-terms__toggle::-webkit-details-marker {
+	display: none;
+}
+
+.stx-terms__toggle:hover,
+.stx-terms__menu[open] > .stx-terms__toggle {
+	border-color: var(--stx-ink);
+}
+
+.stx-terms__label {
+	color: var(--stx-muted);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.stx-terms__current {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.stx-terms__chev {
+	flex: none;
+	width: 18px;
+	height: 18px;
+	color: var(--stx-muted);
+	transition: transform 0.2s ease;
+}
+
+.stx-terms__menu[open] .stx-terms__chev {
+	transform: rotate(180deg);
+}
+
+.stx-terms__menu > .stx-terms__list {
+	position: absolute;
+	inset-inline: 0;
+	top: calc(100% + 6px);
+	z-index: 30;
+	max-height: min(60vh, 420px);
+	padding: 6px;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius-sm);
+	background: var(--stx-card);
+	box-shadow: var(--stx-shadow-pop);
 }
 
 .stx-tags {
@@ -254,6 +440,413 @@
 	--stx-link: var(--stx-accent-ink);
 	background: var(--stx-accent-soft);
 	color: var(--stx-accent-ink);
+}
+
+/* ==========================================================================
+   Category cards (Blog categories: icon cards, picture cards, name over the
+   picture, with their newest posts)
+   ========================================================================== */
+
+.stx-bcats {
+	display: grid;
+	grid-template-columns: repeat(var(--stx-cols, 3), minmax(0, 1fr));
+	gap: 16px;
+}
+
+/* --stx-cat is the category's own colour (Studiare), else the accent. Its
+   "ink" is pulled towards the text colour, so small text and icons on its
+   soft tint stay readable in light and dark mode. */
+.stx-bcat {
+	--stx-link: var(--stx-ink);
+	--stx-cat-ink: color-mix(in srgb, var(--stx-cat, var(--stx-accent-strong)) 64%, var(--stx-ink));
+	--stx-cat-soft: color-mix(in srgb, var(--stx-cat, var(--stx-accent)) 14%, var(--stx-card));
+	position: relative;
+	display: flex;
+	min-width: 0;
+	color: var(--stx-ink);
+	text-decoration: none;
+}
+
+.stx-bcat__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.stx-bcat__name {
+	color: var(--stx-ink);
+	font-size: 15.5px;
+	font-weight: 800;
+	line-height: 1.6;
+}
+
+.stx-bcat__count {
+	color: var(--stx-muted);
+	font-size: 12.5px;
+	line-height: 1.6;
+}
+
+.stx-bcat__desc {
+	display: -webkit-box;
+	margin: 0;
+	overflow: hidden;
+	color: var(--stx-text);
+	font-size: 13px;
+	line-height: 1.8;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.stx-bcat__mark,
+.stx-bcat__tile {
+	display: grid;
+	place-items: center;
+	background: var(--stx-cat-soft);
+	color: var(--stx-cat-ink);
+}
+
+.stx-bcat__mark {
+	flex: none;
+	width: 48px;
+	height: 48px;
+	border-radius: 14px;
+}
+
+.stx-bcat__mark .stx-ico {
+	width: 22px;
+	height: 22px;
+}
+
+.stx-bcat__tile {
+	width: 100%;
+	height: 100%;
+}
+
+.stx-bcat__tile .stx-ico {
+	width: 44px;
+	height: 44px;
+}
+
+/* Studiare's category icons are pictures. Two classes: Elementor's
+   `.elementor img` would reset their height. */
+.stx-bcat .stx-bcat__mark img {
+	width: 28px;
+	height: 28px;
+	object-fit: contain;
+}
+
+.stx-bcat .stx-bcat__tile img {
+	width: 56px;
+	height: 56px;
+	object-fit: contain;
+}
+
+.stx-bcat__media {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	aspect-ratio: var(--stx-ratio, 4 / 3);
+	background: var(--stx-cat-soft);
+}
+
+.stx-bcat__pic {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.stx-bcat .stx-bcat__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.5s var(--stx-ease);
+}
+
+a.stx-bcat:hover .stx-bcat__img {
+	transform: scale(1.04);
+}
+
+/* The chevron points left, which is "forward" in RTL. */
+.stx-bcat__go svg,
+.stx-bcat__arrow svg {
+	display: block;
+	width: 15px;
+	height: 15px;
+	scale: -1 1;
+}
+
+[dir="rtl"] .stx-bcat__go svg,
+[dir="rtl"] .stx-bcat__arrow svg {
+	scale: 1;
+}
+
+/* Icon cards */
+.stx-bcats--cards .stx-bcat {
+	align-items: center;
+	gap: 14px;
+	padding: 18px 20px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+	box-shadow: var(--stx-shadow);
+	transition: border-color 0.2s ease, transform 0.2s var(--stx-ease);
+}
+
+.stx-bcats--cards .stx-bcat:hover {
+	border-color: var(--stx-cat, var(--stx-accent));
+	transform: translateY(-2px);
+}
+
+.stx-bcats--cards .stx-bcat.is-active {
+	border-color: var(--stx-cat, var(--stx-accent));
+}
+
+.stx-bcat__go {
+	display: grid;
+	place-items: center;
+	flex: none;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: var(--stx-bg);
+	color: var(--stx-muted);
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.stx-bcat:hover .stx-bcat__go {
+	background: var(--stx-ink);
+	color: var(--stx-card);
+}
+
+/* Picture cards */
+.stx-bcats--covers .stx-bcat {
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stx-bcats--covers .stx-bcat:hover,
+.stx-bcats--covers .stx-bcat.is-active {
+	border-color: var(--stx-cat, var(--stx-accent));
+	box-shadow: var(--stx-shadow);
+}
+
+.stx-bcats--covers .stx-bcat__body {
+	gap: 6px;
+	padding: 16px 18px 18px;
+}
+
+.stx-bcats--covers .stx-bcat__name {
+	font-size: 16.5px;
+}
+
+.stx-bcats--covers .stx-bcat__count {
+	align-self: flex-start;
+	padding: 1px 10px;
+	border-radius: 999px;
+	background: var(--stx-cat-soft);
+	color: var(--stx-cat-ink);
+	font-weight: 700;
+}
+
+/* Name over the picture */
+.stx-bcats--overlay .stx-bcat {
+	overflow: hidden;
+	border-radius: var(--stx-radius);
+	background: #171c1f;
+	isolation: isolate;
+}
+
+.stx-bcats--overlay .stx-bcat__media {
+	width: 100%;
+	background: color-mix(in srgb, var(--stx-cat, var(--stx-accent)) 45%, #171c1f);
+}
+
+.stx-bcats--overlay .stx-bcat__tile {
+	background: none;
+	color: rgba(255, 255, 255, 0.72);
+}
+
+/* The shade is a pseudo-element on purpose: Elementor strips background
+   images from every element inside sections that have not scrolled into view
+   yet (`.e-con.e-parent:not(.e-lazyloaded) *`), which would leave white text
+   on a light picture; pseudo-elements are not matched by that rule. */
+.stx-bcats--overlay .stx-bcat__media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to top, rgba(15, 19, 21, 0.92), rgba(15, 19, 21, 0.4) 45%, rgba(15, 19, 21, 0) 72%);
+	pointer-events: none;
+}
+
+.stx-bcats--overlay .stx-bcat__body {
+	position: absolute;
+	inset: auto 0 0;
+	z-index: 1;
+	gap: 6px;
+	padding: 18px;
+}
+
+.stx-bcats--overlay .stx-bcat__body::before {
+	content: "";
+	width: 28px;
+	height: 3px;
+	margin-block-end: 4px;
+	border-radius: 3px;
+	background: var(--stx-cat, var(--stx-accent));
+}
+
+.stx-bcats--overlay .stx-bcat__name {
+	color: #ffffff;
+	font-size: 17px;
+}
+
+.stx-bcats--overlay .stx-bcat__count {
+	color: rgba(255, 255, 255, 0.82);
+}
+
+/* With their newest posts */
+.stx-bcats--posts .stx-bcat {
+	flex-direction: column;
+	gap: 14px;
+	padding: 20px;
+	border: 1px solid var(--stx-line);
+	border-radius: var(--stx-radius);
+	background: var(--stx-card);
+}
+
+.stx-bcats--posts .stx-bcat.is-active {
+	border-color: var(--stx-cat, var(--stx-accent));
+}
+
+.stx-bcat__head {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	min-width: 0;
+}
+
+.stx-bcat__titles {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+/* An <h3>: Studiare gives headings their own font, smaller than the card's text. */
+.stx-bcat__head .stx-bcat__name {
+	margin: 0;
+	font-family: inherit;
+	font-size: 17px;
+	line-height: 1.5;
+}
+
+.stx-bcat__name a {
+	--stx-link: var(--stx-ink);
+	color: inherit;
+	text-decoration: none;
+}
+
+.stx-bcat__name a:hover {
+	--stx-link: var(--stx-accent-ink);
+	color: var(--stx-accent-ink);
+}
+
+.stx-bcat__posts {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-bcat__posts li {
+	margin: 0;
+}
+
+.stx-bcat__posts li + li {
+	border-block-start: 1px dashed var(--stx-line);
+}
+
+.stx-bcat__post {
+	--stx-link: var(--stx-ink);
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-block: 10px;
+	color: var(--stx-ink);
+	text-decoration: none;
+}
+
+.stx-bcat__thumb {
+	flex: none;
+	width: 56px;
+	height: 56px;
+	overflow: hidden;
+	border-radius: 12px;
+	background: var(--stx-cat-soft);
+}
+
+.stx-bcat__thumb .stx-bcat__tile .stx-ico {
+	width: 22px;
+	height: 22px;
+}
+
+.stx-bcat .stx-bcat__thumb .stx-bcat__tile img {
+	width: 28px;
+	height: 28px;
+}
+
+.stx-bcat__ptext {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.stx-bcat__ptitle {
+	display: -webkit-box;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.7;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	transition: color 0.2s ease;
+}
+
+.stx-bcat__post:hover .stx-bcat__ptitle {
+	color: var(--stx-accent-ink);
+}
+
+.stx-bcat__post time {
+	color: var(--stx-muted);
+	font-size: 12px;
+}
+
+.stx-bcat__more {
+	--stx-link: var(--stx-accent-ink);
+	display: inline-flex;
+	align-items: center;
+	align-self: flex-start;
+	gap: 6px;
+	min-height: 44px;
+	margin-block-start: auto;
+	color: var(--stx-accent-ink);
+	font-size: 13.5px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.stx-bcat__more:hover {
+	--stx-link: var(--stx-ink);
+	color: var(--stx-ink);
 }
 
 /* ==========================================================================
@@ -1143,8 +1736,9 @@
 		font-size: 14px;
 	}
 
-	/* Category buttons scroll sideways in one line, edge to edge. */
-	.stx-terms--chips .stx-terms__list {
+	/* Category buttons and tabs scroll sideways in one line, edge to edge
+	   (blog.js brings the current one into view). */
+	.stx-terms:is(.stx-terms--chips, .stx-terms--tabs) .stx-terms__list {
 		flex-wrap: nowrap;
 		justify-content: flex-start;
 		margin-inline: calc(var(--stx-bleed, 16px) * -1);
@@ -1159,6 +1753,44 @@
 
 	.stx-terms__link {
 		min-height: 44px;
+	}
+
+	.stx-terms__menu {
+		width: 100%;
+	}
+
+	.stx-bcats--cards .stx-bcat {
+		padding: 16px;
+	}
+
+	.stx-bcats--posts .stx-bcat {
+		padding: 18px 16px;
+	}
+
+	/* "Swipe row on phones": the same row as .stx-swipe in home.css, which
+	   blog pages do not load. Positioned, so hidden text in off-screen cards
+	   is clipped too instead of widening the page. */
+	.stx-bcats--swipe {
+		position: relative;
+		display: flex;
+		gap: 12px;
+		margin-inline: calc(var(--stx-bleed, 16px) * -1);
+		padding-inline: var(--stx-bleed, 16px);
+		padding-block-end: 8px;
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-padding-inline: var(--stx-bleed, 16px);
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.stx-bcats--swipe::-webkit-scrollbar {
+		display: none;
+	}
+
+	.stx-bcats--swipe > * {
+		flex: 0 0 min(80%, 300px);
+		scroll-snap-align: start;
 	}
 
 	.stx-posttitle__lead {
@@ -1222,7 +1854,8 @@
 
 @media (pointer: coarse) {
 	.stx-tags__tag,
-	.stx-toc__link {
+	.stx-toc__link,
+	.stx-terms--tree .stx-terms__sub .stx-terms__link {
 		min-height: 44px;
 	}
 }
@@ -1234,7 +1867,7 @@
 /* Studiare's dark mode colours every link white with a selector no class can
    outrank (`body.scdarkcolors a:not(…)`): links that set their own colour keep
    it through --stx-link (see home.css). */
-body.scdarkcolors a:is(.stx-terms__link, .stx-tags__tag, .stx-posttitle__cat, .stx-toc__link, .stx-share__btn, .stx-author__name, .stx-author__more, .stx-pnav__link, .stx-prose a) {
+body.scdarkcolors a:is(.stx-terms__link, .stx-bcat, .stx-bcat__post, .stx-bcat__more, .stx-bcat__name a, .stx-tags__tag, .stx-posttitle__cat, .stx-toc__link, .stx-share__btn, .stx-author__name, .stx-author__more, .stx-pnav__link, .stx-prose a) {
 	color: var(--stx-link) !important;
 }
 
@@ -1247,7 +1880,8 @@ body.scdarkcolors a:is(.stx-terms__link, .stx-tags__tag, .stx-posttitle__cat, .s
    ========================================================================== */
 
 @media (prefers-reduced-motion: no-preference) {
-	.stx-terms--chips .stx-terms__list {
+	.stx-terms:is(.stx-terms--chips, .stx-terms--tabs) .stx-terms__list,
+	.stx-bcats--swipe {
 		scroll-behavior: smooth;
 	}
 
@@ -1260,7 +1894,16 @@ body.scdarkcolors a:is(.stx-terms__link, .stx-tags__tag, .stx-posttitle__cat, .s
 	.stx-toc__sign::before,
 	.stx-toc__sign::after,
 	.stx-pnav__link,
-	.stx-share__btn {
+	.stx-share__btn,
+	.stx-terms--tabs .stx-terms__link::after,
+	.stx-terms__chev,
+	.stx-bcat,
+	.stx-bcat .stx-bcat__img {
 		transition: none;
+	}
+
+	.stx-bcats--cards .stx-bcat:hover,
+	a.stx-bcat:hover .stx-bcat__img {
+		transform: none;
 	}
 }

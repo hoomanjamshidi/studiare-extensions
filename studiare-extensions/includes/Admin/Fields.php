@@ -24,7 +24,8 @@ final class Fields {
 	 *
 	 * @param string $path  Settings path.
 	 * @param string $label Field label.
-	 * @param array  $args  Shared args.
+	 * @param array  $args  Shared args, plus `chip` (string[]): a status chip after
+	 *                      the label, as text and tone (`accent`, `warn` or '').
 	 */
 	public static function toggle( string $path, string $label, array $args = array() ): void {
 		$id = self::id( $path );
@@ -32,7 +33,12 @@ final class Fields {
 		?>
 		<label class="stx-switch-row" for="<?php echo esc_attr( $id ); ?>">
 			<span class="stx-switch-row__text">
-				<span class="stx-field__label"><?php echo esc_html( $label ); ?></span>
+				<span class="stx-field__label">
+					<?php echo esc_html( $label ); ?>
+					<?php if ( ! empty( $args['chip'] ) ) : ?>
+						<span class="stx-chip<?php echo empty( $args['chip'][1] ) ? '' : esc_attr( ' stx-chip--' . $args['chip'][1] ); ?>"><?php echo esc_html( $args['chip'][0] ); ?></span>
+					<?php endif; ?>
+				</span>
 				<?php self::help( $args ); ?>
 			</span>
 			<span class="stx-switch">

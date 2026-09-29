@@ -5,7 +5,7 @@
  *
  * Automatic tiles use the icon picked for the category in Studiare (the
  * category's "Featured icon" image) and otherwise cycle through a set of
- * bundled icons, so a fresh site already looks finished.
+ * bundled icons (Category_Parts), so a fresh site already looks finished.
  *
  * @package StudiareExt
  */
@@ -14,16 +14,11 @@ namespace StudiareExt\Modules\Builder\Elementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
+use StudiareExt\Modules\Builder\Elementor\Category_Parts;
 
 defined( 'ABSPATH' ) || exit;
 
 final class Category_Grid extends Home_Base {
-
-	/** Bundled icons given to automatic tiles in turn. */
-	private const ICONS = array( 'book', 'video', 'graduation', 'chart', 'heart', 'clock', 'star', 'compass' );
-
-	/** Studiare's per-category icon (attachment ID). */
-	private const THEME_ICON_META = 'sc_studi_cat_icon';
 
 	public function get_name(): string {
 		return 'stx-category-grid';
@@ -288,14 +283,12 @@ final class Category_Grid extends Home_Base {
 		$items  = array();
 
 		foreach ( $terms as $index => $term ) {
-			$icon_id = (int) get_term_meta( $term->term_id, self::THEME_ICON_META, true );
-
 			$items[] = array(
 				'title' => html_entity_decode( $term->name, ENT_QUOTES, 'UTF-8' ),
 				'note'  => str_replace( '{count}', self::num( (int) $term->count ), $format ),
 				'url'   => (string) get_term_link( $term ),
-				'icon'  => self::ICONS[ $index % count( self::ICONS ) ],
-				'image' => $icon_id ? (string) wp_get_attachment_image( $icon_id, 'thumbnail', false, array( 'alt' => '' ) ) : '',
+				'icon'  => Category_Parts::fallback_icon( $index ),
+				'image' => Category_Parts::theme_icon( $term ),
 			);
 		}
 

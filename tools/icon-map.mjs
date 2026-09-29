@@ -155,5 +155,6 @@ export const ICONS = [
   { key: 'copy', label: 'کپی', keywords: 'copy duplicate کپی', fa: 'fa-copy', names: { lucide: 'copy', tabler: 'copy', phosphor: 'copy', heroicons: 'document-duplicate', bootstrap: 'copy' } },
   { key: 'trash', label: 'حذف', keywords: 'trash delete حذف', fa: 'fa-trash-alt', names: { lucide: 'trash-2', tabler: 'trash', phosphor: 'trash', heroicons: 'trash', bootstrap: 'trash' } },
   { key: 'grip', label: 'جابجایی', keywords: 'grip drag move جابجایی', fa: 'fa-grip-vertical', names: { lucide: 'grip-vertical', tabler: 'grip-vertical', phosphor: 'dots-six-vertical', heroicons: null, bootstrap: 'grip-vertical' } },
+  { key: 'wrench', label: 'آچار', keywords: 'wrench tool fix repair debug آچار ابزار تعمیر', fa: 'fa-wrench', names: { lucide: 'wrench', tabler: 'tool', phosphor: 'wrench', heroicons: 'wrench', bootstrap: 'wrench' } },
   { key: 'chevron-down', label: 'فلش پایین', keywords: 'chevron caret down فلش', fa: 'fa-chevron-down', names: { lucide: 'chevron-down', tabler: 'chevron-down', phosphor: 'caret-down', heroicons: 'chevron-down', bootstrap: 'chevron-down' } },
 ];

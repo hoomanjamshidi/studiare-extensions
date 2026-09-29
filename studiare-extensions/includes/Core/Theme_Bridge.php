@@ -32,6 +32,18 @@ final class Theme_Bridge {
 		'dark_text'    => '#ffffff',
 	);
 
+	/**
+	 * Term meta where Studiare keeps the "Featured Icon" (attachment ID) of a
+	 * category: blog categories and product categories use different keys.
+	 */
+	private const CATEGORY_ICON_META = array(
+		'category'    => 'sc_studi_blog_cat_icon',
+		'product_cat' => 'sc_studi_cat_icon',
+	);
+
+	/** Term meta with a blog category's "Featured Color" (product categories have none). */
+	private const CATEGORY_COLOR_META = 'sc_studi_blog_cat_color';
+
 	/** @var array|null Memoized Redux options. */
 	private static $options = null;
 
@@ -144,6 +156,31 @@ final class Theme_Bridge {
 	/** Whether the theme's dark mode feature is switched on. */
 	public static function dark_mode_available(): bool {
 		return self::is_active() && (bool) self::option( 'sc_darkmode_ready', false );
+	}
+
+	/**
+	 * Icon picked for a category in Studiare's category screen, or 0.
+	 *
+	 * @param \WP_Term $term Blog or product category.
+	 */
+	public static function category_icon_id( \WP_Term $term ): int {
+		$key = self::CATEGORY_ICON_META[ $term->taxonomy ] ?? '';
+
+		return '' !== $key ? absint( get_term_meta( $term->term_id, $key, true ) ) : 0;
+	}
+
+	/**
+	 * Colour picked for a blog category in Studiare's category screen, as a
+	 * hex colour, or ''.
+	 *
+	 * @param \WP_Term $term Blog category.
+	 */
+	public static function category_color( \WP_Term $term ): string {
+		if ( 'category' !== $term->taxonomy ) {
+			return '';
+		}
+
+		return (string) sanitize_hex_color( (string) get_term_meta( $term->term_id, self::CATEGORY_COLOR_META, true ) );
 	}
 
 	/**

@@ -179,31 +179,35 @@ abstract class Base extends Widget_Base {
 	 * @param string $name          Control name.
 	 * @param string $selector      Selector (relative to the widget).
 	 * @param string $default_value Default value.
+	 * @param array  $extra         More control arguments (e.g. `condition`).
 	 */
-	protected function add_align_control( string $name, string $selector, string $default_value = '' ): void {
+	protected function add_align_control( string $name, string $selector, string $default_value = '', array $extra = array() ): void {
 		$this->add_responsive_control(
 			$name,
-			array(
-				'label'     => __( 'Alignment', 'studiare-extensions' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'options'   => array(
-					'start'  => array(
-						'title' => __( 'Start', 'studiare-extensions' ),
-						'icon'  => 'eicon-text-align-' . self::start_icon(),
+			array_merge(
+				array(
+					'label'     => __( 'Alignment', 'studiare-extensions' ),
+					'type'      => Controls_Manager::CHOOSE,
+					'options'   => array(
+						'start'  => array(
+							'title' => __( 'Start', 'studiare-extensions' ),
+							'icon'  => 'eicon-text-align-' . self::start_icon(),
+						),
+						'center' => array(
+							'title' => __( 'Center', 'studiare-extensions' ),
+							'icon'  => 'eicon-text-align-center',
+						),
+						'end'    => array(
+							'title' => __( 'End', 'studiare-extensions' ),
+							'icon'  => 'eicon-text-align-' . self::end_icon(),
+						),
 					),
-					'center' => array(
-						'title' => __( 'Center', 'studiare-extensions' ),
-						'icon'  => 'eicon-text-align-center',
-					),
-					'end'    => array(
-						'title' => __( 'End', 'studiare-extensions' ),
-						'icon'  => 'eicon-text-align-' . self::end_icon(),
+					'default'   => $default_value,
+					'selectors' => array(
+						'{{WRAPPER}} ' . $selector => 'text-align: {{VALUE}}; --stx-justify: {{VALUE}};',
 					),
 				),
-				'default'   => $default_value,
-				'selectors' => array(
-					'{{WRAPPER}} ' . $selector => 'text-align: {{VALUE}}; --stx-justify: {{VALUE}};',
-				),
+				$extra
 			)
 		);
 	}

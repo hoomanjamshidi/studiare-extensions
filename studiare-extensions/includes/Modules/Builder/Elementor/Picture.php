@@ -89,7 +89,7 @@ final class Picture {
 	 * @param string $image `<img>` tag.
 	 */
 	public static function clean_img_tag( $image ) {
-		if ( ! is_string( $image ) || ! preg_match( '/stx-(sl|pimage)__img/', $image ) ) {
+		if ( ! is_string( $image ) || ! preg_match( '/stx-(sl|pimage|bcat)__img/', $image ) ) {
 			return $image;
 		}
 

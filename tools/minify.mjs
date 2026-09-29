@@ -35,6 +35,7 @@ const FILES = [
   'modules/bottom-nav/js/bottom-nav.js',
   'modules/support-button/css/support-button.css',
   'modules/support-button/js/support-button.js',
+  'modules/theme-fixes/js/otp-digits.js',
 ];
 
 for (const file of FILES) {

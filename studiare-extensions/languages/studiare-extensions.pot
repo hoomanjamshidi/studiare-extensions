@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Studiare Extensions 1.6.0\n"
+"Project-Id-Version: Studiare Extensions 1.7.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/studiare-extensions\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-29T06:58:18+00:00\n"
+"POT-Creation-Date: 2026-09-29T11:14:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: studiare-extensions\n"
@@ -243,7 +243,7 @@ msgstr ""
 
 #: includes/Modules/Bottom_Nav/Item_Types.php:34
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:61
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:127
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:122
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:122
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:91
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:77
@@ -306,10 +306,10 @@ msgstr ""
 #: includes/Modules/Bottom_Nav/Item_Types.php:64
 #: includes/Modules/Bottom_Nav/Item_Types.php:66
 #: includes/Modules/Bottom_Nav/views/admin.php:667
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:44
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:62
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:212
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:336
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:48
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:66
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:279
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:403
 msgid "Menu"
 msgstr ""
 
@@ -502,11 +502,11 @@ msgid "Icons only; the active item expands into a pill with its label."
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:37
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:283
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:369
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:287
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:373
 #: includes/Modules/Builder/Elementor/Widgets/Dark_Toggle.php:69
 #: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:103
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:270
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:337
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:139
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:190
@@ -559,7 +559,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Account.php:132
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:71
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:58
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:152
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:147
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:159
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:286
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:64
@@ -593,12 +593,14 @@ msgstr ""
 #: includes/Modules/Bottom_Nav/views/admin.php:104
 #: includes/Modules/Builder/views/admin.php:90
 #: includes/Modules/Support_Button/views/admin.php:85
+#: includes/Modules/Theme_Fixes/views/admin.php:32
 msgid "Active"
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:105
 #: includes/Modules/Builder/views/admin.php:91
 #: includes/Modules/Support_Button/views/admin.php:86
+#: includes/Modules/Theme_Fixes/views/admin.php:33
 msgid "Inactive"
 msgstr ""
 
@@ -1023,9 +1025,9 @@ msgid "Drag to reorder"
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:527
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:195
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:197
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:127
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:128
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:132
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:107
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:148
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:101
@@ -1078,6 +1080,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:95
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:41
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:51
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:174
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:62
 #: includes/Modules/Support_Button/views/admin.php:179
@@ -1284,7 +1287,7 @@ msgstr ""
 #: includes/Modules/Bottom_Nav/views/admin.php:763
 #: includes/Modules/Bottom_Nav/views/sheet.php:24
 #: includes/Modules/Builder/Assets.php:89
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:378
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:445
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:239
 #: includes/Modules/Builder/Module.php:417
 #: includes/Modules/Support_Button/Module.php:100
@@ -1546,7 +1549,7 @@ msgid "About us"
 msgstr ""
 
 #: includes/Modules/Builder/Design_Pages.php:83
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:260
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:261
 #: includes/Modules/Builder/Presets/About.php:78
 #: includes/Modules/Builder/Presets/About.php:260
 #: includes/Modules/Builder/Presets/About.php:650
@@ -1847,7 +1850,7 @@ msgid "Language"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Parts.php:621
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:249
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:250
 msgid "Certificate"
 msgstr ""
 
@@ -1895,10 +1898,12 @@ msgid "File size"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Parts.php:653
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:103
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:140
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:141
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:142
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:98
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:135
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:136
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:137
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:157
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:482
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:238
 #: includes/Modules/Builder/Elementor/Widgets/Post_Meta.php:42
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:72
@@ -2134,7 +2139,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Add_To_Cart.php:43
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:207
 #: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:73
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:162
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:166
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:80
 #: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:288
@@ -2276,8 +2281,8 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:32
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:98
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:101
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:212
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:96
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:207
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:95
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:189
 #: includes/Modules/Builder/Elementor/Widgets/Course_Curriculum.php:49
@@ -2286,6 +2291,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:60
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:77
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:84
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:333
 #: includes/Modules/Builder/Elementor/Widgets/Post_Nav.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:31
@@ -2402,6 +2408,7 @@ msgstr ""
 
 #. translators: %s: number of posts.
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:131
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:781
 #, php-format
 msgid "%s post"
 msgid_plural "%s posts"
@@ -2416,9 +2423,9 @@ msgstr ""
 msgid "Add a published product to see real data here."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:187
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:189
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:119
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:120
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:124
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:99
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:93
@@ -2427,9 +2434,9 @@ msgstr ""
 msgid "Alignment"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:191
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:193
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:123
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:124
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:128
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:103
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:97
@@ -2440,9 +2447,9 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:199
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:201
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:131
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:132
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:136
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:111
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:152
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:105
@@ -2453,17 +2460,17 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:233
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:237
 #: includes/Modules/Builder/Elementor/Widgets/Reading_Progress.php:46
 msgid "Colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:243
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:247
 msgid "Hover colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:300
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:392
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:304
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:396
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:132
 #: includes/Modules/Builder/Elementor/Widgets/Product_Gallery.php:112
@@ -2472,32 +2479,32 @@ msgstr ""
 msgid "Border radius"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:311
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:403
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:315
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:407
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:209
 msgid "Padding"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:352
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:356
 msgid "Normal"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:352
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:356
 msgid "Hover"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:360
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:364
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:131
 #: includes/Modules/Builder/Elementor/Widgets/Product_Tabs.php:165
 msgid "Text colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:378
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:382
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:152
 msgid "Border colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:413
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:417
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:241
 #: includes/Modules/Builder/Elementor/Widgets/Reading_Progress.php:55
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:129
@@ -2505,14 +2512,14 @@ msgstr ""
 msgid "Height"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:445
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:449
 #: includes/Modules/Builder/Elementor/Widgets/Product_Highlights.php:54
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:121
 #: includes/Modules/Builder/Elementor/Widgets/Related_Products.php:63
 msgid "Columns"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:467
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:471
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:130
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:186
 #: includes/Modules/Builder/Elementor/Widgets/Related_Products.php:119
@@ -2520,7 +2527,7 @@ msgstr ""
 msgid "Space between"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Base.php:528
+#: includes/Modules/Builder/Elementor/Widgets/Base.php:532
 msgid "Shows the product being viewed. While editing, a sample course/product is used — pick it in Studiare+ → Page templates."
 msgstr ""
 
@@ -2670,14 +2677,17 @@ msgstr ""
 msgid "WooCommerce is required for the cart."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:33
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:28
 msgid "Category grid"
 msgstr ""
 
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:36
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:41
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:46
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:32
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:90
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:251
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:492
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:67
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:127
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:184
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:95
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:74
 #: includes/Modules/Builder/Presets/Blog.php:139
@@ -2687,65 +2697,69 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:50
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:45
 msgid "From the site (top-level categories)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:51
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:46
 #: includes/Modules/Builder/Elementor/Widgets/People.php:49
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:133
 msgid "My own list"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:59
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:54
 msgid "Of"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:63
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:58
 msgid "Products and courses"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:64
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:59
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:588
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:70
 msgid "Blog posts"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:73
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:79
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:68
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:210
 msgid "Number of categories"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:85
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:80
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:196
 msgid "Order"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:89
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:84
 msgid "Most items first"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:90
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:85
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:201
 msgid "By name"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:91
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:86
 msgid "Custom order (drag & drop in the category list)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:109
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:213
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:104
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:208
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:191
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:85
 msgid "Small text"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:112
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:107
 msgid "e.g. 12 courses"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:118
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:113
 msgid "Icon (tile style)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:136
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:131
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:132
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:186
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:35
@@ -2758,36 +2772,37 @@ msgstr ""
 msgid "Items"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:156
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:151
 msgid "Numbered cards"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:157
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:152
 msgid "Icon tiles"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:166
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:161
 msgid "Number of items"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:175
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:170
 msgid "Count text"
 msgstr ""
 
 #. translators: keep {count}: it is replaced with a number.
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:179
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:174
 msgid "{count} items"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:180
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:175
 msgid "Keep {count} where the number goes."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:192
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:187
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:164
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:126
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:107
 #: includes/Modules/Builder/Elementor/Widgets/People.php:140
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:192
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:326
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:205
@@ -2798,25 +2813,25 @@ msgstr ""
 msgid "Cards"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:198
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:193
 msgid "Number / icon colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:207
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:202
 msgid "Number / icon background"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:222
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:217
 msgid "No categories with items yet."
 msgstr ""
 
 #. translators: keep {count}: it is replaced with a number.
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:332
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:325
 msgid "{count} posts"
 msgstr ""
 
 #. translators: keep {count}: it is replaced with a number.
-#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:332
+#: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:325
 msgid "{count} products"
 msgstr ""
 
@@ -3122,6 +3137,7 @@ msgid "(optional)"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:453
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:160
 msgid "Choose…"
 msgstr ""
 
@@ -3303,7 +3319,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:101
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:98
 #: includes/Modules/Builder/Elementor/Widgets/Logo_Strip.php:96
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:92
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:96
 #: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:101
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:156
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:107
@@ -3420,6 +3436,7 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:117
 #: includes/Modules/Builder/Elementor/Widgets/People.php:131
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:294
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:183
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:136
@@ -3543,7 +3560,7 @@ msgid "Label style"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:56
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:110
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:114
 msgid "Pill"
 msgstr ""
 
@@ -3634,7 +3651,7 @@ msgid "Vertical"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:103
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:96
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:100
 msgid "Horizontal"
 msgstr ""
 
@@ -3800,6 +3817,7 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:42
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:166
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:34
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:77
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:138
@@ -3983,157 +4001,196 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:22
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:23
 msgid "Navigation menu"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:35
-msgid "Automatic (main menu)"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:49
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:53
 msgid "Items from"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:53
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:57
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:225
 msgid "A WordPress menu"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:54
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:58
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:224
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:484
 msgid "Product categories"
 msgstr ""
 
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:69
+msgid "Automatic (main menu)"
+msgstr ""
+
 #. translators: %s: link to the menus screen.
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:68
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:72
 #, php-format
 msgid "Edit menus in %s."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:69
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:73
 msgid "Appearance → Menus"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:78
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:82
 msgid "Levels"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:97
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:101
 msgid "Vertical (e.g. footer links)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:105
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:109
 msgid "Hover & current effect"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:109
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:113
 msgid "Underline"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:111
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:115
 msgid "Colour only"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:142
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:146
 msgid "Mobile drawer"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:147
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:151
 msgid "Switch to a menu button"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:151
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:155
 msgid "On tablets and phones"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:152
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:156
 msgid "On phones only"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:153
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:157
 msgid "Always (button only)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:154
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:158
 msgid "Never"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:171
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:175
 msgid "Drawer opens from"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:175
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:179
 msgid "Start side"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:176
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:180
 msgid "End side"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:184
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:188
 msgid "Drawer title"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:194
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:198
+msgid "Second menu (two tabs)"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:201
+msgid "The drawer shows two tabs, e.g. the main menu and the course categories."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:209
+msgid "First tab title"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:212
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:454
+msgid "Main menu"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:220
+msgid "Second tab items from"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:234
+msgid "Second menu"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:237
+msgid "— Choose a menu —"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:248
+msgid "Second tab title"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:252
+msgid "Leave empty to use \"Categories\" or the chosen menu's name."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:260
 msgid "Button in drawer"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:203
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:270
 #: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:91
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:101
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:201
 msgid "Button link"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:223
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:278
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:290
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:345
 #: includes/Modules/Builder/Elementor/Widgets/Post_Content.php:74
 #: includes/Modules/Builder/Elementor/Widgets/Text.php:89
 msgid "Link colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:231
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:298
 msgid "Hover & current colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:239
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:306
 msgid "Underline / pill colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:247
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:314
 msgid "Space between items"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:262
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:329
 msgid "Dropdown"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:286
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:353
 msgid "Menu button & drawer"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:294
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:361
 msgid "Button colour"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:302
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:369
 msgid "Button background"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:310
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:377
 msgid "Drawer background"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:324
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:391
 msgid "No menu found. Create one in Appearance → Menus."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:347
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:414
 msgid "Open menu"
 msgstr ""
 
 #. translators: %s: menu item title.
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:424
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:593
 #, php-format
 msgid "Show submenu of %s"
 msgstr ""
@@ -4265,6 +4322,7 @@ msgid "With \"Studiare teachers\", this list is shown until you add teachers."
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/People.php:119
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:281
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:228
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:40
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:239
@@ -4296,13 +4354,13 @@ msgid "Link to their posts"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:58
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:52
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:229
 #: includes/Modules/Builder/Presets/Blog.php:288
 msgid "All posts"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:66
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:37
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:94
 #: includes/Modules/Builder/Elementor/Widgets/Post_Meta.php:53
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:80
 #: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:78
@@ -4318,38 +4376,145 @@ msgstr ""
 msgid "Centred"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:24
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:139
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:55
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:513
 msgid "Blog categories"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:41
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:73
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:100
+msgid "Links"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:99
+msgid "Navigation (marks the category being viewed)"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:101
 msgid "Row of buttons"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:42
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:102
+msgid "Tabs with an underline"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:103
 msgid "List with post counts"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:50
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:104
+msgid "List with subcategories"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:105
+msgid "Drop-down menu"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:109
+msgid "Showcase"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:111
+msgid "Icon cards"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:112
+msgid "Picture cards"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:113
+msgid "Name over the picture"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:114
+msgid "With their newest posts"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:131
+msgid "From the site"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:132
+msgid "Subcategories of the category being viewed"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:135
+msgid "On a category page, \"Subcategories\" lists its subcategories (or its sister categories when it has none); on other pages, the main categories."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:143
+msgid "Main categories only"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:168
+msgid "For the picture looks. Empty: the picture of the newest post in the category."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:177
+#: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:67
+#: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:84
+msgid "Automatic"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:200
+msgid "Most posts first"
+msgstr ""
+
+#. translators: %d: largest number of categories.
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:216
+#, php-format
+msgid "The picture looks and \"With their newest posts\" show at most %d."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:227
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:185
 msgid "\"All\" button"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:53
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:230
 msgid "Links to the blog page. Leave empty to hide."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:61
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:239
 msgid "Post counts"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:70
-msgid "Main categories only"
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:248
+msgid "Category description"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:115
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:251
+msgid "The description written for the category in Posts → Categories."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:259
+msgid "Category colours"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:262
+msgid "Uses the \"Featured Color\" set for each category in Posts → Categories (Studiare)."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:269
+msgid "Posts per category"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:310
 msgid "No categories with posts yet."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:550
+msgid "Choose a category"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:555
+msgid "Category:"
+msgstr ""
+
+#. translators: %s: category name.
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:712
+#, php-format
+msgid "All posts in %s"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Comments.php:23
@@ -4804,10 +4969,6 @@ msgstr ""
 msgid "A short post without sections needs no table of contents."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:100
-msgid "Links"
-msgstr ""
-
 #: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:123
 msgid "The table of contents appears when the post has enough H2 headings."
 msgstr ""
@@ -4846,9 +5007,9 @@ msgid "Currency and period"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:78
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:239
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:248
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:258
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:240
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:249
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:259
 msgid "Toman / month"
 msgstr ""
 
@@ -4857,7 +5018,7 @@ msgid "One per line. Start a line with \"-\" to show it as not included."
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:95
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:250
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:251
 msgid "Choose this plan"
 msgstr ""
 
@@ -4870,7 +5031,7 @@ msgid "Label on the plan"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:119
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:252
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:253
 msgid "Most popular"
 msgstr ""
 
@@ -4882,76 +5043,76 @@ msgstr ""
 msgid "Add plans in the widget settings."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:211
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:212
 msgid "(not included)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:236
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:237
 msgid "Starter"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:237
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:238
 msgid "For trying the first courses."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:240
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:241
 msgid "All beginner courses"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:240
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:249
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:241
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:250
 msgid "Exercise files"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:240
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:241
 msgid "- Support from teachers"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:240
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:241
 msgid "- Certificate"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:241
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:242
 msgid "Start now"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:244
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:245
 msgid "Professional"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:245
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:246
 msgid "Everything you need to grow faster."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:249
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:250
 msgid "All courses"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:249
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:250
 msgid "Support from teachers"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:255
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:256
 msgid "Team"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:256
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:257
 msgid "For companies and study groups."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:259
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:260
 msgid "Everything in Professional"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:259
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:260
 msgid "Up to 5 people"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:259
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:260
 msgid "Progress reports"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:259
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:260
 msgid "Live workshops"
 msgstr ""
 
@@ -5391,11 +5552,6 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:57
 msgid "Custom field: the meta key. Fixed text: the value to show."
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:67
-#: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:84
-msgid "Automatic"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:73
@@ -8962,6 +9118,42 @@ msgstr ""
 
 #: includes/Modules/Support_Button/views/admin.php:401
 msgid "Links are not opened in the preview. On your site the Studiare font is used."
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Module.php:23
+msgid "Theme fixes"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Module.php:27
+msgid "Repairs known problems of the Studiare theme without editing its files. Each fix can be switched off on its own."
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Otp_Digits.php:49
+msgid "Persian digits in the mobile login"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Otp_Digits.php:53
+msgid "The theme's \"log in with mobile\" form rejects a number typed with a Persian keyboard (۰۹۱۲…) with \"must be exactly 11 digits\". This fix turns the digits into English ones as they are typed, and also accepts numbers written with +98, with 0098 or without the first zero."
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/views/admin.php:35
+msgid "Enable the theme fixes"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/views/admin.php:43
+msgid "Fixes"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/views/admin.php:44
+msgid "The theme's files stay untouched, so the fixes keep working after theme updates. If an update repairs a problem itself, switch its fix off."
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/views/admin.php:56
+msgid "Used on this site"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/views/admin.php:57
+msgid "The theme feature is off"
 msgstr ""
 
 #. translators: %s: minimum PHP version.

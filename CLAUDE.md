@@ -14,7 +14,7 @@ Features are added one at a time as **modules**. The first module is the **mobil
 3. **Follow the theme by default.** Colours, fonts and dark mode come from Studiare's CSS variables, and admins can override them. An empty colour setting means "use the theme's colour".
 4. **Never break the site.** Degrade gracefully when Studiare, WooCommerce or Elementor is missing. Real `<a href>` links keep working without JS. The bar is hidden with CSS above the breakpoint (no `wp_is_mobile()`), so it is safe with page caching.
 5. **Security.** Every setting passes through `Core\Sanitizer` (schema based). AJAX checks the nonce and `manage_options`. Escape on output. User SVG goes through `Icon_Library::sanitize_svg()` on save and again on output.
-6. **RTL first, i18n always.** Use logical CSS properties (`inset-inline-start`, `margin-inline-end`). Every string is wrapped in `__()` and friends with the text domain `studiare-extensions`. JS strings are passed from PHP.
+6. **RTL first, i18n always.** Use logical CSS properties (`inset-inline-start`, `margin-inline-end`). Every string is wrapped in `__()` and friends with the text domain `studiare-extensions`. JS strings are passed from PHP. PHP regexes on text need the `u` flag: without it `\R` also matches the byte 0x85 inside letters such as «م» and cuts Persian words apart.
 7. **Accessibility.** Touch targets of at least 44px, a visible `:focus-visible` ring, `aria-*` on sheets and toggles, `prefers-reduced-motion` respected, and hidden labels kept for screen readers.
 8. **Support PHP 7.4 and WordPress 6.0 or newer.** Do not use PHP 8-only syntax (`match`, union types, constructor promotion, nullsafe `?->`).
 
@@ -57,6 +57,13 @@ studiare-extensions/                 ← the plugin (zip this folder)
 │   │   ├── Channels.php             channel registry: labels, brand colours, glyphs (Bale/Eitaa inline), url() from ID/number/link
 │   │   ├── Frontend.php             hooks: enqueue, wp_footer render, visibility rules, view model
 │   │   └── views/                   button.php (front, native <details>), admin.php (settings panel)
+│   ├── Modules/Theme_Fixes/         repairs for known Studiare bugs, one switch each (`fixes.<id>`)
+│   │   ├── Module.php               module definition; boot() boots each switched-on fix
+│   │   ├── Schema.php               defaults (every fix on) + sanitizer schema
+│   │   ├── Fix.php                  abstract base: id(), title(), description(), boot(), in_use()
+│   │   ├── Fixes.php                registry of fix classes (admin order)
+│   │   ├── Otp_Digits.php           mobile login (Studiare Core OTP) accepts Persian digits, +98/0098/9… numbers
+│   │   └── views/                   admin.php (settings panel)
 │   └── Modules/Builder/             page templates: Elementor course/product pages, headers, footers, home, about and contact pages, the blog
 │       ├── Presets/                 ready-made designs written in PHP (El::box/El::w), registered in Catalog.php (Home.php = home pages,
 │       │                            About.php / Contact.php = about us and contact us pages, Blog.php = post lists and single posts,
@@ -73,6 +80,7 @@ studiare-extensions/                 ← the plugin (zip this folder)
 │       ├── Search_Results.php       markup of those live results in the chosen look (`detailed` or `compact`)
 │       └── Elementor/               Integration, Parts (shared markup), Cards (product/post cards), Picture (slider/featured image <picture>
 │                                    + loading hints), Post_Parts (post content with heading anchors, reading time, share links, archive info),
+│                                    Category_Parts (category icon and cover picture, shared by Category grid and Blog categories),
 │                                    Widgets/* (Home_Base = home widgets; Blog_Base = blog widgets; Page_Base = about/contact widgets;
 │                                    Slider = the fast slider, extends Base)
 ├── assets/
@@ -80,6 +88,7 @@ studiare-extensions/                 ← the plugin (zip this folder)
 │   ├── icons/                       catalog.json + packs/*.json (generated, see "Icons")
 │   ├── modules/bottom-nav/          bottom-nav.css (front and admin preview), bottom-nav.js (front), bottom-nav-admin.js
 │   ├── modules/support-button/      support-button.css (front and admin preview), support-button.js (front), support-button-admin.js
+│   ├── modules/theme-fixes/         otp-digits.js (front, loads while Studiare's OTP option is on)
 │   └── modules/builder/             tokens.css (derived tokens + dark mode, printed inline), builder.css (widgets, layers),
 │                                    builder.js (front + editor), builder-admin.*, home.css / home.js (home widgets only,
 │                                    handle `stx-builder-home`), blog.css / blog.js (blog widgets, `stx-builder-blog`),
@@ -116,11 +125,18 @@ phpcs.xml.dist                       WordPress-Extra + PHPCompatibilityWP (7.4+)
 - **Lifting.** Pure CSS through `--stx-sb-lift` (bottom nav: `body.stx-bn-on` + `--stx-bn-space`, back to 0 with `stx-bn-is-hidden`; Studiare's own 70px bar below 480px), `--stx-sb-bar` (`body.sc_add_to_cart_fixed_active`, `:has(.stx-buybar--mobile.is-visible)`) and `--stx-sb-btt` (Studiare's `#back-to-top.visible`, which sits in the inline-end corner). Test a new fixed element in both corners.
 - **Brand glyphs.** Telegram/phone/mail use Phosphor fill, WhatsApp/Instagram use Bootstrap; Bale and Eitaa are official glyphs stored in `Channels` (no icon pack has them). Brand colours are darkened just enough for 3:1 contrast with the white glyph.
 
+## Theme fixes: key contracts
+
+- **What belongs here.** Repairs for bugs in Studiare or its Studiare Core plugin, done from the outside (hooks, request data, a small script), never by editing or copying their files. Each fix is a `Fix` subclass listed in `Fixes::CLASSES`; its switch (`fixes.<id>`, on by default, also for fixes added later), admin row and dashboard toggle follow automatically. `in_use()` tells the admin whether the theme feature it repairs is switched on (chip next to the switch). Describe the problem the visitor sees in `description()`, so an admin can switch the fix off once the theme repairs it.
+- **Studiare Core's OTP login.** Its handlers are encoded, but its scripts are plain: `studiare-core/libs/suncode_otp_reg_login/js/combined_otp_scripts.js` (handle `combined-otp-scripts`, combined form `#combined-otp-form`) and `otp-registration-scripts.js` (older `#otp-login-form` / `#otp-registration-form`). They load on every page while Redux `otp` is on (the login popup can open anywhere). All fields are named `otp_…` (`otp_phone`, `otp_code`, `otp_reg_phone`, `otp_reg`, `otp_back`); AJAX actions `check_and_send_combined_otp`, `verify_combined_otp`, `otp_send_verification_code`, `otp_validate_otp`, `otp_login_validate_otp`. The combined form rejects anything but `/^[0-9]{11}$/` (then a 09xx prefix list) before sending, and the theme only converts Persian digits in `#otp_code`.
+- **Otp_Digits.** otp-digits.js listens on `document` in the capture phase, so it runs before the theme's jQuery handlers and covers popup forms added later: Latin digits while typing (caret kept), the full `normalize()` (+98 / 0098 / 98 / 9… → 09…) on paste (the field has `maxlength="11"`, so the pasted text is cleaned before it is cut), on leaving the field, on Enter (the theme sends from its own keydown handler), on button clicks (restored/autofilled values) and on submit. `Otp_Digits::normalize()` does the same to the `otp_*` fields of those AJAX actions at priority 1, for pages cached before the fix was switched on. Change the two together.
+
 ## Page templates (Builder): key contracts
 
 - **Presets ship through upgrades.** Preset posts store a hash of their data (`_stx_preset_hash`). When `STUDIARE_EXT_VERSION` changes, `Library::maybe_upgrade()` rewrites the presets nobody edited and installs new ones; edited ones wait for "Restore original". Bump the version to ship preset changes.
 - **Widths.** Use `'boxed' => true` (Elementor's site container width), not a fixed pixel width, so templates line up with the page content.
 - **Headers.** Every design has desktop rows (`hide` tablet and mobile) plus `Header::mobile_bar()` (`hide` desktop): one 64px row with 44px icon buttons. Size logos by `height`, because square logos get very tall at a fixed width.
+- **Menu drawer tabs.** Nav_Menu's `drawer_tabs` puts a second list (product categories, or a chosen menu: no "automatic" choice, it would repeat the main one) beside the main list as `.stx-tabs--tabs` inside the drawer, so builder.js's tab code switches them. The drawer opens on the tab that lists the current page. Nothing to list → the single list as before. The drawer moves to `<body>`, so `--stx-nav-*` from `.stx-nav` do not reach it: drawer colour controls also target `.stx-drawer[data-owner="{{ID}}"]`.
 - **Footers.** Every design carries `stx-foot--center-mobile`, so everything is centred on phones. Link lists sit two per row on phones.
 - **Course access.** Use `Theme_Bridge::user_has_course()`. It mirrors Studiare's `inc/studi_lessons.php` (WooCommerce purchase, `studi_has_bought_items() === "true"`, or any Studiare subscription). `studi_has_bought_items()` returns the strings "true" and "false", so never cast its result to bool.
 - **Curriculum.** The default is Studiare's own lesson list (`theme` mode) for everyone. Do not restyle Studiare's native elements.
@@ -163,6 +179,7 @@ phpcs.xml.dist                       WordPress-Extra + PHPCompatibilityWP (7.4+)
 - **Works without JS.** The table of contents is a native `<details>`: designs put an open copy in the sticky sidebar (desktop) and a closed one above the text (phones and tablets) with Elementor's device visibility, so nothing moves after load. Share links are plain links; "Copy link" and the phone share sheet stay `hidden` until blog.js shows them. The reading progress bar moves with `scaleX` only.
 - **Comments.** `Post_Comments` prints the theme's own `comments.php`; Studiare already boxes its comment form, so the widget's card is off by default.
 - **Class names.** The post title is `.stx-posttitle` (`.stx-ptitle` belongs to Product title). Elementor's `.elementor img { height: auto }` beats one-class image rules: sized images need two classes (`.stx-pimage .stx-pimage__img`).
+- **Blog categories** (`Post_Categories`, `stx-post-categories`). Nine looks: navigation (`chips`, `tabs`, `list`, `tree`, `dropdown`) marks the viewed category with `aria-current`; showcase (`cards`, `covers`, `overlay`, `posts`) are `.stx-bcats` grids. Keep the `chips`/`list` values and markup: the blog designs use them. Categories come from one `get_terms()` per request with `pad_counts` (counts include subcategories), sorted by name in the database (its collation knows Persian); `current` lists the viewed category's children, or its sisters when it has none. The picture and post looks query per category, so they stop at 12. Each item carries `--stx-cat` (Studiare's colour) and the CSS derives `--stx-cat-ink`/`--stx-cat-soft` from it, so text never sits on the raw colour. The drop-down is a native `<details>` (blog.js closes it on an outside tap, Esc or focus leaving); blog.js also scrolls the current button/tab into view. The overlay shade is a `::after`, because Elementor's lazy-background rule strips `background-image` from elements (not pseudo-elements). The phone swipe row copies `.stx-swipe` from home.css, which blog pages do not load.
 
 ## Product cards and newer home widgets
 
@@ -196,7 +213,8 @@ phpcs.xml.dist                       WordPress-Extra + PHPCompatibilityWP (7.4+)
 | Fixed elements to lift | `.sc_studi_btm_addtocart_fixed_btn_holder_container.sc_add_to_cart_fixed_active`, `.studi_custom_floating_btn`, `a.swss_floting_ticket`, `#back-to-top` |
 | Page title bar | page meta `_studiare_disable_title` / `_studiare_disable_breadcrumbs` (`on`), read in `inc/templates/page-title.php` |
 | Teachers | `teacher` post type (from the Studiare Core plugin), job title in `_studiare_teacher_job_title` |
-| Category icon | term meta `sc_studi_cat_icon` (attachment ID) |
+| Category icon | term meta (attachment ID): `sc_studi_blog_cat_icon` for blog categories, `sc_studi_cat_icon` for product categories (`Theme_Bridge::category_icon_id()`) |
+| Blog category colour | term meta `sc_studi_blog_cat_color` ("Featured Color", hex; `Theme_Bridge::category_color()`) |
 | Select boxes | every `<select>` becomes select2 on load (`select_to_select2` in `assets/js/global.js`, 13.3+) |
 
 The theme's `.widget_shopping_cart_content` rules (full-height flex) are undone inside `.stx-sheet--cart`. Studiare's mini-cart template uses `.cart-item-image` and `.cart-item-content`.
@@ -217,7 +235,7 @@ The theme's `.widget_shopping_cart_content` rules (full-height flex) are undone 
 
 ## Testing (what "done" means)
 
-Local test site: WordPress on SQLite (`sqlite-database-integration` drop-in), WooCommerce, Redux Framework, Elementor and a test copy of Studiare. Since September 2026 the real theme no longer runs locally: ionCube 15 refuses Studiare's encoded files, and the RTL-CareUnit license plugin the theme installs needs ionCube 15. The test copy is the theme's plain files (357 of 363) with small stand-ins for the 6 encoded ones (`sc_main_functions.php`, `inc/codebean_functions.php`, `inc/sc_shortcodes.php`, the `cdb_blog_posts` widget files and the license file). It is never shipped. Its header, footer, CSS and blog templates are the real ones, but its own dark mode switch and a few features in the encoded files are missing, so dark mode is tested by adding `scdarkcolors` to `<html>` and `<body>`. Serve it with `php -n -d zend_extension=<ioncube_loader_dar_8.4.so> -S 127.0.0.1:8888 -t wp` (the loader must be the first zend extension, so use `-n`). Check with Playwright/Chromium at 390×844 and 1440×900:
+Local test site: WordPress on SQLite (`sqlite-database-integration` drop-in), WooCommerce, Redux Framework, Elementor and a test copy of Studiare. Since September 2026 the real theme no longer runs locally: ionCube 15 refuses Studiare's encoded files, and the RTL-CareUnit license plugin the theme installs needs ionCube 15. The test copy is the theme's plain files (357 of 363) with small stand-ins for the 6 encoded ones (`sc_main_functions.php`, `inc/codebean_functions.php`, `inc/sc_shortcodes.php`, the `cdb_blog_posts` widget files and the license file). It is never shipped. Its header, footer, CSS and blog templates are the real ones, but its own dark mode switch and a few features in the encoded files are missing, so dark mode is tested by adding `scdarkcolors` to `<html>` and `<body>`. The stand-ins must also define the functions the theme's plain files call (`studiare_needs_header()`, `studiare_page_title()`, `studiare_breadcrumbs()`, `codebean_get_config()` which returns `inc/codebean_<name>.php`, …) and include the plain files the encoded loader normally loads (`public_functions.php`, `inc/mega-menus.php`, `inc/mobile_btm_menu.php`, `inc/lib/suncode_course_lessons.php`, `inc/sc_tools/horizontal_menu_walker/horizontal_menu_walker.php`). No ionCube loader is needed: serve it with `php -d memory_limit=1024M -S 127.0.0.1:8888 -t wp`, with `WP_HTTP_BLOCK_EXTERNAL` on (outside requests hang the single-threaded server). Playwright's browser CDN is blocked from Iran, so point `chromium.launch()` at an already cached browser with `executablePath`, and let the page skip non-local requests. Check with Playwright/Chromium at 390×844 and 1440×900:
 
 - all 5 styles with 2, 4, 5 and 7 items, in light and dark mode, RTL and LTR
 - current-page detection (home, shop, search, account, cart) with pretty and plain permalinks
@@ -226,4 +244,5 @@ Local test site: WordPress on SQLite (`sqlite-database-integration` drop-in), Wo
 - admin: every tab, style cards, add/duplicate/delete/reorder buttons, icon picker, media picker, colour reset, Ctrl/⌘+S save, reload persistence, dashboard switch
 - blog: each archive design on the posts page, a category, a tag, an author, page 2 and a blog search; each post design with a table (scrolls on phones), code, a long title, no picture, and comments; table of contents jumps and highlights; copy link; dark mode
 - about/contact: each design on a phone and desktop, in dark mode; key numbers count up; contact form with JS and as a plain post (invalid fields marked, success reset incl. select2, rate limit, honeypot, forged form ID, email copy via `pre_wp_mail`); map click-to-load and route links; the Contact messages list; each design opens in the Elementor editor
+- theme fixes: the OTP forms need Studiare Core, which the test site lacks; test with a scratch mu-plugin that enqueues the vendor's two OTP scripts (from a live Studiare site) under their handles, prints the combined form markup and answers the AJAX actions by echoing what they received. Type ۰۹۱۲…, paste "+۹۸ ۹۱۲ …", type 912… and press Enter, set the value without keystrokes and tap send, and check the older login form; with the fix off the theme must show «شماره تلفن باید دقیقاً 11 رقم داشته باشد».
 - no console errors, and nothing new in `wp-content/debug.log`

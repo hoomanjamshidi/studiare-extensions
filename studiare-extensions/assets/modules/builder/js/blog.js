@@ -3,9 +3,11 @@
  *
  * Everything here enhances markup that already works on its own: share
  * links open the networks, the table of contents is a native <details> with
- * plain anchor links. This adds "Copy link" and the phone's share sheet
- * (hidden until now), marks the section being read, and fills the reading
- * progress bar. Scroll work is batched into one animation frame and only
+ * plain anchor links, the category drop-down is a native <details>. This
+ * adds "Copy link" and the phone's share sheet (hidden until now), marks the
+ * section being read, fills the reading progress bar, brings the current
+ * category into view in rows that scroll sideways, and closes the category
+ * drop-down on an outside tap, with Esc or when focus leaves it. Scroll work is batched into one animation frame and only
  * writes transforms and classes.
  */
 ( function () {
@@ -186,6 +188,50 @@
 	}
 
 	/* ---------------------------------------------------------------------
+	 * Blog categories
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Rows of buttons or tabs scroll sideways on phones, so on a category page
+	 * the current one can start off screen: centre it, instantly (the visitor
+	 * did not ask for motion).
+	 */
+	function initCategoryRow( list ) {
+		const current = list.querySelector( '.is-active' );
+		if ( ! current || list.scrollWidth <= list.clientWidth ) {
+			return;
+		}
+
+		const box = list.getBoundingClientRect();
+		const item = current.getBoundingClientRect();
+		// A visual distance, so it scrolls the right way in RTL and LTR alike.
+		list.scrollBy( { left: item.left + ( item.width / 2 ) - ( box.left + ( box.width / 2 ) ), behavior: 'instant' } );
+	}
+
+	function initCategoryMenu( menu ) {
+		const toggle = menu.querySelector( 'summary' );
+
+		doc.addEventListener( 'click', ( event ) => {
+			if ( menu.open && ! menu.contains( event.target ) ) {
+				menu.open = false;
+			}
+		} );
+
+		menu.addEventListener( 'keydown', ( event ) => {
+			if ( 'Escape' === event.key && menu.open ) {
+				menu.open = false;
+				toggle.focus();
+			}
+		} );
+
+		menu.addEventListener( 'focusout', ( event ) => {
+			if ( menu.open && event.relatedTarget && ! menu.contains( event.relatedTarget ) ) {
+				menu.open = false;
+			}
+		} );
+	}
+
+	/* ---------------------------------------------------------------------
 	 * Boot (page load and widgets added in the Elementor editor)
 	 * ------------------------------------------------------------------- */
 
@@ -202,6 +248,8 @@
 		once( '.stx-share', initShare );
 		once( '[data-stx-toc]', initToc );
 		once( '[data-stx-progress]', initProgress );
+		once( '.stx-terms--chips .stx-terms__list, .stx-terms--tabs .stx-terms__list', initCategoryRow );
+		once( '[data-stx-cat-menu]', initCategoryMenu );
 	}
 
 	if ( doc.readyState === 'loading' ) {

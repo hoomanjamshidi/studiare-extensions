@@ -3,11 +3,11 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, ready-made home, about us and contact us pages, and a floating support button.
+Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, ready-made home, about us and contact us pages, a floating support button, and fixes for known theme problems.
 
 == Description ==
 
@@ -41,13 +41,25 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 * Rises automatically above the Studiare+ bottom navigation, sticky buy bars and the theme's "back to top" button, and follows Studiare's colours and dark mode.
 * Works without JavaScript (a native disclosure), is cache friendly, and is keyboard and screen reader accessible.
 
+= Theme fixes =
+
+* Repairs known problems of the Studiare theme without editing its files, so the fixes survive theme updates. Every fix has its own switch, and the admin shows whether the theme feature it repairs is in use on the site.
+* Persian digits in the mobile login: the OTP forms accept numbers typed with a Persian keyboard, pasted with spaces, or written with +98, 0098 or without the first zero.
+
 == Installation ==
 
 1. Upload the `studiare-extensions` folder to `/wp-content/plugins/`.
 2. Activate the plugin.
-3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates** or **Studiare+ → Floating support button** in the admin menu.
+3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.7.0 =
+* New: Theme fixes (Studiare+ → Theme fixes). Repairs known problems of the Studiare theme without editing its files; each fix has its own switch.
+* Fix: the theme's mobile login (OTP) now accepts numbers typed with a Persian keyboard (۰۹۱۲…) instead of saying "must be exactly 11 digits", and numbers written with +98, 0098 or without the first zero. Covers the combined login/registration form and the older separate forms.
+* New: Blog categories widget in nine looks. Navigation (marks the category being viewed): row of buttons, tabs, list with post counts, list with subcategories and a drop-down. Showcase: icon cards, picture cards, name over the picture, and each category with its newest posts. Categories from the site, the subcategories of the category being viewed, or a hand-picked list with a picture and icon each; uses the colour and icon set for each category in Studiare.
+* New: Navigation menu: optional second tab in the mobile drawer (product categories or another menu).
+* Fix: Category grid now shows the icon Studiare saves for blog categories (it read the product category icon).
 
 = 1.6.0 =
 * New: Page templates → Blog. Three designs for post lists (Magazine, With sidebar, Minimal) and three for single posts (Classic, Focus, Cover). Post lists cover the blog page, categories, tags, authors and dates (and, when switched on, blog searches), with page numbers.

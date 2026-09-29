@@ -184,7 +184,12 @@
 	line-height: 48px;
 }
 
+/* Studiare swaps select2's triangle for an inline Font Awesome glyph
+   (`position: unset`), which would sit at the top of the box. */
 .stx-cform .select2-container.select2-container--default .select2-selection--single .select2-selection__arrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	top: 0;
 	height: 48px;
 	margin-inline: 8px;

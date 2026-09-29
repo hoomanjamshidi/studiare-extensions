@@ -1,7 +1,8 @@
 <?php
 /**
  * Navigation menu with dropdowns and a slide-in drawer on small screens.
- * Source: a WordPress menu or the product categories.
+ * Source: a WordPress menu or the product categories. The drawer can show a
+ * second list in its own tab (e.g. the main menu and the course categories).
  *
  * @package StudiareExt
  */
@@ -30,9 +31,12 @@ final class Nav_Menu extends Base {
 		return array_merge( parent::get_keywords(), array( 'menu', 'nav', 'منو' ) );
 	}
 
-	/** @return array<string, string> */
-	private function menu_options(): array {
-		$options = array( '' => __( 'Automatic (main menu)', 'studiare-extensions' ) );
+	/**
+	 * @param string $empty_label Label of the '' choice.
+	 * @return array<string, string>
+	 */
+	private function menu_options( string $empty_label ): array {
+		$options = array( '' => $empty_label );
 		foreach ( wp_get_nav_menus() as $menu ) {
 			$options[ (string) $menu->term_id ] = $menu->name;
 		}
@@ -62,7 +66,7 @@ final class Nav_Menu extends Base {
 				'label'       => __( 'Menu', 'studiare-extensions' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '',
-				'options'     => $this->menu_options(),
+				'options'     => $this->menu_options( __( 'Automatic (main menu)', 'studiare-extensions' ) ),
 				'description' => sprintf(
 					/* translators: %s: link to the menus screen. */
 					__( 'Edit menus in %s.', 'studiare-extensions' ),
@@ -189,11 +193,74 @@ final class Nav_Menu extends Base {
 		);
 
 		$this->add_control(
+			'drawer_tabs',
+			array(
+				'label'       => __( 'Second menu (two tabs)', 'studiare-extensions' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'default'     => '',
+				'description' => __( 'The drawer shows two tabs, e.g. the main menu and the course categories.', 'studiare-extensions' ),
+				'separator'   => 'before',
+			)
+		);
+
+		$this->add_control(
+			'tab_label',
+			array(
+				'label'       => __( 'First tab title', 'studiare-extensions' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'placeholder' => __( 'Main menu', 'studiare-extensions' ),
+				'condition'   => array( 'drawer_tabs' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
+			'second_source',
+			array(
+				'label'     => __( 'Second tab items from', 'studiare-extensions' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'product_cat',
+				'options'   => array(
+					'product_cat' => __( 'Product categories', 'studiare-extensions' ),
+					'menu'        => __( 'A WordPress menu', 'studiare-extensions' ),
+				),
+				'condition' => array( 'drawer_tabs' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
+			'second_menu',
+			array(
+				'label'     => __( 'Second menu', 'studiare-extensions' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => $this->menu_options( __( '— Choose a menu —', 'studiare-extensions' ) ),
+				'condition' => array(
+					'drawer_tabs'   => 'yes',
+					'second_source' => 'menu',
+				),
+			)
+		);
+
+		$this->add_control(
+			'second_label',
+			array(
+				'label'       => __( 'Second tab title', 'studiare-extensions' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'placeholder' => __( 'Categories', 'studiare-extensions' ),
+				'description' => __( 'Leave empty to use "Categories" or the chosen menu\'s name.', 'studiare-extensions' ),
+				'condition'   => array( 'drawer_tabs' => 'yes' ),
+			)
+		);
+
+		$this->add_control(
 			'drawer_cta',
 			array(
-				'label'   => __( 'Button in drawer', 'studiare-extensions' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => '',
+				'label'     => __( 'Button in drawer', 'studiare-extensions' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => '',
+				'separator' => 'before',
 			)
 		);
 
@@ -230,7 +297,7 @@ final class Nav_Menu extends Base {
 			array(
 				'label'     => __( 'Hover & current colour', 'studiare-extensions' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => array( '{{WRAPPER}} .stx-nav' => '--stx-nav-active: {{VALUE}};' ),
+				'selectors' => array( '{{WRAPPER}} .stx-nav, .stx-drawer[data-owner="{{ID}}"]' => '--stx-nav-active: {{VALUE}};' ),
 			)
 		);
 		$this->add_control(
@@ -378,13 +445,115 @@ final class Nav_Menu extends Base {
 			esc_attr__( 'Close', 'studiare-extensions' ),
 			self::icon( 'close' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- bundled SVG.
 		);
-		echo '<ul class="stx-menu stx-menu--drawer">' . $this->items_html( $tree, 0, $depth ) . '</ul>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped while building.
+		$second = $this->second_tab( $s, $depth );
+		if ( $second ) {
+			$this->render_tabs(
+				array(
+					array(
+						'id'    => $drawer_id . '-main',
+						'title' => '' !== (string) $s['tab_label'] ? $s['tab_label'] : __( 'Main menu', 'studiare-extensions' ),
+						'tree'  => $tree,
+					),
+					array( 'id' => $drawer_id . '-second' ) + $second,
+				),
+				$depth
+			);
+		} else {
+			echo '<ul class="stx-menu stx-menu--drawer">' . $this->items_html( $tree, 0, $depth ) . '</ul>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped while building.
+		}
 
 		if ( '' !== (string) $s['drawer_cta'] && ! empty( $s['drawer_cta_link']['url'] ) ) {
 			printf( '<a class="stx-btn stx-btn--accent stx-btn--md stx-drawer__cta" href="%1$s">%2$s</a>', esc_url( $s['drawer_cta_link']['url'] ), esc_html( $s['drawer_cta'] ) );
 		}
 
 		echo '</div></div>';
+	}
+
+	/**
+	 * Title and items of the drawer's second tab.
+	 *
+	 * @param array $s     Settings.
+	 * @param int   $depth Levels.
+	 * @return array|null `title` and `tree`, or null when the tab is off or has nothing to list
+	 *                    (the drawer then shows the main list alone).
+	 */
+	private function second_tab( array $s, int $depth ): ?array {
+		if ( 'yes' !== $s['drawer_tabs'] ) {
+			return null;
+		}
+
+		if ( 'menu' === $s['second_source'] ) {
+			// No automatic choice here: it would repeat the main menu.
+			$menu  = wp_get_nav_menu_object( (int) $s['second_menu'] );
+			$tree  = $menu ? $this->menu_items_tree( $menu ) : array();
+			$title = $menu ? $menu->name : '';
+		} else {
+			$tree  = $this->category_tree( $depth );
+			$title = __( 'Categories', 'studiare-extensions' );
+		}
+
+		if ( ! $tree ) {
+			return null;
+		}
+
+		return array(
+			'title' => '' !== (string) $s['second_label'] ? $s['second_label'] : $title,
+			'tree'  => $tree,
+		);
+	}
+
+	/**
+	 * Tabs in the drawer, one list each. builder.js switches them like the
+	 * product tabs (click and arrow keys).
+	 *
+	 * @param array $tabs  Tabs (`id`, `title`, `tree`).
+	 * @param int   $depth Levels.
+	 */
+	private function render_tabs( array $tabs, int $depth ): void {
+		// Open on the tab that lists the page being viewed (e.g. a category page).
+		$active = 0;
+		foreach ( $tabs as $index => $tab ) {
+			if ( self::has_current( $tab['tree'] ) ) {
+				$active = $index;
+				break;
+			}
+		}
+
+		echo '<div class="stx-tabs stx-tabs--tabs stx-drawer__tabs"><div class="stx-tabs__nav" role="tablist">';
+		foreach ( $tabs as $index => $tab ) {
+			printf(
+				'<button type="button" class="stx-tabs__tab%1$s" role="tab" id="%2$s-tab" aria-controls="%2$s" aria-selected="%3$s" tabindex="%4$s">%5$s</button>',
+				$active === $index ? ' is-active' : '',
+				esc_attr( $tab['id'] ),
+				$active === $index ? 'true' : 'false',
+				$active === $index ? '0' : '-1',
+				esc_html( $tab['title'] )
+			);
+		}
+		echo '</div>';
+
+		foreach ( $tabs as $index => $tab ) {
+			printf(
+				'<div class="stx-tabs__panel" role="tabpanel" id="%1$s" aria-labelledby="%1$s-tab"%2$s><ul class="stx-menu stx-menu--drawer">%3$s</ul></div>',
+				esc_attr( $tab['id'] ),
+				$active === $index ? '' : ' hidden',
+				$this->items_html( $tab['tree'], 0, $depth ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped while building.
+			);
+		}
+		echo '</div>';
+	}
+
+	/**
+	 * @param array $nodes Nodes of a menu tree.
+	 */
+	private static function has_current( array $nodes ): bool {
+		foreach ( $nodes as $node ) {
+			if ( $node['current'] || $node['ancestor'] || self::has_current( $node['children'] ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -459,10 +628,13 @@ final class Nav_Menu extends Base {
 			$menu  = $menus ? $menus[0] : null;
 		}
 
-		if ( ! $menu ) {
-			return array();
-		}
+		return $menu ? $this->menu_items_tree( $menu ) : array();
+	}
 
+	/**
+	 * @param \WP_Term $menu Menu.
+	 */
+	private function menu_items_tree( \WP_Term $menu ): array {
 		$items = wp_get_nav_menu_items( $menu->term_id, array( 'update_post_term_cache' => false ) );
 		if ( ! $items ) {
 			return array();
@@ -528,7 +700,7 @@ final class Nav_Menu extends Base {
 					'url'      => (string) get_term_link( $term ),
 					'target'   => false,
 					'current'  => $current === (int) $term->term_id,
-					'ancestor' => false,
+					'ancestor' => $current && term_is_ancestor_of( $term, $current, 'product_cat' ),
 					'children' => $level + 1 < $depth ? $build( (int) $term->term_id, $level + 1 ) : array(),
 				);
 			}

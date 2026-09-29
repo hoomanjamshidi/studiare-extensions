@@ -47,7 +47,8 @@
 			trigger.setAttribute( 'aria-expanded', 'true' );
 		}
 
-		const focusable = el.querySelector( 'input, a[href], button:not([data-stx-close])' ) || el.querySelector( 'button' );
+		// Skips unselected tabs (roving tabindex), e.g. in the menu drawer's tabs.
+		const focusable = el.querySelector( 'input, a[href], button:not([data-stx-close]):not([tabindex="-1"])' ) || el.querySelector( 'button' );
 		if ( focusable ) {
 			window.setTimeout( () => focusable.focus( { preventScroll: true } ), 60 );
 		}
@@ -81,8 +82,8 @@
 			return;
 		}
 
-		const items = Array.from( openLayer.el.querySelectorAll( 'a[href], button, input, iframe, video, [tabindex]:not([tabindex="-1"])' ) )
-			.filter( ( node ) => node.offsetParent !== null || node === doc.activeElement );
+		const items = Array.from( openLayer.el.querySelectorAll( 'a[href], button, input, iframe, video, [tabindex]' ) )
+			.filter( ( node ) => node.getAttribute( 'tabindex' ) !== '-1' && ( node.offsetParent !== null || node === doc.activeElement ) );
 
 		if ( ! items.length ) {
 			return;

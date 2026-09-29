@@ -198,7 +198,8 @@ final class Pricing_Plans extends Home_Base {
 				. '</div>';
 		}
 
-		$features = array_filter( array_map( 'trim', preg_split( '/\R/', (string) ( $plan['features'] ?? '' ) ) ) );
+		// Without `u`, \R also matches the byte 0x85 inside UTF-8 letters such as «م» and splits the words.
+		$features = array_filter( array_map( 'trim', (array) preg_split( '/\R/u', (string) ( $plan['features'] ?? '' ) ) ) );
 		if ( $features ) {
 			$html .= '<ul class="stx-plan__list">';
 			foreach ( $features as $feature ) {
