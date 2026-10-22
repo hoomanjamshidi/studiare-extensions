@@ -3,11 +3,11 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, ready-made home, about us and contact us pages, a floating support button, and fixes for known theme problems.
+Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, ready-made home, about us and contact us pages, a floating support button, a "Save as PDF" button and podcast player for blog posts, and fixes for known theme problems.
 
 == Description ==
 
@@ -41,6 +41,11 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 * Rises automatically above the Studiare+ bottom navigation, sticky buy bars and the theme's "back to top" button, and follows Studiare's colours and dark mode.
 * Works without JavaScript (a native disclosure), is cache friendly, and is keyboard and screen reader accessible.
 
+= Article tools =
+
+* "Save as PDF" on every blog post: a button above the text, a box after it, or both. It opens the browser's print window, where "Save as PDF" is one of the printers, so Persian text, fonts and pictures come out exactly as on the site. Only the article is printed (title, author, date, featured picture, text, a link back to the post and page numbers), also with the browser's own Print command and in dark mode. Authors can hide the button on a single post.
+* Podcast player at the top of posts that have an audio version: choose the file from the media library (or paste a link) in the post editor's "Studiare+ article tools" box, with an episode title, narrator, cover and duration. Waveform timeline, 15 seconds back / 30 forward, playback speed, download, "continue where you stopped" and the phone's lock screen controls. Two looks (soft, following dark mode, or an always dark studio). Nothing is downloaded until play is tapped, and without JavaScript the browser's own player shows.
+
 = Theme fixes =
 
 * Repairs known problems of the Studiare theme without editing its files, so the fixes survive theme updates. Every fix has its own switch, and the admin shows whether the theme feature it repairs is in use on the site.
@@ -53,6 +58,14 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.8.0 =
+* New: Article tools (Studiare+ → Article tools): a "Save as PDF" button on every blog post that prints a clean copy of the article (Persian text and fonts as on the site, dark mode turned light on paper), and a podcast player at the top of posts with an audio version, set from the post editor.
+* New: Table of contents: "Follow the reader" (on for phones and tablets by default). Once the list scrolls away, a slim bar under the header names the section being read, shows the reading progress and opens the list; it never moves the article.
+
+= 1.7.1 =
+* Fix: Add to cart widget: choosing a variation no longer fails with "please choose product options" (Studiare's hidden radio list overrode the choice), and the buttons look no longer shows Studiare's select box or repeats the buttons after each change.
+* Fix: Contact form: a chosen topic is no longer dropped when the default topics are translated or the page is cached, and a host without PHP mail() no longer makes a saved message answer "not sent".
 
 = 1.7.0 =
 * New: Theme fixes (Studiare+ → Theme fixes). Repairs known problems of the Studiare theme without editing its files; each fix has its own switch.

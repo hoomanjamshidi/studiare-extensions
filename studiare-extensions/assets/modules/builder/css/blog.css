@@ -106,6 +106,63 @@ a.stx-bcat:focus-visible,
 	line-height: 2;
 }
 
+/* "Two lines with Read more": the whole text stays in the page. blog.js
+   shows the button only when the text is longer than two lines. */
+.stx-archive__clamp {
+	display: flex;
+	flex-direction: column;
+	align-items: inherit;
+}
+
+.stx-archive__clamp:not(.is-open) .stx-archive__text {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+}
+
+/* Without JavaScript nobody could open it. */
+@media (scripting: none) {
+	.stx-archive__clamp:not(.is-open) .stx-archive__text {
+		display: block;
+		-webkit-line-clamp: unset;
+		line-clamp: none;
+	}
+}
+
+.stx-archive .stx-archive__more {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	margin: -6px 0 -10px;
+	padding: 0;
+	border: 0;
+	background: none;
+	box-shadow: none;
+	color: var(--stx-accent-ink);
+	font: inherit;
+	font-size: 13.5px;
+	font-weight: 700;
+	line-height: 1.6;
+	cursor: pointer;
+}
+
+.stx-archive .stx-archive__more[hidden] {
+	display: none;
+}
+
+.stx-archive .stx-archive__more:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+.stx-archive .stx-archive__more:focus-visible {
+	outline: 2px solid var(--stx-accent);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
 .stx-archive__count {
 	color: var(--stx-muted);
 	font-size: 13px;
@@ -1376,6 +1433,152 @@ a.stx-bcat:hover .stx-bcat__img {
 	font-size: 13.5px;
 }
 
+/* Bar that follows the reader (Post_Toc "Follow the reader"): fixed under
+   the header and moved only by transform, so it never shifts the article.
+   blog.js adds `is-visible` once the list has scrolled away. */
+.stx-tocbar {
+	--stx-tocbar-top: calc(var(--stx-header-offset, 0px) + var(--stx-admin-bar, 0px));
+	position: fixed;
+	inset-inline: 0;
+	top: 0;
+	z-index: 980;
+	border-bottom: 1px solid var(--stx-line);
+	background: var(--stx-card);
+	box-shadow: var(--stx-shadow-pop);
+	visibility: hidden;
+	transform: translateY(calc(var(--stx-tocbar-top) - 110%));
+	transition: transform 0.3s var(--stx-ease), visibility 0s linear 0.3s;
+}
+
+.stx-tocbar.is-visible {
+	visibility: visible;
+	transform: translateY(var(--stx-tocbar-top));
+	transition: transform 0.3s var(--stx-ease);
+}
+
+.stx-tocbar[hidden] {
+	display: none;
+}
+
+/* Computers keep the list in a sticky sidebar. */
+@media (min-width: 1025px) {
+	.stx-tocbar--mobile {
+		display: none;
+	}
+}
+
+/* Studiare resets every button with `all: unset`; this sets everything the toggle needs. */
+.stx-tocbar .stx-tocbar__toggle {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 54px;
+	margin: 0;
+	padding: 6px max(16px, calc((100% - 760px) / 2));
+	border: 0;
+	background: none;
+	color: var(--stx-ink);
+	font: inherit;
+	text-align: start;
+	cursor: pointer;
+}
+
+.stx-tocbar .stx-tocbar__toggle:focus-visible {
+	outline: 2px solid var(--stx-accent-ink);
+	outline-offset: -4px;
+}
+
+.stx-tocbar__text {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	min-width: 0;
+	line-height: 1.45;
+}
+
+.stx-tocbar__label {
+	color: var(--stx-muted);
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.stx-tocbar__current {
+	overflow: hidden;
+	color: var(--stx-ink);
+	font-size: 14px;
+	font-weight: 800;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.stx-tocbar__current:empty {
+	display: none;
+}
+
+/* Downward chevron drawn with two borders (physical: it points down in both
+   directions); it turns over while the list is open. */
+.stx-tocbar__chev {
+	flex: none;
+	width: 9px;
+	height: 9px;
+	margin-top: -4px;
+	border-right: 2px solid var(--stx-muted);
+	border-bottom: 2px solid var(--stx-muted);
+	transform: rotate(45deg);
+	transition: transform 0.25s var(--stx-ease);
+}
+
+.stx-tocbar.is-open .stx-tocbar__chev {
+	margin-top: 4px;
+	transform: rotate(225deg);
+}
+
+.stx-tocbar__panel {
+	max-height: min(60vh, 440px);
+	overflow-y: auto;
+	padding: 6px max(6px, calc((100% - 780px) / 2)) 0;
+	border-top: 1px solid var(--stx-line);
+	overscroll-behavior: contain;
+}
+
+.stx-tocbar__panel[hidden] {
+	display: none;
+}
+
+/* Reading progress along the bottom edge: scaleX only, from the start side. */
+.stx-tocbar__progress {
+	position: absolute;
+	inset-inline: 0;
+	bottom: -1px;
+	height: 3px;
+	overflow: hidden;
+}
+
+.stx-tocbar__progress i {
+	display: block;
+	height: 100%;
+	background: var(--stx-accent);
+	transform: scaleX(0);
+	transform-origin: left;
+}
+
+[dir="rtl"] .stx-tocbar__progress i {
+	transform-origin: right;
+}
+
+/* While the bar can show, a jump to a heading stops below it too. */
+@media (max-width: 1024px) {
+	html:has(.stx-tocbar--mobile) .stx-prose :is(h2, h3, h4, h5) {
+		scroll-margin-top: calc(var(--stx-header-offset, 0px) + var(--stx-admin-bar) + 84px);
+	}
+}
+
+html:has(.stx-tocbar--all) .stx-prose :is(h2, h3, h4, h5) {
+	scroll-margin-top: calc(var(--stx-header-offset, 0px) + var(--stx-admin-bar) + 84px);
+}
+
 /* ==========================================================================
    Share
    ========================================================================== */
@@ -1891,6 +2094,9 @@ body.scdarkcolors a:is(.stx-terms__link, .stx-bcat, .stx-bcat__post, .stx-bcat__
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.stx-tocbar,
+	.stx-tocbar.is-visible,
+	.stx-tocbar__chev,
 	.stx-toc__sign::before,
 	.stx-toc__sign::after,
 	.stx-pnav__link,

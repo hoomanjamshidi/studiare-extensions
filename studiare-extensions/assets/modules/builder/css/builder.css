@@ -1368,6 +1368,13 @@ a.stx-rating:hover {
 	pointer-events: none;
 }
 
+/* Studiare's own variation pickers: its radio list (builder.js removes it)
+   and, in buttons mode, the select2 box it puts on every select. */
+.stx-atc .variation-radios,
+.stx-atc--vars-buttons table.variations .select2-container {
+	display: none;
+}
+
 .stx-choices {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));

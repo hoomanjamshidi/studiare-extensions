@@ -9,6 +9,7 @@ namespace StudiareExt;
 
 use StudiareExt\Admin\Admin;
 use StudiareExt\Core\Module;
+use StudiareExt\Modules\Article_Tools\Module as Article_Tools_Module;
 use StudiareExt\Modules\Bottom_Nav\Module as Bottom_Nav_Module;
 use StudiareExt\Modules\Builder\Module as Builder_Module;
 use StudiareExt\Modules\Support_Button\Module as Support_Button_Module;
@@ -53,7 +54,7 @@ final class Plugin {
 	 * (a subclass of Core\Module) through the `studiare_ext_modules` filter.
 	 */
 	private function register_modules(): void {
-		$classes = apply_filters( 'studiare_ext_modules', array( Bottom_Nav_Module::class, Builder_Module::class, Support_Button_Module::class, Theme_Fixes_Module::class ) );
+		$classes = apply_filters( 'studiare_ext_modules', array( Bottom_Nav_Module::class, Builder_Module::class, Support_Button_Module::class, Article_Tools_Module::class, Theme_Fixes_Module::class ) );
 
 		foreach ( (array) $classes as $class ) {
 			if ( ! is_string( $class ) || ! is_subclass_of( $class, Module::class ) ) {

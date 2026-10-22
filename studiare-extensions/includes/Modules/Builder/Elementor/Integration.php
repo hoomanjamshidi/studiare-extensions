@@ -81,6 +81,7 @@ final class Integration {
 		'Archive_Title',
 		'Blog_Breadcrumb',
 		'Post_Categories',
+		'Podcast_List',
 		'Post_Title',
 		'Post_Meta',
 		'Post_Image',

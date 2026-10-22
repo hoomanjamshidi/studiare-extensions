@@ -1,0 +1,63 @@
+/**
+ * Studiare Extensions — "article tools" box on the post edit screen.
+ * Fits the narrow side column of the block editor and the classic editor.
+ */
+
+.stx-atb__intro {
+	margin: 0 0 12px;
+	color: #50575e;
+}
+
+.stx-atb__field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-bottom: 16px;
+}
+
+.stx-atb__field:last-child {
+	margin-bottom: 0;
+}
+
+.stx-atb__field--split {
+	padding-top: 14px;
+	border-top: 1px solid #e0e0e0;
+}
+
+.stx-atb__label {
+	font-weight: 600;
+}
+
+.stx-atb__buttons {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+}
+
+.stx-atb__preview {
+	width: 100%;
+	height: 40px;
+}
+
+.stx-atb__short {
+	width: 7em;
+}
+
+.stx-atb__cover {
+	display: block;
+	width: 96px;
+}
+
+.stx-atb__cover-img {
+	display: block;
+	width: 96px;
+	height: 96px;
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+[hidden].stx-atb__preview,
+.stx-atb [hidden] {
+	display: none !important;
+}

@@ -289,10 +289,11 @@ final class Contact_Messages extends Public_Form {
 	 * @param array $settings Form options.
 	 */
 	private static function clean( array $input, array $settings ): array {
+		// The chosen topic is kept as sent (plain text, like the name), not matched
+		// against the list: admin-ajax.php translates the default topics into the
+		// logged-in user's profile language, and a cached page can show topics
+		// edited since, so a valid choice would be rejected.
 		$topic = mb_substr( $input['topic'], 0, self::MAX_TOPIC );
-		if ( 'select' === $settings['topic_field'] && ! in_array( $topic, self::topic_list( (string) $settings['topics'] ), true ) ) {
-			$topic = '';
-		}
 
 		// Visitors type numbers with Persian digits; keep digits, + and the usual separators.
 		$phone = trim( (string) preg_replace( '/[^\d+()\s-]/', '', Persian::latin_digits( $input['phone'] ) ) );
@@ -393,13 +394,32 @@ final class Contact_Messages extends Public_Form {
 			$headers[] = 'Reply-To: ' . $message['email'];
 		}
 
-		wp_mail(
-			$to,
-			/* translators: 1: site name, 2: message topic or the sender's name. */
-			sprintf( __( '[%1$s] New message: %2$s', 'studiare-extensions' ), $site, $about ),
-			implode( "\n", $lines ),
-			$headers
-		);
+		/* translators: 1: site name, 2: message topic or the sender's name. */
+		$subject = sprintf( __( '[%1$s] New message: %2$s', 'studiare-extensions' ), $site, $about );
+		$body    = implode( "\n", $lines );
+
+		// wp_mail() only catches PHPMailer's own exceptions. On hosts that disable
+		// PHP's mail(), PHPMailer throws an Error instead (a fatal error on PHP 8),
+		// and the visitor would be told a message that is already saved was not sent.
+		try {
+			wp_mail( $to, $subject, $body, $headers );
+		} catch ( \Throwable $error ) {
+			// Core's failure hook, so mail log plugins record it like any other failed email.
+			do_action(
+				'wp_mail_failed', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook.
+				new \WP_Error(
+					'wp_mail_failed',
+					$error->getMessage(),
+					array(
+						'to'          => $to,
+						'subject'     => $subject,
+						'message'     => $body,
+						'headers'     => $headers,
+						'attachments' => array(),
+					)
+				)
+			);
+		}
 	}
 
 	/** Streams every message as a CSV file. */

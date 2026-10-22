@@ -5,9 +5,11 @@
  * links open the networks, the table of contents is a native <details> with
  * plain anchor links, the category drop-down is a native <details>. This
  * adds "Copy link" and the phone's share sheet (hidden until now), marks the
- * section being read, fills the reading progress bar, brings the current
+ * section being read, shows the table of contents bar that follows the
+ * reader once the list has scrolled away, fills the reading progress bar, brings the current
  * category into view in rows that scroll sideways, and closes the category
- * drop-down on an outside tap, with Esc or when focus leaves it. Scroll work is batched into one animation frame and only
+ * drop-down on an outside tap, with Esc or when focus leaves it, and adds
+ * "Read more" to a shortened category description. Scroll work is batched into one animation frame and only
  * writes transforms and classes.
  */
 ( function () {
@@ -141,6 +143,7 @@
 			return;
 		}
 
+		const bar = followBar( root );
 		let active = null;
 		watchScroll( () => {
 			const line = topOffset() + window.innerHeight * 0.25;
@@ -161,8 +164,115 @@
 					current.link.setAttribute( 'aria-current', 'location' );
 				}
 				active = current;
+				if ( bar ) {
+					bar.mark( current ? current.link : null );
+				}
+			}
+
+			if ( bar ) {
+				bar.update();
 			}
 		} );
+	}
+
+	/**
+	 * The bar of a table of contents that follows the reader (Post_Toc
+	 * "Follow the reader"). It lives fixed under the header, so it moves to
+	 * <body>, out of any transformed or clipped Elementor container. It shows
+	 * while its list is visible on this device but scrolled above the screen
+	 * and the article is still being read; it only ever moves by transform.
+	 *
+	 * @param {HTMLElement} details The table of contents.
+	 * @return {?{mark: Function, update: Function}} Null without a bar.
+	 */
+	function followBar( details ) {
+		const bar = details.parentElement && details.parentElement.querySelector( ':scope > [data-stx-tocbar]' );
+		if ( ! bar ) {
+			return null;
+		}
+
+		const toggle = bar.querySelector( '.stx-tocbar__toggle' );
+		const panel = bar.querySelector( '.stx-tocbar__panel' );
+		const current = bar.querySelector( '[data-stx-tocbar-current]' );
+		const progress = bar.querySelector( '[data-stx-tocbar-progress]' );
+		const links = Array.from( panel.querySelectorAll( '.stx-toc__link' ) );
+		const article = doc.querySelector( '.stx-prose' );
+		let shown = false;
+
+		doc.body.appendChild( bar );
+		bar.hidden = false;
+
+		// A reading progress widget on the page already shows how far the reader is.
+		if ( progress && doc.querySelector( '[data-stx-progress]' ) ) {
+			progress.parentElement.remove();
+		}
+
+		function setOpen( open ) {
+			panel.hidden = ! open;
+			toggle.setAttribute( 'aria-expanded', String( open ) );
+			bar.classList.toggle( 'is-open', open );
+		}
+
+		toggle.addEventListener( 'click', () => setOpen( panel.hidden ) );
+		// The jump itself is the link's own; the list gets out of the way first.
+		links.forEach( ( link ) => link.addEventListener( 'click', () => setOpen( false ) ) );
+		doc.addEventListener( 'click', ( event ) => {
+			if ( ! panel.hidden && ! bar.contains( event.target ) ) {
+				setOpen( false );
+			}
+		} );
+		doc.addEventListener( 'keydown', ( event ) => {
+			if ( event.key === 'Escape' && ! panel.hidden ) {
+				setOpen( false );
+				toggle.focus();
+			}
+		} );
+
+		return {
+			/** Marks the section being read (a link of the original list, or null). */
+			mark( source ) {
+				const href = source ? source.getAttribute( 'href' ) : null;
+				links.forEach( ( link ) => {
+					const on = link.getAttribute( 'href' ) === href;
+					link.classList.toggle( 'is-active', on );
+					if ( on ) {
+						link.setAttribute( 'aria-current', 'location' );
+					} else {
+						link.removeAttribute( 'aria-current' );
+					}
+				} );
+				current.textContent = source ? source.textContent : '';
+			},
+
+			update() {
+				// The Elementor editor re-renders widgets: a bar whose list is gone goes too.
+				if ( ! details.isConnected ) {
+					bar.remove();
+					return;
+				}
+
+				const top = topOffset();
+				const end = article ? article.getBoundingClientRect() : null;
+				// A copy hidden on this device (Elementor's visibility) has no box; the stylesheet hides "mobile" bars on computers.
+				const visible = details.getClientRects().length > 0
+					&& getComputedStyle( bar ).display !== 'none'
+					&& details.getBoundingClientRect().bottom < top
+					&& ( ! end || end.bottom > top + 120 );
+
+				if ( visible !== shown ) {
+					shown = visible;
+					bar.classList.toggle( 'is-visible', visible );
+					if ( ! visible ) {
+						setOpen( false );
+					}
+				}
+
+				if ( visible && progress && progress.isConnected && end ) {
+					const ratio = ( top - end.top ) / Math.max( 1, end.height - ( window.innerHeight - top ) );
+					progress.style.transform = 'scaleX(' + Math.min( 1, Math.max( 0, ratio ) ).toFixed( 3 ) + ')';
+				}
+			},
+		};
 	}
 
 	/* ---------------------------------------------------------------------
@@ -232,6 +342,27 @@
 	}
 
 	/* ---------------------------------------------------------------------
+	 * Page title: shortened category description
+	 * ------------------------------------------------------------------- */
+
+	function initClamp( box ) {
+		const text = box.querySelector( '.stx-archive__text' );
+		const button = box.querySelector( '.stx-archive__more' );
+		// Two lines that fit need no button.
+		if ( ! text || ! button || text.scrollHeight <= text.clientHeight + 1 ) {
+			return;
+		}
+
+		const more = button.textContent;
+		button.hidden = false;
+		button.addEventListener( 'click', () => {
+			const open = box.classList.toggle( 'is-open' );
+			button.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+			button.textContent = open ? button.getAttribute( 'data-less' ) : more;
+		} );
+	}
+
+	/* ---------------------------------------------------------------------
 	 * Boot (page load and widgets added in the Elementor editor)
 	 * ------------------------------------------------------------------- */
 
@@ -250,6 +381,7 @@
 		once( '[data-stx-progress]', initProgress );
 		once( '.stx-terms--chips .stx-terms__list, .stx-terms--tabs .stx-terms__list', initCategoryRow );
 		once( '[data-stx-cat-menu]', initCategoryMenu );
+		once( '[data-stx-clamp]', initClamp );
 	}
 
 	if ( doc.readyState === 'loading' ) {

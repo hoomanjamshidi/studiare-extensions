@@ -603,8 +603,8 @@ final class Post_Grid extends Home_Base {
 		return $options;
 	}
 
-	/** @return array<string, string> Category ID → name. */
-	private static function category_options(): array {
+	/** @return array<string, string> Category ID → name (also for Podcast_List). */
+	public static function category_options(): array {
 		$terms = get_terms(
 			array(
 				'taxonomy'   => 'category',

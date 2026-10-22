@@ -316,8 +316,10 @@
 	}
 
 	function buildChoices( select ) {
-		let holder = select.nextElementSibling;
-		if ( ! holder || ! holder.classList.contains( 'stx-choices' ) ) {
+		// Looked up in the cell, not as the select's next sibling: Studiare's
+		// select2 box lands between them, and a new row was added per update.
+		let holder = select.parentElement.querySelector( ':scope > .stx-choices' );
+		if ( ! holder ) {
 			holder = doc.createElement( 'div' );
 			holder.className = 'stx-choices';
 			holder.setAttribute( 'role', 'radiogroup' );
@@ -349,6 +351,11 @@
 	}
 
 	function initChoices( scope ) {
+		// Studiare adds a radio list after each variation select. Its radios
+		// share the select's name and never follow it, so the one checked on
+		// load was posted last and WooCommerce rejected the other choices.
+		scope.querySelectorAll( '.stx-atc .variation-radios' ).forEach( ( radios ) => radios.remove() );
+
 		scope.querySelectorAll( '.stx-atc--vars-buttons table.variations select:not(.stx-enhanced)' ).forEach( ( select ) => {
 			select.classList.add( 'stx-enhanced' );
 			buildChoices( select );

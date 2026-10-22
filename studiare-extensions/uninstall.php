@@ -1,8 +1,8 @@
 <?php
 /**
  * Removes everything the plugin created: one `studiare_ext_<module>` option per
- * module, page templates and their per-product settings, the newsletter list
- * and the contact messages. Pages made from the page designs are the site's
+ * module, page templates and their per-product settings, the newsletter list,
+ * the contact messages and the podcast/PDF settings of posts. Pages made from the page designs are the site's
  * own content and stay.
  *
  * @package StudiareExt
@@ -33,6 +33,10 @@ function studiare_ext_uninstall_site(): void {
 	delete_post_meta_by_key( '_stx_template' );
 	delete_post_meta_by_key( '_stx_highlights' );
 	delete_post_meta_by_key( '_stx_design' );
+
+	// Podcasts of posts and the per-post "hide the PDF button" switch (article tools).
+	delete_post_meta_by_key( '_stx_podcast' );
+	delete_post_meta_by_key( '_stx_pdf_off' );
 
 	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( 'studiare_ext_' ) . '%' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- one-off cleanup.
 	wp_cache_flush();

@@ -2077,6 +2077,65 @@ fieldset.stx-field > legend {
 }
 
 /* ==========================================================================
+   Article tools
+   ========================================================================== */
+
+/* A mock blog post around the real player and PDF button markup. */
+.stx-at-stage {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 60px 14px 24px;
+	overflow-y: auto;
+	scrollbar-width: none;
+	color: #1b2230;
+	font-size: 14px;
+}
+
+.stx-at-stage .stx-pod,
+.stx-at-stage .stx-at-bar {
+	margin-bottom: 4px;
+}
+
+.stx-at-stage .stx-at-cta {
+	margin-top: 6px;
+}
+
+.stx-at-stage__title,
+.stx-at-stage__line {
+	display: block;
+	flex: none;
+	height: 10px;
+	border-radius: 6px;
+	background: #dfe2ec;
+}
+
+.stx-at-stage__title {
+	width: 80%;
+	height: 18px;
+	background: #c9cede;
+}
+
+.stx-at-stage__line--short {
+	width: 45%;
+	margin-bottom: 8px;
+}
+
+.stx-at-stage__line:nth-of-type(3n) {
+	width: 70%;
+}
+
+.scdarkcolors .stx-at-stage {
+	color: var(--dark_light_color, #fff);
+}
+
+.scdarkcolors :is(.stx-at-stage__title, .stx-at-stage__line) {
+	background: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
    Support button
    ========================================================================== */
 

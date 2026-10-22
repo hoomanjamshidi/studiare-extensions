@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Studiare Extensions 1.7.0\n"
+"Project-Id-Version: Studiare Extensions 1.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/studiare-extensions\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-29T11:14:05+00:00\n"
+"POT-Creation-Date: 2026-10-22T19:35:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: studiare-extensions\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Description of the plugin
 #: studiare-extensions.php
-msgid "Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers and footers, and a floating support button."
+msgid "Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, a floating support button, and a \"Save as PDF\" button and podcast player for blog posts."
 msgstr ""
 
 #. Author of the plugin
@@ -33,8 +33,8 @@ msgid "Hooman Jamshidi"
 msgstr ""
 
 #: includes/Admin/Admin.php:49
-#: includes/Modules/Builder/Elementor/Integration.php:133
-#: includes/Modules/Builder/Elementor/Integration.php:168
+#: includes/Modules/Builder/Elementor/Integration.php:134
+#: includes/Modules/Builder/Elementor/Integration.php:169
 msgid "Studiare+"
 msgstr ""
 
@@ -204,6 +204,371 @@ msgstr[1] ""
 #: includes/Modules/Builder/views/search-results.php:22
 #, php-format
 msgid "Nothing found for “%s”."
+msgstr ""
+
+#: includes/Modules/Article_Tools/Edit_Box.php:47
+msgid "Studiare+ article tools"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Edit_Box.php:77
+msgid "Choose the podcast audio"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Edit_Box.php:78
+msgid "Choose the podcast cover"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Edit_Box.php:79
+msgid "Use this file"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Edit_Box.php:80
+msgid "Use this picture"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Frontend.php:164
+#: includes/Modules/Article_Tools/Module.php:74
+#: includes/Modules/Article_Tools/Schema.php:29
+#: includes/Modules/Article_Tools/views/admin.php:65
+#: includes/Modules/Article_Tools/views/admin.php:85
+#: includes/Modules/Article_Tools/views/admin.php:177
+msgid "Save as PDF"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Frontend.php:240
+#: includes/Modules/Article_Tools/views/podcast.php:86
+msgid "Play"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Frontend.php:241
+msgid "Pause"
+msgstr ""
+
+#. translators: %s: playback speed, e.g. 1.5×.
+#: includes/Modules/Article_Tools/Frontend.php:243
+#: includes/Modules/Article_Tools/views/podcast.php:116
+#, php-format
+msgid "Playback speed: %s"
+msgstr ""
+
+#. translators: 1: time listened, 2: length of the episode.
+#: includes/Modules/Article_Tools/Frontend.php:245
+#, php-format
+msgid "%1$s of %2$s"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Frontend.php:246
+msgid "Preparing…"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Module.php:25
+msgid "Article tools"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Module.php:29
+msgid "A \"Save as PDF\" button on every blog post, and a podcast player at the top of posts that have an audio version."
+msgstr ""
+
+#: includes/Modules/Article_Tools/Module.php:75
+#: includes/Modules/Article_Tools/Schema.php:35
+#: includes/Modules/Article_Tools/views/admin.php:121
+#: includes/Modules/Article_Tools/views/podcast.php:36
+msgid "Listen to this article"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Podcast.php:168
+msgid "Five study habits that really work"
+msgstr ""
+
+#: includes/Modules/Article_Tools/Podcast.php:169
+msgid "Read by the author"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:51
+#: includes/Modules/Bottom_Nav/views/admin.php:104
+#: includes/Modules/Builder/views/admin.php:90
+#: includes/Modules/Support_Button/views/admin.php:85
+#: includes/Modules/Theme_Fixes/views/admin.php:32
+msgid "Active"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:52
+#: includes/Modules/Bottom_Nav/views/admin.php:105
+#: includes/Modules/Builder/views/admin.php:91
+#: includes/Modules/Support_Button/views/admin.php:86
+#: includes/Modules/Theme_Fixes/views/admin.php:33
+msgid "Inactive"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:54
+msgid "Enable the article tools"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:66
+msgid "The button opens the browser's print window, where visitors choose \"Save as PDF\". Only the article goes on paper: no header, sidebar, comments or footer. Persian text, fonts and pictures come out just as on the site, and the browser's own Print command gives the same clean copy."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:70
+msgid "Show the button on blog posts"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:70
+msgid "Authors can hide it on a single post from the \"Studiare+ article tools\" box of the post editor."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:73
+#: includes/Modules/Builder/Elementor/Widgets/Events.php:75
+msgid "Place"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:75
+msgid "Above the text"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:76
+msgid "After the text"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:77
+msgid "Both"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:83
+#: includes/Modules/Builder/Elementor/Widgets/Add_To_Cart.php:43
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:207
+#: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:73
+#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:166
+#: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:80
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:81
+#: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:288
+#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:93
+#: includes/Modules/Support_Button/views/admin.php:240
+msgid "Button text"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:91
+msgid "Featured picture in the PDF"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:93
+msgid "Printed under the title. Visitors who never print do not download it."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:99
+msgid "Link to the article at the end"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:101
+msgid "Readers of a shared PDF can find the original post."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:111
+msgid "Podcast"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:112
+msgid "To add the audio version of a post, open the post in the editor and choose the file in the \"Studiare+ article tools\" box. The player appears at the top of the article; posts without audio stay as they are."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:116
+msgid "Show the podcast player"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:119
+msgid "Text above the title"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:127
+#: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:66
+#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:94
+#: includes/Modules/Builder/Elementor/Widgets/Post_Meta.php:53
+#: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:80
+#: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:78
+#: includes/Modules/Builder/Elementor/Widgets/Slides.php:158
+msgid "Look"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:129
+msgid "Soft (follows dark mode)"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:130
+msgid "Studio (always dark)"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:134
+msgid "Download button"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:135
+msgid "Playback speed button"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:138
+msgid "Continue where the listener stopped"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:140
+msgid "Remembered in the visitor's own browser; nothing is sent to the site."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:150
+#: includes/Modules/Bottom_Nav/views/admin.php:90
+#: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:93
+#: includes/Modules/Support_Button/views/admin.php:281
+msgid "Colours"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:151
+msgid "Leave it empty to follow your Studiare primary colour. The text on the buttons switches between white and black for contrast."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:154
+#: includes/Modules/Builder/Elementor/Integration.php:187
+#: includes/Modules/Builder/Elementor/Widgets/Button.php:36
+#: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:71
+msgid "Accent"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:159
+#: includes/Modules/Bottom_Nav/views/admin.php:482
+#: includes/Modules/Support_Button/views/admin.php:371
+msgid "Live preview"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:162
+#: includes/Modules/Bottom_Nav/views/admin.php:485
+#: includes/Modules/Support_Button/views/admin.php:374
+msgid "Preview colour scheme"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:163
+#: includes/Modules/Bottom_Nav/views/admin.php:177
+#: includes/Modules/Bottom_Nav/views/admin.php:486
+#: includes/Modules/Support_Button/views/admin.php:375
+msgid "Light"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:164
+#: includes/Modules/Bottom_Nav/views/admin.php:487
+#: includes/Modules/Builder/Elementor/Integration.php:186
+#: includes/Modules/Builder/Elementor/Widgets/Button.php:37
+#: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:70
+#: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:82
+#: includes/Modules/Builder/Elementor/Widgets/Slides.php:163
+#: includes/Modules/Support_Button/views/admin.php:376
+msgid "Dark"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/admin.php:201
+msgid "The preview player does not play. On your site the Studiare font is used."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:27
+msgid "Add an audio version of this post. It appears as a podcast player at the top of the article."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:30
+msgid "Podcast audio"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:34
+msgid "Choose from the media library"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:35
+#: includes/Modules/Article_Tools/views/edit-box.php:63
+msgid "Remove"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:38
+msgid "Upload an MP3 or M4A file, or paste a direct link to one."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:42
+msgid "Episode title"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:43
+msgid "Empty: the post title"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:47
+msgid "Narrator or guests"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:52
+#: includes/Modules/Builder/Elementor/Parts.php:601
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:151
+msgid "Duration"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:54
+msgid "Minutes:seconds. Filled in for media library files; shown before the audio loads."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:58
+msgid "Cover"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:62
+msgid "Choose a picture"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:65
+msgid "Empty: the featured image. A square picture looks best."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/edit-box.php:73
+msgid "Hide the \"Save as PDF\" button on this post"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/pdf.php:23
+msgid "Opens the print window. Choose \"Save as PDF\" as the printer."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/pdf.php:35
+msgid "Keep a copy of this article"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/pdf.php:36
+msgid "Save it as a PDF to read offline, share or print."
+msgstr ""
+
+#. translators: %s: length of the episode in minutes.
+#: includes/Modules/Article_Tools/views/podcast.php:79
+#, php-format
+msgid "%s minute"
+msgid_plural "%s minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/Article_Tools/views/podcast.php:95
+msgid "Playback position"
+msgstr ""
+
+#. translators: %s: number of seconds.
+#: includes/Modules/Article_Tools/views/podcast.php:105
+#, php-format
+msgid "Back %s seconds"
+msgstr ""
+
+#. translators: %s: number of seconds.
+#: includes/Modules/Article_Tools/views/podcast.php:110
+#, php-format
+msgid "Forward %s seconds"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/podcast.php:121
+msgid "Download"
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/podcast.php:126
+msgid "The audio could not be played. Check your connection, or download the file."
+msgstr ""
+
+#: includes/Modules/Article_Tools/views/print-foot.php:14
+msgid "Source:"
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/Frontend.php:208
@@ -574,12 +939,6 @@ msgstr ""
 msgid "Buttons"
 msgstr ""
 
-#: includes/Modules/Bottom_Nav/views/admin.php:90
-#: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:93
-#: includes/Modules/Support_Button/views/admin.php:281
-msgid "Colours"
-msgstr ""
-
 #: includes/Modules/Bottom_Nav/views/admin.php:91
 msgid "Size & font"
 msgstr ""
@@ -588,20 +947,6 @@ msgstr ""
 #: includes/Modules/Bottom_Nav/views/admin.php:434
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:303
 msgid "Behaviour"
-msgstr ""
-
-#: includes/Modules/Bottom_Nav/views/admin.php:104
-#: includes/Modules/Builder/views/admin.php:90
-#: includes/Modules/Support_Button/views/admin.php:85
-#: includes/Modules/Theme_Fixes/views/admin.php:32
-msgid "Active"
-msgstr ""
-
-#: includes/Modules/Bottom_Nav/views/admin.php:105
-#: includes/Modules/Builder/views/admin.php:91
-#: includes/Modules/Support_Button/views/admin.php:86
-#: includes/Modules/Theme_Fixes/views/admin.php:33
-msgid "Inactive"
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:107
@@ -631,12 +976,6 @@ msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:175
 msgid "Font Awesome weight"
-msgstr ""
-
-#: includes/Modules/Bottom_Nav/views/admin.php:177
-#: includes/Modules/Bottom_Nav/views/admin.php:486
-#: includes/Modules/Support_Button/views/admin.php:375
-msgid "Light"
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:178
@@ -775,10 +1114,11 @@ msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:356
 #: includes/Modules/Bottom_Nav/views/admin.php:368
-#: includes/Modules/Builder/Elementor/Integration.php:180
+#: includes/Modules/Builder/Elementor/Integration.php:181
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:118
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:113
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:102
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:134
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:276
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:361
 msgid "None"
@@ -791,7 +1131,7 @@ msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:358
 #: includes/Modules/Bottom_Nav/views/admin.php:420
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:88
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:107
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:86
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:169
 #: includes/Modules/Builder/Elementor/Widgets/Post_Content.php:43
@@ -980,26 +1320,6 @@ msgstr ""
 #: includes/Modules/Bottom_Nav/views/admin.php:472
 #: includes/Modules/Support_Button/views/admin.php:352
 msgid "Comma separated IDs, e.g. landing pages that have their own call to action."
-msgstr ""
-
-#: includes/Modules/Bottom_Nav/views/admin.php:482
-#: includes/Modules/Support_Button/views/admin.php:371
-msgid "Live preview"
-msgstr ""
-
-#: includes/Modules/Bottom_Nav/views/admin.php:485
-#: includes/Modules/Support_Button/views/admin.php:374
-msgid "Preview colour scheme"
-msgstr ""
-
-#: includes/Modules/Bottom_Nav/views/admin.php:487
-#: includes/Modules/Builder/Elementor/Integration.php:185
-#: includes/Modules/Builder/Elementor/Widgets/Button.php:37
-#: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:70
-#: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:82
-#: includes/Modules/Builder/Elementor/Widgets/Slides.php:163
-#: includes/Modules/Support_Button/views/admin.php:376
-msgid "Dark"
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:489
@@ -1335,6 +1655,7 @@ msgid "Show more"
 msgstr ""
 
 #: includes/Modules/Builder/Assets.php:91
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:190
 msgid "Show less"
 msgstr ""
 
@@ -1376,7 +1697,7 @@ msgstr ""
 #: includes/Modules/Builder/Contact_Messages.php:62
 #: includes/Modules/Builder/Contact_Messages.php:64
 #: includes/Modules/Builder/Contact_Messages.php:65
-#: includes/Modules/Builder/Contact_Messages.php:462
+#: includes/Modules/Builder/Contact_Messages.php:482
 #: includes/Modules/Builder/views/admin.php:272
 msgid "Contact messages"
 msgstr ""
@@ -1386,14 +1707,14 @@ msgid "From"
 msgstr ""
 
 #: includes/Modules/Builder/Contact_Inbox.php:63
-#: includes/Modules/Builder/Contact_Messages.php:474
+#: includes/Modules/Builder/Contact_Messages.php:494
 #: includes/Modules/Builder/Elementor/Widgets/Countdown.php:95
 #: includes/Modules/Support_Button/views/admin.php:322
 msgid "Message"
 msgstr ""
 
 #: includes/Modules/Builder/Contact_Inbox.php:64
-#: includes/Modules/Builder/Contact_Messages.php:381
+#: includes/Modules/Builder/Contact_Messages.php:382
 msgid "Page"
 msgstr ""
 
@@ -1472,13 +1793,13 @@ msgid "Your message could not be sent. Please try again."
 msgstr ""
 
 #. translators: %s: site name.
-#: includes/Modules/Builder/Contact_Messages.php:367
+#: includes/Modules/Builder/Contact_Messages.php:368
 #, php-format
 msgid "New message from the contact form on %s."
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Messages.php:369
-#: includes/Modules/Builder/Contact_Messages.php:466
+#: includes/Modules/Builder/Contact_Messages.php:370
+#: includes/Modules/Builder/Contact_Messages.php:486
 #: includes/Modules/Builder/Elementor/Widgets/Course_Teacher.php:93
 #: includes/Modules/Builder/Elementor/Widgets/Logo_Strip.php:47
 #: includes/Modules/Builder/Elementor/Widgets/People.php:77
@@ -1498,7 +1819,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Messages.php:372
+#: includes/Modules/Builder/Contact_Messages.php:373
 #: includes/Modules/Builder/Elementor/Post_Parts.php:219
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:54
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:133
@@ -1509,36 +1830,36 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Messages.php:373
-#: includes/Modules/Builder/Contact_Messages.php:470
+#: includes/Modules/Builder/Contact_Messages.php:374
+#: includes/Modules/Builder/Contact_Messages.php:490
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:53
 #: includes/Modules/Support_Button/views/admin.php:38
 msgid "Phone"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Messages.php:374
+#: includes/Modules/Builder/Contact_Messages.php:375
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:161
 msgid "Topic"
 msgstr ""
 
 #. translators: %s: link to the messages in the admin.
-#: includes/Modules/Builder/Contact_Messages.php:388
+#: includes/Modules/Builder/Contact_Messages.php:389
 #, php-format
 msgid "All messages: %s"
 msgstr ""
 
 #. translators: 1: site name, 2: message topic or the sender's name.
-#: includes/Modules/Builder/Contact_Messages.php:399
+#: includes/Modules/Builder/Contact_Messages.php:398
 #, php-format
 msgid "[%1$s] New message: %2$s"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Messages.php:434
-#: includes/Modules/Builder/Contact_Messages.php:446
+#: includes/Modules/Builder/Contact_Messages.php:454
+#: includes/Modules/Builder/Contact_Messages.php:466
 msgid "Contact messages (Studiare+)"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Messages.php:478
+#: includes/Modules/Builder/Contact_Messages.php:498
 msgid "Sent on"
 msgstr ""
 
@@ -1625,77 +1946,74 @@ msgid "Featured"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Cards.php:386
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:191
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:290
 #: includes/Modules/Builder/Presets/Home.php:684
 msgid "Read more"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:176
+#: includes/Modules/Builder/Elementor/Integration.php:177
 msgid "Brand surface"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:181
+#: includes/Modules/Builder/Elementor/Integration.php:182
 msgid "Card (with border)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:182
+#: includes/Modules/Builder/Elementor/Integration.php:183
 msgid "Card (no border)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:183
+#: includes/Modules/Builder/Elementor/Integration.php:184
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:304
 msgid "Soft background"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:184
+#: includes/Modules/Builder/Elementor/Integration.php:185
 #: includes/Modules/Builder/views/admin.php:73
 msgid "Page background"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:186
-#: includes/Modules/Builder/Elementor/Widgets/Button.php:36
-#: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:71
-msgid "Accent"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Integration.php:187
+#: includes/Modules/Builder/Elementor/Integration.php:188
 #: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:85
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:162
 msgid "Accent gradient"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:188
+#: includes/Modules/Builder/Elementor/Integration.php:189
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:68
 msgid "Accent (light)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:191
+#: includes/Modules/Builder/Elementor/Integration.php:192
 msgid "Uses the brand colours from Studiare+ → Page templates, including dark mode. A background set in the Style tab still wins."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:198
+#: includes/Modules/Builder/Elementor/Integration.php:199
 msgid "Sticky while scrolling"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:202
+#: includes/Modules/Builder/Elementor/Integration.php:203
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:83
 #: includes/Modules/Builder/views/admin.php:187
 #: includes/Modules/Support_Button/Module.php:97
 msgid "Off"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:203
+#: includes/Modules/Builder/Elementor/Integration.php:204
 msgid "Desktop only"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:204
+#: includes/Modules/Builder/Elementor/Integration.php:205
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:85
 msgid "All devices"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:208
+#: includes/Modules/Builder/Elementor/Integration.php:209
 msgid "Keeps a column (e.g. the buy box) in view inside its parent. The parent must be taller than this container."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Integration.php:215
+#: includes/Modules/Builder/Elementor/Integration.php:216
 msgid "Distance from top"
 msgstr ""
 
@@ -1826,10 +2144,6 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Parts.php:556
 msgid "Teachers are picked in the course's Studiare settings. Their photo, title and bio appear here."
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Parts.php:601
-msgid "Duration"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Parts.php:605
@@ -2003,7 +2317,7 @@ msgid "Search results"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Post_Parts.php:309
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:48
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:52
 #: includes/Modules/Builder/Elementor/Widgets/Blog_Breadcrumb.php:92
 #: includes/Modules/Builder/views/admin.php:40
 msgid "Blog"
@@ -2136,18 +2450,6 @@ msgstr ""
 msgid "Add to cart"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Add_To_Cart.php:43
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:207
-#: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:73
-#: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:166
-#: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:80
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:81
-#: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:288
-#: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:93
-#: includes/Modules/Support_Button/views/admin.php:240
-msgid "Button text"
-msgstr ""
-
 #: includes/Modules/Builder/Elementor/Widgets/Add_To_Cart.php:46
 msgid "WooCommerce default"
 msgstr ""
@@ -2274,13 +2576,13 @@ msgstr ""
 msgid "This product cannot be bought right now (out of stock or no price)."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:24
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:55
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:28
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:59
 msgid "Blog page title"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:32
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:98
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:36
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:117
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:96
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:207
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:95
@@ -2291,13 +2593,14 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:60
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:77
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:279
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:84
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:333
 #: includes/Modules/Builder/Elementor/Widgets/Post_Nav.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:31
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:70
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:41
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:95
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:47
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:116
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:335
 #: includes/Modules/Builder/Elementor/Widgets/Product_Highlights.php:45
 #: includes/Modules/Builder/Elementor/Widgets/Product_Highlights.php:70
@@ -2318,42 +2621,67 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:38
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:42
 msgid "Categories, tags, authors and searches show their own name and description. The texts below are for the main blog page."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:46
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:50
 msgid "Small title on the blog page"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:58
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:62
 #: includes/Modules/Builder/Elementor/Widgets/Blog_Breadcrumb.php:51
 msgid "Title of the blog page"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:66
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:70
 msgid "Blog page text"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:68
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:72
 msgid "Practical articles, guides and news to help you learn faster."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:75
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:79
+msgid "Category and tag description"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:83
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:71
+#: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:38
+#: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:99
+#: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:45
+msgid "Show"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:84
+msgid "Two lines with \"Read more\""
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:85
+msgid "Hide"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:87
+msgid "\"Read more\" keeps the whole text in the page for search engines. \"Hide\" leaves it out of the page; the meta description from your SEO plugin is not affected."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:94
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:123
 msgid "Number of posts"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:84
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:103
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:163
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:304
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:56
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:79
 #: includes/Modules/Builder/Elementor/Widgets/Product_Title.php:50
 msgid "Size"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:89
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:108
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:87
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:168
 #: includes/Modules/Builder/Elementor/Widgets/Post_Content.php:44
@@ -2363,20 +2691,20 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:90
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:109
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:167
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:62
 #: includes/Modules/Builder/Elementor/Widgets/Product_Title.php:54
 msgid "Extra large"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:100
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:119
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:37
 msgid "Small title"
 msgstr ""
 
 #. translators: %s: widget name.
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:101
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:120
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:52
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:40
 #: includes/Modules/Builder/Elementor/Widgets/Copyright.php:39
@@ -2385,6 +2713,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:141
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:55
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:42
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:281
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:117
 #: includes/Modules/Builder/Elementor/Widgets/Post_Tags.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:55
@@ -2406,8 +2735,12 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:125
+msgid "\"Read more\" button"
+msgstr ""
+
 #. translators: %s: number of posts.
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:131
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:159
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:781
 #, php-format
 msgid "%s post"
@@ -2415,7 +2748,7 @@ msgid_plural "%s posts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:133
+#: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:161
 msgid "Nothing found"
 msgstr ""
 
@@ -2437,6 +2770,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:193
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:123
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:128
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:224
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:103
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:97
@@ -2450,6 +2784,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:201
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:131
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:136
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:228
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:111
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:152
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:105
@@ -2461,6 +2796,7 @@ msgid "End"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:237
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:295
 #: includes/Modules/Builder/Elementor/Widgets/Reading_Progress.php:46
 msgid "Colour"
 msgstr ""
@@ -2685,6 +3021,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:41
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:251
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:492
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:67
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:127
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:184
@@ -2727,6 +3064,7 @@ msgid "Number of categories"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:80
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:115
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:196
 msgid "Order"
 msgstr ""
@@ -2848,13 +3186,6 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:56
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:213
 msgid "Opening hours"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:71
-#: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:38
-#: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:99
-#: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:45
-msgid "Show"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:75
@@ -3217,7 +3548,8 @@ msgid "Boxes"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Countdown.php:130
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:73
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:142
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:94
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:40
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:118
@@ -3417,10 +3749,6 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:67
 msgid "Time"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Events.php:75
-msgid "Place"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:83
@@ -3817,6 +4145,8 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:42
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:185
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:190
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:166
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:34
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:77
@@ -3927,6 +4257,7 @@ msgid "YouTube, Aparat, Vimeo or a video file. Adds a play button that opens the
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:82
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:203
 msgid "Shape"
 msgstr ""
 
@@ -3968,6 +4299,7 @@ msgid "Phones"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:52
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:84
 msgid "Phones and tablets"
 msgstr ""
 
@@ -4331,6 +4663,148 @@ msgstr ""
 msgid "Picture shape"
 msgstr ""
 
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:35
+msgid "Podcast list"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:53
+#: includes/Modules/Builder/Presets/Home.php:556
+msgid "Podcasts"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:59
+msgid "Lists blog posts that have a podcast (set in the \"Podcast\" box of the post editor)."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:67
+#: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:53
+msgid "Posts"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:71
+#: includes/Modules/Builder/Presets/Home.php:33
+#: includes/Modules/Builder/Presets/Home.php:51
+msgid "All categories"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:72
+#: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:73
+#: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:65
+msgid "From categories"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:73
+msgid "Category being viewed"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:86
+msgid "Subcategories are included."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:95
+msgid "On a category page, the podcasts of that category; on other pages, all podcasts."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:104
+msgid "Number of podcasts"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:119
+msgid "Newest first"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:120
+msgid "Oldest first"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:128
+msgid "Text under the title"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:132
+msgid "Post excerpt"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:133
+msgid "Speaker"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:160
+msgid "Lines between rows"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:169
+#: includes/Modules/Builder/Elementor/Widgets/Timeline.php:102
+msgid "Title tag"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:176
+msgid "Plain text"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:196
+msgid "Optional. Leave empty for the list alone."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:207
+msgid "Free shape with decorations"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:208
+msgid "Circle"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:209
+msgid "Rounded"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:210
+msgid "As uploaded"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:218
+#: includes/Modules/Support_Button/views/admin.php:300
+msgid "Position"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:238
+msgid "Show on phones"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:241
+msgid "On narrow screens the picture sits above the list."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:249
+msgid "Picture width"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:266
+msgid "Rows"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:268
+msgid "Row"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:273
+msgid "Hover background"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:280
+#: includes/Modules/Builder/Elementor/Widgets/Stats.php:46
+#: includes/Modules/Builder/Elementor/Widgets/Stats.php:121
+msgid "Number"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:286
+msgid "Arrow"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:325
+msgid "No post has a podcast yet. Add one in the \"Podcast\" box of the post editor."
+msgstr ""
+
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:23
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:78
 msgid "Author box"
@@ -4359,15 +4833,6 @@ msgstr ""
 msgid "All posts"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:66
-#: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:94
-#: includes/Modules/Builder/Elementor/Widgets/Post_Meta.php:53
-#: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:80
-#: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:78
-#: includes/Modules/Builder/Elementor/Widgets/Slides.php:158
-msgid "Look"
-msgstr ""
-
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:70
 msgid "Photo beside the text"
 msgstr ""
@@ -4382,7 +4847,7 @@ msgid "Blog categories"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:73
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:100
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:121
 msgid "Links"
 msgstr ""
 
@@ -4556,7 +5021,7 @@ msgid "Lines of about 70 characters are the easiest to read. Leave empty to fill
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Content.php:70
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:50
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:56
 #: includes/Modules/Builder/views/admin.php:70
 msgid "Headings"
 msgstr ""
@@ -4567,10 +5032,6 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:41
 msgid "Post grid"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:53
-msgid "Posts"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:58
@@ -4584,11 +5045,6 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:60
 msgid "Newest"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:73
-#: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:65
-msgid "From categories"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:74
@@ -4935,41 +5391,50 @@ msgstr ""
 msgid "Shows the excerpt written for the post (none when it is empty)."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:27
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:35
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:93
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:33
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:41
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:114
 msgid "Table of contents"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:43
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:49
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:195
 msgid "In this article"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:54
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:60
 msgid "Main headings (H2)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:55
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:61
 msgid "Main headings and sub-headings (H2, H3)"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:63
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:69
 msgid "Open at first"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:66
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:72
 msgid "Visitors can open and close it. On phones a closed list takes little space above the text."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:82
-msgid "Hide with fewer headings than"
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:79
+msgid "Follow the reader"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:87
+msgid "Once the list scrolls away, a slim bar with the section being read stays under the header; tapping it opens the list. On computers the designs keep the list in a sticky sidebar instead."
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:103
+msgid "Hide with fewer headings than"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:108
 msgid "A short post without sections needs no table of contents."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:123
+#: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:144
 msgid "The table of contents appears when the post has enough H2 headings."
 msgstr ""
 
@@ -6304,11 +6769,6 @@ msgstr ""
 msgid "Key numbers"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Stats.php:46
-#: includes/Modules/Builder/Elementor/Widgets/Stats.php:121
-msgid "Number"
-msgstr ""
-
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:97
 msgid "Floating card with dividers"
 msgstr ""
@@ -6403,10 +6863,6 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Timeline.php:94
 msgid "Steps in a row"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Timeline.php:102
-msgid "Title tag"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Timeline.php:120
@@ -7825,11 +8281,6 @@ msgstr ""
 msgid "Browse by topic"
 msgstr ""
 
-#: includes/Modules/Builder/Presets/Home.php:33
-#: includes/Modules/Builder/Presets/Home.php:51
-msgid "All categories"
-msgstr ""
-
 #: includes/Modules/Builder/Presets/Home.php:36
 msgid "Learning paths"
 msgstr ""
@@ -8127,10 +8578,6 @@ msgstr ""
 
 #: includes/Modules/Builder/Presets/Home.php:548
 msgid "Start the path"
-msgstr ""
-
-#: includes/Modules/Builder/Presets/Home.php:556
-msgid "Podcasts"
 msgstr ""
 
 #: includes/Modules/Builder/Presets/Home.php:556
@@ -9033,10 +9480,6 @@ msgstr ""
 
 #: includes/Modules/Support_Button/views/admin.php:290
 msgid "Button icon and text"
-msgstr ""
-
-#: includes/Modules/Support_Button/views/admin.php:300
-msgid "Position"
 msgstr ""
 
 #: includes/Modules/Support_Button/views/admin.php:301
