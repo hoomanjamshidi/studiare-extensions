@@ -258,6 +258,17 @@ final class Podcast_List extends Base {
 			)
 		);
 
+		$this->add_control(
+			'open_text',
+			array(
+				'label'       => __( 'Episode page button', 'studiare-extensions' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => __( 'Episode page', 'studiare-extensions' ),
+				'description' => __( 'Opens the post of the episode. Leave empty to hide the button (the titles stay links).', 'studiare-extensions' ),
+				'label_block' => true,
+			)
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -473,7 +484,7 @@ final class Podcast_List extends Base {
 		printf( '<div class="%1$s" style="--stx-pods-ink-auto:%2$s" data-stx-pods><div class="stx-pods__inner">', esc_attr( implode( ' ', $classes ) ), esc_attr( self::accent_ink() ) );
 
 		if ( 'playlist' === $look ) {
-			$this->render_deck( $episodes[0] );
+			$this->render_deck( $episodes[0], (string) $s['open_text'] );
 		}
 
 		if ( 'cards' === $look ) {
@@ -526,9 +537,10 @@ final class Podcast_List extends Base {
 	 * The player of the playlist look. It shows the first episode; podcasts.js
 	 * puts the chosen one in its place.
 	 *
-	 * @param array $episode episode().
+	 * @param array  $episode   episode().
+	 * @param string $open_text Text of the episode page button ('' for none).
 	 */
-	private function render_deck( array $episode ): void {
+	private function render_deck( array $episode, string $open_text ): void {
 		$pod = $episode['pod'];
 		?>
 		<div class="stx-pdeck" data-pod-deck><div class="stx-pdeck__in">
@@ -557,6 +569,10 @@ final class Podcast_List extends Base {
 					<?php /* translators: %s: playback speed, e.g. 1.5×. */ ?>
 					<button type="button" class="stx-pdeck__tool stx-pdeck__speed" data-deck-speed aria-label="<?php echo esc_attr( sprintf( __( 'Playback speed: %s', 'studiare-extensions' ), self::num( 1 ) . '×' ) ); ?>"><?php echo esc_html( self::num( 1 ) . '×' ); ?></button>
 				</div>
+
+				<?php if ( '' !== trim( $open_text ) ) : ?>
+					<a class="stx-pdeck__open" href="<?php echo esc_url( $episode['url'] ); ?>" data-deck-open><span><?php echo esc_html( $open_text ); ?></span><?php echo self::CHEVRON; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- constant SVG. ?></a>
+				<?php endif; ?>
 
 				<span class="stx-pdeck__error" role="status" data-deck-error hidden><?php esc_html_e( 'The audio could not be played. Check your connection, or download the file.', 'studiare-extensions' ); ?></span>
 			</div>
@@ -598,6 +614,7 @@ final class Podcast_List extends Base {
 			echo '<span class="stx-ep__time"><bdi dir="ltr">' . esc_html( $episode['time'] ) . '</bdi></span>';
 		}
 
+		echo $this->open_link( $episode, (string) $s['open_text'], false ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by open_link().
 		echo '<span class="stx-ep__bar" aria-hidden="true"><i></i></span>';
 		echo '</li>';
 	}
@@ -630,9 +647,36 @@ final class Podcast_List extends Base {
 		if ( '' !== $episode['sub'] ) {
 			echo '<span class="stx-ep__sub">' . esc_html( $episode['sub'] ) . '</span>';
 		}
+		echo $this->open_link( $episode, (string) $s['open_text'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by open_link().
 		echo '</span>';
 
 		echo '</li>';
+	}
+
+	/**
+	 * Button that opens the episode's post: an arrow in a row (its name for
+	 * screen readers), the text and an arrow on a card.
+	 *
+	 * @param array  $episode   episode().
+	 * @param string $text      Button text ('' for no button).
+	 * @param bool   $with_text Whether the text shows.
+	 */
+	private function open_link( array $episode, string $text, bool $with_text ): string {
+		$text = trim( $text );
+		if ( '' === $text ) {
+			return '';
+		}
+
+		if ( $with_text ) {
+			return '<a class="stx-ep__open stx-ep__open--text" href="' . esc_url( $episode['url'] ) . '"><span>' . esc_html( $text ) . '</span>' . self::CHEVRON . '</a>';
+		}
+
+		return sprintf(
+			'<a class="stx-ep__open" href="%1$s" aria-label="%2$s">%3$s</a>',
+			esc_url( $episode['url'] ),
+			esc_attr( $text . ': ' . $episode['pod']['title'] ),
+			self::CHEVRON
+		);
 	}
 
 	/**

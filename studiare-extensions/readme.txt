@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.8.1
+Stable tag: 1.8.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.8.2 =
+* New: Podcast list: an "Episode page" button that opens the episode's post, in the player, on every row and on every card (its text is editable; empty hides it).
 
 = 1.8.1 =
 * New: Podcast list widget with four looks. Three play the episodes right on the page (a player beside or above the episode list, episode cards, playable rows), with seeking, 15/30 second jumps, speed, previous/next and "continue where you stopped"; the fourth is a list of links beside a picture. Show every podcast or only chosen categories (or the category being viewed). Its small stylesheet is printed inline and its script is deferred, and nothing is downloaded before play is tapped.

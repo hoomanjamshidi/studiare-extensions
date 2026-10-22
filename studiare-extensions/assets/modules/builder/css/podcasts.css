@@ -199,6 +199,100 @@
 	font-variant-numeric: tabular-nums;
 }
 
+/* Episode page button: an arrow at the end of a row, text and arrow on a
+   card and in the player. The arrow points left; LTR sites mirror it. */
+.stx-pods .stx-ep__open,
+.stx-pods .stx-pdeck__open {
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	--stx-link: var(--stx-accent-ink);
+	color: var(--stx-link);
+	font-size: 13px;
+	font-weight: 800;
+	line-height: 1.6;
+	text-decoration: none;
+}
+
+.stx-ep__open svg,
+.stx-pdeck__open svg {
+	width: 16px;
+	height: 16px;
+	scale: -1 1;
+	transition: translate 0.2s var(--stx-ease);
+}
+
+[dir="rtl"] :is(.stx-ep__open, .stx-pdeck__open) svg {
+	scale: 1;
+}
+
+.stx-ep__open:hover svg,
+.stx-pdeck__open:hover svg {
+	translate: 3px 0;
+}
+
+[dir="rtl"] :is(.stx-ep__open, .stx-pdeck__open):hover svg {
+	translate: -3px 0;
+}
+
+.stx-pods .stx-ep__open:focus-visible,
+.stx-pods .stx-pdeck__open:focus-visible {
+	outline: 2px solid var(--stx-pods-accent);
+	outline-offset: 2px;
+}
+
+/* Studiare's dark mode paints every link white (`body.scdarkcolors a:not(…)`,
+   0,3,5); the episode page arrow keeps its accent colour. */
+body.scdarkcolors a:is(.stx-ep__open) {
+	color: var(--stx-link) !important;
+}
+
+/* In a row: a round 44px target. */
+.stx-pods .stx-ep--row .stx-ep__open {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--stx-pods-accent) 12%, transparent);
+}
+
+.stx-pods .stx-ep--row .stx-ep__open:hover {
+	background: color-mix(in srgb, var(--stx-pods-accent) 22%, transparent);
+	color: var(--stx-accent-ink);
+}
+
+/* On a card: above the link that covers the card. */
+.stx-pods .stx-ep__open--text {
+	position: relative;
+	z-index: 2;
+	align-self: flex-start;
+	min-height: 32px;
+	margin-top: 6px;
+}
+
+/* In the player: a light outline button under the controls. */
+.stx-pods .stx-pdeck__open {
+	align-self: center;
+	min-height: 40px;
+	margin-top: 8px;
+	padding: 6px 16px;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	border-radius: 999px;
+	color: inherit;
+}
+
+.stx-pods .stx-pdeck__open:hover {
+	border-color: var(--stx-pods-accent);
+	color: inherit;
+}
+
+@container (min-width: 640px) {
+	.stx-pods .stx-pdeck__open {
+		align-self: flex-start;
+	}
+}
+
 /* ==========================================================================
    Rows (also the episode list of the playlist)
    ========================================================================== */
@@ -1008,8 +1102,14 @@
 	.stx-pods .stx-pods__play,
 	.stx-ep--card,
 	.stx-ep--row,
-	.stx-pods__go svg {
+	.stx-pods__go svg,
+	.stx-ep__open svg,
+	.stx-pdeck__open svg {
 		transition: none;
+	}
+
+	:is(.stx-ep__open, .stx-pdeck__open):hover svg {
+		translate: none !important;
 	}
 
 	.stx-pods .stx-pods__play:hover,

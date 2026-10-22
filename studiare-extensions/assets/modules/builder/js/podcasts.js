@@ -340,6 +340,7 @@
 			label: root.querySelector( '[data-deck-label]' ),
 			title: root.querySelector( '[data-deck-title]' ),
 			sub: root.querySelector( '[data-deck-sub]' ),
+			open: root.querySelector( '[data-deck-open]' ),
 		};
 		const steps = Array.from( root.querySelectorAll( '[data-deck-step]' ) );
 		let dragging = false;
@@ -364,6 +365,9 @@
 				deck.ep = ep;
 				ui.title.textContent = ep.dataset.title;
 				ui.title.href = ep.dataset.url;
+				if ( ui.open ) {
+					ui.open.href = ep.dataset.url;
+				}
 				ui.label.textContent = ep.dataset.label || '';
 				ui.sub.textContent = ep.dataset.sub || '';
 				ui.sub.hidden = ! ep.dataset.sub;

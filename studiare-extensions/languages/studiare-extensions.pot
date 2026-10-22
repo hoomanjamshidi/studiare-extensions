@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-22T20:02:53+00:00\n"
+"POT-Creation-Date: 2026-10-22T20:18:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: studiare-extensions\n"
@@ -248,7 +248,7 @@ msgstr ""
 #: includes/Modules/Article_Tools/Frontend.php:243
 #: includes/Modules/Article_Tools/views/podcast.php:115
 #: includes/Modules/Builder/Assets.php:205
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:558
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:570
 #, php-format
 msgid "Playback speed: %s"
 msgstr ""
@@ -418,7 +418,7 @@ msgstr ""
 
 #: includes/Modules/Article_Tools/views/admin.php:150
 #: includes/Modules/Bottom_Nav/views/admin.php:90
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:357
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:368
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:93
 #: includes/Modules/Support_Button/views/admin.php:281
 msgid "Colours"
@@ -549,20 +549,20 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Modules/Article_Tools/views/podcast.php:94
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:542
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:554
 msgid "Playback position"
 msgstr ""
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:104
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:552
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:564
 #, php-format
 msgid "Back %s seconds"
 msgstr ""
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:109
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:555
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:567
 #, php-format
 msgid "Forward %s seconds"
 msgstr ""
@@ -573,7 +573,7 @@ msgstr ""
 
 #: includes/Modules/Article_Tools/views/podcast.php:125
 #: includes/Modules/Builder/Assets.php:206
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:561
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:577
 msgid "The audio could not be played. Check your connection, or download the file."
 msgstr ""
 
@@ -1704,7 +1704,7 @@ msgstr ""
 
 #. translators: %s: episode title.
 #: includes/Modules/Builder/Assets.php:199
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:695
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:739
 #, php-format
 msgid "Play: %s"
 msgstr ""
@@ -2617,7 +2617,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:60
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:77
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:403
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:414
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:84
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:333
 #: includes/Modules/Builder/Elementor/Widgets/Post_Nav.php:72
@@ -2698,7 +2698,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:103
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:163
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:426
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:437
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:56
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:79
 #: includes/Modules/Builder/Elementor/Widgets/Product_Title.php:50
@@ -2737,7 +2737,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:141
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:55
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:42
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:404
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:415
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:117
 #: includes/Modules/Builder/Elementor/Widgets/Post_Tags.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:55
@@ -2794,7 +2794,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:193
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:123
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:128
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:308
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:319
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:103
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:97
@@ -2808,7 +2808,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:201
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:131
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:136
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:312
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:323
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:111
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:152
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:105
@@ -2820,7 +2820,7 @@ msgid "End"
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:237
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:417
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:428
 #: includes/Modules/Builder/Elementor/Widgets/Reading_Progress.php:46
 msgid "Colour"
 msgstr ""
@@ -4170,8 +4170,8 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:42
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:267
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:274
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:278
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:285
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:166
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:34
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:77
@@ -4282,7 +4282,7 @@ msgid "YouTube, Aparat, Vimeo or a video file. Adds a play button that opens the
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:82
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:287
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:298
 msgid "Shape"
 msgstr ""
 
@@ -4808,96 +4808,108 @@ msgstr ""
 msgid "Cards sit in one row that scrolls sideways on narrow screens."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:280
-msgid "Optional. Leave empty for the list alone."
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:264
+msgid "Episode page button"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:266
+msgid "Episode page"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:267
+msgid "Opens the post of the episode. Leave empty to hide the button (the titles stay links)."
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:291
-msgid "Free shape with decorations"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:292
-msgid "Circle"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:293
-msgid "Rounded"
-msgstr ""
-
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:294
-msgid "As uploaded"
+msgid "Optional. Leave empty for the list alone."
 msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:302
+msgid "Free shape with decorations"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:303
+msgid "Circle"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:304
+msgid "Rounded"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:305
+msgid "As uploaded"
+msgstr ""
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:313
 #: includes/Modules/Support_Button/views/admin.php:300
 msgid "Position"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:322
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:333
 msgid "Show on phones"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:325
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:336
 msgid "On narrow screens the picture sits above the list."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:332
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:343
 msgid "Picture width"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:348
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:359
 msgid "Lines between rows"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:362
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:373
 msgid "Play buttons and progress"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:371
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:382
 msgid "Play icon"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:373
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:384
 msgid "Empty: white or black, whichever reads better on the site's accent colour."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:381
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:392
 msgid "Player background"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:391
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:402
 msgid "Player text"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:400
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:411
 msgid "Episodes"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:405
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:416
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:46
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:121
 msgid "Number"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:410
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:421
 msgid "Arrow"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:447
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:458
 msgid "No post has a podcast yet. Add one in the \"Podcast\" box of the post editor."
 msgstr ""
 
 #. translators: %s: number of the episode in the list.
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:508
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:519
 #, php-format
 msgid "Episode %s"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:550
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:562
 msgid "Previous episode"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:556
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:568
 msgid "Next episode"
 msgstr ""
 
