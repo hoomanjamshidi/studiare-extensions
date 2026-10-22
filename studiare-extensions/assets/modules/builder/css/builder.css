@@ -1455,6 +1455,56 @@ a.stx-rating:hover {
 	color: var(--stx-danger);
 }
 
+/* Sold out: WooCommerce prints only the stock line where the form was, and
+   Studiare paints it as a grey #777 box with a dark border, under which our
+   red text is barely readable. It takes the buy button's place and size as
+   a calm "unavailable" state. The widget class outranks WooCommerce's
+   `.woocommerce div.product .stock` and Studiare's `p.stock.out-of-stock`. */
+.elementor-widget-stx-add-to-cart .stx-atc > p.stock.out-of-stock {
+	--stx-soldout: color-mix(in srgb, var(--stx-danger) 82%, var(--stx-ink));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 48px;
+	margin: 0;
+	padding: 10px 22px;
+	border: 1.5px dashed color-mix(in srgb, var(--stx-danger) 35%, transparent);
+	border-radius: 13px;
+	background: color-mix(in srgb, var(--stx-danger) 7%, var(--stx-card));
+	color: var(--stx-soldout);
+	font-family: inherit;
+	font-size: 15px;
+	font-weight: 800;
+	line-height: 1.4;
+	text-align: center;
+	cursor: not-allowed;
+}
+
+.elementor-widget-stx-add-to-cart .stx-atc--auto > p.stock.out-of-stock {
+	display: inline-flex;
+	width: auto;
+}
+
+/* A "no entry" circle in the text colour. */
+.stx-atc > p.stock.out-of-stock::before {
+	flex: none;
+	width: 20px;
+	height: 20px;
+	background: currentColor;
+	content: "";
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M5.7 5.7l12.6 12.6'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M5.7 5.7l12.6 12.6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* On dark cards the red is lightened to stay readable. */
+.scdarkcolors .elementor-widget-stx-add-to-cart .stx-atc > p.stock.out-of-stock {
+	--stx-soldout: color-mix(in srgb, var(--stx-danger) 55%, var(--stx-ink));
+	background: color-mix(in srgb, var(--stx-danger) 14%, var(--stx-card));
+}
+
 .stx-atc__note {
 	display: flex;
 	align-items: center;

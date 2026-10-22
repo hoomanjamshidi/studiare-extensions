@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.8.3 =
+* Fix: Add to cart widget: a sold-out product (a full course) no longer shows Studiare's grey box with hard-to-read red text; the «Capacity is full!» message takes the buy button's place and size, in a soft red that follows the brand colours and dark mode.
+* New: Theme fixes: "Sold-out course button" does the same on Studiare's own course pages.
 
 = 1.8.2 =
 * New: Podcast list: an "Episode page" button that opens the episode's post, in the player, on every row and on every card (its text is editable; empty hides it).

@@ -38,6 +38,7 @@ const FILES = [
   'modules/support-button/css/support-button.css',
   'modules/support-button/js/support-button.js',
   'modules/theme-fixes/js/otp-digits.js',
+  'modules/theme-fixes/css/sold-out-button.css',
   'modules/article-tools/css/article-tools.css',
   'modules/article-tools/js/article-tools.js',
 ];

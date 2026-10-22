@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Studiare Extensions 1.8.1\n"
+"Project-Id-Version: Studiare Extensions 1.8.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/studiare-extensions\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-22T20:18:18+00:00\n"
+"POT-Creation-Date: 2026-10-22T20:55:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: studiare-extensions\n"
@@ -9702,6 +9702,14 @@ msgstr ""
 
 #: includes/Modules/Theme_Fixes/Otp_Digits.php:53
 msgid "The theme's \"log in with mobile\" form rejects a number typed with a Persian keyboard (۰۹۱۲…) with \"must be exactly 11 digits\". This fix turns the digits into English ones as they are typed, and also accepts numbers written with +98, with 0098 or without the first zero."
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:35
+msgid "Sold-out course button"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:39
+msgid "When a course is full, the theme replaces the buy button with a grey box and small red \"Capacity is full!\" text that is hard to read. This fix shows it as a disabled button the size of the buy button, with a soft red tint and readable text."
 msgstr ""
 
 #: includes/Modules/Theme_Fixes/views/admin.php:35

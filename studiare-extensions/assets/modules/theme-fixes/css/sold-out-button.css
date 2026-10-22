@@ -1,0 +1,54 @@
+/**
+ * Studiare Extensions — sold-out course button (theme fix).
+ *
+ * Replaces Studiare's flat grey `p.stock.out-of-stock` box (#777 fill, dark
+ * border, WooCommerce's red text on top: about 1.1:1 contrast) with a
+ * disabled-looking call to action the size of the theme's buy button
+ * (60px tall). The `[aria-disabled]` part ties the look
+ * to the markup the fix prints and outranks WooCommerce's
+ * `.woocommerce div.product .out-of-stock` colour. The Studiare+ Add to cart
+ * widget styles its own sold-out state with the brand colours, so it is
+ * left out here.
+ */
+
+p.stock.out-of-stock.scoutstock[aria-disabled="true"]:not(.stx-atc > p) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 60px;
+	margin: 0 0 16px;
+	padding: 15px 20px;
+	border: 0;
+	border-radius: 14px;
+	background: #fdeeec;
+	box-shadow: inset 0 0 0 1px rgba(180, 35, 24, 0.14);
+	color: #b42318;
+	font-family: inherit;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 27px;
+	text-align: center;
+	cursor: not-allowed;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* A "no entry" circle, drawn with the text colour. */
+p.stock.out-of-stock.scoutstock[aria-disabled="true"]:not(.stx-atc > p)::before {
+	content: "";
+	flex: none;
+	width: 20px;
+	height: 20px;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M5.7 5.7l12.6 12.6'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M5.7 5.7l12.6 12.6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.scdarkcolors p.stock.out-of-stock.scoutstock[aria-disabled="true"]:not(.stx-atc > p) {
+	background: rgba(240, 68, 56, 0.14);
+	box-shadow: inset 0 0 0 1px rgba(253, 162, 155, 0.22);
+	color: #fda29b;
+}

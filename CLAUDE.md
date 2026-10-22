@@ -70,6 +70,7 @@ studiare-extensions/                 ← the plugin (zip this folder)
 │   │   ├── Fix.php                  abstract base: id(), title(), description(), boot(), in_use()
 │   │   ├── Fixes.php                registry of fix classes (admin order)
 │   │   ├── Otp_Digits.php           mobile login (Studiare Core OTP) accepts Persian digits, +98/0098/9… numbers
+│   │   ├── Sold_Out_Button.php      a full course's stock line (`p.stock.out-of-stock.scoutstock`) as a disabled button
 │   │   └── views/                   admin.php (settings panel)
 │   └── Modules/Builder/             page templates: Elementor course/product pages, headers, footers, home, about and contact pages, the blog
 │       ├── Presets/                 ready-made designs written in PHP (El::box/El::w), registered in Catalog.php (Home.php = home pages,
@@ -95,7 +96,8 @@ studiare-extensions/                 ← the plugin (zip this folder)
 │   ├── icons/                       catalog.json + packs/*.json (generated, see "Icons")
 │   ├── modules/bottom-nav/          bottom-nav.css (front and admin preview), bottom-nav.js (front), bottom-nav-admin.js
 │   ├── modules/support-button/      support-button.css (front and admin preview), support-button.js (front), support-button-admin.js
-│   ├── modules/theme-fixes/         otp-digits.js (front, loads while Studiare's OTP option is on)
+│   ├── modules/theme-fixes/         otp-digits.js (front, loads while Studiare's OTP option is on),
+│   │                                sold-out-button.css (inline on product pages), css/sold-out-button.css (printed inline on product pages)
 │   ├── modules/article-tools/       article-tools.css/js (front: player, PDF button, print stylesheet; admin preview),
 │   │                                article-tools-admin.js, edit-box.css/js (post editor)
 │   └── modules/builder/             tokens.css (derived tokens + dark mode, printed inline), builder.css (widgets, layers),
@@ -147,6 +149,8 @@ phpcs.xml.dist                       WordPress-Extra + PHPCompatibilityWP (7.4+)
 - **What belongs here.** Repairs for bugs in Studiare or its Studiare Core plugin, done from the outside (hooks, request data, a small script), never by editing or copying their files. Each fix is a `Fix` subclass listed in `Fixes::CLASSES`; its switch (`fixes.<id>`, on by default, also for fixes added later), admin row and dashboard toggle follow automatically. `in_use()` tells the admin whether the theme feature it repairs is switched on (chip next to the switch). Describe the problem the visitor sees in `description()`, so an admin can switch the fix off once the theme repairs it.
 - **Studiare Core's OTP login.** Its handlers are encoded, but its scripts are plain: `studiare-core/libs/suncode_otp_reg_login/js/combined_otp_scripts.js` (handle `combined-otp-scripts`, combined form `#combined-otp-form`) and `otp-registration-scripts.js` (older `#otp-login-form` / `#otp-registration-form`). They load on every page while Redux `otp` is on (the login popup can open anywhere). All fields are named `otp_…` (`otp_phone`, `otp_code`, `otp_reg_phone`, `otp_reg`, `otp_back`); AJAX actions `check_and_send_combined_otp`, `verify_combined_otp`, `otp_send_verification_code`, `otp_validate_otp`, `otp_login_validate_otp`. The combined form rejects anything but `/^[0-9]{11}$/` (then a 09xx prefix list) before sending, and the theme only converts Persian digits in `#otp_code`.
 - **Otp_Digits.** otp-digits.js listens on `document` in the capture phase, so it runs before the theme's jQuery handlers and covers popup forms added later: Latin digits while typing (caret kept), the full `normalize()` (+98 / 0098 / 98 / 9… → 09…) on paste (the field has `maxlength="11"`, so the pasted text is cleaned before it is cut), on leaving the field, on Enter (the theme sends from its own keydown handler), on button clicks (restored/autofilled values) and on submit. `Otp_Digits::normalize()` does the same to the `otp_*` fields of those AJAX actions at priority 1, for pages cached before the fix was switched on. Change the two together.
+
+- **Sold_Out_Button.** For a full course Studiare's `custom_stock_class_and_text` (plain `inc/codebean_woocommerce.php`) prints `p.stock.out-of-stock.scoutstock` «ظرفیت تکمیل شد!» where the buy form was, and woocommerce.css paints it as a #777 box. The fix adds `role="button" aria-disabled="true"` (`woocommerce_get_stock_html`) and a small inline stylesheet on product pages. It leaves `.stx-atc > p` alone: the Add to cart widget styles its own sold-out state with the brand tokens in builder.css.
 
 ## Page templates (Builder): key contracts
 

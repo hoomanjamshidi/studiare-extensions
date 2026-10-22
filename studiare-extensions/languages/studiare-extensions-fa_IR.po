@@ -9734,3 +9734,11 @@ msgstr "صفحهٔ این قسمت"
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:267
 msgid "Opens the post of the episode. Leave empty to hide the button (the titles stay links)."
 msgstr "مقالهٔ همین قسمت را باز می‌کند. برای مخفی کردن دکمه خالی بگذارید (عنوان‌ها همچنان لینک هستند)."
+
+#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:35
+msgid "Sold-out course button"
+msgstr "دکمهٔ دورهٔ تکمیل‌شده"
+
+#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:39
+msgid "When a course is full, the theme replaces the buy button with a grey box and small red \"Capacity is full!\" text that is hard to read. This fix shows it as a disabled button the size of the buy button, with a soft red tint and readable text."
+msgstr "وقتی ظرفیت دوره تکمیل شود، قالب به‌جای دکمهٔ خرید یک کادر خاکستری با متن قرمز و کم‌رنگ «ظرفیت تکمیل شد!» نشان می‌دهد که سخت خوانده می‌شود. این اصلاح آن را به شکل دکمه‌ای غیرفعال، هم‌اندازهٔ دکمهٔ خرید، با زمینهٔ قرمز ملایم و متن خوانا نشان می‌دهد."

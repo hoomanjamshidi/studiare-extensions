@@ -17,6 +17,7 @@ final class Fixes {
 	/** Fix classes, in the order the admin lists them. */
 	private const CLASSES = array(
 		Otp_Digits::class,
+		Sold_Out_Button::class,
 	);
 
 	/** @var array<string, Fix>|null Memoized instances keyed by fix id. */
