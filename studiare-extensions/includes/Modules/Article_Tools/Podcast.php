@@ -28,6 +28,16 @@ final class Podcast {
 	/** Bars of the decorative waveform. */
 	private const WAVE_BARS = 48;
 
+	/** Player glyphs, shared by the post player and the Podcast list widget. */
+	private const GLYPHS = array(
+		'play'     => '<path d="M8 5.6v12.8a1.1 1.1 0 0 0 1.7.93l10-6.4a1.1 1.1 0 0 0 0-1.86l-10-6.4A1.1 1.1 0 0 0 8 5.6z"/>',
+		'pause'    => '<rect x="6" y="5" width="4.2" height="14" rx="1.3"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.3"/>',
+		'back'     => '<path d="M3.5 12a8.5 8.5 0 1 0 2.5-6L3.5 8.5"/><path d="M3.5 3.5v5h5"/>',
+		'forward'  => '<path d="M20.5 12a8.5 8.5 0 1 1-2.5-6l2.5 2.5"/><path d="M20.5 3.5v5h-5"/>',
+		'previous' => '<rect x="5" y="5" width="2.6" height="14" rx="1"/><path d="M19 6.3v11.4a1 1 0 0 1-1.56.83l-8.3-5.7a1 1 0 0 1 0-1.66l8.3-5.7A1 1 0 0 1 19 6.3z"/>',
+		'next'     => '<rect x="16.4" y="5" width="2.6" height="14" rx="1"/><path d="M5 6.3v11.4a1 1 0 0 0 1.56.83l8.3-5.7a1 1 0 0 0 0-1.66l-8.3-5.7A1 1 0 0 0 5 6.3z"/>',
+	);
+
 	/** Longest duration accepted (a day), against typos such as 1200:00:00. */
 	private const MAX_DURATION = 86400;
 
@@ -155,6 +165,19 @@ final class Podcast {
 			'file_name' => wp_basename( $path ),
 			'wave'      => self::waveform( (int) $post->ID ),
 		);
+	}
+
+	/**
+	 * One player glyph as inline SVG (back and forward are drawn with the
+	 * stroke the stylesheet gives them, the others are filled).
+	 *
+	 * @param string $name       `play`, `pause`, `back`, `forward`, `previous` or `next`.
+	 * @param string $class_name Class on the <svg>.
+	 */
+	public static function glyph( string $name, string $class_name = '' ): string {
+		$class = '' !== $class_name ? ' class="' . esc_attr( $class_name ) . '"' : '';
+
+		return '<svg' . $class . ' viewBox="0 0 24 24" aria-hidden="true" focusable="false">' . ( self::GLYPHS[ $name ] ?? '' ) . '</svg>';
 	}
 
 	/**

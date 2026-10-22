@@ -3,8 +3,9 @@
  * Front-end assets shared by every template and widget, plus the brand
  * tokens (`--stx-*` custom properties) they are styled with. The home page
  * widgets have their own stylesheet and script (HOME_HANDLE), and so do the
- * blog widgets (BLOG_HANDLE), the about/contact widgets (PAGES_HANDLE) and
- * the slider (SLIDER_HANDLE), so other pages do not load them.
+ * blog widgets (BLOG_HANDLE), the about/contact widgets (PAGES_HANDLE), the
+ * slider (SLIDER_HANDLE) and the podcast list (PODCASTS_HANDLE), so other
+ * pages do not load them.
  *
  * @package StudiareExt
  */
@@ -33,6 +34,9 @@ final class Assets {
 
 	/** Slider widget: its own small stylesheet and script, needing only the tokens. */
 	public const SLIDER_HANDLE = 'stx-slider';
+
+	/** Podcast list widget: its looks and the player that plays episodes in place. */
+	public const PODCASTS_HANDLE = 'stx-podcasts';
 
 	/** @var Module */
 	private $module;
@@ -166,6 +170,41 @@ final class Assets {
 				array(
 					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 					'i18n'    => Contact_Messages::error_messages(),
+				)
+			) . ';',
+			'before'
+		);
+
+		// Inline and needing only the tokens, like the slider: a podcast section
+		// costs no extra request and does not pull in builder.css.
+		wp_register_style( self::PODCASTS_HANDLE, false, array( self::TOKENS_HANDLE ), STUDIARE_EXT_VERSION );
+		wp_add_inline_style( self::PODCASTS_HANDLE, Asset::contents( 'assets/modules/builder/css/podcasts.css' ) );
+		wp_register_script(
+			self::PODCASTS_HANDLE,
+			Asset::url( 'assets/modules/builder/js/podcasts.js' ),
+			array(),
+			STUDIARE_EXT_VERSION,
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
+		);
+		wp_add_inline_script(
+			self::PODCASTS_HANDLE,
+			'window.stxPodcasts = ' . wp_json_encode(
+				array(
+					'persian' => (bool) $this->module->settings()['options']['persian_digits'] && Persian::is_site_persian(),
+					'i18n'    => array(
+						/* translators: %s: episode title. */
+						'play'     => __( 'Play: %s', 'studiare-extensions' ),
+						/* translators: %s: episode title. */
+						'pause'    => __( 'Pause: %s', 'studiare-extensions' ),
+						/* translators: 1: time listened, 2: length of the episode. */
+						'position' => __( '%1$s of %2$s', 'studiare-extensions' ),
+						/* translators: %s: playback speed, e.g. 1.5×. */
+						'speed'    => __( 'Playback speed: %s', 'studiare-extensions' ),
+						'failed'   => __( 'The audio could not be played. Check your connection, or download the file.', 'studiare-extensions' ),
+					),
 				)
 			) . ';',
 			'before'

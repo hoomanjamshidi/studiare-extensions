@@ -34,7 +34,7 @@ final class Home {
 			Blocks::band( 'plain', array( self::products( true ) ), Blocks::white_band() ),
 			Blocks::band( 'page', array( self::weekly_offer() ) ),
 			Blocks::band( 'page', array( Blocks::section_title( __( 'Learning paths', 'studiare-extensions' ), '', '', __( 'Each path is a suggested order of courses, books and workshops.', 'studiare-extensions' ) ), self::paths() ) ),
-			Blocks::band( 'page', array( self::podcasts_title(), self::podcasts() ) ),
+			Blocks::band( 'page', array( self::podcasts_title(), self::podcasts( 'playlist' ) ) ),
 			Blocks::band( 'page', array( Blocks::section_title( __( 'Teachers and authors', 'studiare-extensions' ) ), self::people() ) ),
 			Blocks::band( 'plain', array( Blocks::section_title( __( 'What learners say', 'studiare-extensions' ) ), self::testimonials() ), Blocks::white_band() ),
 			Blocks::band( 'page', array( Blocks::section_title( __( 'Upcoming workshops', 'studiare-extensions' ), __( 'Full calendar', 'studiare-extensions' ), '#' ), self::events() ) ),
@@ -49,7 +49,7 @@ final class Home {
 		return array(
 			self::curved_hero(),
 			Blocks::band( 'page', array( Blocks::section_title( __( 'Browse by topic', 'studiare-extensions' ), __( 'All categories', 'studiare-extensions' ), Blocks::shop_url() ), self::categories( 'numbered' ) ), array( 'pad' => array( 48, 20, 24 ) ) ),
-			Blocks::band( 'page', array( self::podcasts_title(), self::podcasts() ) ),
+			Blocks::band( 'page', array( self::podcasts_title(), self::podcasts( 'cards' ) ) ),
 			Blocks::band( 'plain', array( self::products( true ) ), Blocks::white_band() ),
 			Blocks::band( 'page', array( Blocks::section_title( __( 'Teachers and authors', 'studiare-extensions' ) ), self::people() ) ),
 			Blocks::band( 'page', array( Blocks::section_title( __( 'From the blog', 'studiare-extensions' ), __( 'See all', 'studiare-extensions' ), Blocks::blog_url() ), self::blog( 'card' ) ) ),
@@ -79,6 +79,46 @@ final class Home {
 				)
 			),
 			Blocks::band( 'plain', array( Blocks::row_title( __( 'News from the blog', 'studiare-extensions' ), '', __( 'See all', 'studiare-extensions' ), Blocks::blog_url() ), self::blog( 'simple' ) ), Blocks::last_band( 56 ) ),
+		);
+	}
+
+	/**
+	 * Podcast page: every episode playable on the page, in three looks of the
+	 * Podcast list widget (copy any section to another page).
+	 */
+	public static function podcast_page(): array {
+		return array(
+			Blocks::band(
+				'page',
+				array(
+					Blocks::section_title( __( 'Podcasts', 'studiare-extensions' ), '', '', __( 'Listen right here, or open an episode to read along.', 'studiare-extensions' ) ),
+					self::podcasts( 'playlist', array( 'count' => 6 ) ),
+				),
+				array( 'pad' => array( 40, 20, 24 ) )
+			),
+			Blocks::band(
+				'plain',
+				array(
+					Blocks::section_title( __( 'Newest episodes', 'studiare-extensions' ) ),
+					self::podcasts( 'cards' ),
+				),
+				Blocks::white_band()
+			),
+			Blocks::band(
+				'page',
+				array(
+					Blocks::section_title( __( 'All episodes', 'studiare-extensions' ), __( 'Blog', 'studiare-extensions' ), Blocks::blog_url() ),
+					self::podcasts(
+						'rows',
+						array(
+							'count'    => 12,
+							'covers'   => '',
+							'subtitle' => 'speaker',
+						)
+					),
+				),
+				Blocks::last_band()
+			),
 		);
 	}
 
@@ -556,20 +596,22 @@ final class Home {
 		return Blocks::section_title( __( 'Podcasts', 'studiare-extensions' ), __( 'All episodes', 'studiare-extensions' ), Blocks::blog_url(), __( 'Short, free episodes for the commute.', 'studiare-extensions' ) );
 	}
 
-	/** Picture cards with a play button (pick the podcast category in Elementor). */
-	private static function podcasts(): array {
+	/**
+	 * Episodes that play on the page (Podcast list widget). Pick a category
+	 * in Elementor to show one podcast only.
+	 *
+	 * @param string $look `playlist`, `cards` or `rows`.
+	 * @param array  $more More widget settings.
+	 */
+	private static function podcasts( string $look, array $more = array() ): array {
 		return El::w(
-			'stx-post-grid',
-			array(
-				'card'           => 'media',
-				'source'         => 'latest',
-				'count'          => 4,
-				'ratio'          => '4/3',
-				'media_icon'     => 'play',
-				'mobile_scroll'  => 'yes',
-				'columns'        => '4',
-				'columns_tablet' => '2',
-				'columns_mobile' => '1',
+			'stx-podcast-list',
+			array_merge(
+				array(
+					'look'  => $look,
+					'count' => 4,
+				),
+				$more
 			)
 		);
 	}

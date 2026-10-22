@@ -189,7 +189,7 @@ msgid "Toggle submenu"
 msgstr "باز و بسته کردن زیرمنو"
 
 #: includes/Modules/Bottom_Nav/Frontend.php:209
-#: includes/Modules/Builder/Assets.php:94
+#: includes/Modules/Builder/Assets.php:98
 msgid "Live results are unavailable right now. Press Search to see all results."
 msgstr "نتایج زنده الان در دسترس نیست. برای دیدن همه نتایج، دکمه «جستجو» را بزنید."
 
@@ -570,6 +570,7 @@ msgstr "دکمه‌ها"
 
 #: includes/Modules/Article_Tools/views/admin.php:150
 #: includes/Modules/Bottom_Nav/views/admin.php:90
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:357
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:93
 #: includes/Modules/Support_Button/views/admin.php:281
 msgid "Colours"
@@ -777,7 +778,7 @@ msgstr "سایه"
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:118
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:113
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:102
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:134
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:176
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:276
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:361
 msgid "None"
@@ -1276,7 +1277,7 @@ msgstr "انتخاب آیکون"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:763
 #: includes/Modules/Bottom_Nav/views/sheet.php:24
-#: includes/Modules/Builder/Assets.php:89
+#: includes/Modules/Builder/Assets.php:93
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:445
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:239
 #: includes/Modules/Builder/Module.php:417
@@ -1305,21 +1306,21 @@ msgstr "دنبال چه می‌گردید؟"
 msgid "Results appear as you type."
 msgstr "نتایج همزمان با تایپ نمایش داده می‌شوند."
 
-#: includes/Modules/Builder/Assets.php:90
+#: includes/Modules/Builder/Assets.php:94
 #: includes/Modules/Builder/Elementor/Parts.php:164
 msgid "Show more"
 msgstr "نمایش بیشتر"
 
-#: includes/Modules/Builder/Assets.php:91
+#: includes/Modules/Builder/Assets.php:95
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:190
 msgid "Show less"
 msgstr "نمایش کمتر"
 
-#: includes/Modules/Builder/Assets.php:92
+#: includes/Modules/Builder/Assets.php:96
 msgid "Increase quantity"
 msgstr "افزایش تعداد"
 
-#: includes/Modules/Builder/Assets.php:93
+#: includes/Modules/Builder/Assets.php:97
 msgid "Decrease quantity"
 msgstr "کاهش تعداد"
 
@@ -1531,7 +1532,7 @@ msgid "Watch"
 msgstr "تماشا"
 
 #: includes/Modules/Builder/Elementor/Parts.php:553
-#: includes/Modules/Builder/Presets/Home.php:590
+#: includes/Modules/Builder/Presets/Home.php:632
 msgid "Teacher name"
 msgstr "نام مدرس"
 
@@ -1546,7 +1547,7 @@ msgstr "مدرس‌ها در تنظیمات استادیار همان دوره �
 
 #: includes/Modules/Article_Tools/views/edit-box.php:52
 #: includes/Modules/Builder/Elementor/Parts.php:601
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:151
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:193
 msgid "Duration"
 msgstr "مدت زمان"
 
@@ -1936,7 +1937,7 @@ msgstr "چینش"
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:193
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:123
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:128
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:224
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:308
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:103
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:97
@@ -1950,7 +1951,7 @@ msgstr "ابتدا"
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:201
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:131
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:136
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:228
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:312
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:111
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:152
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:105
@@ -1962,7 +1963,7 @@ msgid "End"
 msgstr "انتها"
 
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:237
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:295
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:417
 #: includes/Modules/Builder/Elementor/Widgets/Reading_Progress.php:46
 msgid "Colour"
 msgstr "رنگ"
@@ -2052,7 +2053,7 @@ msgstr "لینک متنی"
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:141
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:55
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:42
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:281
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:404
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:117
 #: includes/Modules/Builder/Elementor/Widgets/Post_Tags.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:55
@@ -2081,7 +2082,7 @@ msgstr "کلیک کنید"
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:103
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:163
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:304
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:426
 #: includes/Modules/Builder/Elementor/Widgets/Post_Title.php:56
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:79
 #: includes/Modules/Builder/Elementor/Widgets/Product_Title.php:50
@@ -2213,7 +2214,7 @@ msgstr "سرفصل‌ها"
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:60
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:77
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:279
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:403
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:84
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:333
 #: includes/Modules/Builder/Elementor/Widgets/Post_Nav.php:72
@@ -2283,6 +2284,7 @@ msgstr "مدرس دوره"
 #: includes/Modules/Builder/Elementor/Widgets/Logo_Strip.php:96
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:96
 #: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:101
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:220
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:156
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:107
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:36
@@ -2948,7 +2950,7 @@ msgid "Discount badge"
 msgstr "برچسب تخفیف"
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Gallery.php:90
-#: includes/Modules/Builder/Presets/Home.php:244
+#: includes/Modules/Builder/Presets/Home.php:284
 msgid "Intro video"
 msgstr "ویدئوی معرفی"
 
@@ -3478,7 +3480,7 @@ msgstr "قالب جدید"
 msgid "Unknown action."
 msgstr "عملیات ناشناخته."
 
-#: includes/Modules/Builder/Assets.php:122
+#: includes/Modules/Builder/Assets.php:126
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:135
 #: includes/Modules/Builder/Library_Ajax.php:172
 msgid "That did not work. Please try again."
@@ -3897,7 +3899,7 @@ msgstr "سوال قبل از خرید دارید؟"
 #: includes/Modules/Builder/Presets/Footer.php:42
 #: includes/Modules/Builder/Presets/Footer.php:109
 #: includes/Modules/Builder/Presets/Footer.php:270
-#: includes/Modules/Builder/Presets/Home.php:815
+#: includes/Modules/Builder/Presets/Home.php:857
 msgid "Contact us"
 msgstr "تماس با ما"
 
@@ -3978,7 +3980,7 @@ msgstr "ارسال تیکت"
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:41
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:251
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:492
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:81
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:123
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:67
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:127
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:184
@@ -4019,8 +4021,8 @@ msgstr "بازگشت آسان"
 msgid "Within 7 days of delivery"
 msgstr "تا ۷ روز پس از تحویل"
 
-#: includes/Modules/Builder/Presets/Home.php:359
-#: includes/Modules/Builder/Presets/Home.php:884
+#: includes/Modules/Builder/Presets/Home.php:399
+#: includes/Modules/Builder/Presets/Home.php:926
 #: includes/Modules/Builder/Presets/Product.php:92
 msgid "Secure payment"
 msgstr "پرداخت امن"
@@ -4035,7 +4037,7 @@ msgstr "با هم بخرید، کمتر بپردازید"
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Spotlight.php:74
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:223
-#: includes/Modules/Builder/Presets/Home.php:138
+#: includes/Modules/Builder/Presets/Home.php:178
 #: includes/Modules/Builder/Presets/Product.php:147
 msgid "Special offer"
 msgstr "پیشنهاد ویژه"
@@ -4571,17 +4573,17 @@ msgstr "هدر استادیار+ را هنگام اسکرول بالای صفح�
 msgid "Smart"
 msgstr "هوشمند"
 
-#: includes/Modules/Builder/Assets.php:119
+#: includes/Modules/Builder/Assets.php:123
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:92
 msgid "Thank you! You are on the list."
 msgstr "ممنون! نشانی شما در فهرست ثبت شد."
 
-#: includes/Modules/Builder/Assets.php:120
+#: includes/Modules/Builder/Assets.php:124
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:133
 msgid "Please enter a valid email address."
 msgstr "لطفاً یک نشانی ایمیل درست وارد کنید."
 
-#: includes/Modules/Builder/Assets.php:121
+#: includes/Modules/Builder/Assets.php:125
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:134
 msgid "Too many attempts. Please try again in a few minutes."
 msgstr "تلاش‌ها بیش از حد بود. چند دقیقه دیگر دوباره امتحان کنید."
@@ -4605,7 +4607,7 @@ msgstr "حراج"
 #: includes/Modules/Builder/Elementor/Cards.php:386
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:191
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:290
-#: includes/Modules/Builder/Presets/Home.php:684
+#: includes/Modules/Builder/Presets/Home.php:726
 msgid "Read more"
 msgstr "مطالعه بیشتر"
 
@@ -4647,7 +4649,7 @@ msgid "Number of categories"
 msgstr "تعداد دسته‌بندی‌ها"
 
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:80
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:115
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:157
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:196
 msgid "Order"
 msgstr "ترتیب"
@@ -4796,7 +4798,7 @@ msgid "Boxes"
 msgstr "خانه‌ها"
 
 #: includes/Modules/Builder/Elementor/Widgets/Countdown.php:130
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:142
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:184
 #: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:94
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:40
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:72
@@ -4869,7 +4871,7 @@ msgid "Link text"
 msgstr "متن لینک"
 
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:85
-#: includes/Modules/Builder/Presets/Home.php:649
+#: includes/Modules/Builder/Presets/Home.php:691
 msgid "Sign up"
 msgstr "ثبت‌نام"
 
@@ -5034,8 +5036,8 @@ msgstr "تصویر / ویدیو"
 
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:144
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:42
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:185
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:190
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:267
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:274
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:166
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:34
 #: includes/Modules/Builder/Elementor/Widgets/Post_Image.php:77
@@ -5064,7 +5066,7 @@ msgid "YouTube, Aparat, Vimeo or a video file. Adds a play button that opens the
 msgstr "یوتیوب، آپارات، ویمئو یا فایل ویدیو. یک دکمه پخش اضافه می‌کند که ویدیو را باز می‌کند."
 
 #: includes/Modules/Builder/Elementor/Widgets/Media.php:82
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:203
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:287
 msgid "Shape"
 msgstr "شکل"
 
@@ -5253,7 +5255,7 @@ msgstr "شکل تصویر"
 msgid "Post grid"
 msgstr "شبکه نوشته‌ها"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:67
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:109
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:53
 msgid "Posts"
 msgstr "نوشته‌ها"
@@ -5271,7 +5273,7 @@ msgstr "کدام نوشته‌ها"
 msgid "Newest"
 msgstr "جدیدترین‌ها"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:72
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:114
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:73
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:65
 msgid "From categories"
@@ -5503,6 +5505,7 @@ msgid "See more"
 msgstr "مشاهده بیشتر"
 
 #: includes/Modules/Article_Tools/views/admin.php:127
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:89
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:66
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:94
 #: includes/Modules/Builder/Elementor/Widgets/Post_Meta.php:53
@@ -5605,7 +5608,7 @@ msgstr "اسلاید"
 msgid "Key numbers"
 msgstr "آمار کلیدی"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:280
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:405
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:46
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:121
 msgid "Number"
@@ -5724,7 +5727,7 @@ msgid "From \"%s\""
 msgstr "از طرح «%s»"
 
 #: includes/Modules/Builder/Module.php:455
-#: includes/Modules/Builder/Presets/Home.php:684
+#: includes/Modules/Builder/Presets/Home.php:726
 msgid "View"
 msgstr "مشاهده"
 
@@ -5787,7 +5790,7 @@ msgstr "ویترین فروشگاهی روشن: هیرو با بنر، کاشی�
 msgid "Browse by topic"
 msgstr "دسته‌بندی موضوع‌ها"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:71
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:113
 #: includes/Modules/Builder/Presets/Home.php:33
 #: includes/Modules/Builder/Presets/Home.php:51
 msgid "All categories"
@@ -5841,12 +5844,12 @@ msgstr "همه محصولات"
 msgid "News from the blog"
 msgstr "تازه‌های وبلاگ"
 
-#: includes/Modules/Builder/Presets/Home.php:122
+#: includes/Modules/Builder/Presets/Home.php:162
 msgid "Courses, books and workshops"
 msgstr "دوره، کتاب و کارگاه"
 
-#: includes/Modules/Builder/Presets/Home.php:123
-#: includes/Modules/Builder/Presets/Home.php:214
+#: includes/Modules/Builder/Presets/Home.php:163
+#: includes/Modules/Builder/Presets/Home.php:254
 msgid ""
 "Build your own\n"
 "growth path"
@@ -5854,25 +5857,25 @@ msgstr ""
 "مسیر رشد\n"
 "خودت را بساز"
 
-#: includes/Modules/Builder/Presets/Home.php:124
-#: includes/Modules/Builder/Presets/Home.php:220
+#: includes/Modules/Builder/Presets/Home.php:164
+#: includes/Modules/Builder/Presets/Home.php:260
 msgid "Video courses, digital books and live workshops, with practical lessons you can use the same day."
 msgstr "دوره‌های ویدیویی، کتاب‌های دیجیتال و کارگاه‌های زنده؛ با درس‌های کاربردی که همان روز به کارت می‌آیند."
 
-#: includes/Modules/Builder/Presets/Home.php:125
-#: includes/Modules/Builder/Presets/Home.php:226
+#: includes/Modules/Builder/Presets/Home.php:165
+#: includes/Modules/Builder/Presets/Home.php:266
 msgid "Browse the shop"
 msgstr "ورود به فروشگاه"
 
-#: includes/Modules/Builder/Presets/Home.php:127
+#: includes/Modules/Builder/Presets/Home.php:167
 msgid "How to choose"
 msgstr "راهنمای انتخاب"
 
-#: includes/Modules/Builder/Presets/Home.php:130
+#: includes/Modules/Builder/Presets/Home.php:170
 msgid "New courses every month"
 msgstr "دوره‌های تازه هر ماه"
 
-#: includes/Modules/Builder/Presets/Home.php:131
+#: includes/Modules/Builder/Presets/Home.php:171
 msgid ""
 "Learn from\n"
 "experienced teachers"
@@ -5880,23 +5883,23 @@ msgstr ""
 "از اساتید\n"
 "باتجربه یاد بگیر"
 
-#: includes/Modules/Builder/Presets/Home.php:132
+#: includes/Modules/Builder/Presets/Home.php:172
 msgid "Short lessons, real examples and support after the course."
 msgstr "درس‌های کوتاه، مثال‌های واقعی و پشتیبانی پس از دوره."
 
 #: includes/Modules/Builder/Presets/About.php:77
 #: includes/Modules/Builder/Presets/About.php:259
 #: includes/Modules/Builder/Presets/About.php:649
-#: includes/Modules/Builder/Presets/Home.php:133
+#: includes/Modules/Builder/Presets/Home.php:173
 msgid "See the courses"
 msgstr "مشاهده دوره‌ها"
 
 #: includes/Modules/Builder/Presets/About.php:209
-#: includes/Modules/Builder/Presets/Home.php:135
+#: includes/Modules/Builder/Presets/Home.php:175
 msgid "Meet the teachers"
 msgstr "آشنایی با اساتید"
 
-#: includes/Modules/Builder/Presets/Home.php:139
+#: includes/Modules/Builder/Presets/Home.php:179
 msgid ""
 "Buy a bundle,\n"
 "save more"
@@ -5904,19 +5907,19 @@ msgstr ""
 "بسته‌ای بخر،\n"
 "بیشتر صرفه‌جویی کن"
 
-#: includes/Modules/Builder/Presets/Home.php:140
+#: includes/Modules/Builder/Presets/Home.php:180
 msgid "Related courses and books together, at a better price."
 msgstr "دوره‌ها و کتاب‌های مرتبط با هم، با قیمتی بهتر."
 
-#: includes/Modules/Builder/Presets/Home.php:141
+#: includes/Modules/Builder/Presets/Home.php:181
 msgid "See the bundles"
 msgstr "مشاهده بسته‌ها"
 
-#: includes/Modules/Builder/Presets/Home.php:160
+#: includes/Modules/Builder/Presets/Home.php:200
 msgid "Newest course"
 msgstr "تازه‌ترین دوره"
 
-#: includes/Modules/Builder/Presets/Home.php:160
+#: includes/Modules/Builder/Presets/Home.php:200
 msgid ""
 "Start the newest course\n"
 "this week"
@@ -5924,15 +5927,15 @@ msgstr ""
 "تازه‌ترین دوره را\n"
 "همین هفته شروع کن"
 
-#: includes/Modules/Builder/Presets/Home.php:160
+#: includes/Modules/Builder/Presets/Home.php:200
 msgid "See the course"
 msgstr "مشاهده دوره"
 
-#: includes/Modules/Builder/Presets/Home.php:161
+#: includes/Modules/Builder/Presets/Home.php:201
 msgid "Digital library"
 msgstr "کتابخانه دیجیتال"
 
-#: includes/Modules/Builder/Presets/Home.php:161
+#: includes/Modules/Builder/Presets/Home.php:201
 msgid ""
 "E-books with\n"
 "a seasonal discount"
@@ -5940,397 +5943,399 @@ msgstr ""
 "کتاب‌های الکترونیکی\n"
 "با تخفیف فصل"
 
-#: includes/Modules/Builder/Presets/Home.php:161
+#: includes/Modules/Builder/Presets/Home.php:201
 msgid "See the books"
 msgstr "مشاهده کتاب‌ها"
 
-#: includes/Modules/Builder/Presets/Home.php:218
+#: includes/Modules/Builder/Presets/Home.php:258
 msgid "Learn anytime, anywhere"
 msgstr "یادگیری در هر زمان و هر جا"
 
-#: includes/Modules/Builder/Presets/Home.php:227
+#: includes/Modules/Builder/Presets/Home.php:267
 msgid "Get advice"
 msgstr "مشاوره بگیرید"
 
 #. translators: keep <mark> and </mark> around the highlighted words.
-#: includes/Modules/Builder/Presets/Home.php:290
+#: includes/Modules/Builder/Presets/Home.php:330
 msgid "Courses and books for <mark>teachers</mark> and personal growth"
 msgstr "دوره‌ها و کتاب‌ها، برای <mark>معلم‌ها</mark> و رشد فردی"
 
-#: includes/Modules/Builder/Presets/Home.php:294
+#: includes/Modules/Builder/Presets/Home.php:334
 msgid "Courses and books ready to download"
 msgstr "دوره‌ها و کتاب‌های آماده دانلود"
 
-#: includes/Modules/Builder/Presets/Home.php:297
+#: includes/Modules/Builder/Presets/Home.php:337
 msgid "Practical, well-researched lessons. Buy in one step and keep them forever."
 msgstr "محتوای کاربردی با نگاه علمی؛ خرید یک‌مرحله‌ای و دسترسی همیشگی."
 
-#: includes/Modules/Builder/Presets/Home.php:303
+#: includes/Modules/Builder/Presets/Home.php:343
 msgid "Visit the shop"
 msgstr "مشاهده فروشگاه"
 
-#: includes/Modules/Builder/Presets/Home.php:304
+#: includes/Modules/Builder/Presets/Home.php:344
 msgid "Free courses"
 msgstr "دوره‌های رایگان"
 
-#: includes/Modules/Builder/Presets/Home.php:321
+#: includes/Modules/Builder/Presets/Home.php:361
 msgid "Main shop banner"
 msgstr "بنر اصلی فروشگاه"
 
-#: includes/Modules/Builder/Presets/Home.php:355
+#: includes/Modules/Builder/Presets/Home.php:395
 msgid "Money-back guarantee"
 msgstr "ضمانت بازگشت وجه"
 
-#: includes/Modules/Builder/Presets/Home.php:355
+#: includes/Modules/Builder/Presets/Home.php:395
 msgid "Within 7 days of buying"
 msgstr "تا ۷ روز پس از خرید"
 
-#: includes/Modules/Builder/Presets/Home.php:356
+#: includes/Modules/Builder/Presets/Home.php:396
 msgid "Lifetime access"
 msgstr "دسترسی دائمی"
 
-#: includes/Modules/Builder/Presets/Home.php:356
+#: includes/Modules/Builder/Presets/Home.php:396
 msgid "No time limit"
 msgstr "بدون محدودیت زمانی"
 
-#: includes/Modules/Builder/Presets/Home.php:358
+#: includes/Modules/Builder/Presets/Home.php:398
 msgid "Advice when you need it"
 msgstr "پشتیبانی مشاوره‌ای"
 
-#: includes/Modules/Builder/Presets/Home.php:358
+#: includes/Modules/Builder/Presets/Home.php:398
 msgid "Every day, 9 to 20"
 msgstr "هر روز ۹ تا ۲۰"
 
-#: includes/Modules/Builder/Presets/Home.php:359
+#: includes/Modules/Builder/Presets/Home.php:399
 msgid "Trusted bank gateway"
 msgstr "درگاه بانکی معتبر"
 
-#: includes/Modules/Builder/Presets/Home.php:399
+#: includes/Modules/Builder/Presets/Home.php:439
 msgid "From the shop"
 msgstr "محصولات فروشگاه"
 
-#: includes/Modules/Builder/Presets/Home.php:427
+#: includes/Modules/Builder/Presets/Home.php:467
 msgid "30% off this week's bundle"
 msgstr "۳۰٪ تخفیف بسته این هفته"
 
-#: includes/Modules/Builder/Presets/Home.php:430
+#: includes/Modules/Builder/Presets/Home.php:470
 msgid "This week's offer"
 msgstr "پیشنهاد این هفته"
 
-#: includes/Modules/Builder/Presets/Home.php:432
+#: includes/Modules/Builder/Presets/Home.php:472
 msgid "Two video courses, a digital book and a live Q&A session."
 msgstr "دو دوره ویدیویی به همراه کتاب دیجیتال و یک جلسه پرسش و پاسخ زنده."
 
-#: includes/Modules/Builder/Presets/Home.php:448
+#: includes/Modules/Builder/Presets/Home.php:488
 msgid "Buy the bundle"
 msgstr "خرید بسته"
 
-#: includes/Modules/Builder/Presets/Home.php:465
+#: includes/Modules/Builder/Presets/Home.php:505
 msgid "Starter path"
 msgstr "مسیر شروع"
 
-#: includes/Modules/Builder/Presets/Home.php:466
+#: includes/Modules/Builder/Presets/Home.php:506
 msgid "Beginner"
 msgstr "مقدماتی"
 
-#: includes/Modules/Builder/Presets/Home.php:467
+#: includes/Modules/Builder/Presets/Home.php:507
 msgid "For anyone taking their first steps: the basics, one at a time."
 msgstr "برای کسی که قدم‌های اول را برمی‌دارد: اصول پایه، یکی‌یکی."
 
-#: includes/Modules/Builder/Presets/Home.php:468
+#: includes/Modules/Builder/Presets/Home.php:508
 msgid "An introductory book"
 msgstr "کتاب مقدماتی"
 
-#: includes/Modules/Builder/Presets/Home.php:468
+#: includes/Modules/Builder/Presets/Home.php:508
 msgid "The fundamentals course"
 msgstr "دوره مبانی"
 
-#: includes/Modules/Builder/Presets/Home.php:468
+#: includes/Modules/Builder/Presets/Home.php:508
 msgid "A live Q&A workshop"
 msgstr "کارگاه زنده پرسش و پاسخ"
 
-#: includes/Modules/Builder/Presets/Home.php:469
+#: includes/Modules/Builder/Presets/Home.php:509
 msgid "About 4 weeks"
 msgstr "حدود ۴ هفته"
 
-#: includes/Modules/Builder/Presets/Home.php:472
+#: includes/Modules/Builder/Presets/Home.php:512
 msgid "Skills path"
 msgstr "مسیر مهارت"
 
-#: includes/Modules/Builder/Presets/Home.php:473
+#: includes/Modules/Builder/Presets/Home.php:513
 msgid "Beginner to intermediate"
 msgstr "مقدماتی تا متوسط"
 
-#: includes/Modules/Builder/Presets/Home.php:474
+#: includes/Modules/Builder/Presets/Home.php:514
 msgid "For learners who want to turn knowledge into everyday skills."
 msgstr "برای یادگیرندگانی که می‌خواهند دانسته‌ها را به مهارت روزمره تبدیل کنند."
 
-#: includes/Modules/Builder/Presets/Home.php:475
+#: includes/Modules/Builder/Presets/Home.php:515
 msgid "The core skills course"
 msgstr "دوره مهارت‌های اصلی"
 
-#: includes/Modules/Builder/Presets/Home.php:475
+#: includes/Modules/Builder/Presets/Home.php:515
 msgid "An eight-week workbook"
 msgstr "دفترچه تمرین هشت‌هفته‌ای"
 
-#: includes/Modules/Builder/Presets/Home.php:475
+#: includes/Modules/Builder/Presets/Home.php:515
 msgid "Companion podcasts"
 msgstr "پادکست‌های همراه مسیر"
 
-#: includes/Modules/Builder/Presets/Home.php:476
+#: includes/Modules/Builder/Presets/Home.php:516
 msgid "About 6 weeks"
 msgstr "حدود ۶ هفته"
 
-#: includes/Modules/Builder/Presets/Home.php:479
+#: includes/Modules/Builder/Presets/Home.php:519
 msgid "Mastery path"
 msgstr "مسیر حرفه‌ای"
 
-#: includes/Modules/Builder/Presets/Home.php:480
+#: includes/Modules/Builder/Presets/Home.php:520
 msgid "Advanced"
 msgstr "پیشرفته"
 
-#: includes/Modules/Builder/Presets/Home.php:481
+#: includes/Modules/Builder/Presets/Home.php:521
 msgid "For those ready to go deeper and work on real projects."
 msgstr "برای کسانی که آماده‌اند عمیق‌تر شوند و روی پروژه‌های واقعی کار کنند."
 
-#: includes/Modules/Builder/Presets/Home.php:482
+#: includes/Modules/Builder/Presets/Home.php:522
 msgid "The advanced course"
 msgstr "دوره پیشرفته"
 
-#: includes/Modules/Builder/Presets/Home.php:482
+#: includes/Modules/Builder/Presets/Home.php:522
 msgid "A project workshop"
 msgstr "کارگاه پروژه"
 
-#: includes/Modules/Builder/Presets/Home.php:482
+#: includes/Modules/Builder/Presets/Home.php:522
 msgid "A one-to-one consultation"
 msgstr "جلسه مشاوره اختصاصی"
 
-#: includes/Modules/Builder/Presets/Home.php:483
+#: includes/Modules/Builder/Presets/Home.php:523
 msgid "About 8 weeks"
 msgstr "حدود ۸ هفته"
 
-#: includes/Modules/Builder/Presets/Home.php:548
+#: includes/Modules/Builder/Presets/Home.php:588
 msgid "Start the path"
 msgstr "شروع مسیر"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:53
-#: includes/Modules/Builder/Presets/Home.php:556
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:84
+#: includes/Modules/Builder/Presets/Home.php:94
+#: includes/Modules/Builder/Presets/Home.php:596
 msgid "Podcasts"
 msgstr "پادکست‌ها و شنیدنی‌ها"
 
-#: includes/Modules/Builder/Presets/Home.php:556
+#: includes/Modules/Builder/Presets/Home.php:110
+#: includes/Modules/Builder/Presets/Home.php:596
 msgid "All episodes"
 msgstr "آرشیو شنیدنی‌ها"
 
-#: includes/Modules/Builder/Presets/Home.php:556
+#: includes/Modules/Builder/Presets/Home.php:596
 msgid "Short, free episodes for the commute."
 msgstr "شنیدنی‌های کوتاه و رایگان برای مسیر رفت‌وآمد."
 
-#: includes/Modules/Builder/Presets/Home.php:580
+#: includes/Modules/Builder/Presets/Home.php:622
 msgid "Counsellor and author"
 msgstr "مشاور و نویسنده"
 
-#: includes/Modules/Builder/Presets/Home.php:581
+#: includes/Modules/Builder/Presets/Home.php:623
 msgid "Child psychologist"
 msgstr "روان‌شناس کودک"
 
-#: includes/Modules/Builder/Presets/Home.php:582
+#: includes/Modules/Builder/Presets/Home.php:624
 msgid "Communication skills teacher"
 msgstr "مدرس مهارت‌های ارتباطی"
 
-#: includes/Modules/Builder/Presets/Home.php:583
+#: includes/Modules/Builder/Presets/Home.php:625
 msgid "Researcher"
 msgstr "پژوهشگر"
 
-#: includes/Modules/Builder/Presets/Home.php:629
+#: includes/Modules/Builder/Presets/Home.php:671
 msgid "The exercises were short, and in the very first week I could use them at home."
 msgstr "تمرین‌ها کوتاه بود و همان هفته اول توانستم در خانه از آن‌ها استفاده کنم."
 
-#: includes/Modules/Builder/Presets/Home.php:629
+#: includes/Modules/Builder/Presets/Home.php:671
 msgid "Maryam R."
 msgstr "مریم ر."
 
-#: includes/Modules/Builder/Presets/Home.php:629
+#: includes/Modules/Builder/Presets/Home.php:671
 msgid "Communication skills course"
 msgstr "دوره مهارت‌های ارتباط مؤثر"
 
-#: includes/Modules/Builder/Presets/Home.php:630
+#: includes/Modules/Builder/Presets/Home.php:672
 msgid "Most courses stay general; here every session gave me something concrete to do that day."
 msgstr "بیشتر دوره‌ها کلی حرف می‌زنند؛ اینجا هر جلسه یک کار مشخص برای همان روز داشت."
 
-#: includes/Modules/Builder/Presets/Home.php:630
+#: includes/Modules/Builder/Presets/Home.php:672
 msgid "Hossein N."
 msgstr "حسین ن."
 
-#: includes/Modules/Builder/Presets/Home.php:630
+#: includes/Modules/Builder/Presets/Home.php:672
 msgid "Habits and focus course"
 msgstr "دوره عادت‌سازی و تمرکز"
 
-#: includes/Modules/Builder/Presets/Home.php:631
+#: includes/Modules/Builder/Presets/Home.php:673
 msgid "Support went on after the workshop, and I got answers to my questions in the group."
 msgstr "پشتیبانی بعد از کارگاه هم ادامه داشت و پاسخ سؤال‌هایم را در گروه گرفتم."
 
-#: includes/Modules/Builder/Presets/Home.php:631
+#: includes/Modules/Builder/Presets/Home.php:673
 msgid "Somayeh K."
 msgstr "سمیه ک."
 
-#: includes/Modules/Builder/Presets/Home.php:631
+#: includes/Modules/Builder/Presets/Home.php:673
 msgid "Talent discovery workshop"
 msgstr "کارگاه استعدادیابی"
 
-#: includes/Modules/Builder/Presets/Home.php:662
+#: includes/Modules/Builder/Presets/Home.php:704
 msgid "Effective conversation workshop"
 msgstr "کارگاه گفت‌وگوی مؤثر"
 
-#: includes/Modules/Builder/Presets/Home.php:662
+#: includes/Modules/Builder/Presets/Home.php:704
 msgid "18:00 to 20:00"
 msgstr "۱۸:۰۰ تا ۲۰:۰۰"
 
-#: includes/Modules/Builder/Presets/Home.php:662
-#: includes/Modules/Builder/Presets/Home.php:663
+#: includes/Modules/Builder/Presets/Home.php:704
+#: includes/Modules/Builder/Presets/Home.php:705
 msgid "Online, in Skyroom"
 msgstr "آنلاین — اسکای‌روم"
 
-#: includes/Modules/Builder/Presets/Home.php:663
+#: includes/Modules/Builder/Presets/Home.php:705
 msgid "Live Q&A session"
 msgstr "جلسه پرسش و پاسخ زنده"
 
-#: includes/Modules/Builder/Presets/Home.php:663
+#: includes/Modules/Builder/Presets/Home.php:705
 msgid "17:00 to 19:00"
 msgstr "۱۷:۰۰ تا ۱۹:۰۰"
 
-#: includes/Modules/Builder/Presets/Home.php:664
+#: includes/Modules/Builder/Presets/Home.php:706
 msgid "In-person skills workshop"
 msgstr "کارگاه حضوری مهارت‌ها"
 
-#: includes/Modules/Builder/Presets/Home.php:664
+#: includes/Modules/Builder/Presets/Home.php:706
 msgid "9:00 to 13:00"
 msgstr "۹:۰۰ تا ۱۳:۰۰"
 
-#: includes/Modules/Builder/Presets/Home.php:664
+#: includes/Modules/Builder/Presets/Home.php:706
 msgid "In person, limited seats"
 msgstr "حضوری، ظرفیت محدود"
 
-#: includes/Modules/Builder/Presets/Home.php:719
+#: includes/Modules/Builder/Presets/Home.php:761
 msgid "Frequently asked questions"
 msgstr "پرسش‌های پرتکرار"
 
-#: includes/Modules/Builder/Presets/Home.php:724
+#: includes/Modules/Builder/Presets/Home.php:766
 msgid "How long can I access a course?"
 msgstr "دسترسی به دوره‌ها تا چه زمانی است؟"
 
-#: includes/Modules/Builder/Presets/Home.php:724
+#: includes/Modules/Builder/Presets/Home.php:766
 msgid "Once you buy, the videos and files are yours to keep, with no time limit."
 msgstr "پس از خرید، دسترسی به ویدیوها و فایل‌های همراه دائمی است و محدودیت زمانی ندارد."
 
 #: includes/Modules/Builder/Presets/Contact.php:422
-#: includes/Modules/Builder/Presets/Home.php:725
+#: includes/Modules/Builder/Presets/Home.php:767
 msgid "Can I get a refund?"
 msgstr "امکان بازگشت وجه وجود دارد؟"
 
 #: includes/Modules/Builder/Presets/Contact.php:422
-#: includes/Modules/Builder/Presets/Home.php:725
+#: includes/Modules/Builder/Presets/Home.php:767
 msgid "Within seven days of buying, if you have watched less than a fifth of the course, you get a full refund."
 msgstr "تا هفت روز پس از خرید، اگر کمتر از یک‌پنجم دوره را دیده باشید، کل مبلغ بازگردانده می‌شود."
 
-#: includes/Modules/Builder/Presets/Home.php:726
+#: includes/Modules/Builder/Presets/Home.php:768
 msgid "Are the workshops held in person?"
 msgstr "کارگاه‌ها به‌صورت حضوری برگزار می‌شوند؟"
 
-#: includes/Modules/Builder/Presets/Home.php:726
+#: includes/Modules/Builder/Presets/Home.php:768
 msgid "Most workshops are live online; in-person ones are announced with limited seats."
 msgstr "بیشتر کارگاه‌ها به‌صورت زنده و آنلاین برگزار می‌شوند؛ کارگاه‌های حضوری با ظرفیت محدود اعلام می‌شوند."
 
-#: includes/Modules/Builder/Presets/Home.php:727
+#: includes/Modules/Builder/Presets/Home.php:769
 msgid "How do I choose the right course?"
 msgstr "برای انتخاب دوره مناسب چه کنم؟"
 
-#: includes/Modules/Builder/Presets/Home.php:727
+#: includes/Modules/Builder/Presets/Home.php:769
 msgid "Take the short guide or call support, and we will suggest two or three options that fit you."
 msgstr "راهنمای انتخاب را کامل کنید یا با پشتیبانی تماس بگیرید تا دو یا سه گزینه متناسب با شما پیشنهاد شود."
 
-#: includes/Modules/Builder/Presets/Home.php:743
-#: includes/Modules/Builder/Presets/Home.php:811
+#: includes/Modules/Builder/Presets/Home.php:785
+#: includes/Modules/Builder/Presets/Home.php:853
 msgid "Not sure where to start?"
 msgstr "مطمئن نیستید از کجا شروع کنید؟"
 
-#: includes/Modules/Builder/Presets/Home.php:743
-#: includes/Modules/Builder/Presets/Home.php:811
+#: includes/Modules/Builder/Presets/Home.php:785
+#: includes/Modules/Builder/Presets/Home.php:853
 msgid "Answer a few short questions and we will suggest two or three products that fit your needs."
 msgstr "به چند سؤال کوتاه پاسخ دهید تا دو یا سه محصول متناسب با نیاز شما پیشنهاد شود."
 
-#: includes/Modules/Builder/Presets/Home.php:746
-#: includes/Modules/Builder/Presets/Home.php:814
+#: includes/Modules/Builder/Presets/Home.php:788
+#: includes/Modules/Builder/Presets/Home.php:856
 msgid "Start the guide"
 msgstr "شروع راهنمای انتخاب"
 
-#: includes/Modules/Builder/Presets/Home.php:747
+#: includes/Modules/Builder/Presets/Home.php:789
 msgid "Talk to an adviser"
 msgstr "تماس با مشاور"
 
 #: includes/Modules/Builder/Presets/Blog.php:277
-#: includes/Modules/Builder/Presets/Home.php:780
+#: includes/Modules/Builder/Presets/Home.php:822
 msgid "A short letter every week"
 msgstr "هفته‌ای یک نامه کوتاه"
 
-#: includes/Modules/Builder/Presets/Home.php:782
+#: includes/Modules/Builder/Presets/Home.php:824
 msgid "One practical exercise and the newest blog posts, with no ads."
 msgstr "یک تمرین کاربردی و تازه‌ترین مطالب وبلاگ، بدون تبلیغات."
 
-#: includes/Modules/Builder/Presets/Home.php:838
+#: includes/Modules/Builder/Presets/Home.php:880
 msgid "Three classroom and communication courses in one"
 msgstr "سه دوره کلاس‌داری و ارتباط مؤثر، یکجا"
 
-#: includes/Modules/Builder/Presets/Home.php:841
+#: includes/Modules/Builder/Presets/Home.php:883
 msgid "Teachers' bundle"
 msgstr "بسته ویژه معلم‌ها"
 
-#: includes/Modules/Builder/Presets/Home.php:843
+#: includes/Modules/Builder/Presets/Home.php:885
 msgid "Classroom management, talking with students and parents, and motivation skills, 30% off."
 msgstr "مدیریت کلاس، ارتباط با دانش‌آموز و والدین، و مهارت‌های انگیزشی؛ با ۳۰٪ تخفیف."
 
-#: includes/Modules/Builder/Presets/Home.php:854
+#: includes/Modules/Builder/Presets/Home.php:896
 msgid "Add the bundle to the cart"
 msgstr "افزودن بسته به سبد"
 
-#: includes/Modules/Builder/Presets/Home.php:884
+#: includes/Modules/Builder/Presets/Home.php:926
 msgid "Instant access right after paying."
 msgstr "دسترسی فوری بلافاصله پس از پرداخت."
 
-#: includes/Modules/Builder/Presets/Home.php:885
+#: includes/Modules/Builder/Presets/Home.php:927
 msgid "Download anytime"
 msgstr "دانلود همیشگی"
 
-#: includes/Modules/Builder/Presets/Home.php:885
+#: includes/Modules/Builder/Presets/Home.php:927
 msgid "Your files stay in your account for good."
 msgstr "فایل‌ها همیشه در حساب کاربری شما در دسترس است."
 
-#: includes/Modules/Builder/Presets/Home.php:886
+#: includes/Modules/Builder/Presets/Home.php:928
 msgid "Quality guaranteed"
 msgstr "تضمین کیفیت"
 
-#: includes/Modules/Builder/Presets/Home.php:886
+#: includes/Modules/Builder/Presets/Home.php:928
 msgid "Specialist content that fits your needs."
 msgstr "محتوای تخصصی و متناسب با نیاز شما."
 
-#: includes/Modules/Builder/Presets/Home.php:887
+#: includes/Modules/Builder/Presets/Home.php:929
 msgid "Support every day"
 msgstr "پشتیبانی هر روز"
 
-#: includes/Modules/Builder/Presets/Home.php:887
+#: includes/Modules/Builder/Presets/Home.php:929
 msgid "Every day from 9 to 20."
 msgstr "همه روزه از ساعت ۹ تا ۲۰."
 
-#: includes/Modules/Builder/Presets/Home.php:904
+#: includes/Modules/Builder/Presets/Home.php:946
 msgid "Articles published"
 msgstr "مقاله منتشرشده"
 
-#: includes/Modules/Builder/Presets/Home.php:905
+#: includes/Modules/Builder/Presets/Home.php:947
 msgid "Years of experience"
 msgstr "سال سابقه"
 
 #: includes/Modules/Builder/Presets/About.php:395
-#: includes/Modules/Builder/Presets/Home.php:906
+#: includes/Modules/Builder/Presets/Home.php:948
 msgid "Learners"
 msgstr "یادگیرنده"
 
@@ -6873,7 +6878,7 @@ msgstr "آبی تلگرام، سبز واتس‌اپ و مانند آن. اگر 
 msgid "Button icon and text"
 msgstr "آیکون و متن دکمه"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:218
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:302
 #: includes/Modules/Support_Button/views/admin.php:300
 msgid "Position"
 msgstr "جایگاه"
@@ -6959,7 +6964,7 @@ msgctxt "unit after a number of seconds"
 msgid "s"
 msgstr " ثانیه"
 
-#: includes/Modules/Builder/Assets.php:145
+#: includes/Modules/Builder/Assets.php:149
 msgid "Link copied."
 msgstr "لینک کپی شد."
 
@@ -7123,6 +7128,7 @@ msgstr "نتایج جستجو"
 #: includes/Modules/Builder/Elementor/Post_Parts.php:309
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:52
 #: includes/Modules/Builder/Elementor/Widgets/Blog_Breadcrumb.php:92
+#: includes/Modules/Builder/Presets/Home.php:110
 #: includes/Modules/Builder/views/admin.php:40
 msgid "Blog"
 msgstr "وبلاگ"
@@ -8343,7 +8349,7 @@ msgstr "دو طرف خط"
 msgid "Steps in a row"
 msgstr "مرحله‌ها در یک ردیف"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:169
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:202
 #: includes/Modules/Builder/Elementor/Widgets/Timeline.php:102
 msgid "Title tag"
 msgstr "تگ عنوان"
@@ -8770,95 +8776,95 @@ msgstr "نوشته‌های تازه در ایمیل شما"
 msgid "One short letter a week with the newest articles. No ads."
 msgstr "هفته‌ای یک نامه کوتاه با تازه‌ترین مقاله‌ها. بدون تبلیغ."
 
-#: includes/Modules/Builder/Presets/Catalog.php:165
+#: includes/Modules/Builder/Presets/Catalog.php:171
 msgid "Blog · Magazine"
 msgstr "وبلاگ · مجله‌ای"
 
-#: includes/Modules/Builder/Presets/Catalog.php:166
+#: includes/Modules/Builder/Presets/Catalog.php:172
 msgid "Soft title band with category buttons, the newest post highlighted over a card grid, page numbers and a newsletter box."
 msgstr "نوار عنوان ملایم با دکمه‌های دسته‌بندی، جدیدترین نوشته به‌صورت برجسته بالای شبکه کارت‌ها، شماره صفحه‌ها و کادر خبرنامه."
 
-#: includes/Modules/Builder/Presets/Catalog.php:171
+#: includes/Modules/Builder/Presets/Catalog.php:177
 msgid "Blog · With sidebar"
 msgstr "وبلاگ · با ستون کناری"
 
-#: includes/Modules/Builder/Presets/Catalog.php:177
+#: includes/Modules/Builder/Presets/Catalog.php:183
 msgid "Blog · Minimal"
 msgstr "وبلاگ · مینیمال"
 
-#: includes/Modules/Builder/Presets/Catalog.php:178
+#: includes/Modules/Builder/Presets/Catalog.php:184
 msgid "Airy white page: centred title and categories over editorial cards without boxes."
 msgstr "صفحه سفید و خلوت: عنوان و دسته‌بندی‌های وسط‌چین بالای کارت‌های مجله‌ای بدون کادر."
 
-#: includes/Modules/Builder/Presets/Catalog.php:183
+#: includes/Modules/Builder/Presets/Catalog.php:189
 msgid "Post · Classic"
 msgstr "نوشته · کلاسیک"
 
-#: includes/Modules/Builder/Presets/Catalog.php:184
+#: includes/Modules/Builder/Presets/Catalog.php:190
 msgid "The post in a white card beside a sticky sidebar with the table of contents, latest posts and newsletter."
 msgstr "نوشته در یک کارت سفید کنار ستون کناری چسبان با فهرست مطالب، تازه‌ترین نوشته‌ها و خبرنامه."
 
-#: includes/Modules/Builder/Presets/Catalog.php:189
+#: includes/Modules/Builder/Presets/Catalog.php:195
 msgid "Post · Focus"
 msgstr "نوشته · متمرکز"
 
-#: includes/Modules/Builder/Presets/Catalog.php:190
+#: includes/Modules/Builder/Presets/Catalog.php:196
 msgid "One narrow, centred reading column with a wide picture, large text and share buttons with names."
 msgstr "یک ستون باریک و وسط‌چین برای خواندن، با تصویر عریض، متن درشت و دکمه‌های اشتراک‌گذاری با نام."
 
-#: includes/Modules/Builder/Presets/Catalog.php:195
+#: includes/Modules/Builder/Presets/Catalog.php:201
 msgid "Post · Cover"
 msgstr "نوشته · کاور"
 
-#: includes/Modules/Builder/Presets/Catalog.php:196
+#: includes/Modules/Builder/Presets/Catalog.php:202
 msgid "Dark title band beside the picture, then the text between a share rail and a sticky table of contents."
 msgstr "نوار عنوان تیره کنار تصویر، سپس متن بین ستون اشتراک‌گذاری و فهرست مطالب چسبان."
 
-#: includes/Modules/Builder/Presets/Catalog.php:201
+#: includes/Modules/Builder/Presets/Catalog.php:207
 msgid "About · Story"
 msgstr "درباره ما · داستان"
 
-#: includes/Modules/Builder/Presets/Catalog.php:202
+#: includes/Modules/Builder/Presets/Catalog.php:208
 msgid "Hero with a team photo, number tiles that count up, a timeline, values, the team, reviews and a call to action."
 msgstr "بخش آغازین با عکس تیم، کاشی‌های آمار با شمارش خودکار، خط زمانی، ارزش‌ها، تیم، نظرات و دعوت به اقدام."
 
-#: includes/Modules/Builder/Presets/Catalog.php:207
+#: includes/Modules/Builder/Presets/Catalog.php:213
 msgid "About · Minimal"
 msgstr "درباره ما · مینیمال"
 
-#: includes/Modules/Builder/Presets/Catalog.php:208
+#: includes/Modules/Builder/Presets/Catalog.php:214
 msgid "Centred title, a wide photo, large numbers, what you believe, milestones and questions."
 msgstr "عنوان وسط‌چین، یک عکس عریض، اعداد بزرگ، باورها، نقطه‌های عطف و پرسش‌ها."
 
-#: includes/Modules/Builder/Presets/Catalog.php:213
+#: includes/Modules/Builder/Presets/Catalog.php:219
 msgid "About · Academy"
 msgstr "درباره ما · آکادمی"
 
-#: includes/Modules/Builder/Presets/Catalog.php:214
+#: includes/Modules/Builder/Presets/Catalog.php:220
 msgid "Curved accent hero with a video, a dark band of large numbers, six reasons, milestones in a row and the teachers."
 msgstr "بخش آغازین رنگی با لبه منحنی و ویدیو، نوار تیره اعداد بزرگ، شش دلیل، نقطه‌های عطف در یک ردیف و مدرس‌ها."
 
-#: includes/Modules/Builder/Presets/Catalog.php:219
+#: includes/Modules/Builder/Presets/Catalog.php:225
 msgid "Contact · Cards"
 msgstr "تماس با ما · کارتی"
 
-#: includes/Modules/Builder/Presets/Catalog.php:220
+#: includes/Modules/Builder/Presets/Catalog.php:226
 msgid "Four contact cards, the form beside messenger buttons, a map with directions and common questions."
 msgstr "چهار کارت تماس، فرم در کنار دکمه‌های پیام‌رسان، نقشه با مسیریابی و پرسش‌های پرتکرار."
 
-#: includes/Modules/Builder/Presets/Catalog.php:225
+#: includes/Modules/Builder/Presets/Catalog.php:231
 msgid "Contact · Split"
 msgstr "تماس با ما · دوستونه"
 
-#: includes/Modules/Builder/Presets/Catalog.php:226
+#: includes/Modules/Builder/Presets/Catalog.php:232
 msgid "A dark panel with every way to reach you beside the form, then a map that loads on request."
 msgstr "پنلی تیره با همه راه‌های ارتباطی در کنار فرم، و نقشه‌ای که با درخواست بازدیدکننده باز می‌شود."
 
-#: includes/Modules/Builder/Presets/Catalog.php:231
+#: includes/Modules/Builder/Presets/Catalog.php:237
 msgid "Contact · Support centre"
 msgstr "تماس با ما · مرکز پشتیبانی"
 
-#: includes/Modules/Builder/Presets/Catalog.php:232
+#: includes/Modules/Builder/Presets/Catalog.php:238
 msgid "Accent hero with messenger buttons, one card per team, questions beside the form, and a map."
 msgstr "بخش آغازین رنگی با دکمه‌های پیام‌رسان، یک کارت برای هر تیم، پرسش‌ها در کنار فرم، و نقشه."
 
@@ -9030,7 +9036,7 @@ msgstr "برای همه نوشته‌های وبلاگ به کار می‌رود
 msgid "Most discussed"
 msgstr "پربحث‌ترین‌ها"
 
-#: includes/Modules/Builder/Presets/Catalog.php:172
+#: includes/Modules/Builder/Presets/Catalog.php:178
 msgid "Posts in rows beside a sticky sidebar: blog search, categories, the most discussed posts and tags."
 msgstr "نوشته‌ها به‌صورت ردیفی کنار ستون کناری چسبان: جستجوی وبلاگ، دسته‌بندی‌ها، پربحث‌ترین نوشته‌ها و برچسب‌ها."
 
@@ -9243,13 +9249,16 @@ msgstr "توقف"
 
 #. translators: %s: playback speed, e.g. 1.5×.
 #: includes/Modules/Article_Tools/Frontend.php:243
-#: includes/Modules/Article_Tools/views/podcast.php:116
+#: includes/Modules/Article_Tools/views/podcast.php:115
+#: includes/Modules/Builder/Assets.php:205
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:558
 #, php-format
 msgid "Playback speed: %s"
 msgstr "سرعت پخش: %s"
 
 #. translators: 1: time listened, 2: length of the episode.
 #: includes/Modules/Article_Tools/Frontend.php:245
+#: includes/Modules/Builder/Assets.php:203
 #, php-format
 msgid "%1$s of %2$s"
 msgstr "%1$s از %2$s"
@@ -9273,11 +9282,11 @@ msgstr "دکمهٔ «ذخیرهٔ PDF» در همهٔ مقاله‌های وبل
 msgid "Listen to this article"
 msgstr "این مقاله را بشنوید"
 
-#: includes/Modules/Article_Tools/Podcast.php:168
+#: includes/Modules/Article_Tools/Podcast.php:191
 msgid "Five study habits that really work"
 msgstr "پنج عادت مطالعه که واقعاً جواب می‌دهند"
 
-#: includes/Modules/Article_Tools/Podcast.php:169
+#: includes/Modules/Article_Tools/Podcast.php:192
 msgid "Read by the author"
 msgstr "با صدای نویسنده"
 
@@ -9445,27 +9454,32 @@ msgid "%s minute"
 msgid_plural "%s minutes"
 msgstr[0] "%s دقیقه"
 
-#: includes/Modules/Article_Tools/views/podcast.php:95
+#: includes/Modules/Article_Tools/views/podcast.php:94
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:542
 msgid "Playback position"
 msgstr "موقعیت پخش"
 
 #. translators: %s: number of seconds.
-#: includes/Modules/Article_Tools/views/podcast.php:105
+#: includes/Modules/Article_Tools/views/podcast.php:104
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:552
 #, php-format
 msgid "Back %s seconds"
 msgstr "%s ثانیه به عقب"
 
 #. translators: %s: number of seconds.
-#: includes/Modules/Article_Tools/views/podcast.php:110
+#: includes/Modules/Article_Tools/views/podcast.php:109
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:555
 #, php-format
 msgid "Forward %s seconds"
 msgstr "%s ثانیه به جلو"
 
-#: includes/Modules/Article_Tools/views/podcast.php:121
+#: includes/Modules/Article_Tools/views/podcast.php:120
 msgid "Download"
 msgstr "دانلود"
 
-#: includes/Modules/Article_Tools/views/podcast.php:126
+#: includes/Modules/Article_Tools/views/podcast.php:125
+#: includes/Modules/Builder/Assets.php:206
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:561
 msgid "The audio could not be played. Check your connection, or download the file."
 msgstr "فایل صوتی پخش نشد. اتصال اینترنت را بررسی کنید یا فایل را دانلود کنید."
 
@@ -9506,106 +9520,205 @@ msgstr "با «مطالعه بیشتر» متن کامل در صفحه می‌م
 msgid "\"Read more\" button"
 msgstr "دکمهٔ «مطالعه بیشتر»"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:35
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:46
 msgid "Podcast list"
 msgstr "فهرست پادکست‌ها"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:59
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:101
 msgid "Lists blog posts that have a podcast (set in the \"Podcast\" box of the post editor)."
 msgstr "مقاله‌هایی را که پادکست دارند فهرست می‌کند (پادکست در کادر «پادکست» ویرایشگر نوشته تعریف می‌شود)."
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:73
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:115
 msgid "Category being viewed"
 msgstr "دسته‌بندی در حال نمایش"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:86
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:128
 msgid "Subcategories are included."
 msgstr "زیردسته‌ها هم شامل می‌شوند."
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:95
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:137
 msgid "On a category page, the podcasts of that category; on other pages, all podcasts."
 msgstr "در صفحهٔ یک دسته‌بندی، پادکست‌های همان دسته؛ در صفحه‌های دیگر، همهٔ پادکست‌ها."
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:104
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:146
 msgid "Number of podcasts"
 msgstr "تعداد پادکست‌ها"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:119
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:161
 msgid "Newest first"
 msgstr "جدیدترین اول"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:120
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:162
 msgid "Oldest first"
 msgstr "قدیمی‌ترین اول"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:128
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:170
 msgid "Text under the title"
 msgstr "متن زیر عنوان"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:132
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:174
 msgid "Post excerpt"
 msgstr "خلاصهٔ مقاله"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:133
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:175
 msgid "Speaker"
 msgstr "گوینده"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:160
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:348
 msgid "Lines between rows"
 msgstr "خط جداکننده بین ردیف‌ها"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:176
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:209
 msgid "Plain text"
 msgstr "متن ساده"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:196
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:280
 msgid "Optional. Leave empty for the list alone."
 msgstr "اختیاری. برای نمایش فقط فهرست، خالی بگذارید."
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:207
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:291
 msgid "Free shape with decorations"
 msgstr "شکل آزاد با تزئین"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:208
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:292
 msgid "Circle"
 msgstr "دایره"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:209
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:293
 msgid "Rounded"
 msgstr "گوشه‌گرد"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:210
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:294
 msgid "As uploaded"
 msgstr "همان‌طور که بارگذاری شده"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:238
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:322
 msgid "Show on phones"
 msgstr "نمایش در موبایل"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:241
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:325
 msgid "On narrow screens the picture sits above the list."
 msgstr "در صفحه‌های باریک، تصویر بالای فهرست قرار می‌گیرد."
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:249
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:332
 msgid "Picture width"
 msgstr "عرض تصویر"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:266
-msgid "Rows"
-msgstr "ردیف‌ها"
-
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:268
-msgid "Row"
-msgstr "ردیف"
-
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:273
-msgid "Hover background"
-msgstr "پس‌زمینه هنگام هاور"
-
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:286
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:410
 msgid "Arrow"
 msgstr "فلش"
 
-#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:325
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:447
 msgid "No post has a podcast yet. Add one in the \"Podcast\" box of the post editor."
 msgstr "هنوز هیچ مقاله‌ای پادکست ندارد. در کادر «پادکست» ویرایشگر نوشته یکی اضافه کنید."
+
+#. translators: %s: episode title.
+#: includes/Modules/Builder/Assets.php:199
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:695
+#, php-format
+msgid "Play: %s"
+msgstr "پخش: %s"
+
+#. translators: %s: episode title.
+#: includes/Modules/Builder/Assets.php:201
+#, php-format
+msgid "Pause: %s"
+msgstr "توقف: %s"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:69
+msgid "Player with episode list"
+msgstr "پخش‌کننده با فهرست قسمت‌ها"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:70
+msgid "Episode cards"
+msgstr "کارت‌های قسمت‌ها"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:71
+msgid "Playable rows"
+msgstr "ردیف‌های قابل پخش"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:72
+msgid "Simple list with picture"
+msgstr "فهرست ساده با تصویر"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:93
+msgid "The first three play the episodes right here; the simple list opens each post."
+msgstr "سه حالت اول قسمت‌ها را همین‌جا پخش می‌کنند؛ فهرست ساده هر مقاله را باز می‌کند."
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:227
+msgid "Cover pictures"
+msgstr "تصویر کاور"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:237
+msgid "Player position"
+msgstr "جای پخش‌کننده"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:241
+msgid "Beside the list"
+msgstr "کنار فهرست"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:242
+msgid "Above the list"
+msgstr "بالای فهرست"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:253
+msgid "Swipe on phones"
+msgstr "اسکرول افقی در موبایل"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:256
+msgid "Cards sit in one row that scrolls sideways on narrow screens."
+msgstr "در صفحه‌های باریک، کارت‌ها در یک ردیف کنار هم می‌آیند و افقی اسکرول می‌شوند."
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:362
+msgid "Play buttons and progress"
+msgstr "دکمه‌های پخش و نوار پیشرفت"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:371
+msgid "Play icon"
+msgstr "آیکن پخش"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:373
+msgid "Empty: white or black, whichever reads better on the site's accent colour."
+msgstr "خالی: سفید یا مشکی، هر کدام که روی رنگ اصلی سایت خواناتر باشد."
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:381
+msgid "Player background"
+msgstr "پس‌زمینهٔ پخش‌کننده"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:391
+msgid "Player text"
+msgstr "متن پخش‌کننده"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:400
+msgid "Episodes"
+msgstr "قسمت‌ها"
+
+#. translators: %s: number of the episode in the list.
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:508
+#, php-format
+msgid "Episode %s"
+msgstr "قسمت %s"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:550
+msgid "Previous episode"
+msgstr "قسمت قبلی"
+
+#: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:556
+msgid "Next episode"
+msgstr "قسمت بعدی"
+
+#: includes/Modules/Builder/Presets/Catalog.php:165
+msgid "Page · Podcasts"
+msgstr "صفحهٔ پادکست‌ها"
+
+#: includes/Modules/Builder/Presets/Catalog.php:166
+msgid "Every episode plays on the page: a player beside the episode list, the newest episodes as cards and all episodes as rows."
+msgstr "همهٔ قسمت‌ها در خود صفحه پخش می‌شوند: پخش‌کننده کنار فهرست قسمت‌ها، جدیدترین قسمت‌ها به‌صورت کارت و همهٔ قسمت‌ها به‌صورت ردیف."
+
+#: includes/Modules/Builder/Presets/Home.php:94
+msgid "Listen right here, or open an episode to read along."
+msgstr "همین‌جا گوش کنید، یا قسمتی را باز کنید و متنش را هم بخوانید."
+
+#: includes/Modules/Builder/Presets/Home.php:102
+msgid "Newest episodes"
+msgstr "جدیدترین قسمت‌ها"

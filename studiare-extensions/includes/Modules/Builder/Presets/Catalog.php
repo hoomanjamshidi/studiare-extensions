@@ -160,6 +160,12 @@ final class Catalog {
 				'description' => __( 'Light shop front: hero with a banner, category tiles, best sellers, a bundle offer, perks and the latest posts.', 'studiare-extensions' ),
 				'build'       => array( Home::class, 'shop' ),
 			),
+			'home-podcasts'     => array(
+				'type'        => 'home',
+				'label'       => __( 'Page · Podcasts', 'studiare-extensions' ),
+				'description' => __( 'Every episode plays on the page: a player beside the episode list, the newest episodes as cards and all episodes as rows.', 'studiare-extensions' ),
+				'build'       => array( Home::class, 'podcast_page' ),
+			),
 			'archive-magazine'  => array(
 				'type'        => 'archive',
 				'label'       => __( 'Blog · Magazine', 'studiare-extensions' ),

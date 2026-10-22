@@ -84,8 +84,7 @@ $minutes = $pod['duration'] ? max( 1, (int) round( $pod['duration'] / 60 ) ) : 0
 
 		<div class="stx-pod__player">
 			<button type="button" class="stx-pod__play" data-pod-play aria-label="<?php esc_attr_e( 'Play', 'studiare-extensions' ); ?>">
-				<svg class="stx-pod__glyph-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.6v12.8a1.1 1.1 0 0 0 1.7.93l10-6.4a1.1 1.1 0 0 0 0-1.86l-10-6.4A1.1 1.1 0 0 0 8 5.6z"/></svg>
-				<svg class="stx-pod__glyph-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4.2" height="14" rx="1.3"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.3"/></svg>
+				<?php echo Podcast::glyph( 'play', 'stx-pod__glyph-play' ) . Podcast::glyph( 'pause', 'stx-pod__glyph-pause' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- constant SVG. ?>
 				<span class="stx-pod__spinner" aria-hidden="true"></span>
 			</button>
 
@@ -103,12 +102,12 @@ $minutes = $pod['duration'] ? max( 1, (int) round( $pod['duration'] / 60 ) ) : 0
 			<span class="stx-pod__tools">
 				<?php /* translators: %s: number of seconds. */ ?>
 				<button type="button" class="stx-pod__tool" data-pod-skip="<?php echo esc_attr( (string) -Podcast::SKIP_BACK ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Back %s seconds', 'studiare-extensions' ), Persian::number( Podcast::SKIP_BACK ) ) ); ?>">
-					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6L3.5 8.5"/><path d="M3.5 3.5v5h5"/></svg>
+					<?php echo Podcast::glyph( 'back' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- constant SVG. ?>
 					<span class="stx-pod__skip"><?php echo esc_html( Persian::number( Podcast::SKIP_BACK ) ); ?></span>
 				</button>
 				<?php /* translators: %s: number of seconds. */ ?>
 				<button type="button" class="stx-pod__tool" data-pod-skip="<?php echo esc_attr( (string) Podcast::SKIP_FORWARD ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Forward %s seconds', 'studiare-extensions' ), Persian::number( Podcast::SKIP_FORWARD ) ) ); ?>">
-					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 12a8.5 8.5 0 1 1-2.5-6l2.5 2.5"/><path d="M20.5 3.5v5h-5"/></svg>
+					<?php echo Podcast::glyph( 'forward' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- constant SVG. ?>
 					<span class="stx-pod__skip"><?php echo esc_html( Persian::number( Podcast::SKIP_FORWARD ) ); ?></span>
 				</button>
 				<?php if ( $options['speed'] ) : ?>

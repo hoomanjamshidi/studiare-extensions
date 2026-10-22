@@ -11,7 +11,9 @@
  * nothing moves when this runs; this creates the audio element on the first
  * tap (nothing is downloaded before), wires the controls, remembers where the
  * visitor stopped and the chosen speed, and feeds the phone's lock screen
- * controls (Media Session). Progress only changes a clip-path.
+ * controls (Media Session). Progress only changes a clip-path. Playing
+ * announces `stx:podcast-play`, so a Podcast list widget on the page stops,
+ * and the player stops when a list starts.
  */
 ( function () {
 	'use strict';
@@ -323,6 +325,7 @@
 				}
 				ui.play.setAttribute( 'aria-label', i18n.pause || '' );
 				players.forEach( ( player ) => player !== controller && player.pause() );
+				doc.dispatchEvent( new window.CustomEvent( 'stx:podcast-play', { detail: { source: 'article' } } ) );
 				mediaSession();
 			} );
 			audio.addEventListener( 'pause', () => {
@@ -415,6 +418,13 @@
 		showSpeed();
 		show( position );
 	}
+
+	// A Podcast list widget started playing: the post players stop.
+	doc.addEventListener( 'stx:podcast-play', ( event ) => {
+		if ( event.detail && event.detail.source !== 'article' ) {
+			players.forEach( ( player ) => player.pause() );
+		}
+	} );
 
 	initPrint();
 	doc.querySelectorAll( '[data-stx-pod]' ).forEach( initPlayer );
