@@ -222,7 +222,7 @@ msgstr "هر صفحه، دسته‌بندی، شماره تلفن یا آدرس 
 #: includes/Modules/Bottom_Nav/Item_Types.php:34
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:61
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:122
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:122
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:129
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:91
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:77
 #: includes/Modules/Builder/Elementor/Widgets/Heading.php:100
@@ -420,6 +420,8 @@ msgstr "«%s» از نوار حذف می‌شود."
 #: includes/Modules/Bottom_Nav/Module.php:156
 #: includes/Modules/Bottom_Nav/views/admin.php:540
 #: includes/Modules/Builder/Module.php:384
+#: includes/Modules/Support_Button/Module.php:125
+#: includes/Modules/Support_Button/views/admin.php:227
 msgid "Delete"
 msgstr "حذف"
 
@@ -429,23 +431,23 @@ msgstr "حذف"
 msgid "You can add up to %d buttons."
 msgstr "حداکثر %d دکمه می‌توانید اضافه کنید."
 
-#: includes/Modules/Bottom_Nav/Module.php:159
+#: includes/Admin/Admin.php:194
 msgid "Choose an icon image"
 msgstr "انتخاب تصویر آیکون"
 
-#: includes/Modules/Bottom_Nav/Module.php:160
+#: includes/Admin/Admin.php:195
 msgid "Use this image"
 msgstr "استفاده از این تصویر"
 
-#: includes/Modules/Bottom_Nav/Module.php:161
+#: includes/Admin/Admin.php:196
 msgid "No icons match your search."
 msgstr "آیکونی با این جستجو پیدا نشد."
 
-#: includes/Modules/Bottom_Nav/Module.php:162
+#: includes/Modules/Bottom_Nav/Module.php:159
 msgid "— Select —"
 msgstr "— انتخاب کنید —"
 
-#: includes/Modules/Bottom_Nav/Module.php:241
+#: includes/Modules/Bottom_Nav/Module.php:238
 msgid "page"
 msgstr "برگه"
 
@@ -507,8 +509,8 @@ msgstr "فقط آیکون؛ دکمه فعال همراه با عنوانش به 
 msgid "Background"
 msgstr "پس‌زمینه"
 
+#: includes/Admin/views/icon-picker.php:23
 #: includes/Modules/Bottom_Nav/views/admin.php:38
-#: includes/Modules/Bottom_Nav/views/admin.php:769
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:164
 msgid "Icons"
 msgstr "آیکون‌ها"
@@ -554,7 +556,7 @@ msgstr "آیکون دکمه مرکزی"
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:71
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:58
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:147
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:159
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:188
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:286
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:64
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:92
@@ -572,7 +574,7 @@ msgstr "دکمه‌ها"
 #: includes/Modules/Bottom_Nav/views/admin.php:90
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:368
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:93
-#: includes/Modules/Support_Button/views/admin.php:281
+#: includes/Modules/Support_Button/views/admin.php:371
 msgid "Colours"
 msgstr "رنگ‌ها"
 
@@ -589,7 +591,7 @@ msgstr "رفتار"
 #: includes/Modules/Article_Tools/views/admin.php:51
 #: includes/Modules/Bottom_Nav/views/admin.php:104
 #: includes/Modules/Builder/views/admin.php:90
-#: includes/Modules/Support_Button/views/admin.php:85
+#: includes/Modules/Support_Button/views/admin.php:87
 #: includes/Modules/Theme_Fixes/views/admin.php:32
 msgid "Active"
 msgstr "فعال"
@@ -597,7 +599,7 @@ msgstr "فعال"
 #: includes/Modules/Article_Tools/views/admin.php:52
 #: includes/Modules/Bottom_Nav/views/admin.php:105
 #: includes/Modules/Builder/views/admin.php:91
-#: includes/Modules/Support_Button/views/admin.php:86
+#: includes/Modules/Support_Button/views/admin.php:88
 #: includes/Modules/Theme_Fixes/views/admin.php:33
 msgid "Inactive"
 msgstr "غیرفعال"
@@ -634,7 +636,7 @@ msgstr "ضخامت Font Awesome"
 #: includes/Modules/Article_Tools/views/admin.php:163
 #: includes/Modules/Bottom_Nav/views/admin.php:177
 #: includes/Modules/Bottom_Nav/views/admin.php:486
-#: includes/Modules/Support_Button/views/admin.php:375
+#: includes/Modules/Support_Button/views/admin.php:465
 msgid "Light"
 msgstr "روشن"
 
@@ -671,7 +673,7 @@ msgstr "نمایش عنوان‌ها"
 #: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:65
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:360
 #: includes/Modules/Builder/views/admin.php:188
-#: includes/Modules/Support_Button/views/admin.php:255
+#: includes/Modules/Support_Button/views/admin.php:345
 msgid "Always"
 msgstr "همیشه"
 
@@ -932,7 +934,7 @@ msgid "Moves the sticky add-to-cart bar and floating contact buttons up so they 
 msgstr "نوار چسبان «افزودن به سبد» و دکمه‌های شناور تماس را بالاتر می‌برد تا دیده شوند."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:445
-#: includes/Modules/Support_Button/views/admin.php:357
+#: includes/Modules/Support_Button/views/admin.php:447
 msgid "Stacking order (z-index)"
 msgstr "ترتیب لایه (z-index)"
 
@@ -941,44 +943,44 @@ msgid "Raise it if a chat widget or popup covers the bar."
 msgstr "اگر ابزارک چت یا پاپ‌آپی روی نوار قرار می‌گیرد، این عدد را بیشتر کنید."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:458
-#: includes/Modules/Support_Button/views/admin.php:330
+#: includes/Modules/Support_Button/views/admin.php:420
 msgid "Where to show"
 msgstr "محل نمایش"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:462
-#: includes/Modules/Support_Button/views/admin.php:344
+#: includes/Modules/Support_Button/views/admin.php:434
 msgid "Hide on the checkout page"
 msgstr "مخفی در صفحه تسویه حساب"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:462
-#: includes/Modules/Support_Button/views/admin.php:344
+#: includes/Modules/Support_Button/views/admin.php:434
 msgid "Keeps buyers focused on completing the order."
 msgstr "خریدار را روی تکمیل سفارش متمرکز نگه می‌دارد."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:463
-#: includes/Modules/Support_Button/views/admin.php:345
+#: includes/Modules/Support_Button/views/admin.php:435
 msgid "Hide on the cart page"
 msgstr "مخفی در صفحه سبد خرید"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:468
-#: includes/Modules/Support_Button/views/admin.php:348
+#: includes/Modules/Support_Button/views/admin.php:438
 msgid "Hide on these pages or posts (IDs)"
 msgstr "مخفی در این برگه‌ها یا نوشته‌ها (شناسه)"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:472
-#: includes/Modules/Support_Button/views/admin.php:352
+#: includes/Modules/Support_Button/views/admin.php:442
 msgid "Comma separated IDs, e.g. landing pages that have their own call to action."
 msgstr "شناسه‌ها را با کاما جدا کنید؛ مثلاً صفحات فرودی که دکمه اقدام اختصاصی دارند."
 
 #: includes/Modules/Article_Tools/views/admin.php:159
 #: includes/Modules/Bottom_Nav/views/admin.php:482
-#: includes/Modules/Support_Button/views/admin.php:371
+#: includes/Modules/Support_Button/views/admin.php:461
 msgid "Live preview"
 msgstr "پیش‌نمایش زنده"
 
 #: includes/Modules/Article_Tools/views/admin.php:162
 #: includes/Modules/Bottom_Nav/views/admin.php:485
-#: includes/Modules/Support_Button/views/admin.php:374
+#: includes/Modules/Support_Button/views/admin.php:464
 msgid "Preview colour scheme"
 msgstr "حالت رنگی پیش‌نمایش"
 
@@ -989,7 +991,7 @@ msgstr "حالت رنگی پیش‌نمایش"
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:70
 #: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:82
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:163
-#: includes/Modules/Support_Button/views/admin.php:376
+#: includes/Modules/Support_Button/views/admin.php:466
 msgid "Dark"
 msgstr "تاریک"
 
@@ -1011,7 +1013,8 @@ msgid "Tap the buttons to try the animation. On your site the Studiare font is u
 msgstr "روی دکمه‌ها بزنید تا انیمیشن را ببینید. در سایت از فونت قالب استادیار استفاده می‌شود."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:521
-#: includes/Modules/Support_Button/views/admin.php:128
+#: includes/Modules/Support_Button/views/admin.php:133
+#: includes/Modules/Support_Button/views/admin.php:211
 msgid "Drag to reorder"
 msgstr "برای جابه‌جایی بکشید"
 
@@ -1030,13 +1033,15 @@ msgstr "وسط"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:533
 #: includes/Modules/Builder/Module.php:407
-#: includes/Modules/Support_Button/views/admin.php:138
+#: includes/Modules/Support_Button/views/admin.php:143
+#: includes/Modules/Support_Button/views/admin.php:221
 msgid "Move up"
 msgstr "انتقال به بالا"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:534
 #: includes/Modules/Builder/Module.php:408
-#: includes/Modules/Support_Button/views/admin.php:139
+#: includes/Modules/Support_Button/views/admin.php:144
+#: includes/Modules/Support_Button/views/admin.php:222
 msgid "Move down"
 msgstr "انتقال به پایین"
 
@@ -1062,34 +1067,39 @@ msgstr "نوع دکمه"
 #: includes/Modules/Builder/Elementor/Widgets/Product_Spotlight.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:54
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:122
-#: includes/Modules/Support_Button/views/admin.php:160
+#: includes/Modules/Support_Button/views/admin.php:165
 msgid "Label"
 msgstr "عنوان"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:565
 #: includes/Modules/Builder/Elementor/Widgets/Account.php:102
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:95
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:138
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:41
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:51
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:174
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:62
-#: includes/Modules/Support_Button/views/admin.php:179
-#: includes/Modules/Support_Button/views/admin.php:225
+#: includes/Modules/Support_Button/views/admin.php:184
+#: includes/Modules/Support_Button/views/admin.php:258
+#: includes/Modules/Support_Button/views/admin.php:315
 msgid "Icon"
 msgstr "آیکون"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:567
+#: includes/Modules/Support_Button/views/admin.php:260
 msgid "From pack"
 msgstr "از پک"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:569
 #: includes/Modules/Builder/Elementor/Widgets/Site_Logo.php:54
 #: includes/Modules/Builder/Elementor/Widgets/Trust_Badges.php:63
+#: includes/Modules/Support_Button/views/admin.php:261
 msgid "Image"
 msgstr "تصویر"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:576
+#: includes/Modules/Support_Button/views/admin.php:268
 msgid "Choose icon"
 msgstr "انتخاب آیکون"
 
@@ -1098,6 +1108,7 @@ msgid "Any Font Awesome 5 Pro class loaded by Studiare."
 msgstr "هر کلاس Font Awesome 5 Pro که استادیار بارگذاری می‌کند."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:585
+#: includes/Modules/Support_Button/views/admin.php:273
 msgid "Media library"
 msgstr "کتابخانه رسانه"
 
@@ -1110,7 +1121,8 @@ msgid "Use fill=\"currentColor\" or stroke=\"currentColor\" so the icon follows 
 msgstr "از fill=\"currentColor\" یا stroke=\"currentColor\" استفاده کنید تا آیکون از رنگ‌های نوار پیروی کند. اسکریپت‌ها هنگام ذخیره حذف می‌شوند."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:595
-#: includes/Modules/Support_Button/views/admin.php:152
+#: includes/Modules/Support_Button/views/admin.php:157
+#: includes/Modules/Support_Button/views/admin.php:245
 msgid "Link (URL)"
 msgstr "لینک (URL)"
 
@@ -1271,22 +1283,22 @@ msgstr "فروشگاه / دوره‌ها"
 msgid "My account"
 msgstr "حساب کاربری من"
 
-#: includes/Modules/Bottom_Nav/views/admin.php:762
+#: includes/Admin/views/icon-picker.php:16
 msgid "Choose an icon"
 msgstr "انتخاب آیکون"
 
-#: includes/Modules/Bottom_Nav/views/admin.php:763
+#: includes/Admin/views/icon-picker.php:17
 #: includes/Modules/Bottom_Nav/views/sheet.php:24
 #: includes/Modules/Builder/Assets.php:93
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:445
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:239
 #: includes/Modules/Builder/Module.php:417
-#: includes/Modules/Support_Button/Module.php:100
+#: includes/Modules/Support_Button/Module.php:119
 #: includes/Modules/Support_Button/views/button.php:77
 msgid "Close"
 msgstr "بستن"
 
-#: includes/Modules/Bottom_Nav/views/admin.php:767
+#: includes/Admin/views/icon-picker.php:21
 msgid "Search icons… (e.g. cart, سبد)"
 msgstr "جستجوی آیکون… (مثلاً سبد یا cart)"
 
@@ -1369,7 +1381,7 @@ msgstr "چسبان هنگام اسکرول"
 #: includes/Modules/Builder/Elementor/Integration.php:203
 #: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:83
 #: includes/Modules/Builder/views/admin.php:187
-#: includes/Modules/Support_Button/Module.php:97
+#: includes/Modules/Support_Button/Module.php:116
 msgid "Off"
 msgstr "خاموش"
 
@@ -1733,7 +1745,7 @@ msgid "Outlined button"
 msgstr "دکمه دورخط"
 
 #: includes/Modules/Builder/Elementor/Widgets/Account.php:139
-#: includes/Modules/Support_Button/views/admin.php:257
+#: includes/Modules/Support_Button/views/admin.php:347
 msgid "Icon only"
 msgstr "فقط آیکون"
 
@@ -1761,7 +1773,7 @@ msgstr "فقط روی نمایش داخل ویرایشگر اثر دارد."
 #: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:119
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:671
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:70
-#: includes/Modules/Support_Button/views/admin.php:289
+#: includes/Modules/Support_Button/views/admin.php:379
 msgid "Button"
 msgstr "دکمه"
 
@@ -1789,7 +1801,7 @@ msgstr "افزودن به سبد خرید"
 #: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:288
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:93
-#: includes/Modules/Support_Button/views/admin.php:240
+#: includes/Modules/Support_Button/views/admin.php:330
 msgid "Button text"
 msgstr "متن دکمه"
 
@@ -1965,6 +1977,7 @@ msgstr "انتها"
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:237
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:428
 #: includes/Modules/Builder/Elementor/Widgets/Reading_Progress.php:46
+#: includes/Modules/Support_Button/views/admin.php:252
 msgid "Colour"
 msgstr "رنگ"
 
@@ -2206,8 +2219,8 @@ msgstr "سرفصل‌ها"
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:117
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:96
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:207
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:95
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:189
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:102
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:218
 #: includes/Modules/Builder/Elementor/Widgets/Course_Curriculum.php:49
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:58
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:146
@@ -2238,7 +2251,7 @@ msgstr "سرفصل‌ها"
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:216
 #: includes/Modules/Builder/Elementor/Widgets/Timeline.php:54
 #: includes/Modules/Builder/Elementor/Widgets/Timeline.php:127
-#: includes/Modules/Support_Button/views/admin.php:273
+#: includes/Modules/Support_Button/views/admin.php:363
 msgid "Title"
 msgstr "عنوان"
 
@@ -2341,6 +2354,7 @@ msgstr "اندازه عکس"
 #: includes/Modules/Builder/Elementor/Widgets/Testimonials.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Trust_Badges.php:44
 #: includes/Modules/Builder/Module.php:422
+#: includes/Modules/Support_Button/views/admin.php:235
 msgid "Name"
 msgstr "نام"
 
@@ -2421,8 +2435,8 @@ msgid "Icon list"
 msgstr "لیست آیکون‌دار"
 
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:131
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:132
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:186
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:161
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:215
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:35
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:86
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:129
@@ -2469,7 +2483,7 @@ msgstr "استایل آیکون"
 msgid "Plain"
 msgstr "ساده"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:165
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:194
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:125
 msgid "List"
 msgstr "لیست"
@@ -2713,7 +2727,7 @@ msgstr "مشخصات فنی محصول"
 msgid "Specifications"
 msgstr "مشخصات"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:190
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:219
 #: includes/Modules/Builder/Elementor/Widgets/Product_Attributes.php:46
 #: includes/Modules/Builder/Elementor/Widgets/Product_Attributes.php:67
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:207
@@ -2742,7 +2756,7 @@ msgid "Badges"
 msgstr "برچسب‌ها"
 
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:83
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:71
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:78
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:38
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:99
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:45
@@ -3291,7 +3305,7 @@ msgid "Kind label above the title"
 msgstr "برچسب نوع بالای عنوان"
 
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:187
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:164
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:193
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:126
 #: includes/Modules/Builder/Elementor/Widgets/Features.php:107
 #: includes/Modules/Builder/Elementor/Widgets/People.php:140
@@ -3934,7 +3948,7 @@ msgstr "آماده شروع هستید؟"
 msgid "Lifetime access, learn at your own pace and ask your questions on the site."
 msgstr "دسترسی همیشگی، یادگیری با سرعت خودتان و پرسش و پاسخ در سایت."
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:148
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:177
 #: includes/Modules/Builder/Presets/Contact.php:315
 #: includes/Modules/Builder/Presets/Footer.php:491
 msgid "Your address goes here"
@@ -4294,7 +4308,7 @@ msgstr "هر طرح یک قالب معمولی المنتور است: ویرای
 msgid "Reinstall missing designs"
 msgstr "نصب دوباره طرح‌های حذف‌شده"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:174
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:203
 #: includes/Modules/Builder/views/admin.php:342
 msgid "Brand colours"
 msgstr "رنگ‌های برند"
@@ -4430,7 +4444,7 @@ msgstr "فوتر · ملایم"
 msgid "Soft accent band, everything centred, with trust badges."
 msgstr "نوار رنگی ملایم، همه‌چیز وسط‌چین، همراه با نمادهای اعتماد."
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:139
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:168
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:215
 #: includes/Modules/Builder/Presets/Contact.php:82
 #: includes/Modules/Builder/Presets/Contact.php:313
@@ -4439,7 +4453,7 @@ msgstr "نوار رنگی ملایم، همه‌چیز وسط‌چین، همر�
 msgid "Saturday to Wednesday, 9 to 17"
 msgstr "شنبه تا چهارشنبه، ۹ تا ۱۷"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:144
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:173
 #: includes/Modules/Builder/Presets/Contact.php:314
 #: includes/Modules/Builder/Presets/Footer.php:340
 msgid "We answer within one working day"
@@ -4669,7 +4683,7 @@ msgstr "ترتیب دلخواه (با کشیدن و رها کردن در فهر�
 
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:104
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:208
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:191
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:220
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:85
 msgid "Small text"
 msgstr "متن کوچک"
@@ -4785,7 +4799,7 @@ msgstr "یک پیام نمایش داده شود"
 #: includes/Modules/Builder/Contact_Inbox.php:63
 #: includes/Modules/Builder/Contact_Messages.php:494
 #: includes/Modules/Builder/Elementor/Widgets/Countdown.php:95
-#: includes/Modules/Support_Button/views/admin.php:322
+#: includes/Modules/Support_Button/views/admin.php:412
 msgid "Message"
 msgstr "پیام"
 
@@ -4913,7 +4927,7 @@ msgstr "پرسش‌ها"
 
 #: includes/Modules/Builder/Elementor/Widgets/Faq.php:48
 #: includes/Modules/Builder/Elementor/Widgets/Faq.php:110
-#: includes/Modules/Support_Button/views/admin.php:37
+#: includes/Modules/Support_Button/views/admin.php:39
 msgid "Question"
 msgstr "پرسش"
 
@@ -5147,12 +5161,12 @@ msgstr "شورت‌کد فرم افزونه خبرنامه‌تان را این�
 
 #: includes/Modules/Builder/Contact_Messages.php:373
 #: includes/Modules/Builder/Elementor/Post_Parts.php:219
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:54
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:59
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:133
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:144
 #: includes/Modules/Builder/Newsletter.php:160
-#: includes/Modules/Support_Button/Channels.php:75
-#: includes/Modules/Support_Button/views/admin.php:39
+#: includes/Modules/Support_Button/Channels.php:86
+#: includes/Modules/Support_Button/views/admin.php:41
 msgid "Email"
 msgstr "ایمیل"
 
@@ -5427,7 +5441,7 @@ msgid "\"All\" button"
 msgstr "دکمه «همه»"
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:187
-#: includes/Modules/Support_Button/views/admin.php:338
+#: includes/Modules/Support_Button/views/admin.php:428
 msgid "All"
 msgstr "همه"
 
@@ -5490,7 +5504,7 @@ msgstr "کارت تبلیغاتی"
 #: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:83
 #: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:92
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:165
-#: includes/Modules/Support_Button/views/admin.php:72
+#: includes/Modules/Support_Button/views/admin.php:74
 msgid "Card"
 msgstr "کارت"
 
@@ -6388,8 +6402,8 @@ msgstr "اسلایدر تصویری"
 
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:100
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:105
-#: includes/Modules/Support_Button/views/admin.php:201
-#: includes/Modules/Support_Button/views/admin.php:204
+#: includes/Modules/Support_Button/views/admin.php:291
+#: includes/Modules/Support_Button/views/admin.php:294
 msgid "Design"
 msgstr "مدل"
 
@@ -6610,71 +6624,71 @@ msgid "Play slides"
 msgstr "پخش اسلایدها"
 
 #: includes/Modules/Builder/Elementor/Post_Parts.php:215
-#: includes/Modules/Support_Button/Channels.php:39
+#: includes/Modules/Support_Button/Channels.php:43
 msgid "Telegram"
 msgstr "تلگرام"
 
-#: includes/Modules/Support_Button/Channels.php:42
+#: includes/Modules/Support_Button/Channels.php:46
 msgid "Username (with or without @), a t.me link, or a phone number with the country code."
 msgstr "نام کاربری (با یا بدون @)، لینک t.me یا شماره موبایل با کد کشور."
 
 #: includes/Modules/Builder/Elementor/Post_Parts.php:216
-#: includes/Modules/Support_Button/Channels.php:45
+#: includes/Modules/Support_Button/Channels.php:49
 msgid "WhatsApp"
 msgstr "واتس‌اپ"
 
-#: includes/Modules/Support_Button/Channels.php:48
+#: includes/Modules/Support_Button/Channels.php:52
 msgid "Mobile number (09… or with the country code) or a wa.me link."
 msgstr "شماره موبایل (به‌صورت ۰۹… یا با کد کشور) یا لینک wa.me."
 
-#: includes/Modules/Support_Button/Channels.php:51
+#: includes/Modules/Support_Button/Channels.php:55
 msgid "Bale"
 msgstr "بله"
 
-#: includes/Modules/Support_Button/Channels.php:54
+#: includes/Modules/Support_Button/Channels.php:58
 msgid "Username (with or without @) or a ble.ir link."
 msgstr "نام کاربری (با یا بدون @) یا لینک ble.ir."
 
-#: includes/Modules/Support_Button/Channels.php:57
+#: includes/Modules/Support_Button/Channels.php:61
 msgid "Eitaa"
 msgstr "ایتا"
 
-#: includes/Modules/Support_Button/Channels.php:60
+#: includes/Modules/Support_Button/Channels.php:64
 msgid "Username (with or without @) or an eitaa.com link."
 msgstr "نام کاربری (با یا بدون @) یا لینک eitaa.com."
 
-#: includes/Modules/Support_Button/Channels.php:63
+#: includes/Modules/Support_Button/Channels.php:74
 msgid "Instagram"
 msgstr "اینستاگرام"
 
-#: includes/Modules/Support_Button/Channels.php:66
+#: includes/Modules/Support_Button/Channels.php:77
 msgid "Username. Visitors land straight in a direct message (ig.me)."
 msgstr "نام کاربری. بازدیدکننده مستقیم به دایرکت شما می‌رود (ig.me)."
 
-#: includes/Modules/Support_Button/Channels.php:69
+#: includes/Modules/Support_Button/Channels.php:80
 msgid "Call us"
 msgstr "تماس تلفنی"
 
-#: includes/Modules/Support_Button/Channels.php:72
+#: includes/Modules/Support_Button/Channels.php:83
 msgid "Any phone number. On phones, tapping it starts the call."
 msgstr "هر شماره تلفنی. در موبایل، با لمس آن تماس برقرار می‌شود."
 
-#: includes/Modules/Support_Button/Channels.php:78
+#: includes/Modules/Support_Button/Channels.php:89
 msgid "An email address."
 msgstr "یک نشانی ایمیل."
 
-#: includes/Modules/Support_Button/Channels.php:81
+#: includes/Modules/Support_Button/Channels.php:92
 msgid "Support page"
 msgstr "صفحه پشتیبانی"
 
-#: includes/Modules/Support_Button/Channels.php:84
+#: includes/Modules/Support_Button/Channels.php:95
 msgid "Any page or link: tickets, FAQ or an online chat service."
 msgstr "هر صفحه یا لینکی: تیکت، پرسش‌های متداول یا سرویس گفتگوی آنلاین."
 
 #: includes/Modules/Support_Button/Frontend.php:169
-#: includes/Modules/Support_Button/Module.php:99
-#: includes/Modules/Support_Button/Schema.php:32
-#: includes/Modules/Support_Button/views/admin.php:242
+#: includes/Modules/Support_Button/Module.php:118
+#: includes/Modules/Support_Button/Schema.php:43
+#: includes/Modules/Support_Button/views/admin.php:332
 msgid "Support"
 msgstr "پشتیبانی"
 
@@ -6682,284 +6696,284 @@ msgstr "پشتیبانی"
 msgid "Floating support button"
 msgstr "دکمه شناور پشتیبانی"
 
-#: includes/Modules/Support_Button/Module.php:28
-msgid "A corner button that opens Telegram, WhatsApp, Bale, Eitaa and more, and moves out of the way of the bottom navigation."
-msgstr "دکمه‌ای در گوشه صفحه برای تلگرام، واتس‌اپ، بله، ایتا و راه‌های دیگر که خودکار بالای منوی پایین موبایل می‌نشیند."
-
-#: includes/Modules/Support_Button/Module.php:95
+#: includes/Modules/Support_Button/Module.php:114
 msgid "Not set"
 msgstr "وارد نشده"
 
-#: includes/Modules/Support_Button/Module.php:96
+#: includes/Modules/Support_Button/Module.php:115
 msgid "Check the value"
 msgstr "مقدار را بررسی کنید"
 
-#: includes/Modules/Support_Button/Module.php:98
+#: includes/Modules/Support_Button/Module.php:117
 msgid "Opens:"
 msgstr "مقصد:"
 
-#: includes/Modules/Support_Button/Schema.php:38
+#: includes/Modules/Support_Button/Schema.php:49
 msgid "Online support"
 msgstr "پشتیبانی آنلاین"
 
-#: includes/Modules/Support_Button/Schema.php:39
+#: includes/Modules/Support_Button/Schema.php:50
 msgid "Message us in the app you prefer."
 msgstr "در هر پیام‌رسانی که راحت‌ترید به ما پیام دهید."
 
-#: includes/Modules/Support_Button/Schema.php:43
+#: includes/Modules/Support_Button/Schema.php:54
 msgid "Hi! Have a question about a course? We are here to help."
 msgstr "سلام! درباره دوره‌ها سؤالی دارید؟ ما اینجاییم که کمکتان کنیم."
 
-#: includes/Modules/Support_Button/views/admin.php:35
+#: includes/Modules/Support_Button/views/admin.php:37
 msgid "Chat"
 msgstr "گفتگو"
 
-#: includes/Modules/Support_Button/views/admin.php:36
+#: includes/Modules/Support_Button/views/admin.php:38
 msgid "Headset"
 msgstr "هدست"
 
 #: includes/Modules/Builder/Contact_Messages.php:374
 #: includes/Modules/Builder/Contact_Messages.php:490
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:53
-#: includes/Modules/Support_Button/views/admin.php:38
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:58
+#: includes/Modules/Support_Button/views/admin.php:40
 msgid "Phone"
 msgstr "تلفن"
 
-#: includes/Modules/Support_Button/views/admin.php:40
+#: includes/Modules/Support_Button/views/admin.php:42
 msgid "Ticket"
 msgstr "تیکت"
 
-#: includes/Modules/Support_Button/views/admin.php:46
-#: includes/Modules/Support_Button/views/admin.php:51
+#: includes/Modules/Support_Button/views/admin.php:48
+#: includes/Modules/Support_Button/views/admin.php:53
 msgid "Right"
 msgstr "راست"
 
-#: includes/Modules/Support_Button/views/admin.php:47
-#: includes/Modules/Support_Button/views/admin.php:50
+#: includes/Modules/Support_Button/views/admin.php:49
+#: includes/Modules/Support_Button/views/admin.php:52
 msgid "Left"
 msgstr "چپ"
 
-#: includes/Modules/Support_Button/views/admin.php:66
-#: includes/Modules/Support_Button/views/admin.php:110
+#: includes/Modules/Support_Button/views/admin.php:68
+#: includes/Modules/Support_Button/views/admin.php:112
 msgid "Channels"
 msgstr "راه‌های ارتباطی"
 
-#: includes/Modules/Support_Button/views/admin.php:67
+#: includes/Modules/Support_Button/views/admin.php:69
 msgid "Appearance"
 msgstr "ظاهر"
 
-#: includes/Modules/Support_Button/views/admin.php:68
+#: includes/Modules/Support_Button/views/admin.php:70
 msgid "Position & display"
 msgstr "جایگاه و نمایش"
 
-#: includes/Modules/Support_Button/views/admin.php:72
+#: includes/Modules/Support_Button/views/admin.php:74
 msgid "A small window with a heading and one row per channel."
 msgstr "پنجره‌ای کوچک با عنوان و یک ردیف برای هر راه ارتباطی."
 
-#: includes/Modules/Support_Button/views/admin.php:73
+#: includes/Modules/Support_Button/views/admin.php:75
 msgid "Bubbles"
 msgstr "حباب‌ها"
 
-#: includes/Modules/Support_Button/views/admin.php:73
+#: includes/Modules/Support_Button/views/admin.php:75
 msgid "Round brand buttons that pop up above the main button."
 msgstr "دکمه‌های گرد به رنگ هر برند که بالای دکمه اصلی ظاهر می‌شوند."
 
-#: includes/Modules/Support_Button/views/admin.php:88
+#: includes/Modules/Support_Button/views/admin.php:90
 msgid "Enable the support button"
 msgstr "فعال‌سازی دکمه پشتیبانی"
 
-#: includes/Modules/Support_Button/views/admin.php:111
+#: includes/Modules/Support_Button/views/admin.php:113
 msgid "Switch on the ways visitors can reach you, fill in your ID or number, and drag to reorder. A channel without an ID stays hidden."
 msgstr "راه‌هایی را که بازدیدکننده‌ها از آن‌ها با شما در تماس می‌شوند روشن کنید، شناسه یا شماره را بنویسید و با کشیدن، ترتیبشان را عوض کنید. راهی که شناسه نداشته باشد نمایش داده نمی‌شود."
 
-#: includes/Modules/Support_Button/views/admin.php:116
+#: includes/Modules/Support_Button/views/admin.php:118
 msgid "No channel is ready yet, so the button is not shown on your site. Fill in at least one switched-on channel."
 msgstr "هنوز هیچ راه ارتباطی آماده نیست، پس دکمه در سایت نمایش داده نمی‌شود. دست‌کم برای یکی از راه‌های روشن، شناسه یا شماره بنویسید."
 
-#: includes/Modules/Support_Button/views/admin.php:140
+#: includes/Modules/Support_Button/views/admin.php:145
+#: includes/Modules/Support_Button/views/admin.php:223
+#: includes/Modules/Support_Button/views/admin.php:224
 msgid "Show this channel"
 msgstr "نمایش این راه ارتباطی"
 
 #. translators: %s: channel name, e.g. Telegram.
-#: includes/Modules/Support_Button/views/admin.php:141
+#: includes/Modules/Support_Button/views/admin.php:146
 #, php-format
 msgid "Show %s"
 msgstr "نمایش %s"
 
-#: includes/Modules/Support_Button/views/admin.php:152
+#: includes/Modules/Support_Button/views/admin.php:157
 msgid "ID, number or link"
 msgstr "شناسه، شماره یا لینک"
 
-#: includes/Modules/Support_Button/views/admin.php:165
+#: includes/Modules/Support_Button/views/admin.php:170
+#: includes/Modules/Support_Button/views/admin.php:240
 msgid "Note under the label"
 msgstr "توضیح زیر عنوان"
 
-#: includes/Modules/Support_Button/views/admin.php:166
+#: includes/Modules/Support_Button/views/admin.php:171
+#: includes/Modules/Support_Button/views/admin.php:241
 msgid "e.g. Replies within an hour"
 msgstr "مثلاً پاسخ‌گویی در کمتر از یک ساعت"
 
-#: includes/Modules/Support_Button/views/admin.php:171
+#: includes/Modules/Support_Button/views/admin.php:176
 msgid "Ready-made first message"
 msgstr "متن آماده پیام اول"
 
-#: includes/Modules/Support_Button/views/admin.php:172
+#: includes/Modules/Support_Button/views/admin.php:177
 msgid "Hello, I have a question about…"
 msgstr "سلام، درباره… سؤال داشتم"
 
-#: includes/Modules/Support_Button/views/admin.php:173
+#: includes/Modules/Support_Button/views/admin.php:178
 msgid "Optional. WhatsApp opens with this text typed in; the visitor can edit it before sending."
 msgstr "اختیاری. واتس‌اپ با همین متن نوشته‌شده باز می‌شود و بازدیدکننده پیش از ارسال می‌تواند آن را ویرایش کند."
 
-#: includes/Modules/Support_Button/views/admin.php:202
+#: includes/Modules/Support_Button/views/admin.php:292
 msgid "How the channels appear when the button is tapped. The previews use your real channels."
 msgstr "راه‌های ارتباطی با لمس دکمه چگونه نمایش داده شوند. پیش‌نمایش‌ها راه‌های واقعی شما را نشان می‌دهند."
 
-#: includes/Modules/Support_Button/views/admin.php:220
+#: includes/Modules/Support_Button/views/admin.php:310
 msgid "Main button"
 msgstr "دکمه اصلی"
 
-#: includes/Modules/Support_Button/views/admin.php:221
+#: includes/Modules/Support_Button/views/admin.php:311
 msgid "With a single channel switched on, the button opens it directly and shows its logo."
 msgstr "اگر فقط یک راه ارتباطی روشن باشد، دکمه مستقیم همان را باز می‌کند و لوگویش را نشان می‌دهد."
 
-#: includes/Modules/Support_Button/views/admin.php:243
+#: includes/Modules/Support_Button/views/admin.php:333
 msgid "Also read out by screen readers when the text is hidden."
 msgstr "وقتی متن پنهان باشد هم صفحه‌خوان‌ها آن را می‌خوانند."
 
-#: includes/Modules/Support_Button/views/admin.php:246
+#: includes/Modules/Support_Button/views/admin.php:336
 msgid "Button size"
 msgstr "اندازه دکمه"
 
-#: includes/Modules/Support_Button/views/admin.php:253
+#: includes/Modules/Support_Button/views/admin.php:343
 msgid "Show the text"
 msgstr "نمایش متن"
 
-#: includes/Modules/Support_Button/views/admin.php:256
+#: includes/Modules/Support_Button/views/admin.php:346
 msgid "On computers only"
 msgstr "فقط در دسکتاپ"
 
-#: includes/Modules/Support_Button/views/admin.php:259
+#: includes/Modules/Support_Button/views/admin.php:349
 msgid "On phones a round icon button takes the least room."
 msgstr "در موبایل، دکمه گرد آیکونی کمترین جا را می‌گیرد."
 
-#: includes/Modules/Support_Button/views/admin.php:261
+#: includes/Modules/Support_Button/views/admin.php:351
 msgid "Attention pulse"
 msgstr "موج جلب توجه"
 
-#: includes/Modules/Support_Button/views/admin.php:261
+#: includes/Modules/Support_Button/views/admin.php:351
 msgid "A soft ring pulses three times after the page loads. Visitors who ask for reduced motion never see it."
 msgstr "پس از بارگذاری صفحه، حلقه‌ای ملایم سه بار دور دکمه موج می‌زند. بازدیدکننده‌هایی که کاهش حرکت را در دستگاهشان فعال کرده‌اند آن را نمی‌بینند."
 
-#: includes/Modules/Support_Button/views/admin.php:268
+#: includes/Modules/Support_Button/views/admin.php:358
 msgid "Card heading"
 msgstr "عنوان کارت"
 
-#: includes/Modules/Support_Button/views/admin.php:269
+#: includes/Modules/Support_Button/views/admin.php:359
 msgid "Leave both empty to show the channels only."
 msgstr "هر دو را خالی بگذارید تا فقط راه‌های ارتباطی نمایش داده شوند."
 
-#: includes/Modules/Support_Button/views/admin.php:274
+#: includes/Modules/Support_Button/views/admin.php:364
 msgid "Subtitle"
 msgstr "زیرعنوان"
 
-#: includes/Modules/Support_Button/views/admin.php:282
+#: includes/Modules/Support_Button/views/admin.php:372
 msgid "Leave a colour empty to follow your Studiare theme colours automatically. Dark mode follows the theme too."
 msgstr "رنگی را خالی بگذارید تا به‌طور خودکار از رنگ‌های قالب استادیار پیروی کند. حالت تاریک هم از قالب پیروی می‌کند."
 
-#: includes/Modules/Support_Button/views/admin.php:285
+#: includes/Modules/Support_Button/views/admin.php:375
 msgid "Brand colours for channels"
 msgstr "رنگ برند برای هر راه ارتباطی"
 
-#: includes/Modules/Support_Button/views/admin.php:285
+#: includes/Modules/Support_Button/views/admin.php:375
 msgid "Telegram blue, WhatsApp green and so on. Off: every channel uses the button colour."
 msgstr "آبی تلگرام، سبز واتس‌اپ و مانند آن. اگر خاموش باشد، همه به رنگ دکمه نمایش داده می‌شوند."
 
-#: includes/Modules/Support_Button/views/admin.php:290
+#: includes/Modules/Support_Button/views/admin.php:380
 msgid "Button icon and text"
 msgstr "آیکون و متن دکمه"
 
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:313
-#: includes/Modules/Support_Button/views/admin.php:300
+#: includes/Modules/Support_Button/views/admin.php:390
 msgid "Position"
 msgstr "جایگاه"
 
-#: includes/Modules/Support_Button/views/admin.php:301
+#: includes/Modules/Support_Button/views/admin.php:391
 msgid "The button rises automatically above the bottom navigation, sticky buy bars and the theme's \"back to top\" button."
 msgstr "دکمه به‌طور خودکار بالای منوی پایین موبایل، نوارهای خرید ثابت و دکمه «بازگشت به بالا»ی قالب قرار می‌گیرد."
 
-#: includes/Modules/Support_Button/views/admin.php:304
+#: includes/Modules/Support_Button/views/admin.php:394
 msgid "Corner"
 msgstr "گوشه"
 
-#: includes/Modules/Support_Button/views/admin.php:308
+#: includes/Modules/Support_Button/views/admin.php:398
 msgid "Distance from the side"
 msgstr "فاصله از کناره"
 
-#: includes/Modules/Support_Button/views/admin.php:309
+#: includes/Modules/Support_Button/views/admin.php:399
 msgid "Distance from the bottom"
 msgstr "فاصله از پایین"
 
-#: includes/Modules/Support_Button/views/admin.php:316
+#: includes/Modules/Support_Button/views/admin.php:406
 msgid "Greeting"
 msgstr "پیام خوشامد"
 
-#: includes/Modules/Support_Button/views/admin.php:317
+#: includes/Modules/Support_Button/views/admin.php:407
 msgid "A short message beside the button, shown once per visit. Tapping it opens the channels."
 msgstr "پیامی کوتاه کنار دکمه که در هر بازدید یک بار نمایش داده می‌شود. با لمس آن، راه‌های ارتباطی باز می‌شوند."
 
-#: includes/Modules/Support_Button/views/admin.php:321
+#: includes/Modules/Support_Button/views/admin.php:411
 msgid "Show a greeting"
 msgstr "نمایش پیام خوشامد"
 
-#: includes/Modules/Support_Button/views/admin.php:323
+#: includes/Modules/Support_Button/views/admin.php:413
 msgid "Appears after"
 msgstr "نمایش پس از"
 
-#: includes/Modules/Support_Button/views/admin.php:336
+#: includes/Modules/Support_Button/views/admin.php:426
 msgid "Devices"
 msgstr "دستگاه‌ها"
 
-#: includes/Modules/Support_Button/views/admin.php:339
+#: includes/Modules/Support_Button/views/admin.php:429
 msgid "Computers and tablets"
 msgstr "دسکتاپ و تبلت"
 
-#: includes/Modules/Support_Button/views/admin.php:340
+#: includes/Modules/Support_Button/views/admin.php:430
 msgid "Phones only"
 msgstr "فقط موبایل"
 
-#: includes/Modules/Support_Button/views/admin.php:342
+#: includes/Modules/Support_Button/views/admin.php:432
 msgid "Phones are screens narrower than 768px."
 msgstr "موبایل یعنی صفحه‌های باریک‌تر از ۷۶۸ پیکسل."
 
-#: includes/Modules/Support_Button/views/admin.php:361
+#: includes/Modules/Support_Button/views/admin.php:451
 msgid "Raise it if a popup or chat widget covers the button."
 msgstr "اگر پنجره بازشو یا ابزارک گفتگو روی دکمه را می‌پوشاند، آن را بیشتر کنید."
 
-#: includes/Modules/Support_Button/views/admin.php:378
+#: includes/Modules/Support_Button/views/admin.php:468
 msgid "Preview state"
 msgstr "وضعیت پیش‌نمایش"
 
-#: includes/Modules/Support_Button/views/admin.php:379
+#: includes/Modules/Support_Button/views/admin.php:469
 msgid "Open"
 msgstr "باز"
 
-#: includes/Modules/Support_Button/views/admin.php:380
+#: includes/Modules/Support_Button/views/admin.php:470
 msgid "Closed"
 msgstr "بسته"
 
-#: includes/Modules/Support_Button/views/admin.php:395
+#: includes/Modules/Support_Button/views/admin.php:485
 msgid "Fill in a channel to see the button."
 msgstr "برای دیدن دکمه، یک راه ارتباطی را تکمیل کنید."
 
-#: includes/Modules/Support_Button/views/admin.php:396
+#: includes/Modules/Support_Button/views/admin.php:486
 msgid "Hidden on phones (Position & display tab)."
 msgstr "در موبایل پنهان است (زبانه جایگاه و نمایش)."
 
-#: includes/Modules/Support_Button/views/admin.php:401
+#: includes/Modules/Support_Button/views/admin.php:491
 msgid "Links are not opened in the preview. On your site the Studiare font is used."
 msgstr "لینک‌ها در پیش‌نمایش باز نمی‌شوند. در سایت شما از فونت قالب استادیار استفاده می‌شود."
 
-#: includes/Modules/Support_Button/views/admin.php:323
+#: includes/Modules/Support_Button/views/admin.php:413
 msgctxt "unit after a number of seconds"
 msgid "s"
 msgstr " ثانیه"
@@ -7196,70 +7210,66 @@ msgstr "عنوان وبلاگ"
 msgid "Current page"
 msgstr "صفحه فعلی"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:37
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:66
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:42
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:73
 msgid "Contact details"
 msgstr "راه‌های ارتباطی"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:55
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:60
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:202
 msgid "Address"
 msgstr "نشانی"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:56
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:61
 #: includes/Modules/Builder/Elementor/Widgets/Map.php:213
 msgid "Opening hours"
 msgstr "ساعت کاری"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:75
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:82
 msgid "The list below"
 msgstr "فهرست زیر"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:76
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:83
 msgid "The floating support button's ways to reach us"
 msgstr "راه‌های ارتباطی دکمه شناور پشتیبانی"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:78
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:85
 msgid "The second choice shows what you set in Studiare+ → Floating support button, so you type your numbers and usernames once."
 msgstr "گزینه دوم همان راه‌هایی را نشان می‌دهد که در استادیار+ ← دکمه شناور پشتیبانی تنظیم کرده‌اید؛ این‌طور شماره‌ها و نام‌های کاربری را فقط یک بار وارد می‌کنید."
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:86
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:93
 msgid "Type"
 msgstr "نوع"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:98
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:105
 msgid "Empty: the type's name"
 msgstr "خالی: نام همان نوع"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:104
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:111
 msgid "Number, address or username"
 msgstr "شماره، نشانی یا نام کاربری"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:108
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:115
 msgid "Phones and messengers become links: a number (Persian digits work), @username or a link."
 msgstr "تلفن و پیام‌رسان‌ها لینک می‌شوند: شماره (با ارقام فارسی هم درست است)، ‎@username یا یک لینک."
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:114
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:121
 msgid "Small text below"
 msgstr "متن کوچک زیر آن"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:124
-msgid "For an address: a link to your place on a map."
-msgstr "برای نشانی: لینک مکان شما روی نقشه."
-
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:166
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:195
 msgid "Brand buttons"
 msgstr "دکمه‌های رنگ برند"
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:177
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:206
 msgid "Messengers in their own colours; off uses the accent colour for all."
 msgstr "هر پیام‌رسان با رنگ خودش؛ در حالت خاموش همه با رنگ اصلی نمایش داده می‌شوند."
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:213
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:242
 msgid "Switch on and fill in some ways to reach you in Studiare+ → Floating support button."
 msgstr "در استادیار+ ← دکمه شناور پشتیبانی چند راه ارتباطی را روشن و پر کنید."
 
-#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:214
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:243
 msgid "Add a phone number, email or messenger."
 msgstr "یک شماره تلفن، ایمیل یا پیام‌رسان اضافه کنید."
 
@@ -9735,10 +9745,94 @@ msgstr "صفحهٔ این قسمت"
 msgid "Opens the post of the episode. Leave empty to hide the button (the titles stay links)."
 msgstr "مقالهٔ همین قسمت را باز می‌کند. برای مخفی کردن دکمه خالی بگذارید (عنوان‌ها همچنان لینک هستند)."
 
-#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:35
-msgid "Sold-out course button"
-msgstr "دکمهٔ دورهٔ تکمیل‌شده"
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:68
+msgid "Other network (own icon)"
+msgstr "شبکه دیگر (با آیکون دلخواه)"
 
-#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:39
-msgid "When a course is full, the theme replaces the buy button with a grey box and small red \"Capacity is full!\" text that is hard to read. This fix shows it as a disabled button the size of the buy button, with a soft red tint and readable text."
-msgstr "وقتی ظرفیت دوره تکمیل شود، قالب به‌جای دکمهٔ خرید یک کادر خاکستری با متن قرمز و کم‌رنگ «ظرفیت تکمیل شد!» نشان می‌دهد که سخت خوانده می‌شود. این اصلاح آن را به شکل دکمه‌ای غیرفعال، هم‌اندازهٔ دکمهٔ خرید، با زمینهٔ قرمز ملایم و متن خوانا نشان می‌دهد."
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:131
+msgid "For an address: a link to your place on a map. For another network: your page there."
+msgstr "برای آدرس: لینک مکان شما روی نقشه. برای شبکه دیگر: لینک صفحه شما در آن شبکه."
+
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:144
+msgid "From the icon library, or upload the network's logo as an SVG file."
+msgstr "از کتابخانه آیکون‌ها انتخاب کنید یا لوگوی شبکه را به‌صورت فایل SVG بارگذاری کنید."
+
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:151
+msgid "Brand colour"
+msgstr "رنگ برند"
+
+#: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:153
+msgid "Empty: the accent colour. Pick one dark enough for a white icon."
+msgstr "خالی: رنگ اصلی سایت. رنگی انتخاب کنید که آن‌قدر تیره باشد که آیکون سفید روی آن خوانا بماند."
+
+#: includes/Modules/Support_Button/Channels.php:67
+msgid "Rubika"
+msgstr "روبیکا"
+
+#: includes/Modules/Support_Button/Channels.php:71
+msgid "Username (with or without @) or a rubika.ir link."
+msgstr "نام کاربری (با یا بدون @) یا لینک rubika.ir."
+
+#: includes/Modules/Support_Button/Module.php:28
+msgid "A corner button that opens Telegram, WhatsApp, Bale, Eitaa, Rubika, your own channels and more, and moves out of the way of the bottom navigation."
+msgstr "دکمه‌ای در گوشه صفحه که تلگرام، واتساپ، بله، ایتا، روبیکا، راه‌های ارتباطی دلخواه شما و موارد دیگر را باز می‌کند و از سر راه منوی پایین کنار می‌رود."
+
+#: includes/Modules/Support_Button/Module.php:120
+msgid "Add a name"
+msgstr "نام را وارد کنید"
+
+#: includes/Modules/Support_Button/Module.php:121
+msgid "New channel"
+msgstr "راه ارتباطی جدید"
+
+#: includes/Modules/Support_Button/Module.php:122
+msgid "Delete this channel?"
+msgstr "این راه ارتباطی حذف شود؟"
+
+#. translators: %s: channel name.
+#: includes/Modules/Support_Button/Module.php:124
+#, php-format
+msgid "\"%s\" will be removed from the support button."
+msgstr "«%s» از دکمه پشتیبانی حذف می‌شود."
+
+#. translators: %d: maximum number of custom channels.
+#: includes/Modules/Support_Button/Module.php:127
+#, php-format
+msgid "You can make up to %d channels of your own."
+msgstr "حداکثر %d راه ارتباطی دلخواه می‌توانید بسازید."
+
+#: includes/Modules/Support_Button/views/admin.php:202
+msgid "Make your own channel"
+msgstr "ساخت راه ارتباطی دلخواه"
+
+#: includes/Modules/Support_Button/views/admin.php:204
+msgid "Any other social network or page, with its own name, link, colour and icon (from the icon library, an image or SVG code)."
+msgstr "هر شبکه اجتماعی یا صفحه دیگر، با نام، لینک، رنگ و آیکون خودش (از کتابخانه آیکون‌ها، یک تصویر یا کد SVG)."
+
+#: includes/Modules/Support_Button/views/admin.php:236
+msgid "e.g. Rubino"
+msgstr "مثلاً روبینو"
+
+#: includes/Modules/Support_Button/views/admin.php:247
+msgid "Your page on the network, any link on your site, or tel: / mailto:."
+msgstr "لینک صفحه شما در آن شبکه، هر لینکی از سایت خودتان، یا tel: / mailto:."
+
+#: includes/Modules/Support_Button/views/admin.php:254
+msgid "The circle behind the icon. Pick a dark enough colour for a white icon."
+msgstr "رنگ دایره پشت آیکون. رنگی انتخاب کنید که آیکون سفید روی آن خوانا باشد."
+
+#: includes/Modules/Support_Button/views/admin.php:272
+msgid "Image URL"
+msgstr "آدرس تصویر"
+
+#: includes/Modules/Support_Button/views/admin.php:274
+msgid "The network's logo as a square PNG, WebP or SVG file. It fills the circle, so the colour above only shows around a transparent logo."
+msgstr "لوگوی شبکه به‌صورت فایل مربعی PNG، WebP یا SVG. لوگو کل دایره را پر می‌کند، پس رنگ بالا فقط دور لوگوهای بدون پس‌زمینه دیده می‌شود."
+
+#: includes/Modules/Support_Button/views/admin.php:277
+msgid "SVG code"
+msgstr "کد SVG"
+
+#: includes/Modules/Support_Button/views/admin.php:278
+msgid "Use fill=\"currentColor\" so the icon turns white on the colour above. Scripts are removed on save."
+msgstr "از fill=\"currentColor\" استفاده کنید تا آیکون روی رنگ بالا سفید شود. اسکریپت‌ها هنگام ذخیره حذف می‌شوند."

@@ -1,9 +1,10 @@
 <?php
 /**
- * Contact details: phone, email, address, opening hours and messengers
- * (Telegram, WhatsApp, Bale, Eitaa, Instagram) as cards, a list or brand
- * buttons. The ways to reach you come from the floating support button's
- * settings (typed once, shown everywhere) or from a list made here.
+ * Contact details: phone, email, address, opening hours, messengers
+ * (Telegram, WhatsApp, Bale, Eitaa, Rubika, Instagram) and any other network
+ * with its own icon and colour, as cards, a list or brand buttons. The ways
+ * to reach you come from the floating support button's settings (typed once,
+ * shown everywhere, its custom channels included) or from a list made here.
  *
  * Numbers, usernames and links are turned into tel:, mailto: and app links
  * by Support_Button\Channels, exactly like the floating button does.
@@ -14,6 +15,7 @@
 namespace StudiareExt\Modules\Builder\Elementor\Widgets;
 
 use Elementor\Controls_Manager;
+use Elementor\Icons_Manager;
 use Elementor\Repeater;
 use StudiareExt\Core\Icon_Library;
 use StudiareExt\Modules\Support_Button\Channels;
@@ -26,8 +28,11 @@ final class Contact_Details extends Page_Base {
 	/** Kinds that are text only (no link built from the value). */
 	private const TEXT_KINDS = array( 'address', 'hours' );
 
+	/** Kinds whose link is chosen in the Link control instead of built from the value. */
+	private const LINK_KINDS = array( 'address', 'hours', 'custom' );
+
 	/** Kinds shown left-to-right (numbers, addresses, usernames). */
-	private const LTR_KINDS = array( 'phone', 'email', 'telegram', 'whatsapp', 'bale', 'eitaa', 'instagram' );
+	private const LTR_KINDS = array( 'phone', 'email', 'telegram', 'whatsapp', 'bale', 'eitaa', 'rubika', 'instagram' );
 
 	public function get_name(): string {
 		return 'stx-contact-details';
@@ -42,7 +47,7 @@ final class Contact_Details extends Page_Base {
 	}
 
 	public function get_keywords(): array {
-		return array_merge( parent::get_keywords(), array( 'phone', 'email', 'address', 'telegram', 'whatsapp', 'bale', 'eitaa', 'تلفن', 'آدرس', 'تلگرام', 'واتساپ', 'بله', 'ایتا' ) );
+		return array_merge( parent::get_keywords(), array( 'phone', 'email', 'address', 'telegram', 'whatsapp', 'bale', 'eitaa', 'rubika', 'social', 'تلفن', 'آدرس', 'تلگرام', 'واتساپ', 'بله', 'ایتا', 'روبیکا', 'شبکه اجتماعی' ) );
 	}
 
 	/** @return array<string, string> Kind => label. */
@@ -58,7 +63,9 @@ final class Contact_Details extends Page_Base {
 			'whatsapp'  => $channels['whatsapp']['label'],
 			'bale'      => $channels['bale']['label'],
 			'eitaa'     => $channels['eitaa']['label'],
+			'rubika'    => $channels['rubika']['label'],
 			'instagram' => $channels['instagram']['label'],
+			'custom'    => __( 'Other network (own icon)', 'studiare-extensions' ),
 		);
 	}
 
@@ -121,8 +128,30 @@ final class Contact_Details extends Page_Base {
 			array(
 				'label'       => __( 'Link', 'studiare-extensions' ),
 				'type'        => Controls_Manager::URL,
-				'description' => __( 'For an address: a link to your place on a map.', 'studiare-extensions' ),
-				'condition'   => array( 'kind' => self::TEXT_KINDS ),
+				'description' => __( 'For an address: a link to your place on a map. For another network: your page there.', 'studiare-extensions' ),
+				'condition'   => array( 'kind' => self::LINK_KINDS ),
+			)
+		);
+		$repeater->add_control(
+			'icon',
+			array(
+				'label'       => __( 'Icon', 'studiare-extensions' ),
+				'type'        => Controls_Manager::ICONS,
+				'default'     => array(
+					'value'   => 'fas fa-globe',
+					'library' => 'fa-solid',
+				),
+				'description' => __( 'From the icon library, or upload the network\'s logo as an SVG file.', 'studiare-extensions' ),
+				'condition'   => array( 'kind' => 'custom' ),
+			)
+		);
+		$repeater->add_control(
+			'color',
+			array(
+				'label'       => __( 'Brand colour', 'studiare-extensions' ),
+				'type'        => Controls_Manager::COLOR,
+				'description' => __( 'Empty: the accent colour. Pick one dark enough for a white icon.', 'studiare-extensions' ),
+				'condition'   => array( 'kind' => 'custom' ),
 			)
 		);
 
@@ -239,10 +268,10 @@ final class Contact_Details extends Page_Base {
 	private static function render_entry( array $item ): void {
 		$title = esc_html( $item['label'] );
 		$value = nl2br( esc_html( $item['value'] ) );
-		if ( $item['ltr'] ) {
-			// Numbers and usernames read left to right but still line up with the page.
-			$value = '<bdi dir="ltr">' . $value . '</bdi>';
-		}
+		// Numbers and usernames read left to right but still line up with the page.
+		// Other values (addresses, another network's @name) take the direction of
+		// their own first letter, so "@name" is not shown as "name@".
+		$value = '<bdi' . ( $item['ltr'] ? ' dir="ltr"' : '' ) . '>' . $value . '</bdi>';
 
 		printf( '<span class="stx-cdetails__icon" aria-hidden="true">%s</span><span class="stx-cdetails__body">', $item['glyph'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- bundled SVG.
 		if ( '' !== $item['value'] ) {
@@ -332,7 +361,7 @@ final class Contact_Details extends Page_Base {
 		foreach ( $rows as $row ) {
 			$kind  = isset( $kinds[ $row['kind'] ?? '' ] ) ? $row['kind'] : 'phone';
 			$value = trim( (string) ( $row['value'] ?? '' ) );
-			$url   = in_array( $kind, self::TEXT_KINDS, true )
+			$url   = in_array( $kind, self::LINK_KINDS, true )
 				? (string) ( $row['link']['url'] ?? '' )
 				: Channels::url(
 					$kind,
@@ -352,9 +381,9 @@ final class Contact_Details extends Page_Base {
 				'note'     => (string) ( $row['note'] ?? '' ),
 				'url'      => $url,
 				'external' => '' !== $url && Channels::is_external( $url ),
-				'glyph'    => self::glyph( $kind ),
+				'glyph'    => 'custom' === $kind ? self::custom_glyph( (array) ( $row['icon'] ?? array() ) ) : self::glyph( $kind ),
 				// Phone and email have no brand colour, so they use the accent.
-				'brand'    => $channels[ $kind ]['color'] ?? '',
+				'brand'    => 'custom' === $kind ? (string) ( $row['color'] ?? '' ) : ( $channels[ $kind ]['color'] ?? '' ),
 				'ltr'      => in_array( $kind, self::LTR_KINDS, true ),
 			);
 		}
@@ -392,5 +421,22 @@ final class Contact_Details extends Page_Base {
 		}
 
 		return Channels::glyph( $kind );
+	}
+
+	/**
+	 * Markup of the icon chosen for another network (a library icon or an
+	 * uploaded SVG); a compass when none is chosen.
+	 *
+	 * @param array $icon Icons control value (`value`, `library`).
+	 */
+	private static function custom_glyph( array $icon ): string {
+		if ( empty( $icon['value'] ) ) {
+			return Icon_Library::svg( 'phosphor', 'compass', true );
+		}
+
+		ob_start();
+		Icons_Manager::render_icon( $icon, array( 'aria-hidden' => 'true' ) );
+
+		return (string) ob_get_clean();
 	}
 }

@@ -191,6 +191,9 @@ final class Admin {
 			'disabled'     => __( 'Feature disabled.', 'studiare-extensions' ),
 			'themeDefault' => __( 'Theme default', 'studiare-extensions' ),
 			'resetColor'   => __( 'Use theme default', 'studiare-extensions' ),
+			'chooseImage'  => __( 'Choose an icon image', 'studiare-extensions' ),
+			'useImage'     => __( 'Use this image', 'studiare-extensions' ),
+			'noIcons'      => __( 'No icons match your search.', 'studiare-extensions' ),
 		);
 	}
 

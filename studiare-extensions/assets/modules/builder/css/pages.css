@@ -467,6 +467,30 @@
 	height: 24px;
 }
 
+/* Another network's icon from Elementor's library: a font icon or an inline SVG. */
+.stx-cdetails__icon i {
+	font-size: 22px;
+}
+
+.stx-cdetails .e-font-icon-svg {
+	fill: currentColor;
+}
+
+/* A support button channel's logo image fills its box. */
+.stx-cdetails__icon img {
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	object-fit: cover;
+}
+
+.stx-cdetails__btn img {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
 .has-brand .stx-cdetails__icon {
 	background: var(--stx-brand);
 	color: #ffffff;
@@ -616,6 +640,10 @@
 .stx-cdetails__btn svg {
 	width: 22px;
 	height: 22px;
+}
+
+.stx-cdetails__btn i {
+	font-size: 20px;
 }
 
 .stx-cdetails__btn:hover {

@@ -3,8 +3,10 @@
  * Settings panel for the floating support button.
  *
  * Every control binds to the settings by path (`data-stx-bind`), including
- * the channel rows, which are printed here in the saved order.
- * support-button-admin.js adds the live preview, row summaries and
+ * the built-in channel rows, which are printed here in the saved order.
+ * Rows of the channels the admin makes are cloned from
+ * `[data-stx-custom-template]` by support-button-admin.js (bound with
+ * `data-custom-bind`), which also adds the live preview, row summaries and
  * drag-to-reorder.
  *
  * @var \StudiareExt\Modules\Support_Button\Module $module
@@ -117,7 +119,10 @@ $designs = array(
 					</p>
 
 					<ul class="stx-items" data-stx-channels>
-						<?php foreach ( $settings['order'] as $channel_id ) : ?>
+						<?php
+						// Custom channels in the order are added by the script, from the template below.
+						foreach ( array_intersect( $settings['order'], array_keys( $channels ) ) as $channel_id ) :
+							?>
 							<?php
 							$channel = $channels[ $channel_id ];
 							$bind    = 'channels.' . $channel_id . '.';
@@ -191,7 +196,92 @@ $designs = array(
 							</li>
 						<?php endforeach; ?>
 					</ul>
+					<div class="stx-sb-custom-add">
+						<button type="button" class="stx-btn stx-btn--soft" data-stx-custom-add>
+							<?php echo Icon_Library::svg( 'phosphor', 'plus' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php esc_html_e( 'Make your own channel', 'studiare-extensions' ); ?>
+						</button>
+						<p class="stx-field__help"><?php esc_html_e( 'Any other social network or page, with its own name, link, colour and icon (from the icon library, an image or SVG code).', 'studiare-extensions' ); ?></p>
+					</div>
 				</div>
+
+				<template data-stx-custom-template>
+					<li class="stx-item stx-item--custom" data-channel="__ID__">
+						<div class="stx-item__row">
+							<span class="stx-item__handle" aria-hidden="true" title="<?php esc_attr_e( 'Drag to reorder', 'studiare-extensions' ); ?>"><?php echo Icon_Library::svg( 'phosphor', 'grip' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+							<span class="stx-item__icon stx-channel-icon" data-channel-icon aria-hidden="true"></span>
+							<button type="button" class="stx-item__summary" data-item-toggle aria-expanded="false" aria-controls="stx-sb-__ID__-editor">
+								<span class="stx-item__label" data-channel-label></span>
+								<span class="stx-item__chips">
+									<span class="stx-chip" data-channel-value dir="ltr" hidden></span>
+									<span class="stx-chip stx-chip--warn" data-channel-warning hidden></span>
+								</span>
+							</button>
+							<span class="stx-item__tools">
+								<button type="button" class="stx-move" data-channel-move="up" aria-label="<?php esc_attr_e( 'Move up', 'studiare-extensions' ); ?>">▲</button>
+								<button type="button" class="stx-move" data-channel-move="down" aria-label="<?php esc_attr_e( 'Move down', 'studiare-extensions' ); ?>">▼</button>
+								<label class="stx-switch stx-switch--sm" title="<?php esc_attr_e( 'Show this channel', 'studiare-extensions' ); ?>">
+									<input type="checkbox" data-custom-bind="enabled" aria-label="<?php esc_attr_e( 'Show this channel', 'studiare-extensions' ); ?>">
+									<span class="stx-switch__track" aria-hidden="true"></span>
+								</label>
+								<button type="button" class="stx-icon-btn stx-icon-btn--danger" data-custom-action="delete" aria-label="<?php esc_attr_e( 'Delete', 'studiare-extensions' ); ?>" title="<?php esc_attr_e( 'Delete', 'studiare-extensions' ); ?>"><?php echo Icon_Library::svg( 'phosphor', 'trash' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
+								<button type="button" class="stx-icon-btn stx-item__chevron" data-item-toggle tabindex="-1" aria-hidden="true"><?php echo Icon_Library::svg( 'phosphor', 'chevron-down' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
+							</span>
+						</div>
+
+						<div class="stx-item__editor" id="stx-sb-__ID__-editor" hidden>
+							<div class="stx-fields stx-fields--2">
+								<div class="stx-field">
+									<label class="stx-field__label" for="stx-sb-__ID__-label"><?php esc_html_e( 'Name', 'studiare-extensions' ); ?></label>
+									<input type="text" class="stx-input" id="stx-sb-__ID__-label" data-custom-bind="label" maxlength="30" placeholder="<?php esc_attr_e( 'e.g. Rubino', 'studiare-extensions' ); ?>">
+								</div>
+
+								<div class="stx-field">
+									<label class="stx-field__label" for="stx-sb-__ID__-note"><?php esc_html_e( 'Note under the label', 'studiare-extensions' ); ?></label>
+									<input type="text" class="stx-input" id="stx-sb-__ID__-note" data-custom-bind="note" maxlength="60" placeholder="<?php esc_attr_e( 'e.g. Replies within an hour', 'studiare-extensions' ); ?>">
+								</div>
+
+								<div class="stx-field stx-field--full">
+									<label class="stx-field__label" for="stx-sb-__ID__-value"><?php esc_html_e( 'Link (URL)', 'studiare-extensions' ); ?></label>
+									<input type="text" class="stx-input" id="stx-sb-__ID__-value" data-custom-bind="value" dir="ltr" placeholder="https://" autocomplete="off" spellcheck="false">
+									<p class="stx-field__help"><?php esc_html_e( 'Your page on the network, any link on your site, or tel: / mailto:.', 'studiare-extensions' ); ?></p>
+									<p class="stx-channel-url" data-channel-url hidden></p>
+								</div>
+
+								<div class="stx-field stx-field--color">
+									<span class="stx-field__label"><?php esc_html_e( 'Colour', 'studiare-extensions' ); ?></span>
+									<div class="stx-color" data-custom-color></div>
+									<p class="stx-field__help"><?php esc_html_e( 'The circle behind the icon. Pick a dark enough colour for a white icon.', 'studiare-extensions' ); ?></p>
+								</div>
+
+								<div class="stx-field stx-field--full">
+									<span class="stx-field__label"><?php esc_html_e( 'Icon', 'studiare-extensions' ); ?></span>
+									<div class="stx-segmented">
+										<label class="stx-segmented__option"><input type="radio" name="stx-sb-__ID__-icon-source" value="pack" data-custom-bind="icon_source"><span><?php esc_html_e( 'From pack', 'studiare-extensions' ); ?></span></label>
+										<label class="stx-segmented__option"><input type="radio" name="stx-sb-__ID__-icon-source" value="image" data-custom-bind="icon_source"><span><?php esc_html_e( 'Image', 'studiare-extensions' ); ?></span></label>
+										<label class="stx-segmented__option"><input type="radio" name="stx-sb-__ID__-icon-source" value="svg" data-custom-bind="icon_source"><span>SVG</span></label>
+									</div>
+
+									<div class="stx-icon-choice" data-custom-show-if="pack">
+										<button type="button" class="stx-btn stx-btn--soft" data-custom-action="pick-icon">
+											<span class="stx-icon-choice__preview" data-custom-icon-preview aria-hidden="true"></span>
+											<?php esc_html_e( 'Choose icon', 'studiare-extensions' ); ?>
+										</button>
+									</div>
+									<div class="stx-media-field" data-custom-show-if="image">
+										<input type="url" class="stx-input" data-custom-bind="icon_image" dir="ltr" placeholder="https://" aria-label="<?php esc_attr_e( 'Image URL', 'studiare-extensions' ); ?>">
+										<button type="button" class="stx-btn stx-btn--soft" data-custom-action="pick-image"><?php esc_html_e( 'Media library', 'studiare-extensions' ); ?></button>
+										<p class="stx-field__help"><?php esc_html_e( 'The network\'s logo as a square PNG, WebP or SVG file. It fills the circle, so the colour above only shows around a transparent logo.', 'studiare-extensions' ); ?></p>
+									</div>
+									<div data-custom-show-if="svg">
+										<textarea class="stx-input stx-input--code" rows="4" dir="ltr" data-custom-bind="icon_svg" aria-label="<?php esc_attr_e( 'SVG code', 'studiare-extensions' ); ?>" placeholder="<svg viewBox=&quot;0 0 24 24&quot;>…</svg>"></textarea>
+										<p class="stx-field__help"><?php esc_html_e( 'Use fill="currentColor" so the icon turns white on the colour above. Scripts are removed on save.', 'studiare-extensions' ); ?></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</template>
 			</section>
 
 			<?php /* ----------------------------------------------------- Appearance */ ?>
@@ -403,4 +493,6 @@ $designs = array(
 			</div>
 		</aside>
 	</div>
+
+	<?php require STUDIARE_EXT_DIR . 'includes/Admin/views/icon-picker.php'; ?>
 </div>

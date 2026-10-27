@@ -4,7 +4,7 @@
  * Builds on the admin shell (window.STX) and adds:
  *   - a live phone preview and a mini preview on every style card
  *   - the sortable button list (rows cloned from #stx-item-template)
- *   - the icon picker dialog and media-library picker
+ *   - icons from the shared icon picker and the media library
  *
  * MARKUP CONTRACT: `renderNav()` mirrors views/nav.php and `resolveItems()`
  * mirrors Item_Resolver.php, so the preview matches the site pixel for pixel
@@ -94,38 +94,6 @@
 	const faSolid = ( classes ) => classes.replace( /\bfa[lrd]\b/, 'fas' );
 	const faIcon = ( classes ) => '<i class="' + esc( classes ) + '" aria-hidden="true"></i>';
 
-	const SVG_TAGS = [ 'svg', 'g', 'defs', 'title', 'path', 'circle', 'ellipse', 'rect', 'line', 'polyline', 'polygon', 'clippath', 'lineargradient', 'radialgradient', 'stop' ];
-
-	/**
-	 * Client-side counterpart of Icon_Library::sanitize_svg() so unsaved custom
-	 * SVG is safe to preview. The server sanitizes again on save.
-	 */
-	function sanitizeSvg( markup ) {
-		const doc = new DOMParser().parseFromString( markup || '', 'image/svg+xml' );
-		const svg = doc.documentElement;
-
-		if ( ! svg || svg.nodeName.toLowerCase() !== 'svg' || doc.querySelector( 'parsererror' ) ) {
-			return '';
-		}
-
-		svg.querySelectorAll( '*' ).forEach( ( node ) => {
-			if ( ! SVG_TAGS.includes( node.nodeName.toLowerCase() ) ) {
-				node.remove();
-			}
-		} );
-
-		[ svg, ...svg.querySelectorAll( '*' ) ].forEach( ( node ) => {
-			Array.from( node.attributes ).forEach( ( attribute ) => {
-				const name = attribute.name.toLowerCase();
-				if ( name.indexOf( 'on' ) === 0 || name === 'href' || name === 'xlink:href' || /javascript:/i.test( attribute.value ) ) {
-					node.removeAttribute( attribute.name );
-				}
-			} );
-		} );
-
-		return new XMLSerializer().serializeToString( svg );
-	}
-
 	/**
 	 * Icon markup for an item (mirrors Item_Resolver::icon_html()).
 	 * Returns '' for the active variant when there is none.
@@ -142,7 +110,7 @@
 				break;
 
 			case 'svg': {
-				const svg = active ? '' : sanitizeSvg( item.icon_svg );
+				const svg = active ? '' : STX.sanitizeSvg( item.icon_svg );
 				if ( svg ) {
 					return decorate( svg );
 				}
@@ -506,6 +474,29 @@
 		editingField = false;
 	}
 
+	/** Opens the shared icon picker, drawn in the bar's icon pack. */
+	function pickIcon( id, trigger ) {
+		const state = store.get();
+		const item = getItems()[ findIndex( id ) ] || {};
+
+		STX.iconPicker.open( {
+			icons: catalog.icons,
+			glyph: ( key ) => ( state.icon_pack === FONT_AWESOME ? faIcon( faClass( key, state.fa_weight ) ) : packSvg( state.icon_pack, key, false ) ),
+			selected: item.icon_source === 'pack' ? item.icon : '',
+			trigger,
+			onPick( key ) {
+				const items = STX.clone( getItems() );
+				const picked = items[ findIndex( id ) ];
+				if ( picked ) {
+					picked.icon = key;
+					picked.icon_source = 'pack';
+					commitItems( items, { inPlace: true } );
+					refreshRows();
+				}
+			},
+		} );
+	}
+
 	function updateItem( id, field, value ) {
 		const items = STX.clone( getItems() );
 		const item = items[ findIndex( id ) ];
@@ -733,11 +724,14 @@
 			}
 
 			case 'pick-icon':
-				IconPicker.open( id, button );
+				pickIcon( id, button );
 				break;
 
 			case 'pick-image':
-				pickImage( id );
+				STX.pickImage( ( url ) => {
+					updateItem( id, 'icon_image', url );
+					refreshRows();
+				} );
 				break;
 		}
 	}
@@ -841,105 +835,6 @@
 			}
 		} );
 	}
-
-	/* =====================================================================
-	 * Media library (custom icon image)
-	 * =================================================================== */
-
-	function pickImage( id ) {
-		if ( ! window.wp || ! window.wp.media ) {
-			return;
-		}
-
-		const frame = window.wp.media( {
-			title: i18n.chooseImage,
-			button: { text: i18n.useImage },
-			library: { type: 'image' },
-			multiple: false,
-		} );
-
-		frame.on( 'select', () => {
-			const attachment = frame.state().get( 'selection' ).first().toJSON();
-			updateItem( id, 'icon_image', attachment.url );
-			refreshRows();
-		} );
-
-		frame.open();
-	}
-
-	/* =====================================================================
-	 * Icon picker dialog
-	 * =================================================================== */
-
-	const IconPicker = ( function () {
-		const dialog = document.getElementById( 'stx-icon-picker' );
-		const grid = dialog.querySelector( '[data-stx-icon-grid]' );
-		const search = dialog.querySelector( '[data-stx-icon-search]' );
-		let itemId = null;
-		let returnFocus = null;
-
-		function render() {
-			const state = store.get();
-			const item = getItems()[ findIndex( itemId ) ] || {};
-			const query = search.value.trim().toLowerCase();
-
-			const matches = catalog.icons.filter( ( icon ) => ! query || ( icon.label + ' ' + icon.keywords + ' ' + icon.key ).toLowerCase().includes( query ) );
-
-			grid.innerHTML = matches.length
-				? matches.map( ( icon ) => {
-					const glyph = state.icon_pack === FONT_AWESOME ? faIcon( faClass( icon.key, state.fa_weight ) ) : packSvg( state.icon_pack, icon.key, false );
-					const selected = item.icon_source === 'pack' && item.icon === icon.key;
-					return '<button type="button" class="stx-icon-option" role="option" aria-selected="' + selected + '" data-icon="' + esc( icon.key ) + '">' + glyph + '<span>' + esc( icon.label ) + '</span></button>';
-				} ).join( '' )
-				: '<p class="stx-field__help">' + esc( i18n.noIcons ) + '</p>';
-		}
-
-		function open( id, trigger ) {
-			itemId = id;
-			returnFocus = trigger;
-			search.value = '';
-			render();
-			dialog.showModal();
-			search.focus();
-		}
-
-		function close() {
-			dialog.close();
-		}
-
-		search.addEventListener( 'input', render );
-
-		grid.addEventListener( 'click', ( event ) => {
-			const option = event.target.closest( '[data-icon]' );
-			if ( ! option ) {
-				return;
-			}
-
-			const items = STX.clone( getItems() );
-			const item = items[ findIndex( itemId ) ];
-			if ( item ) {
-				item.icon = option.dataset.icon;
-				item.icon_source = 'pack';
-				commitItems( items, { inPlace: true } );
-				refreshRows();
-			}
-			close();
-		} );
-
-		dialog.addEventListener( 'click', ( event ) => {
-			if ( event.target === dialog || event.target.closest( '[data-stx-dialog-close]' ) ) {
-				close();
-			}
-		} );
-
-		dialog.addEventListener( 'close', () => {
-			if ( returnFocus ) {
-				returnFocus.focus();
-			}
-		} );
-
-		return { open };
-	}() );
 
 	/* =====================================================================
 	 * Boot

@@ -156,9 +156,6 @@ final class Module extends Base_Module {
 			'delete'        => __( 'Delete', 'studiare-extensions' ),
 			/* translators: %d: maximum number of buttons. */
 			'maxReached'    => sprintf( __( 'You can add up to %d buttons.', 'studiare-extensions' ), Schema::MAX_ITEMS ),
-			'chooseImage'   => __( 'Choose an icon image', 'studiare-extensions' ),
-			'useImage'      => __( 'Use this image', 'studiare-extensions' ),
-			'noIcons'       => __( 'No icons match your search.', 'studiare-extensions' ),
 			'noneOption'    => __( '— Select —', 'studiare-extensions' ),
 		);
 	}

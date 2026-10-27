@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.8.3
+Stable tag: 1.8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.8.4 =
+* New: Floating support button: Rubika as a contact channel (username or rubika.ir link).
+* New: Floating support button: make up to 6 channels of your own for any other social network or page, each with its name, link, note, colour and icon (from the icon library, an image from the media library, or SVG code). They are ordered with the others and also show in the Contact details widget.
+* New: Contact details widget: Rubika, and "Other network" items with an icon from Elementor's library (or an uploaded SVG) and a brand colour.
 
 = 1.8.3 =
 * Fix: Add to cart widget: a sold-out product (a full course) no longer shows Studiare's grey box with hard-to-read red text; the «Capacity is full!» message takes the buy button's place and size, in a soft red that follows the brand colours and dark mode.

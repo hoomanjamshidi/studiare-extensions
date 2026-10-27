@@ -8,6 +8,7 @@
  *   - widgets:  tabs, colour fields, range read-outs
  *   - actions:  save (Ctrl/⌘+S), reset, dashboard module switches
  *   - feedback: toasts and a promise-based confirm dialog
+ *   - icons:    icon picker dialog, media-library image picker, SVG cleaning
  */
 ( function () {
 	'use strict';
@@ -178,6 +179,136 @@
 			dialog.querySelector( 'button[value="cancel"]' ).focus();
 		} );
 	}
+
+	/* ---------------------------------------------------------------------
+	 * Icons and media (custom icons in module panels)
+	 * ------------------------------------------------------------------- */
+
+	const SVG_TAGS = [ 'svg', 'g', 'defs', 'title', 'path', 'circle', 'ellipse', 'rect', 'line', 'polyline', 'polygon', 'clippath', 'lineargradient', 'radialgradient', 'stop' ];
+
+	/**
+	 * Client-side counterpart of Icon_Library::sanitize_svg() so unsaved custom
+	 * SVG is safe to preview. The server sanitizes again on save.
+	 *
+	 * @param {string} markup Raw SVG.
+	 * @return {string} Cleaned SVG, or '' when it is not an SVG.
+	 */
+	function sanitizeSvg( markup ) {
+		const doc = new DOMParser().parseFromString( markup || '', 'image/svg+xml' );
+		const svg = doc.documentElement;
+
+		if ( ! svg || svg.nodeName.toLowerCase() !== 'svg' || doc.querySelector( 'parsererror' ) ) {
+			return '';
+		}
+
+		svg.querySelectorAll( '*' ).forEach( ( node ) => {
+			if ( ! SVG_TAGS.includes( node.nodeName.toLowerCase() ) ) {
+				node.remove();
+			}
+		} );
+
+		[ svg, ...svg.querySelectorAll( '*' ) ].forEach( ( node ) => {
+			Array.from( node.attributes ).forEach( ( attribute ) => {
+				const name = attribute.name.toLowerCase();
+				if ( name.indexOf( 'on' ) === 0 || name === 'href' || name === 'xlink:href' || /javascript:/i.test( attribute.value ) ) {
+					node.removeAttribute( attribute.name );
+				}
+			} );
+		} );
+
+		return new XMLSerializer().serializeToString( svg );
+	}
+
+	/**
+	 * Opens the media library for one image. Panels that use it call
+	 * wp_enqueue_media() in their enqueue_admin_assets().
+	 *
+	 * @param {Function} onSelect Receives the chosen image's URL.
+	 */
+	function pickImage( onSelect ) {
+		if ( ! window.wp || ! window.wp.media ) {
+			return;
+		}
+
+		const frame = window.wp.media( {
+			title: i18n.chooseImage,
+			button: { text: i18n.useImage },
+			library: { type: 'image' },
+			multiple: false,
+		} );
+
+		frame.on( 'select', () => onSelect( frame.state().get( 'selection' ).first().toJSON().url ) );
+		frame.open();
+	}
+
+	/**
+	 * The icon picker dialog (Admin/views/icon-picker.php), shared by panels.
+	 * `open()` takes the catalog's icons, how to draw one, the selected key,
+	 * the button to refocus and the callback that receives the chosen key.
+	 */
+	const iconPicker = ( function () {
+		const dialog = document.getElementById( 'stx-icon-picker' );
+		if ( ! dialog ) {
+			return null;
+		}
+
+		const grid = dialog.querySelector( '[data-stx-icon-grid]' );
+		const search = dialog.querySelector( '[data-stx-icon-search]' );
+		let request = null;
+
+		function render() {
+			const query = search.value.trim().toLowerCase();
+			const matches = request.icons.filter( ( icon ) => ! query || ( icon.label + ' ' + icon.keywords + ' ' + icon.key ).toLowerCase().includes( query ) );
+
+			grid.innerHTML = matches.length
+				? matches.map( ( icon ) => (
+					'<button type="button" class="stx-icon-option" role="option" aria-selected="' + ( icon.key === request.selected ) + '" data-icon="' + escapeHtml( icon.key ) + '">' +
+						request.glyph( icon.key ) + '<span>' + escapeHtml( icon.label ) + '</span>' +
+					'</button>'
+				) ).join( '' )
+				: '<p class="stx-field__help">' + escapeHtml( i18n.noIcons ) + '</p>';
+		}
+
+		/**
+		 * @param {Object}   options
+		 * @param {Array}    options.icons    Catalog icons ({ key, label, keywords }).
+		 * @param {Function} options.glyph    Key → icon markup.
+		 * @param {string}   options.selected Selected key ('' for none).
+		 * @param {Element}  options.trigger  Focused again on close.
+		 * @param {Function} options.onPick   Receives the chosen key.
+		 */
+		function open( options ) {
+			request = options;
+			search.value = '';
+			render();
+			dialog.showModal();
+			search.focus();
+		}
+
+		search.addEventListener( 'input', render );
+
+		grid.addEventListener( 'click', ( event ) => {
+			const option = event.target.closest( '[data-icon]' );
+			if ( option ) {
+				dialog.close();
+				request.onPick( option.dataset.icon );
+			}
+		} );
+
+		dialog.addEventListener( 'click', ( event ) => {
+			if ( event.target === dialog || event.target.closest( '[data-stx-dialog-close]' ) ) {
+				dialog.close();
+			}
+		} );
+
+		dialog.addEventListener( 'close', () => {
+			if ( request && request.trigger && request.trigger.isConnected ) {
+				request.trigger.focus();
+			}
+		} );
+
+		return { open };
+	}() );
 
 	/* ---------------------------------------------------------------------
 	 * AJAX
@@ -364,44 +495,62 @@
 
 	const isValidColor = ( value ) => window.CSS && CSS.supports( 'color', value );
 
+	/**
+	 * Turns an empty `.stx-color` host into a swatch, a text field and a
+	 * reset button. Empty means "use the fallback" (usually the theme colour).
+	 *
+	 * @param {Element}  host
+	 * @param {Object}   options
+	 * @param {Function} options.get      Returns the current value.
+	 * @param {Function} options.set      Receives a new value ('' to reset).
+	 * @param {string}   options.fallback Colour shown while the value is empty.
+	 * @return {Function} Redraws the field from get().
+	 */
+	function colorField( host, options ) {
+		const labelNode = host.parentElement.querySelector( '.stx-field__label' );
+		const label = labelNode ? labelNode.textContent.trim() : '';
+
+		host.innerHTML =
+			'<label class="stx-color__swatch"><input type="color" tabindex="-1" aria-hidden="true"></label>' +
+			'<input type="text" class="stx-color__text" spellcheck="false" autocomplete="off" aria-label="' + escapeHtml( label ) + '" placeholder="' + escapeHtml( i18n.themeDefault ) + '">' +
+			'<button type="button" class="stx-icon-btn stx-color__reset" title="' + escapeHtml( i18n.resetColor ) + '" aria-label="' + escapeHtml( i18n.resetColor ) + '">' + RESET_ICON + '</button>';
+
+		const picker = host.querySelector( 'input[type="color"]' );
+		const text = host.querySelector( '.stx-color__text' );
+		const swatch = host.querySelector( '.stx-color__swatch' );
+
+		function render() {
+			const value = options.get() || '';
+			host.classList.toggle( 'has-value', value !== '' );
+			swatch.style.setProperty( '--stx-swatch', value || options.fallback );
+			picker.value = toHex( value || options.fallback );
+			if ( document.activeElement !== text ) {
+				text.value = value;
+			}
+		}
+
+		picker.addEventListener( 'input', () => options.set( picker.value ) );
+		text.addEventListener( 'input', () => {
+			const value = text.value.trim();
+			if ( value === '' || isValidColor( value ) ) {
+				options.set( value );
+			}
+		} );
+		text.addEventListener( 'blur', render );
+		host.querySelector( '.stx-color__reset' ).addEventListener( 'click', () => options.set( '' ) );
+
+		render();
+		return render;
+	}
+
 	function initColorFields( scope ) {
 		scope.querySelectorAll( '[data-stx-color]' ).forEach( ( host ) => {
 			const path = host.dataset.stxColor;
-			const fallback = host.dataset.fallback || '';
-			const labelNode = host.parentElement.querySelector( '.stx-field__label' );
-			const label = labelNode ? labelNode.textContent.trim() : '';
-
-			host.innerHTML =
-				'<label class="stx-color__swatch"><input type="color" tabindex="-1" aria-hidden="true"></label>' +
-				'<input type="text" class="stx-color__text" spellcheck="false" autocomplete="off" aria-label="' + escapeHtml( label ) + '" placeholder="' + escapeHtml( i18n.themeDefault ) + '">' +
-				'<button type="button" class="stx-icon-btn stx-color__reset" title="' + escapeHtml( i18n.resetColor ) + '" aria-label="' + escapeHtml( i18n.resetColor ) + '">' + RESET_ICON + '</button>';
-
-			const picker = host.querySelector( 'input[type="color"]' );
-			const text = host.querySelector( '.stx-color__text' );
-			const swatch = host.querySelector( '.stx-color__swatch' );
-
-			function render() {
-				const value = store.get( path ) || '';
-				host.classList.toggle( 'has-value', value !== '' );
-				swatch.style.setProperty( '--stx-swatch', value || fallback );
-				picker.value = toHex( value || fallback );
-				if ( document.activeElement !== text ) {
-					text.value = value;
-				}
-			}
-
-			picker.addEventListener( 'input', () => store.set( path, picker.value ) );
-			text.addEventListener( 'input', () => {
-				const value = text.value.trim();
-				if ( value === '' || isValidColor( value ) ) {
-					store.set( path, value );
-				}
-			} );
-			text.addEventListener( 'blur', render );
-			host.querySelector( '.stx-color__reset' ).addEventListener( 'click', () => store.set( path, '' ) );
-
-			store.subscribe( render );
-			render();
+			store.subscribe( colorField( host, {
+				get: () => store.get( path ),
+				set: ( value ) => store.set( path, value ),
+				fallback: host.dataset.fallback || '',
+			} ) );
 		} );
 	}
 
@@ -545,5 +694,9 @@
 		toast,
 		confirm: confirmDialog,
 		post,
+		colorField,
+		sanitizeSvg,
+		pickImage,
+		iconPicker,
 	};
 }() );

@@ -3,11 +3,14 @@
  *
  * Fields bind to the store through admin.js (`data-stx-bind`); this adds:
  *   - channel rows: summary chips, the resolved link, open/close, reorder
+ *   - channels the admin makes (`custom`): rows cloned from the template,
+ *     their fields (`data-custom-bind`), icon, colour, add and delete
  *   - the live phone preview and the design cards, rendered with the real
  *     front-end stylesheet
  *
- * Contracts: renderWidget() mirrors views/button.php and channelUrl()
- * mirrors Channels::url(). Change them together.
+ * Contracts: renderWidget() mirrors views/button.php, channelUrl() mirrors
+ * Channels::url() and channelEntry() mirrors Channels::ready(). Change them
+ * together.
  */
 ( function ( $ ) {
 	'use strict';
@@ -22,6 +25,7 @@
 	const esc = STX.escapeHtml;
 	const moduleData = STX.data.moduleData;
 	const channels = moduleData.channels;
+	const customPrefix = moduleData.customPrefix;
 	const i18n = Object.assign( {}, STX.i18n, moduleData.i18n || {} );
 
 	/* =====================================================================
@@ -66,6 +70,16 @@
 		return 'https://wa.me/' + number + ( message.trim() ? '?text=' + encodeURIComponent( message.trim() ) : '' );
 	}
 
+	function linkUrl( value ) {
+		if ( ! value ) {
+			return '';
+		}
+		if ( /^(tel|mailto):\S+$/i.test( value ) ) {
+			return value;
+		}
+		return isUrl( value ) || value.charAt( 0 ) === '/' ? withScheme( value ) : '';
+	}
+
 	function channelUrl( id, channel ) {
 		const value = latinDigits( String( channel.value || '' ).trim() );
 		if ( ! value ) {
@@ -81,6 +95,8 @@
 				return handleUrl( value, 'https://ble.ir/' );
 			case 'eitaa':
 				return handleUrl( value, 'https://eitaa.com/' );
+			case 'rubika':
+				return handleUrl( value, 'https://rubika.ir/' );
 			case 'instagram':
 				return handleUrl( value, 'https://ig.me/m/' );
 			case 'phone': {
@@ -90,7 +106,7 @@
 			case 'email':
 				return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test( value ) ? 'mailto:' + value : '';
 			case 'link':
-				return isUrl( value ) || value.charAt( 0 ) === '/' ? withScheme( value ) : '';
+				return linkUrl( value );
 		}
 
 		return '';
@@ -100,21 +116,63 @@
 		return id === 'link' ? moduleData.icons[ channel.icon ] || moduleData.icons.chat : channels[ id ].glyph;
 	}
 
-	const channelLabel = ( id, channel ) => channel.label || channels[ id ].label;
+	const decorate = ( svg ) => svg.replace( /^<svg\b/i, '<svg aria-hidden="true" focusable="false"' );
 
-	/** Switched-on channels that resolve to a link, in order (mirror of Frontend::channels()). */
-	function readyChannels( state ) {
-		return state.order.filter( ( id ) => channels[ id ] && state.channels[ id ] && state.channels[ id ].enabled ).map( ( id ) => {
+	/** Glyph of a custom channel (mirror of Channels::custom_glyph()). */
+	function customGlyph( channel ) {
+		if ( channel.icon_source === 'image' && channel.icon_image ) {
+			return '<img src="' + esc( channel.icon_image ) + '" alt="">';
+		}
+		if ( channel.icon_source === 'svg' ) {
+			const svg = STX.sanitizeSvg( channel.icon_svg );
+			if ( svg ) {
+				return decorate( svg );
+			}
+		}
+		return moduleData.icons[ channel.icon ] || moduleData.icons.share;
+	}
+
+	const isCustom = ( id ) => id.indexOf( customPrefix ) === 0;
+	const findCustom = ( state, id ) => ( state.custom || [] ).find( ( channel ) => channel.id === id );
+
+	/**
+	 * Saved settings, name, link, glyph and colour of any channel, or null
+	 * when the id is unknown (mirror of Channels::built_in_entry() / custom_entry()).
+	 */
+	function channelEntry( state, id ) {
+		if ( channels[ id ] ) {
 			const channel = state.channels[ id ];
-			return {
-				id,
-				label: channelLabel( id, channel ),
-				note: channel.note || '',
+			return channel ? {
+				channel,
+				label: channel.label || channels[ id ].label,
 				url: channelUrl( id, channel ),
 				glyph: channelGlyph( id, channel ),
-				brand: state.colors.brand ? channels[ id ].color : '',
-			};
-		} ).filter( ( channel ) => channel.url );
+				color: channels[ id ].color,
+			} : null;
+		}
+
+		const channel = findCustom( state, id );
+		return channel ? {
+			channel,
+			label: String( channel.label || '' ).trim(),
+			url: linkUrl( latinDigits( String( channel.value || '' ).trim() ) ),
+			glyph: customGlyph( channel ),
+			color: channel.color,
+		} : null;
+	}
+
+	/** Switched-on channels that resolve to a link, in order (mirror of Channels::ready()). */
+	function readyChannels( state ) {
+		return state.order.map( ( id ) => ( { id, entry: channelEntry( state, id ) } ) )
+			.filter( ( { entry } ) => entry && entry.channel.enabled && entry.url && entry.label )
+			.map( ( { id, entry } ) => ( {
+				id,
+				label: entry.label,
+				note: entry.channel.note || '',
+				url: entry.url,
+				glyph: entry.glyph,
+				brand: state.colors.brand ? entry.color : '',
+			} ) );
 	}
 
 	/* =====================================================================
@@ -301,31 +359,42 @@
 
 	const list = root.querySelector( '[data-stx-channels]' );
 	const noneReady = root.querySelector( '[data-stx-none-ready]' );
+	const customTemplate = root.querySelector( '[data-stx-custom-template]' );
 	const rows = () => Array.from( list.querySelectorAll( '.stx-item[data-channel]' ) );
+	const primaryColor = getComputedStyle( root ).getPropertyValue( '--primary_color' ).trim();
+
+	/** Colour fields of the custom rows, by channel id (they redraw on every change). */
+	const colorRenders = new Map();
 
 	/** Shortens long links for the chip; the full value stays in the field. */
 	const shorten = ( text ) => ( text.length > 28 ? text.slice( 0, 27 ) + '…' : text );
 
 	function refreshRow( row, state ) {
 		const id = row.dataset.channel;
-		const channel = state.channels[ id ];
-		const url = channelUrl( id, channel );
+		const entry = channelEntry( state, id );
+		if ( ! entry ) {
+			return;
+		}
+
+		const channel = entry.channel;
 		const value = String( channel.value || '' ).trim();
 
 		row.classList.toggle( 'is-off', ! channel.enabled );
-		row.querySelector( '[data-channel-icon]' ).innerHTML = channelGlyph( id, channel );
-		row.querySelector( '[data-channel-label]' ).textContent = channelLabel( id, channel );
+		row.querySelector( '[data-channel-icon]' ).innerHTML = entry.glyph;
+		row.querySelector( '[data-channel-label]' ).textContent = entry.label || i18n.newChannel;
 
 		const chip = row.querySelector( '[data-channel-value]' );
-		chip.hidden = ! url;
+		chip.hidden = ! entry.url;
 		chip.textContent = shorten( value );
 
 		let problem = '';
 		if ( ! channel.enabled ) {
 			problem = value ? '' : i18n.off;
+		} else if ( ! entry.label ) {
+			problem = i18n.needsName;
 		} else if ( ! value ) {
 			problem = i18n.notSet;
-		} else if ( ! url ) {
+		} else if ( ! entry.url ) {
 			problem = i18n.invalid;
 		}
 		const warning = row.querySelector( '[data-channel-warning]' );
@@ -334,8 +403,58 @@
 		warning.classList.toggle( 'stx-chip--warn', Boolean( channel.enabled ) );
 
 		const link = row.querySelector( '[data-channel-url]' );
-		link.hidden = ! url;
-		link.innerHTML = url ? esc( i18n.opens ) + ' <a href="' + esc( url ) + '" target="_blank" rel="noopener" dir="ltr">' + esc( url ) + '</a>' : '';
+		link.hidden = ! entry.url;
+		link.innerHTML = entry.url ? esc( i18n.opens ) + ' <a href="' + esc( entry.url ) + '" target="_blank" rel="noopener" dir="ltr">' + esc( entry.url ) + '</a>' : '';
+
+		if ( isCustom( id ) ) {
+			refreshCustomFields( row, channel );
+		}
+	}
+
+	/** Writes a custom channel's values into its row (never into the field being typed in). */
+	function refreshCustomFields( row, channel ) {
+		row.querySelector( '[data-channel-icon]' ).style.setProperty( '--stx-sb-brand', channel.color || 'var(--primary_color)' );
+		row.querySelector( '[data-custom-icon-preview]' ).innerHTML = moduleData.icons[ channel.icon ] || '';
+
+		row.querySelectorAll( '[data-custom-bind]' ).forEach( ( control ) => {
+			const value = channel[ control.dataset.customBind ];
+			if ( control.type === 'checkbox' ) {
+				control.checked = Boolean( value );
+			} else if ( control.type === 'radio' ) {
+				control.checked = control.value === value;
+			} else if ( document.activeElement !== control ) {
+				control.value = value == null ? '' : value;
+			}
+		} );
+
+		row.querySelectorAll( '[data-custom-show-if]' ).forEach( ( node ) => {
+			node.hidden = node.dataset.customShowIf !== channel.icon_source;
+		} );
+
+		colorRenders.get( row.dataset.channel )();
+	}
+
+	/** Adds rows for new custom channels and removes the rows of deleted ones. */
+	function syncCustomRows( state ) {
+		const ids = ( state.custom || [] ).map( ( channel ) => channel.id );
+
+		rows().filter( ( row ) => isCustom( row.dataset.channel ) && ! ids.includes( row.dataset.channel ) ).forEach( ( row ) => {
+			colorRenders.delete( row.dataset.channel );
+			row.remove();
+		} );
+
+		ids.filter( ( id ) => ! colorRenders.has( id ) ).forEach( ( id ) => {
+			const holder = document.createElement( 'template' );
+			holder.innerHTML = customTemplate.innerHTML.replace( /__ID__/g, id );
+			const row = holder.content.firstElementChild;
+
+			colorRenders.set( id, STX.colorField( row.querySelector( '[data-custom-color]' ), {
+				get: () => ( findCustom( store.get(), id ) || {} ).color,
+				set: ( value ) => updateCustom( id, { color: value } ),
+				fallback: primaryColor,
+			} ) );
+			list.appendChild( row );
+		} );
 	}
 
 	/** Puts the rows in the stored order (after reordering, reset or save). */
@@ -353,6 +472,7 @@
 
 	function refreshChannels() {
 		const state = store.get();
+		syncCustomRows( state );
 		syncOrder( state );
 		rows().forEach( ( row ) => refreshRow( row, state ) );
 		noneReady.hidden = readyChannels( state ).length > 0;
@@ -375,6 +495,92 @@
 		store.set( 'order', order );
 	}
 
+	/* =====================================================================
+	 * Custom channels
+	 * =================================================================== */
+
+	/**
+	 * @param {string} id      Custom channel id.
+	 * @param {Object} changes Fields to change.
+	 */
+	function updateCustom( id, changes ) {
+		const custom = STX.clone( store.get( 'custom' ) || [] );
+		const channel = custom.find( ( entry ) => entry.id === id );
+		if ( channel ) {
+			Object.assign( channel, changes );
+			store.set( 'custom', custom );
+		}
+	}
+
+	function addCustom() {
+		const custom = STX.clone( store.get( 'custom' ) || [] );
+		if ( custom.length >= moduleData.maxCustom ) {
+			STX.toast( i18n.maxReached, 'error' );
+			return;
+		}
+
+		const id = customPrefix + Math.random().toString( 36 ).slice( 2, 10 );
+		custom.push( Object.assign( STX.clone( moduleData.customDefaults ), { id } ) );
+		store.set( 'custom', custom );
+		store.set( 'order', store.get( 'order' ).concat( [ id ] ) );
+
+		const row = list.querySelector( '[data-channel="' + id + '"]' );
+		setOpen( row, true );
+		row.scrollIntoView( { behavior: 'smooth', block: 'center' } );
+		row.querySelector( '[data-custom-bind="label"]' ).focus( { preventScroll: true } );
+	}
+
+	async function deleteCustom( id ) {
+		const channel = findCustom( store.get(), id );
+		const confirmed = await STX.confirm( {
+			title: i18n.deleteTitle,
+			message: i18n.deleteMessage.replace( '%s', channel.label || i18n.newChannel ),
+			confirmLabel: i18n.delete,
+			danger: true,
+		} );
+		if ( ! confirmed ) {
+			return;
+		}
+
+		store.set( 'custom', store.get( 'custom' ).filter( ( entry ) => entry.id !== id ) );
+		store.set( 'order', store.get( 'order' ).filter( ( entry ) => entry !== id ) );
+	}
+
+	function customAction( action, id, button ) {
+		switch ( action ) {
+			case 'delete':
+				deleteCustom( id );
+				break;
+
+			case 'pick-icon': {
+				const channel = findCustom( store.get(), id );
+				STX.iconPicker.open( {
+					icons: moduleData.catalog,
+					glyph: ( key ) => moduleData.icons[ key ] || '',
+					selected: channel.icon_source === 'pack' ? channel.icon : '',
+					trigger: button,
+					onPick: ( key ) => updateCustom( id, { icon: key, icon_source: 'pack' } ),
+				} );
+				break;
+			}
+
+			case 'pick-image':
+				STX.pickImage( ( url ) => updateCustom( id, { icon_image: url } ) );
+				break;
+		}
+	}
+
+	/** Field changes in custom rows (built-in rows bind through admin.js). */
+	function onCustomInput( event ) {
+		const control = event.target.closest( '[data-custom-bind]' );
+		if ( ! control || ( control.type === 'radio' && ! control.checked ) ) {
+			return;
+		}
+		updateCustom( control.closest( '.stx-item' ).dataset.channel, {
+			[ control.dataset.customBind ]: control.type === 'checkbox' ? control.checked : control.value,
+		} );
+	}
+
 	function initChannels() {
 		list.addEventListener( 'click', ( event ) => {
 			const row = event.target.closest( '.stx-item' );
@@ -391,8 +597,18 @@
 			if ( mover ) {
 				move( row.dataset.channel, mover.dataset.channelMove === 'up' ? -1 : 1 );
 				mover.focus();
+				return;
+			}
+
+			const action = event.target.closest( '[data-custom-action]' );
+			if ( action ) {
+				customAction( action.dataset.customAction, row.dataset.channel, action );
 			}
 		} );
+
+		list.addEventListener( 'input', onCustomInput );
+		list.addEventListener( 'change', onCustomInput );
+		root.querySelector( '[data-stx-custom-add]' ).addEventListener( 'click', addCustom );
 
 		if ( $ && $.fn.sortable ) {
 			$( list ).sortable( {

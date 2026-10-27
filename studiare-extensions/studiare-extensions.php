@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Studiare Extensions
  * Description:       Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, a floating support button, and a "Save as PDF" button and podcast player for blog posts.
- * Version:           1.8.3
+ * Version:           1.8.4
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Hooman Jamshidi
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'STUDIARE_EXT_VERSION', '1.8.3' );
+define( 'STUDIARE_EXT_VERSION', '1.8.4' );
 define( 'STUDIARE_EXT_FILE', __FILE__ );
 define( 'STUDIARE_EXT_DIR', plugin_dir_path( __FILE__ ) );
 define( 'STUDIARE_EXT_URL', plugin_dir_url( __FILE__ ) );
