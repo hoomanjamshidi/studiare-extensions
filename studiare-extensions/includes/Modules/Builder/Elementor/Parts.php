@@ -137,6 +137,11 @@ final class Parts {
 	/**
 	 * Product description (`the_content`), optionally collapsed.
 	 *
+	 * Other modules can put blocks before and after it through the
+	 * `studiare_ext_product_description_extras` filter, which runs before
+	 * `the_content`. Those blocks stay outside the collapsed box (the audio
+	 * products player would otherwise hide behind "Show more").
+	 *
 	 * @param \WC_Product $product Product (already the global post).
 	 * @param array       $o       `collapse` (bool), `height` (int px).
 	 */
@@ -145,24 +150,32 @@ final class Parts {
 			return '';
 		}
 
+		$extras = array_merge(
+			array(
+				'before' => '',
+				'after'  => '',
+			),
+			(array) apply_filters( 'studiare_ext_product_description_extras', array(), $product )
+		);
+
 		self::$in_content = true;
 		$content          = apply_filters( 'the_content', get_post_field( 'post_content', $product->get_id() ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- core hook.
 		self::$in_content = false;
 
 		if ( '' === trim( wp_strip_all_tags( (string) $content ) ) && false === strpos( (string) $content, '<img' ) ) {
-			return Context::is_editor() ? self::demo_description() : '';
+			return $extras['before'] . ( Context::is_editor() ? self::demo_description() : '' ) . $extras['after'];
 		}
 
 		if ( empty( $o['collapse'] ) ) {
-			return '<div class="stx-desc">' . $content . '</div>';
+			return $extras['before'] . '<div class="stx-desc">' . $content . '</div>' . $extras['after'];
 		}
 
-		return sprintf(
+		return $extras['before'] . sprintf(
 			'<div class="stx-desc is-collapsible" style="--stx-desc-h:%1$dpx" data-stx-collapse><div class="stx-desc__body">%2$s</div><button type="button" class="stx-desc__more" aria-expanded="false">%3$s</button></div>',
 			max( 120, (int) ( $o['height'] ?? 420 ) ),
 			$content,
 			esc_html__( 'Show more', 'studiare-extensions' )
-		);
+		) . $extras['after'];
 	}
 
 	private static function demo_description(): string {

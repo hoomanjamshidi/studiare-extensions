@@ -4,10 +4,13 @@
  * (before or after the text) and loads its assets on those pages only.
  *
  * Added through `the_content`, which Studiare's product page
- * (`woocommerce/sc_templates/studi_content.php`), WooCommerce's description
- * tab and Elementor product templates all run. What a visitor may hear is
- * decided per visitor, and the files themselves are checked again by Stream
- * on every request, so a cached page never opens a paid track.
+ * (`woocommerce/sc_templates/studi_content.php`) and WooCommerce's
+ * description tab run. Studiare+ product templates ask first through
+ * `studiare_ext_product_description_extras`, so the player sits outside
+ * their collapsible description instead of behind "Show more". What a
+ * visitor may hear is decided per visitor, and the files themselves are
+ * checked again by Stream on every request, so a cached page never opens
+ * a paid track.
  *
  * @package StudiareExt
  */
@@ -42,6 +45,7 @@ final class Frontend {
 	public function register(): void {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_filter( 'the_content', array( $this, 'filter_content' ), self::CONTENT_PRIORITY );
+		add_filter( 'studiare_ext_product_description_extras', array( $this, 'description_extras' ), 10, 2 );
 	}
 
 	public function enqueue_assets(): void {
@@ -72,19 +76,47 @@ final class Frontend {
 	 * @param string $content Filtered content.
 	 */
 	public function filter_content( $content ) {
-		if ( $this->printed || doing_filter( 'get_the_excerpt' ) || doing_action( 'wp_head' ) || (int) get_the_ID() !== (int) get_queried_object_id() ) {
+		if ( doing_filter( 'get_the_excerpt' ) || doing_action( 'wp_head' ) || (int) get_the_ID() !== (int) get_queried_object_id() ) {
 			return $content;
 		}
 
-		$product = $this->viewed_product();
-		$player  = $product ? $this->module->player( $product, 'product' ) : '';
+		$player = $this->take_player();
 		if ( '' === $player ) {
 			return $content;
 		}
 
-		$this->printed = true;
+		return $this->at_bottom() ? $content . $player : $player . $content;
+	}
 
-		return 'bottom' === $this->module->settings()['player']['position'] ? $content . $player : $player . $content;
+	/**
+	 * Hands the player to a Studiare+ template's description, to print beside it.
+	 *
+	 * @param array       $extras  `before` / `after` markup.
+	 * @param \WC_Product $product Product whose description is printed.
+	 */
+	public function description_extras( $extras, $product ): array {
+		$extras = (array) $extras;
+		$player = $product instanceof \WC_Product && (int) $product->get_id() === (int) get_queried_object_id() ? $this->take_player() : '';
+		if ( '' !== $player ) {
+			$place            = $this->at_bottom() ? 'after' : 'before';
+			$extras[ $place ] = ( $extras[ $place ] ?? '' ) . $player;
+		}
+
+		return $extras;
+	}
+
+	/** The player of the viewed product, once per request ('' afterwards or without audio). */
+	private function take_player(): string {
+		$product = $this->printed ? null : $this->viewed_product();
+		$player  = $product ? $this->module->player( $product, 'product' ) : '';
+
+		$this->printed = $this->printed || '' !== $player;
+
+		return $player;
+	}
+
+	private function at_bottom(): bool {
+		return 'bottom' === $this->module->settings()['player']['position'];
 	}
 
 	/** The product being viewed, when it has audio. */
