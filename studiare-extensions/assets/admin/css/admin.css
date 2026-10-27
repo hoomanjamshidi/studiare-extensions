@@ -2136,6 +2136,20 @@ fieldset.stx-field > legend {
 }
 
 /* ==========================================================================
+   Audio products
+   ========================================================================== */
+
+/* The real player markup, below the phone's notch and scrolling inside the screen. */
+.stx-ap-stage {
+	height: 100%;
+	box-sizing: border-box;
+	padding: 60px 12px 24px;
+	overflow-y: auto;
+	scrollbar-width: none;
+	font-size: 14px;
+}
+
+/* ==========================================================================
    Support button
    ========================================================================== */
 

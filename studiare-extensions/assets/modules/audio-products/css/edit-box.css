@@ -1,0 +1,122 @@
+/**
+ * Studiare Extensions — "Studiare+ audio" box on the product edit screen.
+ */
+
+.stx-apb__intro {
+	margin: 4px 0 14px;
+	color: #50575e;
+}
+
+.stx-apb__tracks {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stx-apb__track {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	gap: 12px;
+	align-items: start;
+	margin: 0;
+	padding: 12px;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	background: #f6f7f7;
+}
+
+.stx-apb__order {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+	min-width: 28px;
+}
+
+.stx-apb__order .button-link {
+	min-width: 28px;
+	min-height: 24px;
+	color: #50575e;
+	text-decoration: none;
+}
+
+.stx-apb__number {
+	font-weight: 600;
+}
+
+.stx-apb__fields {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px 16px;
+}
+
+.stx-apb__field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.stx-apb__field--wide {
+	flex: 1 1 100%;
+}
+
+.stx-apb__field label,
+.stx-apb__label {
+	font-weight: 600;
+}
+
+.stx-apb__file {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.stx-apb__file .widefat {
+	flex: 1 1 260px;
+	width: auto;
+}
+
+.stx-apb__name {
+	color: #50575e;
+	word-break: break-all;
+}
+
+.stx-apb__short {
+	width: 8em;
+}
+
+.stx-apb__remove {
+	min-height: 30px;
+}
+
+.stx-apb__add {
+	margin: 12px 0 6px;
+}
+
+.stx-apb__options {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 1px solid #e0e0e0;
+}
+
+.stx-apb [hidden] {
+	display: none !important;
+}
+
+@media (max-width: 600px) {
+	.stx-apb__track {
+		grid-template-columns: auto minmax(0, 1fr);
+	}
+
+	.stx-apb__remove {
+		grid-column: 2;
+		justify-self: start;
+	}
+}

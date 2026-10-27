@@ -3,11 +3,11 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.8.4
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, ready-made home, about us and contact us pages, a floating support button, a "Save as PDF" button and podcast player for blog posts, and fixes for known theme problems.
+Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, ready-made home, about us and contact us pages, a floating support button, a "Save as PDF" button and podcast player for blog posts, audio products that buyers listen to on the site, and fixes for known theme problems.
 
 == Description ==
 
@@ -46,6 +46,15 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 * "Save as PDF" on every blog post: a button above the text, a box after it, or both. It opens the browser's print window, where "Save as PDF" is one of the printers, so Persian text, fonts and pictures come out exactly as on the site. Only the article is printed (title, author, date, featured picture, text, a link back to the post and page numbers), also with the browser's own Print command and in dark mode. Authors can hide the button on a single post.
 * Podcast player at the top of posts that have an audio version: choose the file from the media library (or paste a link) in the post editor's "Studiare+ article tools" box, with an episode title, narrator, cover and duration. Waveform timeline, 15 seconds back / 30 forward, playback speed, download, "continue where you stopped" and the phone's lock screen controls. Two looks (soft, following dark mode, or an always dark studio). Nothing is downloaded until play is tapped, and without JavaScript the browser's own player shows.
 
+= Audio products =
+
+* Sell audio (audio books, courses, podcasts) as WooCommerce products: add the tracks in the product editor's "Studiare+ audio" box, and buyers listen on the product page and in a "My audio" tab of their account, not only by downloading.
+* A free preview for every track: its first seconds (MP3; the site sends only that part of the file), a separate short preview file, the whole track free, or none. When a preview ends the player offers the buy button.
+* Files uploaded from the box go to WooCommerce's protected folder and are sent by the site only to visitors allowed to hear them, with seeking; their address never appears on the page. Links to another file host work too.
+* Downloads for buyers can be switched off per product.
+* The audio of a course's Studiare lessons can join the player, with the access set in Studiare (open, logged-in users, buyers, release dates).
+* Playlist player with 15 seconds back / 30 forward, previous/next, playback speed, "continue where you stopped", lock screen controls, dark mode and two looks.
+
 = Theme fixes =
 
 * Repairs known problems of the Studiare theme without editing its files, so the fixes survive theme updates. Every fix has its own switch, and the admin shows whether the theme feature it repairs is in use on the site.
@@ -58,6 +67,9 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.9.0 =
+* New: Audio products. Buyers listen to a product's audio on the site (product page and a "My audio" account tab) with a dedicated player; other visitors hear a free preview of each track (its first seconds, a separate file, or the whole track). Files are sent only to those allowed to hear them. The audio of Studiare lessons can join the player.
 
 = 1.8.4 =
 * New: Floating support button: Rubika as a contact channel (username or rubika.ir link).

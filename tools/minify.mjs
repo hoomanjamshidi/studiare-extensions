@@ -41,6 +41,8 @@ const FILES = [
   'modules/theme-fixes/css/sold-out-button.css',
   'modules/article-tools/css/article-tools.css',
   'modules/article-tools/js/article-tools.js',
+  'modules/audio-products/css/audio-products.css',
+  'modules/audio-products/js/audio-products.js',
 ];
 
 for (const file of FILES) {

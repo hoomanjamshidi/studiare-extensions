@@ -571,6 +571,7 @@ msgid "Buttons"
 msgstr "دکمه‌ها"
 
 #: includes/Modules/Article_Tools/views/admin.php:150
+#: includes/Modules/Audio_Products/views/admin.php:129
 #: includes/Modules/Bottom_Nav/views/admin.php:90
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:368
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:93
@@ -589,6 +590,7 @@ msgid "Behaviour"
 msgstr "رفتار"
 
 #: includes/Modules/Article_Tools/views/admin.php:51
+#: includes/Modules/Audio_Products/views/admin.php:47
 #: includes/Modules/Bottom_Nav/views/admin.php:104
 #: includes/Modules/Builder/views/admin.php:90
 #: includes/Modules/Support_Button/views/admin.php:87
@@ -597,6 +599,7 @@ msgid "Active"
 msgstr "فعال"
 
 #: includes/Modules/Article_Tools/views/admin.php:52
+#: includes/Modules/Audio_Products/views/admin.php:48
 #: includes/Modules/Bottom_Nav/views/admin.php:105
 #: includes/Modules/Builder/views/admin.php:91
 #: includes/Modules/Support_Button/views/admin.php:88
@@ -634,6 +637,7 @@ msgid "Font Awesome weight"
 msgstr "ضخامت Font Awesome"
 
 #: includes/Modules/Article_Tools/views/admin.php:163
+#: includes/Modules/Audio_Products/views/admin.php:142
 #: includes/Modules/Bottom_Nav/views/admin.php:177
 #: includes/Modules/Bottom_Nav/views/admin.php:486
 #: includes/Modules/Support_Button/views/admin.php:465
@@ -973,18 +977,21 @@ msgid "Comma separated IDs, e.g. landing pages that have their own call to actio
 msgstr "شناسه‌ها را با کاما جدا کنید؛ مثلاً صفحات فرودی که دکمه اقدام اختصاصی دارند."
 
 #: includes/Modules/Article_Tools/views/admin.php:159
+#: includes/Modules/Audio_Products/views/admin.php:138
 #: includes/Modules/Bottom_Nav/views/admin.php:482
 #: includes/Modules/Support_Button/views/admin.php:461
 msgid "Live preview"
 msgstr "پیش‌نمایش زنده"
 
 #: includes/Modules/Article_Tools/views/admin.php:162
+#: includes/Modules/Audio_Products/views/admin.php:141
 #: includes/Modules/Bottom_Nav/views/admin.php:485
 #: includes/Modules/Support_Button/views/admin.php:464
 msgid "Preview colour scheme"
 msgstr "حالت رنگی پیش‌نمایش"
 
 #: includes/Modules/Article_Tools/views/admin.php:164
+#: includes/Modules/Audio_Products/views/admin.php:143
 #: includes/Modules/Bottom_Nav/views/admin.php:487
 #: includes/Modules/Builder/Elementor/Integration.php:186
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:37
@@ -1031,6 +1038,7 @@ msgstr "برای جابه‌جایی بکشید"
 msgid "Center"
 msgstr "وسط"
 
+#: includes/Modules/Audio_Products/views/edit-box.php:50
 #: includes/Modules/Bottom_Nav/views/admin.php:533
 #: includes/Modules/Builder/Module.php:407
 #: includes/Modules/Support_Button/views/admin.php:143
@@ -1038,6 +1046,7 @@ msgstr "وسط"
 msgid "Move up"
 msgstr "انتقال به بالا"
 
+#: includes/Modules/Audio_Products/views/edit-box.php:52
 #: includes/Modules/Bottom_Nav/views/admin.php:534
 #: includes/Modules/Builder/Module.php:408
 #: includes/Modules/Support_Button/views/admin.php:144
@@ -1359,6 +1368,7 @@ msgid "Page background"
 msgstr "پس‌زمینه صفحه"
 
 #: includes/Modules/Article_Tools/views/admin.php:154
+#: includes/Modules/Audio_Products/views/admin.php:133
 #: includes/Modules/Builder/Elementor/Integration.php:187
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:36
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:71
@@ -1411,6 +1421,8 @@ msgstr "فاصله از بالا"
 msgid "{percent}% off"
 msgstr "{percent}٪ تخفیف"
 
+#: includes/Modules/Audio_Products/Player.php:82
+#: includes/Modules/Audio_Products/Player.php:130
 #: includes/Modules/Builder/Elementor/Parts.php:45
 #: includes/Modules/Builder/Elementor/Parts.php:282
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:72
@@ -1535,6 +1547,9 @@ msgid "%s lesson"
 msgid_plural "%s lessons"
 msgstr[0] "%s درس"
 
+#: includes/Modules/Audio_Products/views/admin.php:95
+#: includes/Modules/Audio_Products/views/edit-box.php:72
+#: includes/Modules/Audio_Products/views/player.php:88
 #: includes/Modules/Builder/Elementor/Parts.php:478
 msgid "Free preview"
 msgstr "پیش‌نمایش رایگان"
@@ -1558,6 +1573,7 @@ msgid "Teachers are picked in the course's Studiare settings. Their photo, title
 msgstr "مدرس‌ها در تنظیمات استادیار همان دوره انتخاب می‌شوند و عکس، عنوان و بیوگرافی‌شان اینجا نمایش داده می‌شود."
 
 #: includes/Modules/Article_Tools/views/edit-box.php:52
+#: includes/Modules/Audio_Products/views/edit-box.php:68
 #: includes/Modules/Builder/Elementor/Parts.php:601
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:193
 msgid "Duration"
@@ -1693,6 +1709,7 @@ msgstr "حساب کاربری / ورود"
 msgid "Text for guests"
 msgstr "متن برای مهمان‌ها"
 
+#: includes/Modules/Audio_Products/views/player.php:206
 #: includes/Modules/Builder/Elementor/Widgets/Account.php:42
 msgid "Log in"
 msgstr "ورود / ثبت‌نام"
@@ -2215,6 +2232,7 @@ msgstr "همیشه لیست درس‌های خود استادیار (پیش‌ف
 msgid "Curriculum"
 msgstr "سرفصل‌ها"
 
+#: includes/Modules/Audio_Products/views/edit-box.php:56
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:36
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:117
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:96
@@ -3560,6 +3578,7 @@ msgstr "همان انتخاب دسکتاپ در موبایل هم استفاده
 msgid "Custom template"
 msgstr "قالب سفارشی"
 
+#: includes/Modules/Audio_Products/Player.php:115
 #: includes/Modules/Builder/Module.php:380
 #: includes/Modules/Builder/Module.php:418
 msgid "Preview"
@@ -4609,6 +4628,7 @@ msgstr "تلاش‌ها بیش از حد بود. چند دقیقه دیگر دو
 msgid "Details"
 msgstr "جزئیات"
 
+#: includes/Modules/Audio_Products/Player.php:89
 #: includes/Modules/Builder/Elementor/Cards.php:70
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:318
 msgid "Buy"
@@ -4874,6 +4894,7 @@ msgid "Time"
 msgstr "زمان"
 
 #: includes/Modules/Article_Tools/views/admin.php:73
+#: includes/Modules/Audio_Products/views/admin.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:75
 msgid "Place"
 msgstr "مکان"
@@ -5165,7 +5186,7 @@ msgstr "شورت‌کد فرم افزونه خبرنامه‌تان را این�
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:133
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:144
 #: includes/Modules/Builder/Newsletter.php:160
-#: includes/Modules/Support_Button/Channels.php:86
+#: includes/Modules/Support_Button/Channels.php:93
 #: includes/Modules/Support_Button/views/admin.php:41
 msgid "Email"
 msgstr "ایمیل"
@@ -5519,6 +5540,7 @@ msgid "See more"
 msgstr "مشاهده بیشتر"
 
 #: includes/Modules/Article_Tools/views/admin.php:127
+#: includes/Modules/Audio_Products/views/admin.php:81
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:89
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:66
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:94
@@ -6624,64 +6646,64 @@ msgid "Play slides"
 msgstr "پخش اسلایدها"
 
 #: includes/Modules/Builder/Elementor/Post_Parts.php:215
-#: includes/Modules/Support_Button/Channels.php:43
+#: includes/Modules/Support_Button/Channels.php:49
 msgid "Telegram"
 msgstr "تلگرام"
 
-#: includes/Modules/Support_Button/Channels.php:46
+#: includes/Modules/Support_Button/Channels.php:52
 msgid "Username (with or without @), a t.me link, or a phone number with the country code."
 msgstr "نام کاربری (با یا بدون @)، لینک t.me یا شماره موبایل با کد کشور."
 
 #: includes/Modules/Builder/Elementor/Post_Parts.php:216
-#: includes/Modules/Support_Button/Channels.php:49
+#: includes/Modules/Support_Button/Channels.php:55
 msgid "WhatsApp"
 msgstr "واتس‌اپ"
 
-#: includes/Modules/Support_Button/Channels.php:52
+#: includes/Modules/Support_Button/Channels.php:58
 msgid "Mobile number (09… or with the country code) or a wa.me link."
 msgstr "شماره موبایل (به‌صورت ۰۹… یا با کد کشور) یا لینک wa.me."
 
-#: includes/Modules/Support_Button/Channels.php:55
+#: includes/Modules/Support_Button/Channels.php:61
 msgid "Bale"
 msgstr "بله"
 
-#: includes/Modules/Support_Button/Channels.php:58
+#: includes/Modules/Support_Button/Channels.php:64
 msgid "Username (with or without @) or a ble.ir link."
 msgstr "نام کاربری (با یا بدون @) یا لینک ble.ir."
 
-#: includes/Modules/Support_Button/Channels.php:61
+#: includes/Modules/Support_Button/Channels.php:67
 msgid "Eitaa"
 msgstr "ایتا"
 
-#: includes/Modules/Support_Button/Channels.php:64
+#: includes/Modules/Support_Button/Channels.php:70
 msgid "Username (with or without @) or an eitaa.com link."
 msgstr "نام کاربری (با یا بدون @) یا لینک eitaa.com."
 
-#: includes/Modules/Support_Button/Channels.php:74
+#: includes/Modules/Support_Button/Channels.php:81
 msgid "Instagram"
 msgstr "اینستاگرام"
 
-#: includes/Modules/Support_Button/Channels.php:77
+#: includes/Modules/Support_Button/Channels.php:84
 msgid "Username. Visitors land straight in a direct message (ig.me)."
 msgstr "نام کاربری. بازدیدکننده مستقیم به دایرکت شما می‌رود (ig.me)."
 
-#: includes/Modules/Support_Button/Channels.php:80
+#: includes/Modules/Support_Button/Channels.php:87
 msgid "Call us"
 msgstr "تماس تلفنی"
 
-#: includes/Modules/Support_Button/Channels.php:83
+#: includes/Modules/Support_Button/Channels.php:90
 msgid "Any phone number. On phones, tapping it starts the call."
 msgstr "هر شماره تلفنی. در موبایل، با لمس آن تماس برقرار می‌شود."
 
-#: includes/Modules/Support_Button/Channels.php:89
+#: includes/Modules/Support_Button/Channels.php:96
 msgid "An email address."
 msgstr "یک نشانی ایمیل."
 
-#: includes/Modules/Support_Button/Channels.php:92
+#: includes/Modules/Support_Button/Channels.php:99
 msgid "Support page"
 msgstr "صفحه پشتیبانی"
 
-#: includes/Modules/Support_Button/Channels.php:95
+#: includes/Modules/Support_Button/Channels.php:102
 msgid "Any page or link: tickets, FAQ or an online chat service."
 msgstr "هر صفحه یا لینکی: تیکت، پرسش‌های متداول یا سرویس گفتگوی آنلاین."
 
@@ -9232,6 +9254,7 @@ msgid "Choose the podcast cover"
 msgstr "انتخاب کاور پادکست"
 
 #: includes/Modules/Article_Tools/Edit_Box.php:79
+#: includes/Modules/Audio_Products/Edit_Box.php:70
 msgid "Use this file"
 msgstr "استفاده از این فایل"
 
@@ -9250,6 +9273,7 @@ msgstr "ذخیرهٔ PDF"
 
 #: includes/Modules/Article_Tools/Frontend.php:240
 #: includes/Modules/Article_Tools/views/podcast.php:86
+#: includes/Modules/Audio_Products/views/player.php:118
 msgid "Play"
 msgstr "پخش"
 
@@ -9260,6 +9284,8 @@ msgstr "توقف"
 #. translators: %s: playback speed, e.g. 1.5×.
 #: includes/Modules/Article_Tools/Frontend.php:243
 #: includes/Modules/Article_Tools/views/podcast.php:115
+#: includes/Modules/Audio_Products/Frontend.php:123
+#: includes/Modules/Audio_Products/views/player.php:101
 #: includes/Modules/Builder/Assets.php:205
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:570
 #, php-format
@@ -9267,7 +9293,9 @@ msgid "Playback speed: %s"
 msgstr "سرعت پخش: %s"
 
 #. translators: 1: time listened, 2: length of the episode.
+#. translators: 1: time listened, 2: length of the track.
 #: includes/Modules/Article_Tools/Frontend.php:245
+#: includes/Modules/Audio_Products/Frontend.php:125
 #: includes/Modules/Builder/Assets.php:203
 #, php-format
 msgid "%1$s of %2$s"
@@ -9357,14 +9385,17 @@ msgid "Show the podcast player"
 msgstr "نمایش پخش‌کنندهٔ پادکست"
 
 #: includes/Modules/Article_Tools/views/admin.php:119
+#: includes/Modules/Audio_Products/views/admin.php:78
 msgid "Text above the title"
 msgstr "متن بالای عنوان"
 
 #: includes/Modules/Article_Tools/views/admin.php:129
+#: includes/Modules/Audio_Products/views/admin.php:83
 msgid "Soft (follows dark mode)"
 msgstr "ملایم (هماهنگ با حالت تیره)"
 
 #: includes/Modules/Article_Tools/views/admin.php:130
+#: includes/Modules/Audio_Products/views/admin.php:84
 msgid "Studio (always dark)"
 msgstr "استودیو (همیشه تیره)"
 
@@ -9373,22 +9404,27 @@ msgid "Download button"
 msgstr "دکمهٔ دانلود"
 
 #: includes/Modules/Article_Tools/views/admin.php:135
+#: includes/Modules/Audio_Products/views/admin.php:87
 msgid "Playback speed button"
 msgstr "دکمهٔ سرعت پخش"
 
 #: includes/Modules/Article_Tools/views/admin.php:138
+#: includes/Modules/Audio_Products/views/admin.php:88
 msgid "Continue where the listener stopped"
 msgstr "ادامه از جایی که شنونده متوقف کرده بود"
 
 #: includes/Modules/Article_Tools/views/admin.php:140
+#: includes/Modules/Audio_Products/views/admin.php:88
 msgid "Remembered in the visitor's own browser; nothing is sent to the site."
 msgstr "در مرورگر خود بازدیدکننده نگه داشته می‌شود و چیزی به سایت فرستاده نمی‌شود."
 
 #: includes/Modules/Article_Tools/views/admin.php:151
+#: includes/Modules/Audio_Products/views/admin.php:130
 msgid "Leave it empty to follow your Studiare primary colour. The text on the buttons switches between white and black for contrast."
 msgstr "برای پیروی از رنگ اصلی قالب استادیار خالی بگذارید. رنگ متن روی دکمه‌ها برای خوانایی، خودکار سفید یا مشکی می‌شود."
 
 #: includes/Modules/Article_Tools/views/admin.php:201
+#: includes/Modules/Audio_Products/views/admin.php:161
 msgid "The preview player does not play. On your site the Studiare font is used."
 msgstr "پخش‌کنندهٔ پیش‌نمایش صدا پخش نمی‌کند. در سایت شما فونت قالب استادیار به کار می‌رود."
 
@@ -9406,6 +9442,7 @@ msgstr "انتخاب از کتابخانهٔ رسانه"
 
 #: includes/Modules/Article_Tools/views/edit-box.php:35
 #: includes/Modules/Article_Tools/views/edit-box.php:63
+#: includes/Modules/Audio_Products/views/edit-box.php:92
 msgid "Remove"
 msgstr "حذف"
 
@@ -9458,19 +9495,23 @@ msgid "Save it as a PDF to read offline, share or print."
 msgstr "آن را به‌صورت PDF ذخیره کنید تا بدون اینترنت بخوانید، به اشتراک بگذارید یا چاپ کنید."
 
 #. translators: %s: length of the episode in minutes.
+#. translators: %s: total length in minutes.
 #: includes/Modules/Article_Tools/views/podcast.php:79
+#: includes/Modules/Audio_Products/views/player.php:81
 #, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
 msgstr[0] "%s دقیقه"
 
 #: includes/Modules/Article_Tools/views/podcast.php:94
+#: includes/Modules/Audio_Products/views/player.php:107
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:554
 msgid "Playback position"
 msgstr "موقعیت پخش"
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:104
+#: includes/Modules/Audio_Products/views/player.php:117
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:564
 #, php-format
 msgid "Back %s seconds"
@@ -9478,6 +9519,7 @@ msgstr "%s ثانیه به عقب"
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:109
+#: includes/Modules/Audio_Products/views/player.php:123
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:567
 #, php-format
 msgid "Forward %s seconds"
@@ -9622,14 +9664,19 @@ msgstr "فلش"
 msgid "No post has a podcast yet. Add one in the \"Podcast\" box of the post editor."
 msgstr "هنوز هیچ مقاله‌ای پادکست ندارد. در کادر «پادکست» ویرایشگر نوشته یکی اضافه کنید."
 
+#. translators: %s: track title.
 #. translators: %s: episode title.
+#: includes/Modules/Audio_Products/Frontend.php:119
+#: includes/Modules/Audio_Products/views/player.php:161
 #: includes/Modules/Builder/Assets.php:199
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:739
 #, php-format
 msgid "Play: %s"
 msgstr "پخش: %s"
 
+#. translators: %s: track title.
 #. translators: %s: episode title.
+#: includes/Modules/Audio_Products/Frontend.php:121
 #: includes/Modules/Builder/Assets.php:201
 #, php-format
 msgid "Pause: %s"
@@ -9765,11 +9812,11 @@ msgstr "رنگ برند"
 msgid "Empty: the accent colour. Pick one dark enough for a white icon."
 msgstr "خالی: رنگ اصلی سایت. رنگی انتخاب کنید که آن‌قدر تیره باشد که آیکون سفید روی آن خوانا بماند."
 
-#: includes/Modules/Support_Button/Channels.php:67
+#: includes/Modules/Support_Button/Channels.php:73
 msgid "Rubika"
 msgstr "روبیکا"
 
-#: includes/Modules/Support_Button/Channels.php:71
+#: includes/Modules/Support_Button/Channels.php:78
 msgid "Username (with or without @) or a rubika.ir link."
 msgstr "نام کاربری (با یا بدون @) یا لینک rubika.ir."
 
@@ -9836,3 +9883,272 @@ msgstr "کد SVG"
 #: includes/Modules/Support_Button/views/admin.php:278
 msgid "Use fill=\"currentColor\" so the icon turns white on the colour above. Scripts are removed on save."
 msgstr "از fill=\"currentColor\" استفاده کنید تا آیکون روی رنگ بالا سفید شود. اسکریپت‌ها هنگام ذخیره حذف می‌شوند."
+
+#: includes/Modules/Audio_Products/Edit_Box.php:42
+msgid "Studiare+ audio"
+msgstr "صوت استادیار+"
+
+#: includes/Modules/Audio_Products/Edit_Box.php:68
+msgid "Choose the track file"
+msgstr "انتخاب فایل قسمت"
+
+#: includes/Modules/Audio_Products/Edit_Box.php:69
+msgid "Choose the preview file"
+msgstr "انتخاب فایل پیش‌نمایش"
+
+#: includes/Modules/Audio_Products/Edit_Box.php:71
+msgid "Remove this track?"
+msgstr "این قسمت حذف شود؟"
+
+#: includes/Modules/Audio_Products/Module.php:29
+msgid "Audio products"
+msgstr "محصولات صوتی"
+
+#: includes/Modules/Audio_Products/Module.php:33
+msgid "Buyers listen to audio products on the site with a dedicated player, and visitors hear a free preview before buying."
+msgstr "خریداران محصولات صوتی را با پلیر اختصاصی روی خود سایت گوش می‌دهند و بازدیدکنندگان پیش از خرید، پیش‌نمایش رایگان را می‌شنوند."
+
+#: includes/Modules/Audio_Products/My_Account.php:103
+#: includes/Modules/Audio_Products/Schema.php:45
+msgid "My audio"
+msgstr "صوت‌های من"
+
+#: includes/Modules/Audio_Products/Player.php:77
+msgid "The habits of great learners (audio book)"
+msgstr "عادت‌های یادگیرندگان موفق (کتاب صوتی)"
+
+#: includes/Modules/Audio_Products/Player.php:82
+msgid "Introduction"
+msgstr "مقدمه"
+
+#: includes/Modules/Audio_Products/Player.php:83
+msgid "Chapter one: attention"
+msgstr "فصل اول: تمرکز"
+
+#: includes/Modules/Audio_Products/Player.php:84
+msgid "Chapter two: memory"
+msgstr "فصل دوم: حافظه"
+
+#: includes/Modules/Audio_Products/Player.php:84
+#: includes/Modules/Audio_Products/Player.php:127
+msgid "After purchase"
+msgstr "پس از خرید"
+
+#: includes/Modules/Audio_Products/Player.php:120
+msgid "Log in to listen"
+msgstr "برای شنیدن وارد شوید"
+
+#. translators: %s: date the lesson opens.
+#: includes/Modules/Audio_Products/Player.php:124
+#, php-format
+msgid "Opens on %s"
+msgstr "باز می‌شود در %s"
+
+#. translators: %s: length of the free preview, e.g. 1:00.
+#: includes/Modules/Audio_Products/Player.php:138
+#, php-format
+msgid "Preview %s"
+msgstr "پیش‌نمایش %s"
+
+#: includes/Modules/Audio_Products/Playlist.php:181
+msgid "Untitled track"
+msgstr "قسمت بدون عنوان"
+
+#: includes/Modules/Audio_Products/Schema.php:33
+#: includes/Modules/Audio_Products/views/player.php:30
+msgid "Audio files of this product"
+msgstr "فایل‌های صوتی این محصول"
+
+#: includes/Modules/Audio_Products/Stream.php:239
+msgid "You cannot listen to this file."
+msgstr "شما اجازه شنیدن این فایل را ندارید."
+
+#: includes/Modules/Audio_Products/views/account.php:20
+msgid "You have no audio products yet."
+msgstr "هنوز محصول صوتی‌ای ندارید."
+
+#: includes/Modules/Audio_Products/views/account.php:21
+msgid "Browse products"
+msgstr "دیدن محصولات"
+
+#: includes/Modules/Audio_Products/views/admin.php:50
+msgid "Enable audio products"
+msgstr "فعال‌سازی محصولات صوتی"
+
+#: includes/Modules/Audio_Products/views/admin.php:60
+msgid "Audio products are WooCommerce products. Activate WooCommerce to use them."
+msgstr "محصولات صوتی، محصولات ووکامرس هستند. برای استفاده از آن‌ها ووکامرس را فعال کنید."
+
+#: includes/Modules/Audio_Products/views/admin.php:65
+msgid "Player on the product page"
+msgstr "پلیر در صفحه محصول"
+
+#: includes/Modules/Audio_Products/views/admin.php:66
+msgid "Open a product in the editor and add its tracks in the \"Studiare+ audio\" box. The player shows in the product description; products without audio stay as they are. Files are sent by the site only to visitors allowed to hear them, so their address never appears on the page."
+msgstr "محصول را در ویرایشگر باز کنید و قسمت‌هایش را در کادر «صوت استادیار+» اضافه کنید. پلیر در توضیحات محصول نمایش داده می‌شود و محصولات بدون صوت تغییری نمی‌کنند. سایت فایل‌ها را فقط برای کسانی می‌فرستد که اجازه شنیدنشان را دارند، بنابراین نشانی فایل‌ها هیچ‌وقت در صفحه دیده نمی‌شود."
+
+#: includes/Modules/Audio_Products/views/admin.php:74
+msgid "Above the description"
+msgstr "بالای توضیحات"
+
+#: includes/Modules/Audio_Products/views/admin.php:75
+msgid "After the description"
+msgstr "پس از توضیحات"
+
+#: includes/Modules/Audio_Products/views/admin.php:96
+msgid "Each track chooses its own preview in the product box: its first seconds, a separate short file, the whole track, or none. Visitors who have not bought the product never receive more than the preview."
+msgstr "پیش‌نمایش هر قسمت در کادر محصول انتخاب می‌شود: چند ثانیه اول، یک فایل کوتاه جدا، کل قسمت یا هیچ. کسی که محصول را نخریده، هیچ‌وقت بیشتر از پیش‌نمایش دریافت نمی‌کند."
+
+#: includes/Modules/Audio_Products/views/admin.php:100
+msgid "Default preview length"
+msgstr "مدت پیش‌فرض پیش‌نمایش"
+
+#: includes/Modules/Audio_Products/views/admin.php:100
+msgid "s"
+msgstr "ثانیه"
+
+#: includes/Modules/Audio_Products/views/admin.php:100
+msgid "Used for new tracks and for the private audio of Studiare lessons."
+msgstr "برای قسمت‌های جدید و صوت درس‌های خصوصی استادیار به کار می‌رود."
+
+#: includes/Modules/Audio_Products/views/admin.php:101
+msgid "Preview of private Studiare lessons"
+msgstr "پیش‌نمایش درس‌های خصوصی استادیار"
+
+#: includes/Modules/Audio_Products/views/admin.php:101
+msgid "Lesson audio added to a player plays its first seconds for visitors who have not bought the course (MP3 files on this site only)."
+msgstr "صوت درس‌هایی که به پلیر اضافه شده‌اند، برای کسانی که دوره را نخریده‌اند چند ثانیه اول را پخش می‌کند (فقط فایل‌های MP3 روی همین سایت)."
+
+#: includes/Modules/Audio_Products/views/admin.php:102
+msgid "Buy button in the player"
+msgstr "دکمه خرید در پلیر"
+
+#: includes/Modules/Audio_Products/views/admin.php:102
+msgid "Shown under the list and when a preview ends."
+msgstr "زیر فهرست و هنگام پایان پیش‌نمایش نمایش داده می‌شود."
+
+#: includes/Modules/Audio_Products/views/admin.php:109
+msgid "Customer account"
+msgstr "حساب کاربری مشتری"
+
+#: includes/Modules/Audio_Products/views/admin.php:110
+msgid "A tab in the WooCommerce account page with the player of every audio product the customer bought. It only shows to customers who own one."
+msgstr "زبانه‌ای در صفحه حساب کاربری ووکامرس با پلیر همه محصولات صوتی‌ای که مشتری خریده است. فقط برای مشتریانی دیده می‌شود که دست‌کم یکی دارند."
+
+#: includes/Modules/Audio_Products/views/admin.php:114
+msgid "Show the tab"
+msgstr "نمایش زبانه"
+
+#: includes/Modules/Audio_Products/views/admin.php:117
+msgid "Tab name"
+msgstr "نام زبانه"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:23
+msgid "The first seconds (MP3 files)"
+msgstr "چند ثانیه اول (فایل‌های MP3)"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:24
+msgid "A separate preview file"
+msgstr "یک فایل پیش‌نمایش جدا"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:25
+msgid "The whole track is free"
+msgstr "کل قسمت رایگان است"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:26
+msgid "No preview: buyers only"
+msgstr "بدون پیش‌نمایش: فقط خریداران"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:60
+msgid "Audio file"
+msgstr "فایل صوتی"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:64
+#: includes/Modules/Audio_Products/views/edit-box.php:88
+msgid "Upload or choose"
+msgstr "بارگذاری یا انتخاب"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:80
+msgid "Preview length (seconds)"
+msgstr "مدت پیش‌نمایش (ثانیه)"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:84
+msgid "Preview file"
+msgstr "فایل پیش‌نمایش"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:87
+msgid "None chosen"
+msgstr "انتخاب نشده"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:98
+msgid "Add the audio of this product. Buyers listen to it on the product page and in \"My audio\" of their account; other visitors hear the free preview you choose for each track. Files uploaded here go to WooCommerce's protected folder, so their address never reaches the page."
+msgstr "صوت این محصول را اضافه کنید. خریداران آن را در صفحه محصول و در «صوت‌های من» حساب کاربری‌شان گوش می‌دهند و دیگران پیش‌نمایش رایگانی را می‌شنوند که برای هر قسمت انتخاب می‌کنید. فایل‌هایی که اینجا بارگذاری می‌شوند به پوشه محافظت‌شده ووکامرس می‌روند، پس نشانی‌شان به صفحه نمی‌رسد."
+
+#: includes/Modules/Audio_Products/views/edit-box.php:109
+msgid "Add a track"
+msgstr "افزودن قسمت"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:111
+msgid "\"The first seconds\" only works with MP3 files on this site: the server sends just that part of the file. For M4A files or links to another host, upload a short preview file instead."
+msgstr "«چند ثانیه اول» فقط با فایل‌های MP3 روی همین سایت کار می‌کند: سرور فقط همان بخش فایل را می‌فرستد. برای فایل‌های M4A یا لینک‌های هاست دیگر، یک فایل پیش‌نمایش کوتاه بارگذاری کنید."
+
+#: includes/Modules/Audio_Products/views/edit-box.php:116
+msgid "Buyers may also download the files"
+msgstr "خریداران بتوانند فایل‌ها را دانلود هم کنند"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:121
+msgid "Add the audio of this course's Studiare lessons to the player"
+msgstr "صوت درس‌های استادیار این دوره هم به پلیر اضافه شود"
+
+#: includes/Modules/Audio_Products/views/edit-box.php:123
+msgid "Lessons keep the access set in Studiare: open lessons play for everyone, \"logged-in users\" lessons after logging in, and private lessons for buyers (with the free preview from the Studiare+ settings)."
+msgstr "درس‌ها همان دسترسی تنظیم‌شده در استادیار را دارند: درس‌های آزاد برای همه، درس‌های «کاربران واردشده» پس از ورود و درس‌های خصوصی برای خریداران (با پیش‌نمایش رایگان تنظیمات استادیار+) پخش می‌شوند."
+
+#. translators: %s: number of audio tracks.
+#: includes/Modules/Audio_Products/views/player.php:78
+#, php-format
+msgid "%s track"
+msgid_plural "%s tracks"
+msgstr[0] "%s قسمت"
+
+#: includes/Modules/Audio_Products/views/player.php:86
+msgid "Full access"
+msgstr "دسترسی کامل"
+
+#: includes/Modules/Audio_Products/views/player.php:115
+msgid "Previous track"
+msgstr "قسمت قبلی"
+
+#: includes/Modules/Audio_Products/views/player.php:124
+msgid "Next track"
+msgstr "قسمت بعدی"
+
+#: includes/Modules/Audio_Products/views/player.php:128
+msgid "The free preview of this track has ended."
+msgstr "پیش‌نمایش رایگان این قسمت تمام شد."
+
+#: includes/Modules/Audio_Products/views/player.php:133
+msgid "The audio could not be played. Check your connection and try again."
+msgstr "پخش صوت ممکن نشد. اتصال اینترنت را بررسی کنید و دوباره امتحان کنید."
+
+#. translators: %s: track title.
+#: includes/Modules/Audio_Products/views/player.php:181
+#, php-format
+msgid "Download: %s"
+msgstr "دانلود: %s"
+
+#: includes/Modules/Audio_Products/views/player.php:196
+msgid "Buy this product to hear every track in full, here on the site."
+msgstr "با خرید این محصول، همه قسمت‌ها را کامل و همین‌جا روی سایت گوش دهید."
+
+#: includes/Modules/Audio_Products/views/player.php:197
+msgid "Already bought it? Log in to listen."
+msgstr "قبلاً خریده‌اید؟ برای شنیدن وارد شوید."
+
+#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:35
+msgid "Sold-out course button"
+msgstr "دکمه دوره تکمیل‌ظرفیت"
+
+#: includes/Modules/Theme_Fixes/Sold_Out_Button.php:39
+msgid "When a course is full, the theme replaces the buy button with a grey box and small red \"Capacity is full!\" text that is hard to read. This fix shows it as a disabled button the size of the buy button, with a soft red tint and readable text."
+msgstr "وقتی ظرفیت دوره تکمیل می‌شود، قالب به‌جای دکمه خرید یک کادر خاکستری با متن قرمز و ریز «ظرفیت تکمیل شد!» نشان می‌دهد که خواندنش سخت است. این اصلاح آن را به شکل یک دکمه غیرفعال هم‌اندازه دکمه خرید، با رنگ قرمز ملایم و متن خوانا نشان می‌دهد."

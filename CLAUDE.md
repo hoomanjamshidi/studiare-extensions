@@ -64,6 +64,19 @@ studiare-extensions/                 ← the plugin (zip this folder)
 │   │   ├── Edit_Box.php             post edit screen box (podcast fields, `_stx_pdf_off`), media pickers
 │   │   ├── Frontend.php             `the_content` filter (priority 20): print head/foot, PDF button, player; assets on those posts only
 │   │   └── views/                   podcast.php, pdf.php, print-head.php, print-foot.php, edit-box.php, admin.php
+│   ├── Modules/Audio_Products/      WooCommerce products buyers listen to on the site, free preview for others
+│   │   ├── Module.php               module definition, colour tokens, player() (markup for one product)
+│   │   ├── Schema.php               defaults + sanitizer schema (player, preview, account, colors)
+│   │   ├── Album.php                per-product meta `_stx_audio` (download, lessons, tracks with preview), product_ids()
+│   │   ├── Files.php                where a file lives (local path / other host), MP3 sniffing, ID3 size
+│   │   ├── Lessons.php              read-only bridge to Studiare lessons (`lessons_group`, `lesson_data[0]`)
+│   │   ├── Playlist.php             the access rules: each track's state (full/preview/locked) for one visitor
+│   │   ├── Player.php               view model for views/player.php (notes, stream URLs, buy/login), sample()
+│   │   ├── Stream.php               `/?stx_audio=<product>&track=<key>&part=play|download`: checked, Range, cut previews
+│   │   ├── Frontend.php             `the_content` on product pages (priority 20), assets there only
+│   │   ├── My_Account.php           "My audio" account endpoint `stx-audio` (WooCommerce query var)
+│   │   ├── Edit_Box.php             product edit box (tracks, previews, download/lessons switches)
+│   │   └── views/                   player.php, account.php, edit-box.php, admin.php
 │   ├── Modules/Theme_Fixes/         repairs for known Studiare bugs, one switch each (`fixes.<id>`)
 │   │   ├── Module.php               module definition; boot() boots each switched-on fix
 │   │   ├── Schema.php               defaults (every fix on) + sanitizer schema
@@ -98,6 +111,8 @@ studiare-extensions/                 ← the plugin (zip this folder)
 │   ├── modules/support-button/      support-button.css (front and admin preview), support-button.js (front), support-button-admin.js
 │   ├── modules/theme-fixes/         otp-digits.js (front, loads while Studiare's OTP option is on),
 │   │                                sold-out-button.css (inline on product pages), css/sold-out-button.css (printed inline on product pages)
+│   ├── modules/audio-products/      audio-products.css/js (front player; css also in the admin preview),
+│   │                                audio-products-admin.js, edit-box.css/js (product editor)
 │   ├── modules/article-tools/       article-tools.css/js (front: player, PDF button, print stylesheet; admin preview),
 │   │                                article-tools-admin.js, edit-box.css/js (post editor)
 │   └── modules/builder/             tokens.css (derived tokens + dark mode, printed inline), builder.css (widgets, layers),
@@ -145,6 +160,15 @@ phpcs.xml.dist                       WordPress-Extra + PHPCompatibilityWP (7.4+)
 - **Dark mode on paper.** Studiare's dark rules are often `!important` with high specificity, but they read `--dark_primary_color`, `--dark_secondary_color` and `--dark_light_color`: print flips those to white/#111 and sets `color-scheme: light` (the theme's `color-scheme: dark` paints the page margins). The screen stays dark; never remove `scdarkcolors` for printing.
 - **Podcast.** `_stx_podcast` (Podcast::fields()): `audio_id` (a media library audio file; its current URL is used) or `url`, `title` (empty: post title), `speaker`, `cover_id` (empty: featured image), `duration` in seconds (typed as 12:34 with Latin or Persian digits; empty: the attachment's `length`). The player markup is fully printed by PHP (no layout shift); the JS creates `new Audio()` on the first tap, so nothing downloads before. Without JS a `<noscript>` hides the controls and shows `<audio controls>`. The timeline is `dir="ltr"` in every language (like a tape); progress is a `clip-path` on a second copy of the waveform, never a width. Resume position `stxPodcast:<id>` and speed `stxPodcastSpeed` live in localStorage. Seeking needs a server that answers Range requests (PHP's built-in server does not: use a router for tests).
 - **Colours.** `--stx-at-accent` (admin colour, empty = `--primary_color`) and `--stx-at-on-accent` from `Core\Color::ink()` (white or #111 by contrast; `ink()` in article-tools-admin.js mirrors it). Accent text uses `--stx-at-a-text` (accent mixed with black on light, with white on dark). Components lay out by their own width (container queries), not the screen's.
+
+## Audio products: key contracts
+
+- **One place for access.** `Playlist` decides each track's state for a visitor: `full` (bought via `Theme_Bridge::user_has_course()`, can edit the product, or a free track), `preview` (first seconds or a separate preview file) or `locked` (`buy`, `login`, `date`). The player is printed from it and `Stream` asks it again on every request, so a cached page never opens a paid file. Downloads are for owners only (`download && owned`), switchable per product.
+- **Files never reach the page.** Every track plays through `Stream::url()`. Local files are sent by PHP with one HTTP Range (seeking works on any server); other hosts get a 302 after the check. The edit box uploads with WooCommerce's `type=downloadable_product`, so new files land in `uploads/woocommerce_uploads` (Apache denies it via WooCommerce's .htaccess; nginx needs its own rule, as for WooCommerce downloads).
+- **Cut previews.** "First N seconds" is served as the ID3 tag plus `size × (N+2) / duration` bytes, so only local MP3s of known length qualify: `Files::is_mp3()` reads the file's first bytes, because WordPress gives `.m4a` the `audio/mpeg` type. Anything else falls back to `locked`. The script also stops at `data-limit` and shows the buy prompt (`[data-ap-gate]`).
+- **Studiare lessons.** With `lessons` on, `Lessons::audio()` adds lessons with `lesson_audio` as keys `l<ID>`, mirroring `inc/studi_lessons.php`: privacy first (`''` all, `lesson_free_users` login, `on`/`lesson_protected` buyers), then `lesson_available_date` and `lesson_available_after_days` (via Studiare's `studi_get_user_last_purchase_time_cached()` when it exists). Private MP3 lessons get the default clip as a preview when `preview.lessons` is on.
+- **Track ids** are `t` + 8 characters, made once in `Album::clean_tracks()` and kept, so resume keys (`stxAudio:<product>:<track>`) survive reordering. Speed is shared with the podcast players (`stxPodcastSpeed`) and they pause each other via `stx:podcast-play` (`source: 'audio-product'`).
+- **Markup.** Only `<div>/<span>/<ol>` inside the description. The deck's controls are `dir="ltr"` like the podcast players; progress is `scaleX` on `.stx-ap__fill`. Without JS the deck is hidden and each playable track gets a `<noscript><audio controls>`.
 
 ## Theme fixes: key contracts
 
