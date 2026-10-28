@@ -84,6 +84,9 @@ foreach ( $player['tracks'] as $track ) {
 			</span>
 			<?php if ( $player['owned'] ) : ?>
 				<span class="stx-ap__status stx-ap__status--owned"><?php echo $icon( 'check' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- bundled SVG. ?><span><?php esc_html_e( 'Full access', 'studiare-extensions' ); ?></span></span>
+			<?php elseif ( $player['manager'] ) : ?>
+				<?php // Store managers hear everything to check the files; say so, so it is not taken for a leak. ?>
+				<span class="stx-ap__status"><?php echo $icon( 'user' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- bundled SVG. ?><span><?php esc_html_e( 'Store manager view: every track is open to you', 'studiare-extensions' ); ?></span></span>
 			<?php elseif ( $first ) : ?>
 				<span class="stx-ap__status"><?php echo $icon( 'play' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- bundled SVG. ?><span><?php esc_html_e( 'Free preview', 'studiare-extensions' ); ?></span></span>
 			<?php endif; ?>
@@ -187,7 +190,7 @@ foreach ( $player['tracks'] as $track ) {
 			<?php endforeach; ?>
 		</ol>
 
-		<?php if ( $player['buy'] || ( '' !== $player['login'] && ! $player['owned'] ) ) : ?>
+		<?php if ( $player['buy'] || ( '' !== $player['login'] && ! $player['owned'] && ! $player['manager'] ) ) : ?>
 			<div class="stx-ap__foot">
 				<span class="stx-ap__foot-text">
 					<?php

@@ -4,9 +4,11 @@
  * audio product the customer bought, so they can listen again without
  * looking for the product.
  *
- * Registered as a WooCommerce query var, so WooCommerce adds the endpoint
- * and Studiare's account menu (`wc_get_account_menu_items()`) lists it. The
- * tab only shows to customers who own an audio product.
+ * Registered as a WooCommerce query var, so WooCommerce adds the endpoint,
+ * and every menu of Studiare's account page (top icons, mobile menu,
+ * breadcrumb; all built from `wc_get_account_menu_items()`) lists it. The
+ * tab shows to every logged-in customer, with a note when they own no
+ * audio yet, so customers always know where to find their audio.
  *
  * @package StudiareExt
  */
@@ -20,9 +22,6 @@ defined( 'ABSPATH' ) || exit;
 final class My_Account {
 
 	public const ENDPOINT = 'stx-audio';
-
-	/** Remembers which endpoint the rewrite rules were flushed for. */
-	private const RULES_OPTION = 'studiare_ext_audio_endpoint';
 
 	/** @var Module */
 	private $module;
@@ -48,6 +47,7 @@ final class My_Account {
 		add_filter( 'woocommerce_endpoint_' . self::ENDPOINT . '_title', array( $this, 'title' ) );
 		add_action( 'woocommerce_account_' . self::ENDPOINT . '_endpoint', array( $this, 'render' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+		add_action( 'wp_head', array( $this, 'menu_icon_css' ) );
 	}
 
 	/**
@@ -60,12 +60,23 @@ final class My_Account {
 		return $vars;
 	}
 
-	/** New endpoints need fresh rewrite rules once, after WooCommerce added them. */
+	/**
+	 * Rebuilds the rewrite rules when they lack the endpoint (first run, or
+	 * rules rebuilt while the tab was off), after WooCommerce added it.
+	 */
 	public function maybe_flush_rules(): void {
-		if ( self::ENDPOINT !== get_option( self::RULES_OPTION ) ) {
-			flush_rewrite_rules( false );
-			update_option( self::RULES_OPTION, self::ENDPOINT );
+		$rules = get_option( 'rewrite_rules' );
+		if ( ! is_array( $rules ) ) {
+			return; // Plain permalinks: endpoints work as query strings.
 		}
+
+		foreach ( array_keys( $rules ) as $pattern ) {
+			if ( false !== strpos( (string) $pattern, self::ENDPOINT ) ) {
+				return;
+			}
+		}
+
+		flush_rewrite_rules( false );
 	}
 
 	/**
@@ -75,7 +86,7 @@ final class My_Account {
 	 */
 	public function add_menu_item( $items ): array {
 		$items = (array) $items;
-		if ( ! $this->owned_products() ) {
+		if ( ! is_user_logged_in() ) {
 			return $items;
 		}
 
@@ -103,6 +114,28 @@ final class My_Account {
 		return '' !== $label ? $label : __( 'My audio', 'studiare-extensions' );
 	}
 
+	/**
+	 * Headphones for the tab in Studiare's account menus, in the theme's own
+	 * Font Awesome so it matches the other items. Studiare picks each icon in
+	 * woocommerce-dashboard.css by the item's class and falls back to a list
+	 * icon; the top icon bar adds the endpoint as a class on its <i>. The
+	 * selectors repeat Studiare's, so they win by coming later.
+	 */
+	public function menu_icon_css(): void {
+		if ( ! function_exists( 'is_account_page' ) || ! is_account_page() || ! is_user_logged_in() ) {
+			return;
+		}
+
+		$link      = '.woocommerce-MyAccount-navigation-link--' . self::ENDPOINT;
+		$selectors = array(
+			'.woocommerce-account .woocommerce-MyAccount-navigation ul li' . $link . ' a:before', // Side menu.
+			'.top_accoun_nav_item' . $link . ' a:before', // Top bar and mobile menu.
+			'.fa-list.' . self::ENDPOINT . '::before', // Top icon bar.
+		);
+
+		echo '<style id="stx-audio-menu-icon">' . esc_html( implode( ',', $selectors ) ) . '{content:"\\f025"}</style>' . "\n";
+	}
+
 	public function enqueue_assets(): void {
 		if ( function_exists( 'is_wc_endpoint_url' ) && is_wc_endpoint_url( self::ENDPOINT ) ) {
 			Frontend::enqueue();
@@ -123,8 +156,7 @@ final class My_Account {
 	}
 
 	/**
-	 * Audio products the logged-in customer bought (or reaches through a
-	 * Studiare subscription).
+	 * Audio products the logged-in customer paid for (Playlist::owned()).
 	 *
 	 * @return int[]
 	 */
@@ -135,7 +167,7 @@ final class My_Account {
 				array_filter(
 					Album::product_ids(),
 					static function ( int $product_id ) use ( $user_id ): bool {
-						return Theme_Bridge::user_has_course( $user_id, $product_id );
+						return Theme_Bridge::user_bought_product( $user_id, $product_id );
 					}
 				)
 			) : array();

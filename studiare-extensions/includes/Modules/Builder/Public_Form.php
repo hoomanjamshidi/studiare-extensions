@@ -129,7 +129,7 @@ abstract class Public_Form {
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
 		// An explicit, empty escape character: RFC 4180 quoting only (PHP 8.4 deprecates the default).
 		$put = static function ( array $cells ) use ( $out ): void {
-			fputcsv( $out, $cells, ',', '"', '' );
+			fputcsv( $out, array_map( array( self::class, 'csv_cell' ), $cells ), ',', '"', '' );
 		};
 
 		$put( $header );
@@ -158,6 +158,20 @@ abstract class Public_Form {
 
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		exit;
+	}
+
+	/**
+	 * One CSV cell, safe to open in a spreadsheet. Visitors fill these forms,
+	 * and Excel runs a cell that starts with = + - @ (or a tab/return before
+	 * one) as a formula, so such cells get a leading apostrophe, which the
+	 * spreadsheet hides (OWASP's advice against CSV injection).
+	 *
+	 * @param mixed $value Cell value.
+	 */
+	public static function csv_cell( $value ): string {
+		$value = (string) $value;
+
+		return '' !== $value && false !== strpos( "=+-@\t\r", $value[0] ) ? "'" . $value : $value;
 	}
 
 	/**

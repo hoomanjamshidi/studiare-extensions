@@ -33,7 +33,7 @@ final class Player {
 				'duration' => $track['duration'],
 				'state'    => $track['state'],
 				'limit'    => $track['limit'],
-				'note'     => self::note( $track, $playlist->owned() ),
+				'note'     => self::note( $track, $playlist->owned() || $playlist->manager_view() ),
 				'src'      => 'locked' !== $track['state'] ? Stream::url( $product_id, $track['key'] ) : '',
 				'download' => $track['download'] ? Stream::url( $product_id, $track['key'], 'download' ) : '',
 			);
@@ -47,9 +47,10 @@ final class Player {
 			'cover_id' => $cover_id,
 			'artwork'  => $cover_id ? (string) wp_get_attachment_image_url( $cover_id, 'medium' ) : '',
 			'owned'    => $playlist->owned(),
+			'manager'  => $playlist->manager_view(),
 			'tracks'   => $tracks,
 			'total'    => (int) array_sum( array_column( $tracks, 'duration' ) ),
-			'buy'      => $playlist->owned() || ! $settings['preview']['cta'] ? null : self::buy( $product ),
+			'buy'      => $playlist->owned() || $playlist->manager_view() || ! $settings['preview']['cta'] ? null : self::buy( $product ),
 			'login'    => is_user_logged_in() ? '' : (string) wc_get_page_permalink( 'myaccount' ),
 		);
 	}
@@ -78,6 +79,7 @@ final class Player {
 			'cover_id' => 0,
 			'artwork'  => '',
 			'owned'    => false,
+			'manager'  => false,
 			'tracks'   => array(
 				$track( 's1', __( 'Introduction', 'studiare-extensions' ), 312, 'full', 0, __( 'Free', 'studiare-extensions' ) ),
 				$track( 's2', __( 'Chapter one: attention', 'studiare-extensions' ), 1490, 'preview', 60, self::preview_note( 60 ) ),
@@ -108,7 +110,7 @@ final class Player {
 	 * who has not bought the product may hear.
 	 *
 	 * @param array $track Playlist track.
-	 * @param bool  $owned Whether the visitor bought the product.
+	 * @param bool  $owned Whether every track is open to the visitor (buyer or store manager).
 	 */
 	private static function note( array $track, bool $owned ): string {
 		if ( 'preview' === $track['state'] ) {
@@ -116,9 +118,6 @@ final class Player {
 		}
 
 		if ( 'locked' === $track['state'] ) {
-			if ( 'login' === $track['reason'] ) {
-				return __( 'Log in to listen', 'studiare-extensions' );
-			}
 			if ( 'date' === $track['reason'] ) {
 				/* translators: %s: date the lesson opens. */
 				return sprintf( __( 'Opens on %s', 'studiare-extensions' ), self::date( $track['opens'] ) );

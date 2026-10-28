@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,7 +51,7 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 * Sell audio (audio books, courses, podcasts) as WooCommerce products: add the tracks in the product editor's "Studiare+ audio" box, and buyers listen on the product page and in a "My audio" tab of their account, not only by downloading.
 * A free preview for every track: its first seconds (MP3; the site sends only that part of the file), a separate short preview file, the whole track free, or none. When a preview ends the player offers the buy button.
 * Files uploaded from the box go to WooCommerce's protected folder and are sent by the site only to visitors allowed to hear them, with seeking; their address never appears on the page. Links to another file host work too.
-* Downloads for buyers can be switched off per product.
+* Full access only for customers who paid for the product (not subscriptions, roles or being logged in). Downloads for buyers can be switched off per product.
 * The audio of a course's Studiare lessons can join the player, with the access set in Studiare (open, logged-in users, buyers, release dates).
 * Playlist player with 15 seconds back / 30 forward, previous/next, playback speed, "continue where you stopped", lock screen controls, dark mode and two looks.
 
@@ -67,6 +67,13 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.9.1 =
+* Security: Audio products open in full only for customers who paid for that product. A Studiare subscription, being logged in, or a role that can edit products (such as teachers) no longer unlocks the tracks; Studiare lessons for "logged-in users" also need the purchase in the player. Store managers still hear every track to check the files, and the player says so.
+* Security: contact form and newsletter CSV exports neutralise cells that a spreadsheet would run as formulas (CSV injection).
+* Fix: the "My audio" tab shows in every Studiare account menu (top icons, side menu, mobile menu) for every logged-in customer, with the headphones icon, and its address keeps working when rewrite rules are rebuilt.
+* Fix: audio stream answers tell page caches and CDNs (LiteSpeed, Cloudflare and others) never to store them.
+* New theme fix: after logging in through Studiare's login popup the account page opened with the login form until refreshed (the browser had prefetched it as a guest). Account, cart and checkout pages are no longer prefetched.
 
 = 1.9.0 =
 * New: Audio products. Buyers listen to a product's audio on the site (product page and a "My audio" account tab) with a dedicated player; other visitors hear a free preview of each track (its first seconds, a separate file, or the whole track). Files are sent only to those allowed to hear them. The audio of Studiare lessons can join the player.

@@ -108,15 +108,36 @@ final class Theme_Bridge {
 	/**
 	 * Whether a user may take a course: the same test Studiare's own lesson
 	 * list uses (`inc/studi_lessons.php`), so our "enrolled" state always
-	 * matches which lessons the theme unlocks.
-	 *
-	 * Note that `studi_has_bought_items()` returns the *strings* "true" and
-	 * "false"; casting its result to bool would make every user a student.
+	 * matches which lessons the theme unlocks. That includes any Studiare
+	 * subscription of the user, active or not.
 	 *
 	 * @param int $user_id    User ID.
 	 * @param int $product_id Product ID.
 	 */
 	public static function user_has_course( int $user_id, int $product_id ): bool {
+		if ( self::user_bought_product( $user_id, $product_id ) ) {
+			return true;
+		}
+
+		// Studiare treats any subscription of the user as access to every course.
+		return $user_id
+			&& class_exists( '\Studiare_Subscription_Manager' )
+			&& method_exists( '\Studiare_Subscription_Manager', 'get_user_subscriptions' )
+			&& ! empty( \Studiare_Subscription_Manager::get_user_subscriptions( $user_id ) );
+	}
+
+	/**
+	 * Whether a user paid for this product: a paid WooCommerce order with it
+	 * (WooCommerce's own test, or Studiare's `studi_has_bought_items()`).
+	 * Stricter than user_has_course(): subscriptions do not count.
+	 *
+	 * Note that `studi_has_bought_items()` returns the *strings* "true" and
+	 * "false"; casting its result to bool would make every user a buyer.
+	 *
+	 * @param int $user_id    User ID.
+	 * @param int $product_id Product ID.
+	 */
+	public static function user_bought_product( int $user_id, int $product_id ): bool {
 		if ( ! $user_id || ! $product_id ) {
 			return false;
 		}
@@ -126,14 +147,7 @@ final class Theme_Bridge {
 			return true;
 		}
 
-		if ( function_exists( 'studi_has_bought_items' ) && 'true' === (string) studi_has_bought_items( $user_id, $product_id ) ) {
-			return true;
-		}
-
-		// Studiare treats any subscription of the user as access to every course.
-		return class_exists( '\Studiare_Subscription_Manager' )
-			&& method_exists( '\Studiare_Subscription_Manager', 'get_user_subscriptions' )
-			&& ! empty( \Studiare_Subscription_Manager::get_user_subscriptions( $user_id ) );
+		return function_exists( 'studi_has_bought_items' ) && 'true' === (string) studi_has_bought_items( $user_id, $product_id );
 	}
 
 	/**

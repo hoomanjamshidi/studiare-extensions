@@ -76,7 +76,7 @@ final class Stream {
 		$source = 'preview' === $track['state'] ? $track['preview'] : $track['full'];
 		if ( '' === $source['path'] ) {
 			// Another host: the link is only given to those who may listen.
-			nocache_headers();
+			$this->no_cache();
 			wp_redirect( $source['url'], 302 ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- the admin's own link to their file host.
 			exit;
 		}
@@ -125,6 +125,20 @@ final class Stream {
 	}
 
 	/**
+	 * Tells page caches and CDNs never to keep an answer: it depends on who
+	 * asks, and a cached full file would reach visitors who did not buy.
+	 */
+	private function no_cache(): void {
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- the constant cache plugins read.
+		}
+		nocache_headers();
+		header( 'Cache-Control: private, no-store, no-cache, must-revalidate, max-age=0, no-transform' );
+		header( 'X-LiteSpeed-Cache-Control: no-cache' );
+		header( 'CDN-Cache-Control: no-store' );
+	}
+
+	/**
 	 * Sends a local file (or its first `$limit` bytes), honouring one HTTP Range.
 	 *
 	 * @param string $path     Local file.
@@ -146,11 +160,11 @@ final class Stream {
 		$partial             = 0 !== $start || $end !== $size - 1;
 
 		$this->clean_output();
+		$this->no_cache();
 		status_header( $partial ? 206 : 200 );
 		header( 'Content-Type: ' . $mime );
 		header( 'Accept-Ranges: bytes' );
 		header( 'Content-Length: ' . ( $end - $start + 1 ) );
-		header( 'Cache-Control: private, no-store, no-transform' );
 		header( 'X-Content-Type-Options: nosniff' );
 		header( 'X-Robots-Tag: noindex, nofollow' );
 		header( 'Content-Disposition: ' . ( '' !== $download ? 'attachment; filename*=UTF-8\'\'' . rawurlencode( $download ) : 'inline' ) );
@@ -233,7 +247,7 @@ final class Stream {
 
 	/** @return never */
 	private function refuse(): void {
-		nocache_headers();
+		$this->no_cache();
 		status_header( 403 );
 		header( 'Content-Type: text/plain; charset=utf-8' );
 		echo esc_html__( 'You cannot listen to this file.', 'studiare-extensions' );

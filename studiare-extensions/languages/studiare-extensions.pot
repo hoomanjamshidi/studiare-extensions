@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-27T16:22:35+00:00\n"
+"POT-Creation-Date: 2026-10-28T07:45:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: studiare-extensions\n"
@@ -275,7 +275,7 @@ msgstr ""
 
 #: includes/Modules/Article_Tools/Frontend.php:240
 #: includes/Modules/Article_Tools/views/podcast.php:86
-#: includes/Modules/Audio_Products/views/player.php:118
+#: includes/Modules/Audio_Products/views/player.php:121
 msgid "Play"
 msgstr ""
 
@@ -286,8 +286,8 @@ msgstr ""
 #. translators: %s: playback speed, e.g. 1.5×.
 #: includes/Modules/Article_Tools/Frontend.php:243
 #: includes/Modules/Article_Tools/views/podcast.php:115
-#: includes/Modules/Audio_Products/Frontend.php:123
-#: includes/Modules/Audio_Products/views/player.php:101
+#: includes/Modules/Audio_Products/Frontend.php:155
+#: includes/Modules/Audio_Products/views/player.php:104
 #: includes/Modules/Builder/Assets.php:205
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:570
 #, php-format
@@ -297,7 +297,7 @@ msgstr ""
 #. translators: 1: time listened, 2: length of the episode.
 #. translators: 1: time listened, 2: length of the track.
 #: includes/Modules/Article_Tools/Frontend.php:245
-#: includes/Modules/Audio_Products/Frontend.php:125
+#: includes/Modules/Audio_Products/Frontend.php:157
 #: includes/Modules/Builder/Assets.php:203
 #, php-format
 msgid "%1$s of %2$s"
@@ -566,7 +566,7 @@ msgstr ""
 
 #: includes/Modules/Article_Tools/views/edit-box.php:52
 #: includes/Modules/Audio_Products/views/edit-box.php:68
-#: includes/Modules/Builder/Elementor/Parts.php:601
+#: includes/Modules/Builder/Elementor/Parts.php:614
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:193
 msgid "Duration"
 msgstr ""
@@ -614,14 +614,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Modules/Article_Tools/views/podcast.php:94
-#: includes/Modules/Audio_Products/views/player.php:107
+#: includes/Modules/Audio_Products/views/player.php:110
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:554
 msgid "Playback position"
 msgstr ""
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:104
-#: includes/Modules/Audio_Products/views/player.php:117
+#: includes/Modules/Audio_Products/views/player.php:120
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:564
 #, php-format
 msgid "Back %s seconds"
@@ -629,7 +629,7 @@ msgstr ""
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:109
-#: includes/Modules/Audio_Products/views/player.php:123
+#: includes/Modules/Audio_Products/views/player.php:126
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:567
 #, php-format
 msgid "Forward %s seconds"
@@ -667,8 +667,8 @@ msgstr ""
 
 #. translators: %s: track title.
 #. translators: %s: episode title.
-#: includes/Modules/Audio_Products/Frontend.php:119
-#: includes/Modules/Audio_Products/views/player.php:161
+#: includes/Modules/Audio_Products/Frontend.php:151
+#: includes/Modules/Audio_Products/views/player.php:164
 #: includes/Modules/Builder/Assets.php:199
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:739
 #, php-format
@@ -677,7 +677,7 @@ msgstr ""
 
 #. translators: %s: track title.
 #. translators: %s: episode title.
-#: includes/Modules/Audio_Products/Frontend.php:121
+#: includes/Modules/Audio_Products/Frontend.php:153
 #: includes/Modules/Builder/Assets.php:201
 #, php-format
 msgid "Pause: %s"
@@ -691,69 +691,65 @@ msgstr ""
 msgid "Buyers listen to audio products on the site with a dedicated player, and visitors hear a free preview before buying."
 msgstr ""
 
-#: includes/Modules/Audio_Products/My_Account.php:103
+#: includes/Modules/Audio_Products/My_Account.php:114
 #: includes/Modules/Audio_Products/Schema.php:45
 msgid "My audio"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:77
+#: includes/Modules/Audio_Products/Player.php:78
 msgid "The habits of great learners (audio book)"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:82
+#: includes/Modules/Audio_Products/Player.php:84
 msgid "Introduction"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:82
-#: includes/Modules/Audio_Products/Player.php:130
+#: includes/Modules/Audio_Products/Player.php:84
+#: includes/Modules/Audio_Products/Player.php:129
 #: includes/Modules/Builder/Elementor/Parts.php:45
-#: includes/Modules/Builder/Elementor/Parts.php:282
+#: includes/Modules/Builder/Elementor/Parts.php:295
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:72
 msgid "Free"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:83
+#: includes/Modules/Audio_Products/Player.php:85
 msgid "Chapter one: attention"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:84
+#: includes/Modules/Audio_Products/Player.php:86
 msgid "Chapter two: memory"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:84
-#: includes/Modules/Audio_Products/Player.php:127
+#: includes/Modules/Audio_Products/Player.php:86
+#: includes/Modules/Audio_Products/Player.php:126
 msgid "After purchase"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:89
+#: includes/Modules/Audio_Products/Player.php:91
 #: includes/Modules/Builder/Elementor/Cards.php:70
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:318
 msgid "Buy"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:115
+#: includes/Modules/Audio_Products/Player.php:117
 #: includes/Modules/Builder/Module.php:380
 #: includes/Modules/Builder/Module.php:418
 msgid "Preview"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Player.php:120
-msgid "Log in to listen"
-msgstr ""
-
 #. translators: %s: date the lesson opens.
-#: includes/Modules/Audio_Products/Player.php:124
+#: includes/Modules/Audio_Products/Player.php:123
 #, php-format
 msgid "Opens on %s"
 msgstr ""
 
 #. translators: %s: length of the free preview, e.g. 1:00.
-#: includes/Modules/Audio_Products/Player.php:138
+#: includes/Modules/Audio_Products/Player.php:137
 #, php-format
 msgid "Preview %s"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Playlist.php:181
+#: includes/Modules/Audio_Products/Playlist.php:204
 msgid "Untitled track"
 msgstr ""
 
@@ -762,7 +758,7 @@ msgstr ""
 msgid "Audio files of this product"
 msgstr ""
 
-#: includes/Modules/Audio_Products/Stream.php:239
+#: includes/Modules/Audio_Products/Stream.php:253
 msgid "You cannot listen to this file."
 msgstr ""
 
@@ -800,8 +796,8 @@ msgstr ""
 
 #: includes/Modules/Audio_Products/views/admin.php:95
 #: includes/Modules/Audio_Products/views/edit-box.php:72
-#: includes/Modules/Audio_Products/views/player.php:88
-#: includes/Modules/Builder/Elementor/Parts.php:478
+#: includes/Modules/Audio_Products/views/player.php:91
+#: includes/Modules/Builder/Elementor/Parts.php:491
 msgid "Free preview"
 msgstr ""
 
@@ -968,7 +964,7 @@ msgid "Add the audio of this course's Studiare lessons to the player"
 msgstr ""
 
 #: includes/Modules/Audio_Products/views/edit-box.php:123
-msgid "Lessons keep the access set in Studiare: open lessons play for everyone, \"logged-in users\" lessons after logging in, and private lessons for buyers (with the free preview from the Studiare+ settings)."
+msgid "Lessons open to everyone in Studiare play for everyone; all other lessons (including \"logged-in users\" lessons) play in full only for buyers of this product, with the free preview from the Studiare+ settings. Release dates set in Studiare are kept."
 msgstr ""
 
 #. translators: %s: number of audio tracks.
@@ -983,37 +979,41 @@ msgstr[1] ""
 msgid "Full access"
 msgstr ""
 
-#: includes/Modules/Audio_Products/views/player.php:115
+#: includes/Modules/Audio_Products/views/player.php:89
+msgid "Store manager view: every track is open to you"
+msgstr ""
+
+#: includes/Modules/Audio_Products/views/player.php:118
 msgid "Previous track"
 msgstr ""
 
-#: includes/Modules/Audio_Products/views/player.php:124
+#: includes/Modules/Audio_Products/views/player.php:127
 msgid "Next track"
 msgstr ""
 
-#: includes/Modules/Audio_Products/views/player.php:128
+#: includes/Modules/Audio_Products/views/player.php:131
 msgid "The free preview of this track has ended."
 msgstr ""
 
-#: includes/Modules/Audio_Products/views/player.php:133
+#: includes/Modules/Audio_Products/views/player.php:136
 msgid "The audio could not be played. Check your connection and try again."
 msgstr ""
 
 #. translators: %s: track title.
-#: includes/Modules/Audio_Products/views/player.php:181
+#: includes/Modules/Audio_Products/views/player.php:184
 #, php-format
 msgid "Download: %s"
 msgstr ""
 
-#: includes/Modules/Audio_Products/views/player.php:196
+#: includes/Modules/Audio_Products/views/player.php:199
 msgid "Buy this product to hear every track in full, here on the site."
 msgstr ""
 
-#: includes/Modules/Audio_Products/views/player.php:197
+#: includes/Modules/Audio_Products/views/player.php:200
 msgid "Already bought it? Log in to listen."
 msgstr ""
 
-#: includes/Modules/Audio_Products/views/player.php:206
+#: includes/Modules/Audio_Products/views/player.php:209
 #: includes/Modules/Builder/Elementor/Widgets/Account.php:42
 msgid "Log in"
 msgstr ""
@@ -2058,7 +2058,7 @@ msgid "Results appear as you type."
 msgstr ""
 
 #: includes/Modules/Builder/Assets.php:94
-#: includes/Modules/Builder/Elementor/Parts.php:164
+#: includes/Modules/Builder/Elementor/Parts.php:177
 msgid "Show more"
 msgstr ""
 
@@ -2138,7 +2138,7 @@ msgstr ""
 
 #: includes/Modules/Builder/Contact_Inbox.php:125
 #: includes/Modules/Builder/Elementor/Cards.php:281
-#: includes/Modules/Builder/Elementor/Parts.php:283
+#: includes/Modules/Builder/Elementor/Parts.php:296
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:207
 #: includes/Modules/Builder/Elementor/Widgets/Promo_Card.php:41
 msgid "New"
@@ -2308,7 +2308,7 @@ msgstr ""
 
 #. translators: %s: number of lessons.
 #: includes/Modules/Builder/Elementor/Cards.php:213
-#: includes/Modules/Builder/Elementor/Parts.php:431
+#: includes/Modules/Builder/Elementor/Parts.php:444
 #: includes/Modules/Builder/Search_Results.php:200
 #, php-format
 msgid "%s lesson"
@@ -2325,7 +2325,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Modules/Builder/Elementor/Cards.php:254
-#: includes/Modules/Builder/Elementor/Parts.php:905
+#: includes/Modules/Builder/Elementor/Parts.php:918
 msgid "Course"
 msgstr ""
 
@@ -2436,139 +2436,139 @@ msgstr ""
 msgid "Rated %s out of 5"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:169
+#: includes/Modules/Builder/Elementor/Parts.php:182
 msgid "This is where the product description appears. Write it in the product editor — text, images and videos all show up here with the template's typography."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:186
+#: includes/Modules/Builder/Elementor/Parts.php:199
 msgid "Hands-on techniques you can use the same week"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:187
+#: includes/Modules/Builder/Elementor/Parts.php:200
 msgid "Real examples from real classrooms"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:188
+#: includes/Modules/Builder/Elementor/Parts.php:201
 msgid "Short exercises after every lesson"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:189
+#: includes/Modules/Builder/Elementor/Parts.php:202
 msgid "Downloadable notes and checklists"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:268
+#: includes/Modules/Builder/Elementor/Parts.php:281
 msgid "Quiz"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:284
+#: includes/Modules/Builder/Elementor/Parts.php:297
 msgid "Updated"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:285
+#: includes/Modules/Builder/Elementor/Parts.php:298
 msgid "Popular"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:316
+#: includes/Modules/Builder/Elementor/Parts.php:329
 msgid "Getting started"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:319
+#: includes/Modules/Builder/Elementor/Parts.php:332
 msgid "Why the first session matters"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:319
+#: includes/Modules/Builder/Elementor/Parts.php:332
 msgid "Setting the rules together"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:319
+#: includes/Modules/Builder/Elementor/Parts.php:332
 msgid "Arranging the room"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:322
+#: includes/Modules/Builder/Elementor/Parts.php:335
 msgid "Core techniques"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:325
+#: includes/Modules/Builder/Elementor/Parts.php:338
 msgid "Finding the cause"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:325
+#: includes/Modules/Builder/Elementor/Parts.php:338
 msgid "One-to-one conversations"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:328
+#: includes/Modules/Builder/Elementor/Parts.php:341
 msgid "Putting it into practice"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:331
+#: includes/Modules/Builder/Elementor/Parts.php:344
 msgid "Short group activities"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:331
+#: includes/Modules/Builder/Elementor/Parts.php:344
 msgid "Giving useful feedback"
 msgstr ""
 
 #. translators: 1: number of sections, 2: number of lessons.
-#: includes/Modules/Builder/Elementor/Parts.php:407
+#: includes/Modules/Builder/Elementor/Parts.php:420
 #, php-format
 msgid "%1$s sections · %2$s lessons"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:413
+#: includes/Modules/Builder/Elementor/Parts.php:426
 msgid "Open all"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:414
+#: includes/Modules/Builder/Elementor/Parts.php:427
 msgid "Close all"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:480
+#: includes/Modules/Builder/Elementor/Parts.php:493
 msgid "Watch"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:553
+#: includes/Modules/Builder/Elementor/Parts.php:566
 #: includes/Modules/Builder/Presets/Home.php:632
 msgid "Teacher name"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:554
+#: includes/Modules/Builder/Elementor/Parts.php:567
 #: includes/Modules/Builder/Elementor/Widgets/Course_Teacher.php:94
 msgid "Job title"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:556
+#: includes/Modules/Builder/Elementor/Parts.php:569
 msgid "Teachers are picked in the course's Studiare settings. Their photo, title and bio appear here."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:605
+#: includes/Modules/Builder/Elementor/Parts.php:618
 #: includes/Modules/Builder/Elementor/Widgets/Course_Curriculum.php:98
 msgid "Lessons"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:609
+#: includes/Modules/Builder/Elementor/Parts.php:622
 msgid "Sessions"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:613
+#: includes/Modules/Builder/Elementor/Parts.php:626
 msgid "Level"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:617
+#: includes/Modules/Builder/Elementor/Parts.php:630
 msgid "Language"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:621
+#: includes/Modules/Builder/Elementor/Parts.php:634
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:250
 msgid "Certificate"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:625
+#: includes/Modules/Builder/Elementor/Parts.php:638
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:56
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:78
 msgid "Students"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:629
+#: includes/Modules/Builder/Elementor/Parts.php:642
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:269
 #: includes/Modules/Builder/Elementor/Widgets/Product_Rating.php:30
 #: includes/Modules/Builder/Elementor/Widgets/Product_Rating.php:65
@@ -2576,14 +2576,14 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:633
+#: includes/Modules/Builder/Elementor/Parts.php:646
 #: includes/Modules/Builder/Elementor/Widgets/Product_Reviews.php:29
 #: includes/Modules/Builder/Elementor/Widgets/Product_Reviews.php:33
 #: includes/Modules/Builder/Elementor/Widgets/Product_Tabs.php:39
 msgid "Reviews"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:637
+#: includes/Modules/Builder/Elementor/Parts.php:650
 #: includes/Modules/Builder/Elementor/Widgets/Course_Teacher.php:30
 #: includes/Modules/Builder/Elementor/Widgets/Course_Teacher.php:76
 #: includes/Modules/Builder/Elementor/Widgets/Product_Tabs.php:38
@@ -2592,20 +2592,20 @@ msgstr ""
 msgid "Teacher"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:641
+#: includes/Modules/Builder/Elementor/Parts.php:654
 #: includes/Modules/Builder/Elementor/Widgets/Post_Meta.php:39
 msgid "Last update"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:645
+#: includes/Modules/Builder/Elementor/Parts.php:658
 msgid "File type"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:649
+#: includes/Modules/Builder/Elementor/Parts.php:662
 msgid "File size"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:653
+#: includes/Modules/Builder/Elementor/Parts.php:666
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:98
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:135
 #: includes/Modules/Builder/Elementor/Widgets/Category_Grid.php:136
@@ -2619,41 +2619,41 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:657
+#: includes/Modules/Builder/Elementor/Parts.php:670
 msgid "SKU"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:661
+#: includes/Modules/Builder/Elementor/Parts.php:674
 msgid "Availability"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:665
-#: includes/Modules/Builder/Elementor/Parts.php:824
+#: includes/Modules/Builder/Elementor/Parts.php:678
+#: includes/Modules/Builder/Elementor/Parts.php:837
 msgid "Weight"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:669
-#: includes/Modules/Builder/Elementor/Parts.php:831
+#: includes/Modules/Builder/Elementor/Parts.php:682
+#: includes/Modules/Builder/Elementor/Parts.php:844
 msgid "Dimensions"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:673
+#: includes/Modules/Builder/Elementor/Parts.php:686
 msgid "Custom field"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:677
+#: includes/Modules/Builder/Elementor/Parts.php:690
 msgid "Fixed text"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:849
+#: includes/Modules/Builder/Elementor/Parts.php:862
 msgid "Attribute"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:850
+#: includes/Modules/Builder/Elementor/Parts.php:863
 msgid "Value from the product's attributes"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Parts.php:878
+#: includes/Modules/Builder/Elementor/Parts.php:891
 msgid "Reviews are closed for the sample product."
 msgstr ""
 
@@ -10097,6 +10097,14 @@ msgstr ""
 
 #: includes/Modules/Support_Button/views/admin.php:491
 msgid "Links are not opened in the preview. On your site the Studiare font is used."
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Fresh_Account_Page.php:34
+msgid "Account page after popup login"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Fresh_Account_Page.php:38
+msgid "After logging in through the login popup, the account page still shows the login form until the page is refreshed: the browser had loaded it in advance while the visitor was a guest. This fix stops the browser from loading the account, cart and checkout pages in advance, so they always open up to date."
 msgstr ""
 
 #: includes/Modules/Theme_Fixes/Module.php:23

@@ -18,6 +18,7 @@ final class Fixes {
 	private const CLASSES = array(
 		Otp_Digits::class,
 		Sold_Out_Button::class,
+		Fresh_Account_Page::class,
 	);
 
 	/** @var array<string, Fix>|null Memoized instances keyed by fix id. */

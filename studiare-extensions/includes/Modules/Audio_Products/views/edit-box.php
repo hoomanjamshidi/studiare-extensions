@@ -120,7 +120,7 @@ $row = static function ( array $track, string $index ) use ( $previews, $file_na
 				<input type="checkbox" name="stx_audio[lessons]" value="1" <?php checked( $album['lessons'] ); ?>>
 				<?php esc_html_e( 'Add the audio of this course\'s Studiare lessons to the player', 'studiare-extensions' ); ?>
 			</label>
-			<span class="description"><?php esc_html_e( 'Lessons keep the access set in Studiare: open lessons play for everyone, "logged-in users" lessons after logging in, and private lessons for buyers (with the free preview from the Studiare+ settings).', 'studiare-extensions' ); ?></span>
+			<span class="description"><?php esc_html_e( 'Lessons open to everyone in Studiare play for everyone; all other lessons (including "logged-in users" lessons) play in full only for buyers of this product, with the free preview from the Studiare+ settings. Release dates set in Studiare are kept.', 'studiare-extensions' ); ?></span>
 		<?php endif; ?>
 	</div>
 </div>

@@ -7,9 +7,10 @@
  * fields in `lesson_data[0]`: `lesson_title`, `lesson_audio` (a link),
  * `private_lesson` ('' = open to all, `lesson_free_users` = logged-in
  * visitors, `on`/`lesson_protected` = buyers) and the release rules
- * `lesson_available_date` / `lesson_available_after_days`. The same rules
- * are applied here as in the theme's `inc/studi_lessons.php`, so the player
- * never opens a lesson the course page keeps closed.
+ * `lesson_available_date` / `lesson_available_after_days`. Playlist applies
+ * the theme's rules (`inc/studi_lessons.php`), stricter in one place: the
+ * player opens "logged-in users" lessons to buyers only, so it never opens
+ * a lesson the course page keeps closed.
  *
  * @package StudiareExt
  */

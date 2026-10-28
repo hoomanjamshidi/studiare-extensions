@@ -2,8 +2,8 @@
 /**
  * The tracks of one product as one visitor may hear them.
  *
- * Every track gets a state: `full` (bought, free, or an editor of the
- * product), `preview` (only the free preview: its first seconds or a
+ * Every track gets a state: `full` (bought, free, or a store manager
+ * checking the files), `preview` (only the free preview: its first seconds or a
  * separate file) or `locked` (with the reason: `buy`, `login` or `date`).
  * The player is printed from this list and Stream serves files only after
  * asking it again, so the rules live in one place.
@@ -34,6 +34,9 @@ final class Playlist {
 	/** @var bool|null */
 	private $owned = null;
 
+	/** @var bool|null */
+	private $manager = null;
+
 	/**
 	 * @param int   $product_id Product ID.
 	 * @param int   $user_id    Visitor (0 for guests).
@@ -49,13 +52,34 @@ final class Playlist {
 		return $this->product_id;
 	}
 
-	/** Whether the visitor bought the product (or edits it, to check the files). */
+	/**
+	 * Whether the visitor bought this very product. Only a paid order counts:
+	 * not a Studiare subscription, not a role that can edit products (such as
+	 * teachers), not being logged in.
+	 */
 	public function owned(): bool {
 		if ( null === $this->owned ) {
-			$this->owned = $this->user_id && ( Theme_Bridge::user_has_course( $this->user_id, $this->product_id ) || user_can( $this->user_id, 'edit_post', $this->product_id ) );
+			$this->owned = Theme_Bridge::user_bought_product( $this->user_id, $this->product_id );
 		}
 
 		return $this->owned;
+	}
+
+	/**
+	 * A store manager who has not bought the product hears everything, to
+	 * check the files; the player says so (Player::view()).
+	 */
+	public function manager_view(): bool {
+		if ( null === $this->manager ) {
+			$this->manager = ! $this->owned() && $this->user_id && user_can( $this->user_id, 'manage_woocommerce' );
+		}
+
+		return $this->manager;
+	}
+
+	/** Whether every track opens in full: a buyer, or a store manager. */
+	private function full_access(): bool {
+		return $this->owned() || $this->manager_view();
 	}
 
 	/**
@@ -121,7 +145,7 @@ final class Playlist {
 
 		$view = $this->base( (string) $track['id'], (string) $track['title'], '', (int) $track['duration'] ? (int) $track['duration'] : $full['length'], $full, $download );
 
-		if ( $this->owned() || 'free' === $track['preview'] ) {
+		if ( $this->full_access() || 'free' === $track['preview'] ) {
 			return $view;
 		}
 
@@ -144,15 +168,14 @@ final class Playlist {
 
 		$view = $this->base( 'l' . $lesson['id'], $lesson['title'], $lesson['section'], $full['length'], $full, $download );
 
-		if ( user_can( $this->user_id, 'edit_post', $this->product_id ) ) {
+		if ( $this->manager_view() ) {
 			return $view;
 		}
 
-		// As in the theme: privacy first, then the release date for those who may listen.
-		if ( 'login' === $lesson['rule'] && ! $this->user_id ) {
-			return $this->locked( $view, 'login' );
-		}
-		if ( 'buyer' === $lesson['rule'] && ! $this->owned() ) {
+		// Privacy first, then the release date for those who may listen. Unlike
+		// the theme, lessons for "logged-in users" also need the purchase here:
+		// the audio of a course is for its students.
+		if ( 'all' !== $lesson['rule'] && ! $this->owned() ) {
 			return $this->settings['preview']['lessons'] ? $this->with_clip( $view, (int) $this->settings['preview']['seconds'] ) : $this->locked( $view, 'buy' );
 		}
 
@@ -187,8 +210,8 @@ final class Playlist {
 			'limit'    => 0,
 			'full'     => $full,
 			'preview'  => null,
-			// Downloading is for buyers; free tracks are only played to others.
-			'download' => $download && $this->owned(),
+			// Downloading is for buyers (and managers); free tracks are only played to others.
+			'download' => $download && $this->full_access(),
 		);
 	}
 
