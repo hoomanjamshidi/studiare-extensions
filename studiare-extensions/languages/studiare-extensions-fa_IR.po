@@ -9955,7 +9955,7 @@ msgstr "قسمت بدون عنوان"
 msgid "Audio files of this product"
 msgstr "فایل‌های صوتی این محصول"
 
-#: includes/Modules/Audio_Products/Stream.php:253
+#: includes/Modules/Audio_Products/Stream.php:255
 msgid "You cannot listen to this file."
 msgstr "شما اجازه شنیدن این فایل را ندارید."
 
@@ -10153,10 +10153,10 @@ msgstr "درس‌هایی که در استادیار برای همه آزادن�
 msgid "Store manager view: every track is open to you"
 msgstr "نمای مدیر فروشگاه: همه قسمت‌ها برای شما باز است"
 
-#: includes/Modules/Theme_Fixes/Fresh_Account_Page.php:34
+#: includes/Modules/Theme_Fixes/Fresh_Account_Page.php:37
 msgid "Account page after popup login"
 msgstr "صفحه حساب کاربری پس از ورود با پاپ‌آپ"
 
-#: includes/Modules/Theme_Fixes/Fresh_Account_Page.php:38
+#: includes/Modules/Theme_Fixes/Fresh_Account_Page.php:41
 msgid "After logging in through the login popup, the account page still shows the login form until the page is refreshed: the browser had loaded it in advance while the visitor was a guest. This fix stops the browser from loading the account, cart and checkout pages in advance, so they always open up to date."
 msgstr "پس از ورود از پاپ‌آپ ورود، صفحه حساب کاربری تا وقتی صفحه دوباره بارگذاری نشود همچنان فرم ورود را نشان می‌دهد؛ چون مرورگر آن را وقتی بازدیدکننده هنوز مهمان بود از قبل بارگذاری کرده بود. این اصلاح جلوی پیش‌بارگذاری صفحه‌های حساب کاربری، سبد خرید و تسویه‌حساب را می‌گیرد تا همیشه به‌روز باز شوند."

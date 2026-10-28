@@ -8,6 +8,7 @@
 namespace StudiareExt;
 
 use StudiareExt\Admin\Admin;
+use StudiareExt\Core\Cache_Compat;
 use StudiareExt\Core\Module;
 use StudiareExt\Modules\Article_Tools\Module as Article_Tools_Module;
 use StudiareExt\Modules\Audio_Products\Module as Audio_Products_Module;
@@ -44,6 +45,7 @@ final class Plugin {
 		load_plugin_textdomain( self::TEXT_DOMAIN, false, dirname( plugin_basename( STUDIARE_EXT_FILE ) ) . '/languages' );
 
 		$this->register_modules();
+		( new Cache_Compat() )->register();
 
 		if ( is_admin() ) {
 			( new Admin( $this ) )->register();

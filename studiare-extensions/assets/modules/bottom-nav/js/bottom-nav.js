@@ -26,6 +26,28 @@
 	/** Sheet close duration; must match `.stx-sheet__panel` transition in CSS. */
 	const SHEET_CLOSE_MS = 450;
 
+	/**
+	 * Runs `callback( jQuery )` now, or as soon as jQuery arrives. Our scripts
+	 * stay out of cache plugins' "delay JavaScript" (Core\Cache_Compat), while
+	 * jQuery and WooCommerce may load later, after WP Rocket's or LiteSpeed's
+	 * own "all scripts loaded" event.
+	 */
+	function withJQuery( callback ) {
+		if ( window.jQuery ) {
+			callback( window.jQuery );
+			return;
+		}
+		const events = [ 'load', 'rocket-allScriptsLoaded', 'DOMContentLiteSpeedLoaded' ];
+		const retry = () => {
+			if ( ! window.jQuery ) {
+				return;
+			}
+			events.forEach( ( name ) => window.removeEventListener( name, retry ) );
+			callback( window.jQuery );
+		};
+		events.forEach( ( name ) => window.addEventListener( name, retry ) );
+	}
+
 	/* ---------------------------------------------------------------------
 	 * Helpers
 	 * ------------------------------------------------------------------- */
@@ -589,12 +611,12 @@
 		syncCartBadge();
 
 		// WooCommerce triggers its cart events through jQuery.
-		if ( window.jQuery ) {
-			window.jQuery( document.body ).on(
+		withJQuery( ( $ ) => {
+			$( document.body ).on(
 				'wc_fragments_loaded wc_fragments_refreshed added_to_cart removed_from_cart wc_cart_emptied',
 				() => window.requestAnimationFrame( syncCartBadge )
 			);
-		}
+		} );
 
 		nav.addEventListener( 'animationend', ( event ) => {
 			const item = event.target.closest( '.stx-bn__item' );

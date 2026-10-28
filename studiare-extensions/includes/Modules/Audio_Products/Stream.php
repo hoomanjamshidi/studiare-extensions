@@ -147,6 +147,9 @@ final class Stream {
 	 * @param string $download File name to save as, or '' to play.
 	 */
 	private function send( string $path, string $mime, int $limit, string $download ): void {
+		// First of all: cache plugins decide when their output buffer closes (LiteSpeed sends its headers then).
+		$this->no_cache();
+
 		$size  = $limit ? $limit : (int) filesize( $path );
 		$range = $this->range( $size );
 
@@ -160,7 +163,6 @@ final class Stream {
 		$partial             = 0 !== $start || $end !== $size - 1;
 
 		$this->clean_output();
-		$this->no_cache();
 		status_header( $partial ? 206 : 200 );
 		header( 'Content-Type: ' . $mime );
 		header( 'Accept-Ranges: bytes' );

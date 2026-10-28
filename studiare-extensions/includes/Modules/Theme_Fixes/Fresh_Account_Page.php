@@ -12,7 +12,10 @@
  *
  * The fix leaves the account, cart and checkout pages out of prefetching:
  * they depend on who is logged in and what is in the cart, so a copy taken
- * earlier is never right for them.
+ * earlier is never right for them. LiteSpeed Cache's "Instant Click"
+ * (instant.page) prefetches links on hover the same way and does not skip
+ * WooCommerce pages, so while it is on, links to them get
+ * `data-no-instant`. WP Rocket's "Preload links" already skips them.
  *
  * @package StudiareExt
  */
@@ -40,11 +43,49 @@ final class Fresh_Account_Page extends Fix {
 
 	public function boot(): void {
 		add_filter( 'wp_speculation_rules_href_exclude_paths', array( $this, 'exclude_paths' ) );
+		add_action( 'wp_footer', array( $this, 'skip_instant_click' ) );
 	}
 
-	/** Speculative loading exists since WordPress 6.8, and a site can switch it off. */
+	/** Speculative loading (WordPress 6.8+, can be switched off) or LiteSpeed's Instant Click. */
 	public function in_use(): bool {
-		return function_exists( 'wp_get_speculation_rules_configuration' ) && null !== wp_get_speculation_rules_configuration();
+		return ( function_exists( 'wp_get_speculation_rules_configuration' ) && null !== wp_get_speculation_rules_configuration() ) || $this->instant_click_on();
+	}
+
+	/**
+	 * Marks links to the session pages with `data-no-instant`, which
+	 * instant.page reads when the pointer reaches a link. Marked from a
+	 * window capture listener, which runs before instant.page's document
+	 * listener, so links added later (the login popup, menus) count too.
+	 */
+	public function skip_instant_click(): void {
+		if ( ! $this->instant_click_on() ) {
+			return;
+		}
+
+		$paths = array();
+		foreach ( self::PAGES as $page ) {
+			$path = (string) wp_parse_url( (string) wc_get_page_permalink( $page ), PHP_URL_PATH );
+			if ( '' !== $path && '/' !== $path ) {
+				$paths[] = trailingslashit( $path );
+			}
+		}
+		if ( ! $paths ) {
+			return;
+		}
+
+		wp_print_inline_script_tag(
+			'(function(p){function m(e){var a=e.target&&e.target.closest&&e.target.closest("a[href]");if(a&&a.origin===location.origin&&p.some(function(x){return (a.pathname+"/").indexOf(x)===0;})){a.setAttribute("data-no-instant","");}}["mouseover","touchstart","mousedown"].forEach(function(t){window.addEventListener(t,m,{capture:true,passive:true});});})(' . wp_json_encode( $paths ) . ');',
+			// `data-no-defer`: LiteSpeed must not delay this very script.
+			array(
+				'id'            => 'stx-fresh-account-page',
+				'data-no-defer' => true,
+			)
+		);
+	}
+
+	/** Whether LiteSpeed Cache's Instant Click is switched on. */
+	private function instant_click_on(): bool {
+		return function_exists( 'wc_get_page_permalink' ) && defined( 'LSCWP_V' ) && (bool) apply_filters( 'litespeed_conf', 'util-instant_click' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- LiteSpeed Cache's API for reading its settings.
 	}
 
 	/**

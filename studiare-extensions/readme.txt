@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,11 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.9.2 =
+* Compatibility: WP Rocket and LiteSpeed Cache. The plugin's scripts stay out of "Delay JavaScript" (LiteSpeed does not replay the first tap, so the first tap on play, a sheet or the menu button was lost), and its stylesheets are kept whole by "Remove Unused CSS" / "UCSS" (states the scripts add later would lose their styles). Hooks that need jQuery attach whenever it arrives, also when the cache plugin delays it.
+* Compatibility: audio stream answers tell LiteSpeed not to cache them before its output buffer closes.
+* Theme fix "Account page after popup login" also covers LiteSpeed's "Instant Click" (links to the account, cart and checkout pages get `data-no-instant`).
 
 = 1.9.1 =
 * Security: Audio products open in full only for customers who paid for that product. A Studiare subscription, being logged in, or a role that can edit products (such as teachers) no longer unlocks the tracks; Studiare lessons for "logged-in users" also need the purchase in the player. Store managers still hear every track to check the files, and the player says so.

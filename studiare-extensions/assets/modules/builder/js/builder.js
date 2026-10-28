@@ -16,6 +16,28 @@
 	const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' );
 	const isEditor = () => doc.body && doc.body.classList.contains( 'elementor-editor-active' );
 
+	/**
+	 * Runs `callback( jQuery )` now, or as soon as jQuery arrives. Our scripts
+	 * stay out of cache plugins' "delay JavaScript" (Core\Cache_Compat), while
+	 * jQuery and WooCommerce may load later, after WP Rocket's or LiteSpeed's
+	 * own "all scripts loaded" event.
+	 */
+	function withJQuery( callback ) {
+		if ( window.jQuery ) {
+			callback( window.jQuery );
+			return;
+		}
+		const events = [ 'load', 'rocket-allScriptsLoaded', 'DOMContentLiteSpeedLoaded' ];
+		const retry = () => {
+			if ( ! window.jQuery ) {
+				return;
+			}
+			events.forEach( ( name ) => window.removeEventListener( name, retry ) );
+			callback( window.jQuery );
+		};
+		events.forEach( ( name ) => window.addEventListener( name, retry ) );
+	}
+
 	/* ---------------------------------------------------------------------
 	 * Layers: drawer, search overlay, lightbox
 	 * ------------------------------------------------------------------- */
@@ -243,37 +265,38 @@
 
 	/** Swaps the first image for the chosen variation's image (WooCommerce events). */
 	function bindVariationImages() {
-		const $ = window.jQuery;
-		if ( ! $ || bindVariationImages.done ) {
+		if ( bindVariationImages.done ) {
 			return;
 		}
 		bindVariationImages.done = true;
 
-		const firstImage = () => {
-			const gallery = doc.querySelector( '.stx-single [data-stx-gallery]' ) || doc.querySelector( '[data-stx-gallery]' );
-			return gallery ? { gallery, img: gallery.querySelector( '.stx-gallery__slide img' ) } : null;
-		};
+		withJQuery( ( $ ) => {
+			const firstImage = () => {
+				const gallery = doc.querySelector( '.stx-single [data-stx-gallery]' ) || doc.querySelector( '[data-stx-gallery]' );
+				return gallery ? { gallery, img: gallery.querySelector( '.stx-gallery__slide img' ) } : null;
+			};
 
-		$( doc.body ).on( 'found_variation', '.variations_form', ( event, variation ) => {
-			const found = firstImage();
-			if ( ! found || ! found.img || ! variation || ! variation.image || ! variation.image.src ) {
-				return;
-			}
-			if ( ! found.img.dataset.stxSrc ) {
-				found.img.dataset.stxSrc = found.img.getAttribute( 'src' );
-				found.img.dataset.stxSrcset = found.img.getAttribute( 'srcset' ) || '';
-			}
-			found.img.setAttribute( 'src', variation.image.src );
-			found.img.setAttribute( 'srcset', variation.image.srcset || '' );
-			showSlide( found.gallery, 0 );
-		} );
+			$( doc.body ).on( 'found_variation', '.variations_form', ( event, variation ) => {
+				const found = firstImage();
+				if ( ! found || ! found.img || ! variation || ! variation.image || ! variation.image.src ) {
+					return;
+				}
+				if ( ! found.img.dataset.stxSrc ) {
+					found.img.dataset.stxSrc = found.img.getAttribute( 'src' );
+					found.img.dataset.stxSrcset = found.img.getAttribute( 'srcset' ) || '';
+				}
+				found.img.setAttribute( 'src', variation.image.src );
+				found.img.setAttribute( 'srcset', variation.image.srcset || '' );
+				showSlide( found.gallery, 0 );
+			} );
 
-		$( doc.body ).on( 'reset_image', '.variations_form', () => {
-			const found = firstImage();
-			if ( found && found.img && found.img.dataset.stxSrc ) {
-				found.img.setAttribute( 'src', found.img.dataset.stxSrc );
-				found.img.setAttribute( 'srcset', found.img.dataset.stxSrcset );
-			}
+			$( doc.body ).on( 'reset_image', '.variations_form', () => {
+				const found = firstImage();
+				if ( found && found.img && found.img.dataset.stxSrc ) {
+					found.img.setAttribute( 'src', found.img.dataset.stxSrc );
+					found.img.setAttribute( 'srcset', found.img.dataset.stxSrcset );
+				}
+			} );
 		} );
 	}
 
@@ -361,12 +384,13 @@
 			buildChoices( select );
 		} );
 
-		const $ = window.jQuery;
-		if ( $ && ! initChoices.bound ) {
+		if ( ! initChoices.bound ) {
 			initChoices.bound = true;
 			// WooCommerce rebuilds the option lists as choices change.
-			$( doc.body ).on( 'woocommerce_update_variation_values reset_data', '.variations_form', function () {
-				this.querySelectorAll( 'select.stx-enhanced' ).forEach( buildChoices );
+			withJQuery( ( $ ) => {
+				$( doc.body ).on( 'woocommerce_update_variation_values reset_data', '.variations_form', function () {
+					this.querySelectorAll( 'select.stx-enhanced' ).forEach( buildChoices );
+				} );
 			} );
 		}
 	}

@@ -281,6 +281,15 @@ phpcs.xml.dist                       WordPress-Extra + PHPCompatibilityWP (7.4+)
 
 The theme's `.widget_shopping_cart_content` rules (full-height flex) are undone inside `.stx-sheet--cart`. Studiare's mini-cart template uses `.cart-item-image` and `.cart-item-content`.
 
+## Cache plugins (WP Rocket, LiteSpeed Cache): key contracts
+
+- **Core\Cache_Compat** (always registered) holds every hook, read from WP Rocket 3.24 (GitHub `wp-media/wp-rocket`) and LiteSpeed Cache 7.9 sources. Page caching needs nothing: markup is the same for all guests and per-visitor answers (audio streams) define `DONOTCACHEPAGE` before any output buffer closes (LiteSpeed decides in its buffer callback; WP Rocket never caches non-HTML).
+- **Delay JS.** LiteSpeed's `js_delay.js` does not replay the first tap; WP Rocket replays it as an untrusted event (iOS refuses audio). Our scripts are excluded: `rocket_delay_js_exclusions` (regex against the whole `<script>` tag; `id=["']stx-` covers file and inline tags), `litespeed_optm_js_defer_exc` / `litespeed_optm_gm_js_exc` (substring of src or inline text: plugin assets path and `window.stx`). Every front handle must start with `stx-` and every inline config with `window.stx`. Inline scripts printed by hand carry `data-no-defer` (LiteSpeed) and an `stx-` id (Rocket).
+- **jQuery may arrive late.** bottom-nav.js and builder.js bind jQuery/WooCommerce events through `withJQuery()`, which retries on `load`, `rocket-allScriptsLoaded` and `DOMContentLiteSpeedLoaded`. Never test `window.jQuery` once at start-up in a new script.
+- **Unused CSS.** `rocket_rucss_safelist` (our `assets/(.*).css`), `rocket_rucss_inline_atts_exclusions` (literal `id="stx-` / `id='stx-`), `litespeed_ucss_whitelist` (`.stx-*`, `*stx-*`). Keep every rule naming an `stx-` class.
+- **Link prefetching.** WP Rocket's "Preload links" skips WooCommerce pages itself; LiteSpeed's Instant Click (instant.page) does not, so Fresh_Account_Page marks links to them `data-no-instant` while it is on (`apply_filters( 'litespeed_conf', 'util-instant_click' )`).
+- **Testing.** LiteSpeed's optimizations run on any server (`wp litespeed-option set optm-js_defer 2`, `optm-js_comb true`…). It requests the site itself, so run PHP's server with `PHP_CLI_SERVER_WORKERS` > 1. WP Rocket is paid: read its source instead.
+
 ## Workflows
 
 - **Lint PHP:** `vendor/bin/phpcs --standard=phpcs.xml.dist`. Install once with Composer: `wp-coding-standards/wpcs:^3.1` and `phpcompatibility/phpcompatibility-wp`. Must report 0/0. `phpcbf` fixes formatting.
