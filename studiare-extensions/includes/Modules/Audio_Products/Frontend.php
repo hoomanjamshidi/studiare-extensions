@@ -46,6 +46,22 @@ final class Frontend {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_filter( 'the_content', array( $this, 'filter_content' ), self::CONTENT_PRIORITY );
 		add_filter( 'studiare_ext_product_description_extras', array( $this, 'description_extras' ), 10, 2 );
+		add_filter( 'studiare_ext_is_digital_product', array( $this, 'is_digital' ), 10, 2 );
+	}
+
+	/**
+	 * An audio product is listened to on the site, never shipped (the
+	 * Studiare+ thank-you page then shows no packing and delivery steps).
+	 *
+	 * @param bool        $digital Detected value.
+	 * @param \WC_Product $product Product or variation.
+	 */
+	public function is_digital( $digital, $product ): bool {
+		if ( $digital || ! $product instanceof \WC_Product ) {
+			return (bool) $digital;
+		}
+
+		return '' !== get_post_meta( $product->get_parent_id() ? $product->get_parent_id() : $product->get_id(), Album::META, true );
 	}
 
 	public function enqueue_assets(): void {

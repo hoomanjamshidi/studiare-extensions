@@ -21,6 +21,9 @@ final class Schema {
 	/** Player looks: tinted with the accent colour (follows dark mode), or always dark. */
 	public const LOOKS = array( 'soft', 'studio' );
 
+	/** Lowest place the "My audio" tab can take in the account menu (0 = automatic). */
+	public const MAX_MENU_POSITION = 12;
+
 	/** Shortest and longest "first N seconds" preview. */
 	public const MIN_CLIP = 10;
 	public const MAX_CLIP = 600;
@@ -41,8 +44,10 @@ final class Schema {
 				'cta'     => true,
 			),
 			'account' => array(
-				'enabled' => true,
-				'label'   => __( 'My audio', 'studiare-extensions' ),
+				'enabled'  => true,
+				'label'    => __( 'My audio', 'studiare-extensions' ),
+				'position' => 0,
+				'courses'  => true,
 			),
 			'colors'  => array(
 				'accent' => '',
@@ -87,11 +92,17 @@ final class Schema {
 			'account' => array(
 				'type'   => 'group',
 				'fields' => array(
-					'enabled' => array( 'type' => 'bool' ),
-					'label'   => array(
+					'enabled'  => array( 'type' => 'bool' ),
+					'label'    => array(
 						'type'       => 'text',
 						'max_length' => 30,
 					),
+					'position' => array(
+						'type' => 'int',
+						'min'  => 0,
+						'max'  => self::MAX_MENU_POSITION,
+					),
+					'courses'  => array( 'type' => 'bool' ),
 				),
 			),
 			'colors'  => array(

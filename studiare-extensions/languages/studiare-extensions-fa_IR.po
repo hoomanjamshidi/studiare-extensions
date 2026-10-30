@@ -264,6 +264,7 @@ msgstr "یک پنل جستجو باز می‌کند."
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:42
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:85
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:149
+#: includes/Modules/Checkout/views/steps.php:20
 msgid "Cart"
 msgstr "سبد خرید"
 
@@ -420,6 +421,8 @@ msgstr "«%s» از نوار حذف می‌شود."
 #: includes/Modules/Bottom_Nav/Module.php:156
 #: includes/Modules/Bottom_Nav/views/admin.php:540
 #: includes/Modules/Builder/Module.php:384
+#: includes/Modules/Checkout/Module.php:144
+#: includes/Modules/Checkout/views/admin.php:356
 #: includes/Modules/Support_Button/Module.php:125
 #: includes/Modules/Support_Button/views/admin.php:227
 msgid "Delete"
@@ -571,7 +574,7 @@ msgid "Buttons"
 msgstr "دکمه‌ها"
 
 #: includes/Modules/Article_Tools/views/admin.php:150
-#: includes/Modules/Audio_Products/views/admin.php:129
+#: includes/Modules/Audio_Products/views/admin.php:154
 #: includes/Modules/Bottom_Nav/views/admin.php:90
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:368
 #: includes/Modules/Builder/Elementor/Widgets/Post_Share.php:93
@@ -590,18 +593,20 @@ msgid "Behaviour"
 msgstr "رفتار"
 
 #: includes/Modules/Article_Tools/views/admin.php:51
-#: includes/Modules/Audio_Products/views/admin.php:47
+#: includes/Modules/Audio_Products/views/admin.php:55
 #: includes/Modules/Bottom_Nav/views/admin.php:104
 #: includes/Modules/Builder/views/admin.php:90
+#: includes/Modules/Checkout/views/admin.php:67
 #: includes/Modules/Support_Button/views/admin.php:87
 #: includes/Modules/Theme_Fixes/views/admin.php:32
 msgid "Active"
 msgstr "فعال"
 
 #: includes/Modules/Article_Tools/views/admin.php:52
-#: includes/Modules/Audio_Products/views/admin.php:48
+#: includes/Modules/Audio_Products/views/admin.php:56
 #: includes/Modules/Bottom_Nav/views/admin.php:105
 #: includes/Modules/Builder/views/admin.php:91
+#: includes/Modules/Checkout/views/admin.php:68
 #: includes/Modules/Support_Button/views/admin.php:88
 #: includes/Modules/Theme_Fixes/views/admin.php:33
 msgid "Inactive"
@@ -637,7 +642,7 @@ msgid "Font Awesome weight"
 msgstr "ضخامت Font Awesome"
 
 #: includes/Modules/Article_Tools/views/admin.php:163
-#: includes/Modules/Audio_Products/views/admin.php:142
+#: includes/Modules/Audio_Products/views/admin.php:167
 #: includes/Modules/Bottom_Nav/views/admin.php:177
 #: includes/Modules/Bottom_Nav/views/admin.php:486
 #: includes/Modules/Support_Button/views/admin.php:465
@@ -977,21 +982,21 @@ msgid "Comma separated IDs, e.g. landing pages that have their own call to actio
 msgstr "شناسه‌ها را با کاما جدا کنید؛ مثلاً صفحات فرودی که دکمه اقدام اختصاصی دارند."
 
 #: includes/Modules/Article_Tools/views/admin.php:159
-#: includes/Modules/Audio_Products/views/admin.php:138
+#: includes/Modules/Audio_Products/views/admin.php:163
 #: includes/Modules/Bottom_Nav/views/admin.php:482
 #: includes/Modules/Support_Button/views/admin.php:461
 msgid "Live preview"
 msgstr "پیش‌نمایش زنده"
 
 #: includes/Modules/Article_Tools/views/admin.php:162
-#: includes/Modules/Audio_Products/views/admin.php:141
+#: includes/Modules/Audio_Products/views/admin.php:166
 #: includes/Modules/Bottom_Nav/views/admin.php:485
 #: includes/Modules/Support_Button/views/admin.php:464
 msgid "Preview colour scheme"
 msgstr "حالت رنگی پیش‌نمایش"
 
 #: includes/Modules/Article_Tools/views/admin.php:164
-#: includes/Modules/Audio_Products/views/admin.php:143
+#: includes/Modules/Audio_Products/views/admin.php:168
 #: includes/Modules/Bottom_Nav/views/admin.php:487
 #: includes/Modules/Builder/Elementor/Integration.php:186
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:37
@@ -1020,6 +1025,8 @@ msgid "Tap the buttons to try the animation. On your site the Studiare font is u
 msgstr "روی دکمه‌ها بزنید تا انیمیشن را ببینید. در سایت از فونت قالب استادیار استفاده می‌شود."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:521
+#: includes/Modules/Checkout/views/admin.php:297
+#: includes/Modules/Checkout/views/admin.php:344
 #: includes/Modules/Support_Button/views/admin.php:133
 #: includes/Modules/Support_Button/views/admin.php:211
 msgid "Drag to reorder"
@@ -1041,6 +1048,8 @@ msgstr "وسط"
 #: includes/Modules/Audio_Products/views/edit-box.php:50
 #: includes/Modules/Bottom_Nav/views/admin.php:533
 #: includes/Modules/Builder/Module.php:407
+#: includes/Modules/Checkout/views/admin.php:303
+#: includes/Modules/Checkout/views/admin.php:350
 #: includes/Modules/Support_Button/views/admin.php:143
 #: includes/Modules/Support_Button/views/admin.php:221
 msgid "Move up"
@@ -1049,6 +1058,8 @@ msgstr "انتقال به بالا"
 #: includes/Modules/Audio_Products/views/edit-box.php:52
 #: includes/Modules/Bottom_Nav/views/admin.php:534
 #: includes/Modules/Builder/Module.php:408
+#: includes/Modules/Checkout/views/admin.php:304
+#: includes/Modules/Checkout/views/admin.php:351
 #: includes/Modules/Support_Button/views/admin.php:144
 #: includes/Modules/Support_Button/views/admin.php:222
 msgid "Move down"
@@ -1076,6 +1087,9 @@ msgstr "نوع دکمه"
 #: includes/Modules/Builder/Elementor/Widgets/Product_Spotlight.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:54
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:122
+#: includes/Modules/Checkout/views/admin.php:315
+#: includes/Modules/Checkout/views/admin.php:363
+#: includes/Modules/Checkout/views/admin.php:425
 #: includes/Modules/Support_Button/views/admin.php:165
 msgid "Label"
 msgstr "عنوان"
@@ -1289,6 +1303,7 @@ msgstr "فروشگاه / دوره‌ها"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:744
 #: includes/Modules/Builder/Elementor/Widgets/Account.php:89
+#: includes/Modules/Checkout/Thank_You.php:252
 msgid "My account"
 msgstr "حساب کاربری من"
 
@@ -1368,7 +1383,7 @@ msgid "Page background"
 msgstr "پس‌زمینه صفحه"
 
 #: includes/Modules/Article_Tools/views/admin.php:154
-#: includes/Modules/Audio_Products/views/admin.php:133
+#: includes/Modules/Audio_Products/views/admin.php:158
 #: includes/Modules/Builder/Elementor/Integration.php:187
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:36
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:71
@@ -1422,10 +1437,11 @@ msgid "{percent}% off"
 msgstr "{percent}٪ تخفیف"
 
 #: includes/Modules/Audio_Products/Player.php:84
-#: includes/Modules/Audio_Products/Player.php:129
+#: includes/Modules/Audio_Products/Player.php:150
 #: includes/Modules/Builder/Elementor/Parts.php:45
 #: includes/Modules/Builder/Elementor/Parts.php:295
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:72
+#: includes/Modules/Checkout/Pages.php:177
 msgid "Free"
 msgstr "رایگان"
 
@@ -1547,9 +1563,9 @@ msgid "%s lesson"
 msgid_plural "%s lessons"
 msgstr[0] "%s درس"
 
-#: includes/Modules/Audio_Products/views/admin.php:95
+#: includes/Modules/Audio_Products/views/admin.php:103
 #: includes/Modules/Audio_Products/views/edit-box.php:72
-#: includes/Modules/Audio_Products/views/player.php:91
+#: includes/Modules/Audio_Products/views/player.php:86
 #: includes/Modules/Builder/Elementor/Parts.php:491
 msgid "Free preview"
 msgstr "پیش‌نمایش رایگان"
@@ -1709,7 +1725,7 @@ msgstr "حساب کاربری / ورود"
 msgid "Text for guests"
 msgstr "متن برای مهمان‌ها"
 
-#: includes/Modules/Audio_Products/views/player.php:209
+#: includes/Modules/Audio_Products/views/player.php:204
 #: includes/Modules/Builder/Elementor/Widgets/Account.php:42
 msgid "Log in"
 msgstr "ورود / ثبت‌نام"
@@ -1847,6 +1863,9 @@ msgstr "وقتی ووکامرس اجازه دهد"
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:51
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:150
 #: includes/Modules/Builder/Elementor/Widgets/Product_Gallery.php:42
+#: includes/Modules/Checkout/Module.php:135
+#: includes/Modules/Checkout/views/admin.php:128
+#: includes/Modules/Checkout/views/admin.php:213
 msgid "Hidden"
 msgstr "مخفی"
 
@@ -1994,6 +2013,7 @@ msgstr "انتها"
 #: includes/Modules/Builder/Elementor/Widgets/Base.php:237
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:428
 #: includes/Modules/Builder/Elementor/Widgets/Reading_Progress.php:46
+#: includes/Modules/Checkout/views/admin.php:179
 #: includes/Modules/Support_Button/views/admin.php:252
 msgid "Colour"
 msgstr "رنگ"
@@ -2102,6 +2122,7 @@ msgstr "لینک متنی"
 #: includes/Modules/Builder/Elementor/Widgets/Text.php:83
 #: includes/Modules/Builder/Elementor/Widgets/Timeline.php:63
 #: includes/Modules/Builder/Elementor/Widgets/Timeline.php:128
+#: includes/Modules/Checkout/views/admin.php:48
 msgid "Text"
 msgstr "متن"
 
@@ -2149,6 +2170,7 @@ msgid "After text"
 msgstr "بعد از متن"
 
 #: includes/Modules/Builder/Elementor/Widgets/Button.php:135
+#: includes/Modules/Checkout/views/admin.php:44
 msgid "Full width"
 msgstr "تمام‌عرض"
 
@@ -2173,10 +2195,14 @@ msgid "Studiare mini cart (else cart page)"
 msgstr "سبد خرید کشویی استادیار (در غیر این صورت صفحه سبد)"
 
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:77
+#: includes/Modules/Checkout/views/admin.php:30
+#: includes/Modules/Checkout/views/admin.php:100
 msgid "Cart page"
 msgstr "صفحه سبد خرید"
 
 #: includes/Modules/Builder/Elementor/Widgets/Cart.php:78
+#: includes/Modules/Checkout/views/cart.php:192
+#: includes/Modules/Checkout/views/form-checkout.php:37
 msgid "Checkout"
 msgstr "تسویه حساب"
 
@@ -3419,6 +3445,8 @@ msgid "Optional. Shown when Studiare's dark mode is on."
 msgstr "اختیاری. وقتی حالت تاریک استادیار روشن است نمایش داده می‌شود."
 
 #: includes/Modules/Builder/Elementor/Widgets/Site_Logo.php:84
+#: includes/Modules/Checkout/views/admin.php:324
+#: includes/Modules/Checkout/views/admin.php:381
 msgid "Width"
 msgstr "عرض"
 
@@ -3578,7 +3606,7 @@ msgstr "همان انتخاب دسکتاپ در موبایل هم استفاده
 msgid "Custom template"
 msgstr "قالب سفارشی"
 
-#: includes/Modules/Audio_Products/Player.php:117
+#: includes/Modules/Audio_Products/Player.php:138
 #: includes/Modules/Builder/Module.php:380
 #: includes/Modules/Builder/Module.php:418
 msgid "Preview"
@@ -4894,7 +4922,7 @@ msgid "Time"
 msgstr "زمان"
 
 #: includes/Modules/Article_Tools/views/admin.php:73
-#: includes/Modules/Audio_Products/views/admin.php:72
+#: includes/Modules/Audio_Products/views/admin.php:80
 #: includes/Modules/Builder/Elementor/Widgets/Events.php:75
 msgid "Place"
 msgstr "مکان"
@@ -5186,6 +5214,7 @@ msgstr "شورت‌کد فرم افزونه خبرنامه‌تان را این�
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:133
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:144
 #: includes/Modules/Builder/Newsletter.php:160
+#: includes/Modules/Checkout/views/admin.php:52
 #: includes/Modules/Support_Button/Channels.php:93
 #: includes/Modules/Support_Button/views/admin.php:41
 msgid "Email"
@@ -5357,6 +5386,7 @@ msgstr "تصویر با دکمه پخش (پادکست، ویدیو)"
 
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:248
 #: includes/Modules/Builder/Elementor/Widgets/Post_Meta.php:38
+#: includes/Modules/Checkout/Thank_You.php:212
 msgid "Date"
 msgstr "تاریخ"
 
@@ -5540,7 +5570,7 @@ msgid "See more"
 msgstr "مشاهده بیشتر"
 
 #: includes/Modules/Article_Tools/views/admin.php:127
-#: includes/Modules/Audio_Products/views/admin.php:81
+#: includes/Modules/Audio_Products/views/admin.php:89
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:89
 #: includes/Modules/Builder/Elementor/Widgets/Post_Author.php:66
 #: includes/Modules/Builder/Elementor/Widgets/Post_Categories.php:94
@@ -5647,6 +5677,7 @@ msgstr "آمار کلیدی"
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:416
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:46
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:121
+#: includes/Modules/Checkout/views/admin.php:50
 msgid "Number"
 msgstr "عدد"
 
@@ -5764,6 +5795,7 @@ msgstr "از طرح «%s»"
 
 #: includes/Modules/Builder/Module.php:455
 #: includes/Modules/Builder/Presets/Home.php:726
+#: includes/Modules/Checkout/Thank_You.php:403
 msgid "View"
 msgstr "مشاهده"
 
@@ -6424,6 +6456,10 @@ msgstr "اسلایدر تصویری"
 
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:100
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:105
+#: includes/Modules/Checkout/views/admin.php:105
+#: includes/Modules/Checkout/views/admin.php:164
+#: includes/Modules/Checkout/views/admin.php:197
+#: includes/Modules/Checkout/views/admin.php:237
 #: includes/Modules/Support_Button/views/admin.php:291
 #: includes/Modules/Support_Button/views/admin.php:294
 msgid "Design"
@@ -6753,6 +6789,8 @@ msgstr "هدست"
 #: includes/Modules/Builder/Contact_Messages.php:374
 #: includes/Modules/Builder/Contact_Messages.php:490
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:58
+#: includes/Modules/Checkout/Module.php:181
+#: includes/Modules/Checkout/Woo_Texts.php:146
 #: includes/Modules/Support_Button/views/admin.php:40
 msgid "Phone"
 msgstr "تلفن"
@@ -6814,7 +6852,9 @@ msgstr "هنوز هیچ راه ارتباطی آماده نیست، پس دکم�
 msgid "Show this channel"
 msgstr "نمایش این راه ارتباطی"
 
+#. translators: %s: field label.
 #. translators: %s: channel name, e.g. Telegram.
+#: includes/Modules/Checkout/views/admin.php:306
 #: includes/Modules/Support_Button/views/admin.php:146
 #, php-format
 msgid "Show %s"
@@ -6975,6 +7015,7 @@ msgstr "اگر پنجره بازشو یا ابزارک گفتگو روی دکم�
 msgid "Preview state"
 msgstr "وضعیت پیش‌نمایش"
 
+#: includes/Modules/Checkout/views/admin.php:204
 #: includes/Modules/Support_Button/views/admin.php:469
 msgid "Open"
 msgstr "باز"
@@ -7260,6 +7301,7 @@ msgid "The second choice shows what you set in Studiare+ → Floating support bu
 msgstr "گزینه دوم همان راه‌هایی را نشان می‌دهد که در استادیار+ ← دکمه شناور پشتیبانی تنظیم کرده‌اید؛ این‌طور شماره‌ها و نام‌های کاربری را فقط یک بار وارد می‌کنید."
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:93
+#: includes/Modules/Checkout/views/admin.php:367
 msgid "Type"
 msgstr "نوع"
 
@@ -7300,10 +7342,15 @@ msgid "Contact form"
 msgstr "فرم تماس"
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:49
+#: includes/Modules/Checkout/Module.php:133
+#: includes/Modules/Checkout/views/admin.php:40
+#: includes/Modules/Checkout/views/admin.php:404
 msgid "Required"
 msgstr "الزامی"
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:50
+#: includes/Modules/Checkout/Module.php:134
+#: includes/Modules/Checkout/views/admin.php:41
 msgid "Optional"
 msgstr "اختیاری"
 
@@ -8251,6 +8298,7 @@ msgid "Product spotlight"
 msgstr "محصول برگزیده"
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Spotlight.php:43
+#: includes/Modules/Checkout/Woo_Texts.php:132
 msgid "Product"
 msgstr "محصول"
 
@@ -8520,6 +8568,7 @@ msgid "Video courses, books and live workshops by experienced teachers, with sup
 msgstr "دوره‌های ویدیویی، کتاب و کارگاه زنده با مدرس‌های باتجربه، همراه با پشتیبانی که بعد از خرید هم ادامه دارد."
 
 #: includes/Modules/Builder/Presets/About.php:335
+#: includes/Modules/Checkout/views/mini-cart.php:134
 msgid "Browse the courses"
 msgstr "مشاهده دوره‌ها"
 
@@ -9273,7 +9322,7 @@ msgstr "ذخیرهٔ PDF"
 
 #: includes/Modules/Article_Tools/Frontend.php:240
 #: includes/Modules/Article_Tools/views/podcast.php:86
-#: includes/Modules/Audio_Products/views/player.php:121
+#: includes/Modules/Audio_Products/views/player.php:116
 msgid "Play"
 msgstr "پخش"
 
@@ -9284,8 +9333,8 @@ msgstr "توقف"
 #. translators: %s: playback speed, e.g. 1.5×.
 #: includes/Modules/Article_Tools/Frontend.php:243
 #: includes/Modules/Article_Tools/views/podcast.php:115
-#: includes/Modules/Audio_Products/Frontend.php:155
-#: includes/Modules/Audio_Products/views/player.php:104
+#: includes/Modules/Audio_Products/Frontend.php:171
+#: includes/Modules/Audio_Products/views/player.php:99
 #: includes/Modules/Builder/Assets.php:205
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:570
 #, php-format
@@ -9295,7 +9344,7 @@ msgstr "سرعت پخش: %s"
 #. translators: 1: time listened, 2: length of the episode.
 #. translators: 1: time listened, 2: length of the track.
 #: includes/Modules/Article_Tools/Frontend.php:245
-#: includes/Modules/Audio_Products/Frontend.php:157
+#: includes/Modules/Audio_Products/Frontend.php:173
 #: includes/Modules/Builder/Assets.php:203
 #, php-format
 msgid "%1$s of %2$s"
@@ -9385,17 +9434,17 @@ msgid "Show the podcast player"
 msgstr "نمایش پخش‌کنندهٔ پادکست"
 
 #: includes/Modules/Article_Tools/views/admin.php:119
-#: includes/Modules/Audio_Products/views/admin.php:78
+#: includes/Modules/Audio_Products/views/admin.php:86
 msgid "Text above the title"
 msgstr "متن بالای عنوان"
 
 #: includes/Modules/Article_Tools/views/admin.php:129
-#: includes/Modules/Audio_Products/views/admin.php:83
+#: includes/Modules/Audio_Products/views/admin.php:91
 msgid "Soft (follows dark mode)"
 msgstr "ملایم (هماهنگ با حالت تیره)"
 
 #: includes/Modules/Article_Tools/views/admin.php:130
-#: includes/Modules/Audio_Products/views/admin.php:84
+#: includes/Modules/Audio_Products/views/admin.php:92
 msgid "Studio (always dark)"
 msgstr "استودیو (همیشه تیره)"
 
@@ -9404,27 +9453,27 @@ msgid "Download button"
 msgstr "دکمهٔ دانلود"
 
 #: includes/Modules/Article_Tools/views/admin.php:135
-#: includes/Modules/Audio_Products/views/admin.php:87
+#: includes/Modules/Audio_Products/views/admin.php:95
 msgid "Playback speed button"
 msgstr "دکمهٔ سرعت پخش"
 
 #: includes/Modules/Article_Tools/views/admin.php:138
-#: includes/Modules/Audio_Products/views/admin.php:88
+#: includes/Modules/Audio_Products/views/admin.php:96
 msgid "Continue where the listener stopped"
 msgstr "ادامه از جایی که شنونده متوقف کرده بود"
 
 #: includes/Modules/Article_Tools/views/admin.php:140
-#: includes/Modules/Audio_Products/views/admin.php:88
+#: includes/Modules/Audio_Products/views/admin.php:96
 msgid "Remembered in the visitor's own browser; nothing is sent to the site."
 msgstr "در مرورگر خود بازدیدکننده نگه داشته می‌شود و چیزی به سایت فرستاده نمی‌شود."
 
 #: includes/Modules/Article_Tools/views/admin.php:151
-#: includes/Modules/Audio_Products/views/admin.php:130
+#: includes/Modules/Audio_Products/views/admin.php:155
 msgid "Leave it empty to follow your Studiare primary colour. The text on the buttons switches between white and black for contrast."
 msgstr "برای پیروی از رنگ اصلی قالب استادیار خالی بگذارید. رنگ متن روی دکمه‌ها برای خوانایی، خودکار سفید یا مشکی می‌شود."
 
 #: includes/Modules/Article_Tools/views/admin.php:201
-#: includes/Modules/Audio_Products/views/admin.php:161
+#: includes/Modules/Audio_Products/views/admin.php:186
 msgid "The preview player does not play. On your site the Studiare font is used."
 msgstr "پخش‌کنندهٔ پیش‌نمایش صدا پخش نمی‌کند. در سایت شما فونت قالب استادیار به کار می‌رود."
 
@@ -9497,21 +9546,21 @@ msgstr "آن را به‌صورت PDF ذخیره کنید تا بدون اینت
 #. translators: %s: length of the episode in minutes.
 #. translators: %s: total length in minutes.
 #: includes/Modules/Article_Tools/views/podcast.php:79
-#: includes/Modules/Audio_Products/views/player.php:81
+#: includes/Modules/Audio_Products/Player.php:112
 #, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
 msgstr[0] "%s دقیقه"
 
 #: includes/Modules/Article_Tools/views/podcast.php:94
-#: includes/Modules/Audio_Products/views/player.php:110
+#: includes/Modules/Audio_Products/views/player.php:105
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:554
 msgid "Playback position"
 msgstr "موقعیت پخش"
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:104
-#: includes/Modules/Audio_Products/views/player.php:120
+#: includes/Modules/Audio_Products/views/player.php:115
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:564
 #, php-format
 msgid "Back %s seconds"
@@ -9519,7 +9568,7 @@ msgstr "%s ثانیه به عقب"
 
 #. translators: %s: number of seconds.
 #: includes/Modules/Article_Tools/views/podcast.php:109
-#: includes/Modules/Audio_Products/views/player.php:126
+#: includes/Modules/Audio_Products/views/player.php:121
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:567
 #, php-format
 msgid "Forward %s seconds"
@@ -9546,11 +9595,6 @@ msgstr "دنبال‌کردن خواننده هنگام اسکرول"
 #: includes/Modules/Builder/Elementor/Widgets/Post_Toc.php:87
 msgid "Once the list scrolls away, a slim bar with the section being read stays under the header; tapping it opens the list. On computers the designs keep the list in a sticky sidebar instead."
 msgstr "وقتی فهرست از صفحه بیرون می‌رود، نواری باریک با عنوان بخشی که خوانده می‌شود زیر سربرگ می‌ماند و با لمس آن فهرست باز می‌شود. در رایانه، طرح‌ها فهرست را در ستون کناری چسبان نگه می‌دارند."
-
-#. Description of the plugin
-#: studiare-extensions.php
-msgid "Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, a floating support button, and a \"Save as PDF\" button and podcast player for blog posts."
-msgstr "امکانات بیشتر برای قالب آموزشی استادیار: نوار پایین موبایل قابل‌تنظیم، قالب‌های المنتوری برای دوره‌ها، محصولات، سربرگ، پابرگ و وبلاگ، دکمهٔ شناور پشتیبانی، و دکمهٔ «ذخیره به‌صورت PDF» و پخش‌کنندهٔ پادکست برای مقاله‌ها."
 
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:79
 msgid "Category and tag description"
@@ -9666,8 +9710,8 @@ msgstr "هنوز هیچ مقاله‌ای پادکست ندارد. در کادر
 
 #. translators: %s: track title.
 #. translators: %s: episode title.
-#: includes/Modules/Audio_Products/Frontend.php:151
-#: includes/Modules/Audio_Products/views/player.php:164
+#: includes/Modules/Audio_Products/Frontend.php:167
+#: includes/Modules/Audio_Products/views/player.php:159
 #: includes/Modules/Builder/Assets.php:199
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:739
 #, php-format
@@ -9676,7 +9720,7 @@ msgstr "پخش: %s"
 
 #. translators: %s: track title.
 #. translators: %s: episode title.
-#: includes/Modules/Audio_Products/Frontend.php:153
+#: includes/Modules/Audio_Products/Frontend.php:169
 #: includes/Modules/Builder/Assets.php:201
 #, php-format
 msgid "Pause: %s"
@@ -9908,8 +9952,8 @@ msgstr "محصولات صوتی"
 msgid "Buyers listen to audio products on the site with a dedicated player, and visitors hear a free preview before buying."
 msgstr "خریداران محصولات صوتی را با پلیر اختصاصی روی خود سایت گوش می‌دهند و بازدیدکنندگان پیش از خرید، پیش‌نمایش رایگان را می‌شنوند."
 
-#: includes/Modules/Audio_Products/My_Account.php:114
-#: includes/Modules/Audio_Products/Schema.php:45
+#: includes/Modules/Audio_Products/My_Account.php:189
+#: includes/Modules/Audio_Products/Schema.php:48
 msgid "My audio"
 msgstr "صوت‌های من"
 
@@ -9930,18 +9974,18 @@ msgid "Chapter two: memory"
 msgstr "فصل دوم: حافظه"
 
 #: includes/Modules/Audio_Products/Player.php:86
-#: includes/Modules/Audio_Products/Player.php:126
+#: includes/Modules/Audio_Products/Player.php:147
 msgid "After purchase"
 msgstr "پس از خرید"
 
 #. translators: %s: date the lesson opens.
-#: includes/Modules/Audio_Products/Player.php:123
+#: includes/Modules/Audio_Products/Player.php:144
 #, php-format
 msgid "Opens on %s"
 msgstr "باز می‌شود در %s"
 
 #. translators: %s: length of the free preview, e.g. 1:00.
-#: includes/Modules/Audio_Products/Player.php:137
+#: includes/Modules/Audio_Products/Player.php:158
 #, php-format
 msgid "Preview %s"
 msgstr "پیش‌نمایش %s"
@@ -9950,7 +9994,7 @@ msgstr "پیش‌نمایش %s"
 msgid "Untitled track"
 msgstr "قسمت بدون عنوان"
 
-#: includes/Modules/Audio_Products/Schema.php:33
+#: includes/Modules/Audio_Products/Schema.php:36
 #: includes/Modules/Audio_Products/views/player.php:30
 msgid "Audio files of this product"
 msgstr "فایل‌های صوتی این محصول"
@@ -9959,83 +10003,83 @@ msgstr "فایل‌های صوتی این محصول"
 msgid "You cannot listen to this file."
 msgstr "شما اجازه شنیدن این فایل را ندارید."
 
-#: includes/Modules/Audio_Products/views/account.php:20
+#: includes/Modules/Audio_Products/views/account.php:62
 msgid "You have no audio products yet."
 msgstr "هنوز محصول صوتی‌ای ندارید."
 
-#: includes/Modules/Audio_Products/views/account.php:21
+#: includes/Modules/Audio_Products/views/account.php:63
 msgid "Browse products"
 msgstr "دیدن محصولات"
 
-#: includes/Modules/Audio_Products/views/admin.php:50
+#: includes/Modules/Audio_Products/views/admin.php:58
 msgid "Enable audio products"
 msgstr "فعال‌سازی محصولات صوتی"
 
-#: includes/Modules/Audio_Products/views/admin.php:60
+#: includes/Modules/Audio_Products/views/admin.php:68
 msgid "Audio products are WooCommerce products. Activate WooCommerce to use them."
 msgstr "محصولات صوتی، محصولات ووکامرس هستند. برای استفاده از آن‌ها ووکامرس را فعال کنید."
 
-#: includes/Modules/Audio_Products/views/admin.php:65
+#: includes/Modules/Audio_Products/views/admin.php:73
 msgid "Player on the product page"
 msgstr "پلیر در صفحه محصول"
 
-#: includes/Modules/Audio_Products/views/admin.php:66
+#: includes/Modules/Audio_Products/views/admin.php:74
 msgid "Open a product in the editor and add its tracks in the \"Studiare+ audio\" box. The player shows in the product description; products without audio stay as they are. Files are sent by the site only to visitors allowed to hear them, so their address never appears on the page."
 msgstr "محصول را در ویرایشگر باز کنید و قسمت‌هایش را در کادر «صوت استادیار+» اضافه کنید. پلیر در توضیحات محصول نمایش داده می‌شود و محصولات بدون صوت تغییری نمی‌کنند. سایت فایل‌ها را فقط برای کسانی می‌فرستد که اجازه شنیدنشان را دارند، بنابراین نشانی فایل‌ها هیچ‌وقت در صفحه دیده نمی‌شود."
 
-#: includes/Modules/Audio_Products/views/admin.php:74
+#: includes/Modules/Audio_Products/views/admin.php:82
 msgid "Above the description"
 msgstr "بالای توضیحات"
 
-#: includes/Modules/Audio_Products/views/admin.php:75
+#: includes/Modules/Audio_Products/views/admin.php:83
 msgid "After the description"
 msgstr "پس از توضیحات"
 
-#: includes/Modules/Audio_Products/views/admin.php:96
+#: includes/Modules/Audio_Products/views/admin.php:104
 msgid "Each track chooses its own preview in the product box: its first seconds, a separate short file, the whole track, or none. Visitors who have not bought the product never receive more than the preview."
 msgstr "پیش‌نمایش هر قسمت در کادر محصول انتخاب می‌شود: چند ثانیه اول، یک فایل کوتاه جدا، کل قسمت یا هیچ. کسی که محصول را نخریده، هیچ‌وقت بیشتر از پیش‌نمایش دریافت نمی‌کند."
 
-#: includes/Modules/Audio_Products/views/admin.php:100
+#: includes/Modules/Audio_Products/views/admin.php:108
 msgid "Default preview length"
 msgstr "مدت پیش‌فرض پیش‌نمایش"
 
-#: includes/Modules/Audio_Products/views/admin.php:100
+#: includes/Modules/Audio_Products/views/admin.php:108
 msgid "s"
 msgstr "ثانیه"
 
-#: includes/Modules/Audio_Products/views/admin.php:100
+#: includes/Modules/Audio_Products/views/admin.php:108
 msgid "Used for new tracks and for the private audio of Studiare lessons."
 msgstr "برای قسمت‌های جدید و صوت درس‌های خصوصی استادیار به کار می‌رود."
 
-#: includes/Modules/Audio_Products/views/admin.php:101
+#: includes/Modules/Audio_Products/views/admin.php:109
 msgid "Preview of private Studiare lessons"
 msgstr "پیش‌نمایش درس‌های خصوصی استادیار"
 
-#: includes/Modules/Audio_Products/views/admin.php:101
+#: includes/Modules/Audio_Products/views/admin.php:109
 msgid "Lesson audio added to a player plays its first seconds for visitors who have not bought the course (MP3 files on this site only)."
 msgstr "صوت درس‌هایی که به پلیر اضافه شده‌اند، برای کسانی که دوره را نخریده‌اند چند ثانیه اول را پخش می‌کند (فقط فایل‌های MP3 روی همین سایت)."
 
-#: includes/Modules/Audio_Products/views/admin.php:102
+#: includes/Modules/Audio_Products/views/admin.php:110
 msgid "Buy button in the player"
 msgstr "دکمه خرید در پلیر"
 
-#: includes/Modules/Audio_Products/views/admin.php:102
+#: includes/Modules/Audio_Products/views/admin.php:110
 msgid "Shown under the list and when a preview ends."
 msgstr "زیر فهرست و هنگام پایان پیش‌نمایش نمایش داده می‌شود."
 
-#: includes/Modules/Audio_Products/views/admin.php:109
+#: includes/Modules/Audio_Products/views/admin.php:117
 msgid "Customer account"
 msgstr "حساب کاربری مشتری"
 
-#: includes/Modules/Audio_Products/views/admin.php:110
+#: includes/Modules/Audio_Products/views/admin.php:118
 msgid "A tab in the WooCommerce account page with the player of every audio product the customer bought. It only shows to customers who own one."
 msgstr "زبانه‌ای در صفحه حساب کاربری ووکامرس با پلیر همه محصولات صوتی‌ای که مشتری خریده است. فقط برای مشتریانی دیده می‌شود که دست‌کم یکی دارند."
 
-#: includes/Modules/Audio_Products/views/admin.php:114
+#: includes/Modules/Audio_Products/views/admin.php:122
 msgid "Show the tab"
 msgstr "نمایش زبانه"
 
-#: includes/Modules/Audio_Products/views/admin.php:117
+#: includes/Modules/Audio_Products/views/admin.php:125
 msgid "Tab name"
 msgstr "نام زبانه"
 
@@ -10097,43 +10141,43 @@ msgid "Add the audio of this course's Studiare lessons to the player"
 msgstr "صوت درس‌های استادیار این دوره هم به پلیر اضافه شود"
 
 #. translators: %s: number of audio tracks.
-#: includes/Modules/Audio_Products/views/player.php:78
+#: includes/Modules/Audio_Products/Player.php:107
 #, php-format
 msgid "%s track"
 msgid_plural "%s tracks"
 msgstr[0] "%s قسمت"
 
-#: includes/Modules/Audio_Products/views/player.php:86
+#: includes/Modules/Audio_Products/views/player.php:81
 msgid "Full access"
 msgstr "دسترسی کامل"
 
-#: includes/Modules/Audio_Products/views/player.php:118
+#: includes/Modules/Audio_Products/views/player.php:113
 msgid "Previous track"
 msgstr "قسمت قبلی"
 
-#: includes/Modules/Audio_Products/views/player.php:127
+#: includes/Modules/Audio_Products/views/player.php:122
 msgid "Next track"
 msgstr "قسمت بعدی"
 
-#: includes/Modules/Audio_Products/views/player.php:131
+#: includes/Modules/Audio_Products/views/player.php:126
 msgid "The free preview of this track has ended."
 msgstr "پیش‌نمایش رایگان این قسمت تمام شد."
 
-#: includes/Modules/Audio_Products/views/player.php:136
+#: includes/Modules/Audio_Products/views/player.php:131
 msgid "The audio could not be played. Check your connection and try again."
 msgstr "پخش صوت ممکن نشد. اتصال اینترنت را بررسی کنید و دوباره امتحان کنید."
 
 #. translators: %s: track title.
-#: includes/Modules/Audio_Products/views/player.php:184
+#: includes/Modules/Audio_Products/views/player.php:179
 #, php-format
 msgid "Download: %s"
 msgstr "دانلود: %s"
 
-#: includes/Modules/Audio_Products/views/player.php:199
+#: includes/Modules/Audio_Products/views/player.php:194
 msgid "Buy this product to hear every track in full, here on the site."
 msgstr "با خرید این محصول، همه قسمت‌ها را کامل و همین‌جا روی سایت گوش دهید."
 
-#: includes/Modules/Audio_Products/views/player.php:200
+#: includes/Modules/Audio_Products/views/player.php:195
 msgid "Already bought it? Log in to listen."
 msgstr "قبلاً خریده‌اید؟ برای شنیدن وارد شوید."
 
@@ -10149,7 +10193,7 @@ msgstr "وقتی ظرفیت دوره تکمیل می‌شود، قالب به‌
 msgid "Lessons open to everyone in Studiare play for everyone; all other lessons (including \"logged-in users\" lessons) play in full only for buyers of this product, with the free preview from the Studiare+ settings. Release dates set in Studiare are kept."
 msgstr "درس‌هایی که در استادیار برای همه آزادند برای همه پخش می‌شوند؛ بقیه درس‌ها (از جمله درس‌های «کاربران واردشده») فقط برای خریداران این محصول کامل پخش می‌شوند و دیگران پیش‌نمایش رایگان تنظیمات استادیار+ را می‌شنوند. تاریخ‌های انتشار استادیار هم رعایت می‌شوند."
 
-#: includes/Modules/Audio_Products/views/player.php:89
+#: includes/Modules/Audio_Products/views/player.php:84
 msgid "Store manager view: every track is open to you"
 msgstr "نمای مدیر فروشگاه: همه قسمت‌ها برای شما باز است"
 
@@ -10160,3 +10204,1058 @@ msgstr "صفحه حساب کاربری پس از ورود با پاپ‌آپ"
 #: includes/Modules/Theme_Fixes/Fresh_Account_Page.php:41
 msgid "After logging in through the login popup, the account page still shows the login form until the page is refreshed: the browser had loaded it in advance while the visitor was a guest. This fix stops the browser from loading the account, cart and checkout pages in advance, so they always open up to date."
 msgstr "پس از ورود از پاپ‌آپ ورود، صفحه حساب کاربری تا وقتی صفحه دوباره بارگذاری نشود همچنان فرم ورود را نشان می‌دهد؛ چون مرورگر آن را وقتی بازدیدکننده هنوز مهمان بود از قبل بارگذاری کرده بود. این اصلاح جلوی پیش‌بارگذاری صفحه‌های حساب کاربری، سبد خرید و تسویه‌حساب را می‌گیرد تا همیشه به‌روز باز شوند."
+
+#: includes/Modules/Audio_Products/My_Account.php:105
+#: includes/Modules/Audio_Products/views/account.php:53
+msgid "Listen"
+msgstr "شنیدن"
+
+#: includes/Modules/Theme_Fixes/No_Repeat_Purchase.php:43
+msgid "No second purchase of an owned course"
+msgstr "جلوگیری از خرید دوباره‌ی دوره‌ی خریده‌شده"
+
+#: includes/Modules/Theme_Fixes/No_Repeat_Purchase.php:47
+msgid "The theme stops a second purchase only when a logged-in student adds the course to the cart. A course added before logging in, or through a learning path bundle, reaches checkout again, where it is paid for twice or the order fails with \"There was an error processing your order\". With this fix students see \"You are a student of this course\" instead of the buy button, an owned course leaves the cart with a short note, and checkout never takes it. Products set to \"can be bought again\" in the theme are not affected."
+msgstr "قالب فقط وقتی جلوی خرید دوباره را می‌گیرد که دانشجوی واردشده دوره را به سبد اضافه کند. دوره‌ای که پیش از ورود یا از راه بسته‌ی مسیر یادگیری به سبد رفته باشد، دوباره به صفحه‌ی پرداخت می‌رسد؛ آنجا یا دوبار پول آن گرفته می‌شود یا سفارش با خطای «هنگام پردازش سفارش شما خطایی روی داد» شکست می‌خورد. با این اصلاح، دانشجو به‌جای دکمه‌ی خرید «شما دانشجوی این دوره هستید» را می‌بیند، دوره‌ی خریده‌شده با یک پیام کوتاه از سبد خرید حذف می‌شود و صفحه‌ی پرداخت هرگز آن را نمی‌پذیرد. محصولاتی که در قالب «امکان خرید مجدد» دارند تغییری نمی‌کنند."
+
+#. translators: %s: product name
+#: includes/Modules/Theme_Fixes/No_Repeat_Purchase.php:90
+#, php-format
+msgid "You already own &ldquo;%s&rdquo;, so it was removed from your cart."
+msgstr "«%s» را قبلاً خریده‌اید، برای همین از سبد خرید شما حذف شد."
+
+#: includes/Modules/Theme_Fixes/No_Repeat_Purchase.php:109
+msgid "You are a student of this course"
+msgstr "شما دانشجوی این دوره هستید"
+
+#: includes/Modules/Theme_Fixes/Safe_Checkout.php:45
+msgid "Checkout error after placing an order"
+msgstr "خطای صفحه‌ی پرداخت پس از ثبت سفارش"
+
+#. translators: %s: order number
+#: includes/Modules/Theme_Fixes/Safe_Checkout.php:117
+#, php-format
+msgid "Your order could not be completed because of an error on the site. Please try again; if it happens again, contact us and mention order %s."
+msgstr "به‌دلیل خطایی در سایت، سفارش شما کامل نشد. لطفاً دوباره تلاش کنید؛ اگر باز هم تکرار شد، با ما تماس بگیرید و شماره‌ی سفارش %s را اعلام کنید."
+
+#: includes/Modules/Theme_Fixes/Safe_Checkout.php:118
+msgid "Your order could not be completed because of an error on the site. Please try again; if it happens again, contact us."
+msgstr "به‌دلیل خطایی در سایت، سفارش شما کامل نشد. لطفاً دوباره تلاش کنید؛ اگر باز هم تکرار شد، با ما تماس بگیرید."
+
+#. translators: %s: PHP error message with file and line
+#: includes/Modules/Theme_Fixes/Safe_Checkout.php:165
+#, php-format
+msgid "Checkout error (caught by Studiare+): %s"
+msgstr "خطای صفحه‌ی پرداخت (گرفته‌شده توسط استادیار+): %s"
+
+#. translators: %s: field label, e.g. Phone.
+#: includes/Modules/Checkout/Billing_Fields.php:189
+#, php-format
+msgid "%s is not a valid mobile number. Example: 09123456789"
+msgstr "%s یک شماره موبایل معتبر نیست. نمونه: 09123456789"
+
+#. translators: %s: field label.
+#: includes/Modules/Checkout/Billing_Fields.php:201
+#, php-format
+msgid "%s is not a valid national code."
+msgstr "%s یک کد ملی معتبر نیست."
+
+#. translators: %s: field label.
+#: includes/Modules/Checkout/Billing_Fields.php:204
+#, php-format
+msgid "%s must be a number."
+msgstr "%s باید عدد باشد."
+
+#. translators: %s: field label.
+#: includes/Modules/Checkout/Billing_Fields.php:207
+#, php-format
+msgid "Please choose %s from the list."
+msgstr "لطفاً %s را از فهرست انتخاب کنید."
+
+#: includes/Modules/Checkout/Billing_Fields.php:432
+msgid "Choose an option"
+msgstr "یک گزینه را انتخاب کنید"
+
+#: includes/Modules/Checkout/Billing_Fields.php:521
+msgid "Yes"
+msgstr "بله"
+
+#: includes/Modules/Checkout/Billing_Fields.php:521
+msgid "No"
+msgstr "خیر"
+
+#: includes/Modules/Checkout/Module.php:32
+msgid "Cart & checkout"
+msgstr "سبد خرید و پرداخت"
+
+#: includes/Modules/Checkout/Module.php:36
+msgid "A clear, quick cart and checkout: steps, a sticky order summary, coupon and payment in one place, and your own billing fields."
+msgstr "سبد خرید و صورتحسابی روشن و سریع: مراحل خرید، خلاصهٔ سفارش ثابت، کد تخفیف و پرداخت در یک جا، و فیلدهای صورتحساب دلخواه شما."
+
+#: includes/Modules/Checkout/Module.php:136
+#: includes/Modules/Checkout/views/admin.php:45
+msgid "Half width"
+msgstr "نیم‌عرض"
+
+#: includes/Modules/Checkout/Module.php:137
+msgid "Shipped products only"
+msgstr "فقط کالای ارسالی"
+
+#: includes/Modules/Checkout/Module.php:138
+msgid "Add a label"
+msgstr "برچسب بگذارید"
+
+#: includes/Modules/Checkout/Module.php:139
+msgid "New field"
+msgstr "فیلد تازه"
+
+#: includes/Modules/Checkout/Module.php:140
+msgid "Add choices"
+msgstr "گزینه‌ها را بنویسید"
+
+#: includes/Modules/Checkout/Module.php:141
+msgid "Delete this field?"
+msgstr "این فیلد حذف شود؟"
+
+#. translators: %s: field label.
+#: includes/Modules/Checkout/Module.php:143
+#, php-format
+msgid "\"%s\" will be removed from the checkout. Orders keep the values they already have."
+msgstr "«%s» از صورتحساب حذف می‌شود. سفارش‌های قبلی مقدارهایشان را نگه می‌دارند."
+
+#. translators: %d: maximum number of fields.
+#: includes/Modules/Checkout/Module.php:146
+#, php-format
+msgid "You can add up to %d fields of your own."
+msgstr "حداکثر %d فیلد دلخواه می‌توانید بسازید."
+
+#: includes/Modules/Checkout/Pages.php:99
+#: includes/Modules/Checkout/Woo_Texts.php:107
+msgid "Please enter a coupon code."
+msgstr "لطفاً کد تخفیف را وارد کنید."
+
+#: includes/Modules/Checkout/Pages.php:100
+msgid "The coupon could not be checked. Please try again."
+msgstr "بررسی کد تخفیف انجام نشد. لطفاً دوباره تلاش کنید."
+
+#: includes/Modules/Checkout/Schema.php:57
+msgid "Secure payment, instant access to your courses after purchase."
+msgstr "پرداخت امن و دسترسی فوری به دوره‌ها پس از خرید."
+
+#: includes/Modules/Checkout/Schema.php:65
+msgid "Your details stay private and are only used for this order."
+msgstr "اطلاعات شما محرمانه می‌ماند و فقط برای همین سفارش به کار می‌رود."
+
+#: includes/Modules/Checkout/views/admin.php:31
+#: includes/Modules/Checkout/views/admin.php:192
+msgid "Checkout page"
+msgstr "صفحهٔ صورتحساب"
+
+#: includes/Modules/Checkout/views/admin.php:32
+#: includes/Modules/Checkout/views/admin.php:284
+msgid "Billing fields"
+msgstr "فیلدهای صورتحساب"
+
+#: includes/Modules/Checkout/views/admin.php:35
+msgid "Studiare+ design"
+msgstr "طراحی استادیار+"
+
+#: includes/Modules/Checkout/views/admin.php:36
+msgid "Theme design"
+msgstr "طراحی پوسته"
+
+#: includes/Modules/Checkout/views/admin.php:39
+msgid "As WooCommerce"
+msgstr "مانند ووکامرس"
+
+#: includes/Modules/Checkout/views/admin.php:49
+msgid "Long text"
+msgstr "متن بلند"
+
+#: includes/Modules/Checkout/views/admin.php:51
+msgid "Phone number"
+msgstr "شمارهٔ تلفن"
+
+#: includes/Modules/Checkout/views/admin.php:53
+msgid "Drop-down list"
+msgstr "فهرست کشویی"
+
+#: includes/Modules/Checkout/views/admin.php:54
+msgid "Checkbox"
+msgstr "تیک"
+
+#: includes/Modules/Checkout/views/admin.php:55
+msgid "National code"
+msgstr "کد ملی"
+
+#: includes/Modules/Checkout/views/admin.php:70
+msgid "Enable the cart & checkout designs"
+msgstr "فعال‌سازی طراحی سبد خرید و صورتحساب"
+
+#: includes/Modules/Checkout/views/admin.php:79
+msgid "For WooCommerce's classic cart and checkout pages (the [woocommerce_cart] and [woocommerce_checkout] shortcodes), which Studiare uses. Gateways and other plugins keep working."
+msgstr "برای صفحه‌های کلاسیک سبد خرید و صورتحساب ووکامرس (کدهای کوتاه [woocommerce_cart] و [woocommerce_checkout]) که استادیار از آن‌ها استفاده می‌کند. درگاه‌های پرداخت و افزونه‌های دیگر مثل قبل کار می‌کنند."
+
+#: includes/Modules/Checkout/views/admin.php:81
+msgid "View the cart"
+msgstr "دیدن سبد خرید"
+
+#: includes/Modules/Checkout/views/admin.php:82
+msgid "View the checkout"
+msgstr "دیدن صورتحساب"
+
+#: includes/Modules/Checkout/views/admin.php:101
+msgid "Items as cards with the total and the checkout button beside them, and a bar with the total at the bottom of phones."
+msgstr "محصولات به‌صورت کارت، با جمع کل و دکمهٔ پرداخت در کنارشان، و نواری با جمع کل در پایین صفحهٔ گوشی."
+
+#: includes/Modules/Checkout/views/admin.php:108
+#: includes/Modules/Checkout/views/admin.php:198
+#: includes/Modules/Checkout/views/admin.php:238
+#: includes/Modules/Checkout/views/steps.php:25
+msgid "Purchase steps"
+msgstr "مراحل خرید"
+
+#: includes/Modules/Checkout/views/admin.php:110
+msgid "Cart, details & payment, access: the three steps at the top of the cart, checkout and thank-you pages."
+msgstr "سبد خرید، اطلاعات و پرداخت، دسترسی: سه مرحله بالای صفحه‌های سبد خرید، صورتحساب و تشکر از خرید."
+
+#: includes/Modules/Checkout/views/admin.php:116
+msgid "Update the total right away"
+msgstr "به‌روزرسانی فوری جمع کل"
+
+#: includes/Modules/Checkout/views/admin.php:118
+msgid "Changing a quantity updates the cart without the \"Update cart\" button."
+msgstr "با تغییر تعداد، سبد خرید بدون دکمهٔ «به‌روزرسانی سبد» به‌روز می‌شود."
+
+#: includes/Modules/Checkout/views/admin.php:124
+#: includes/Modules/Checkout/views/admin.php:210
+msgid "Coupon box"
+msgstr "کادر کد تخفیف"
+
+#: includes/Modules/Checkout/views/admin.php:126
+msgid "Behind a link"
+msgstr "پشت یک پیوند"
+
+#: includes/Modules/Checkout/views/admin.php:127
+msgid "Always open"
+msgstr "همیشه باز"
+
+#: includes/Modules/Checkout/views/admin.php:131
+msgid "Coupon messages show right under the box."
+msgstr "پیام‌های کد تخفیف درست زیر همین کادر نمایش داده می‌شوند."
+
+#: includes/Modules/Checkout/views/admin.php:135
+msgid "\"Continue shopping\" link"
+msgstr "پیوند «ادامهٔ خرید»"
+
+#: includes/Modules/Checkout/views/admin.php:138
+msgid "Suggested products under the cart"
+msgstr "محصولات پیشنهادی زیر سبد خرید"
+
+#: includes/Modules/Checkout/views/admin.php:140
+msgid "The products set as cross-sells of the items in the cart."
+msgstr "محصولاتی که به‌عنوان «محصولات مکمل» (Cross-sells) برای محصولات سبد تعیین شده‌اند."
+
+#: includes/Modules/Checkout/views/admin.php:146
+msgid "Total bar on phones"
+msgstr "نوار جمع کل در گوشی"
+
+#: includes/Modules/Checkout/views/admin.php:148
+msgid "Keeps the total and the checkout button in reach at the bottom of the screen until the summary scrolls into view."
+msgstr "جمع کل و دکمهٔ پرداخت را تا وقتی خلاصهٔ سفارش دیده نشده، پایین صفحه در دسترس نگه می‌دارد."
+
+#: includes/Modules/Checkout/views/admin.php:152
+msgid "Note under the summary"
+msgstr "یادداشت زیر خلاصهٔ سفارش"
+
+#: includes/Modules/Checkout/views/admin.php:180
+msgid "Buttons, the current step and highlights of both pages. Empty uses the theme's main colour; dark mode follows the theme."
+msgstr "دکمه‌ها، مرحلهٔ فعلی و بخش‌های برجستهٔ هر دو صفحه. خالی یعنی رنگ اصلی پوسته؛ حالت تیره هم از پوسته پیروی می‌کند."
+
+#: includes/Modules/Checkout/views/admin.php:183
+msgid "Accent colour"
+msgstr "رنگ تأکیدی"
+
+#: includes/Modules/Checkout/views/admin.php:193
+msgid "Two short steps, details and payment, beside a sticky order summary with the coupon box."
+msgstr "دو مرحلهٔ کوتاه، اطلاعات و پرداخت، در کنار خلاصهٔ ثابت سفارش همراه با کادر کد تخفیف."
+
+#: includes/Modules/Checkout/views/admin.php:201
+msgid "Order summary on phones"
+msgstr "خلاصهٔ سفارش در گوشی"
+
+#: includes/Modules/Checkout/views/admin.php:203
+msgid "Folded, total only"
+msgstr "بسته، فقط جمع کل"
+
+#: includes/Modules/Checkout/views/admin.php:212
+msgid "In the summary"
+msgstr "در خلاصهٔ سفارش"
+
+#: includes/Modules/Checkout/views/admin.php:217
+msgid "Note under the payment methods"
+msgstr "یادداشت زیر روش‌های پرداخت"
+
+#: includes/Modules/Checkout/views/admin.php:220
+msgid "Text of the order button"
+msgstr "متن دکمهٔ ثبت سفارش"
+
+#: includes/Modules/Checkout/views/admin.php:222
+msgid "e.g. Pay and start learning"
+msgstr "مثلاً پرداخت و شروع یادگیری"
+
+#: includes/Modules/Checkout/views/admin.php:223
+msgid "Empty keeps WooCommerce's text. Some gateways show their own text, such as \"Proceed to PayPal\"."
+msgstr "خالی یعنی متن ووکامرس. برخی درگاه‌ها متن خودشان را نشان می‌دهند، مثل «انتقال به درگاه»."
+
+#: includes/Modules/Checkout/views/admin.php:273
+msgid "Rules"
+msgstr "قواعد"
+
+#: includes/Modules/Checkout/views/admin.php:277
+msgid "Iranian mobile number"
+msgstr "شمارهٔ موبایل ایران"
+
+#: includes/Modules/Checkout/views/admin.php:277
+msgid "The phone must be a mobile number such as 09123456789. Persian digits, +98 and 0098 are accepted and saved as 09…."
+msgstr "تلفن باید شمارهٔ موبایل باشد، مثل 09123456789. ارقام فارسی، ‎+98 و 0098 پذیرفته و به‌صورت ۰۹… ذخیره می‌شوند."
+
+#: includes/Modules/Checkout/views/admin.php:285
+msgid "Switch fields on or off, rename them, make them required or optional and drag them into order. Empty texts keep WooCommerce's."
+msgstr "فیلدها را روشن یا خاموش کنید، نامشان را تغییر دهید، اجباری یا اختیاری‌شان کنید و با کشیدن مرتبشان کنید. متن‌های خالی همان متن ووکامرس می‌مانند."
+
+#: includes/Modules/Checkout/views/admin.php:286
+msgid "A cart of only courses and downloads (virtual or downloadable products) needs no address: it asks only for the fields marked \"Also for courses and downloads\". By default these are the name, mobile and email."
+msgstr "سبدی که فقط دوره و فایل دانلودی (محصول مجازی یا دانلودی) دارد به نشانی نیاز ندارد: فقط فیلدهایی پرسیده می‌شوند که «برای دوره‌ها و فایل‌های دانلودی هم» آن‌ها روشن است. به‌طور پیش‌فرض نام، موبایل و ایمیل."
+
+#: includes/Modules/Checkout/views/admin.php:305
+#: includes/Modules/Checkout/views/admin.php:352
+#: includes/Modules/Checkout/views/admin.php:353
+msgid "Show this field"
+msgstr "نمایش این فیلد"
+
+#: includes/Modules/Checkout/views/admin.php:319
+#: includes/Modules/Checkout/views/admin.php:377
+#: includes/Modules/Checkout/views/admin.php:426
+msgid "Hint inside the field"
+msgstr "راهنمای داخل فیلد"
+
+#: includes/Modules/Checkout/views/admin.php:323
+msgid "Filling in"
+msgstr "تکمیل"
+
+#: includes/Modules/Checkout/views/admin.php:325
+#: includes/Modules/Checkout/views/admin.php:394
+msgid "Also for courses and downloads"
+msgstr "برای دوره‌ها و فایل‌های دانلودی هم"
+
+#: includes/Modules/Checkout/views/admin.php:325
+#: includes/Modules/Checkout/views/admin.php:395
+msgid "Off: asked only when the cart holds a product that is shipped."
+msgstr "خاموش: فقط وقتی پرسیده می‌شود که سبد کالای ارسالی داشته باشد."
+
+#: includes/Modules/Checkout/views/admin.php:336
+msgid "Add a field"
+msgstr "افزودن فیلد"
+
+#: includes/Modules/Checkout/views/admin.php:338
+msgid "Your own fields, such as a national code, field of study or \"How did you hear about us?\". Their answers are saved with the order and shown in the order screen and emails."
+msgstr "فیلدهای دلخواه شما، مثل کد ملی، رشتهٔ تحصیلی یا «از کجا با ما آشنا شدید؟». پاسخ‌ها همراه سفارش ذخیره و در صفحهٔ سفارش و ایمیل‌ها نمایش داده می‌شوند."
+
+#: includes/Modules/Checkout/views/admin.php:364
+msgid "e.g. National code"
+msgstr "مثلاً کد ملی"
+
+#: includes/Modules/Checkout/views/admin.php:389
+msgid "Choices, one per line"
+msgstr "گزینه‌ها، هر کدام در یک خط"
+
+#: includes/Modules/Checkout/views/admin.php:405
+msgid "Checked like a real national code: ten digits with a valid check digit."
+msgstr "مانند کد ملی واقعی بررسی می‌شود: ده رقم با رقم کنترل درست."
+
+#: includes/Modules/Checkout/views/admin.php:420
+#: includes/Modules/Checkout/Woo_Texts.php:135
+msgid "Order notes"
+msgstr "توضیحات سفارش"
+
+#: includes/Modules/Checkout/views/admin.php:424
+msgid "Order notes field"
+msgstr "فیلد توضیحات سفارش"
+
+#: includes/Modules/Checkout/views/admin.php:424
+msgid "A free text box for a message with the order."
+msgstr "کادری برای نوشتن پیام همراه سفارش."
+
+#: includes/Modules/Checkout/views/cart.php:37
+msgid "Your cart"
+msgstr "سبد خرید شما"
+
+#. translators: %s: number of items.
+#: includes/Modules/Checkout/views/cart.php:41
+#: includes/Modules/Checkout/views/mini-cart.php:40
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s مورد"
+
+#: includes/Modules/Checkout/views/cart.php:90
+msgid "Available on backorder"
+msgstr "قابل پیش‌خرید"
+
+#. translators: %s: product name.
+#: includes/Modules/Checkout/views/cart.php:127
+#: includes/Modules/Checkout/views/mini-cart.php:90
+#, php-format
+msgid "Remove %s from cart"
+msgstr "حذف %s از سبد خرید"
+
+#: includes/Modules/Checkout/views/cart.php:147
+#: includes/Modules/Checkout/views/coupon.php:20
+msgid "Coupon code"
+msgstr "کد تخفیف"
+
+#: includes/Modules/Checkout/views/cart.php:149
+#: includes/Modules/Checkout/views/coupon.php:23
+msgid "Apply"
+msgstr "اعمال"
+
+#: includes/Modules/Checkout/views/cart.php:154
+msgid "Update cart"
+msgstr "به‌روزرسانی سبد خرید"
+
+#: includes/Modules/Checkout/Thank_You.php:247
+#: includes/Modules/Checkout/views/cart.php:160
+#: includes/Modules/Checkout/Woo_Texts.php:89
+msgid "Continue shopping"
+msgstr "ادامهٔ خرید"
+
+#: includes/Modules/Checkout/Thank_You.php:216
+#: includes/Modules/Checkout/views/cart.php:189
+#: includes/Modules/Checkout/Woo_Texts.php:98
+msgid "Total"
+msgstr "جمع کل"
+
+#: includes/Modules/Checkout/views/coupon.php:18
+#: includes/Modules/Checkout/Woo_Texts.php:139
+msgid "Have a coupon?"
+msgstr "کد تخفیف دارید؟"
+
+#: includes/Modules/Checkout/views/coupon.php:22
+msgid "Enter your coupon code"
+msgstr "کد تخفیف را وارد کنید"
+
+#: includes/Modules/Checkout/views/form-checkout.php:33
+msgid "You must be logged in to checkout."
+msgstr "برای ثبت سفارش باید وارد حساب کاربری شوید."
+
+#: includes/Modules/Checkout/views/form-checkout.php:43
+msgid "Your details"
+msgstr "اطلاعات شما"
+
+#: includes/Modules/Checkout/views/form-checkout.php:52
+msgid "Payment"
+msgstr "پرداخت"
+
+#: includes/Modules/Checkout/views/form-checkout.php:63
+#: includes/Modules/Checkout/Woo_Texts.php:131
+msgid "Your order"
+msgstr "سفارش شما"
+
+#: includes/Modules/Checkout/views/steps.php:21
+msgid "Details & payment"
+msgstr "اطلاعات و پرداخت"
+
+#: includes/Modules/Checkout/Thank_You.php:461
+#: includes/Modules/Checkout/views/steps.php:22
+msgid "Access to your courses"
+msgstr "دسترسی به دوره‌ها"
+
+#: includes/Modules/Checkout/views/steps.php:22
+msgid "Order tracking"
+msgstr "پیگیری سفارش"
+
+#. translators: %s: field label in a checkout error, e.g. "First name".
+#: includes/Modules/Checkout/Woo_Texts.php:55
+#, php-format
+msgctxt "checkout-validation"
+msgid "Billing %s"
+msgstr "%s"
+
+#. translators: %s: product names.
+#: includes/Modules/Checkout/Woo_Texts.php:70
+#, php-format
+msgid "%s has been added to your cart."
+msgid_plural "%s have been added to your cart."
+msgstr[0] "%s به سبد خرید شما اضافه شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:85
+msgid "Cart updated."
+msgstr "سبد خرید به‌روز شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:86
+#, php-format
+msgid "%s removed."
+msgstr "%s حذف شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:87
+msgid "Undo?"
+msgstr "بازگردانی؟"
+
+#: includes/Modules/Checkout/Woo_Texts.php:88
+msgid "View cart"
+msgstr "مشاهدهٔ سبد خرید"
+
+#: includes/Modules/Checkout/Woo_Texts.php:90
+msgid "Your cart is currently empty."
+msgstr "سبد خرید شما در حال حاضر خالی است."
+
+#: includes/Modules/Checkout/Woo_Texts.php:91
+msgid "Return to shop"
+msgstr "بازگشت به فروشگاه"
+
+#: includes/Modules/Checkout/Woo_Texts.php:92
+#, php-format
+msgid "You cannot add another \"%s\" to your cart."
+msgstr "«%s» را نمی‌توانید دوباره به سبد خرید اضافه کنید."
+
+#: includes/Modules/Checkout/Woo_Texts.php:93
+msgid "Sorry, this product cannot be purchased."
+msgstr "متأسفیم، این محصول قابل خرید نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:94
+msgid "An item which is no longer available was removed from your cart."
+msgstr "محصولی که دیگر موجود نیست از سبد خرید شما حذف شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:95
+msgid "Cart totals"
+msgstr "جمع کل سبد خرید"
+
+#: includes/Modules/Checkout/Woo_Texts.php:96
+msgid "Proceed to checkout"
+msgstr "ادامهٔ فرایند خرید"
+
+#: includes/Modules/Checkout/Woo_Texts.php:97
+msgid "Subtotal"
+msgstr "جمع جزء"
+
+#: includes/Modules/Checkout/Woo_Texts.php:99
+#, php-format
+msgid "Coupon: %s"
+msgstr "کد تخفیف: %s"
+
+#: includes/Modules/Checkout/Woo_Texts.php:100
+msgid "[Remove]"
+msgstr "[حذف]"
+
+#: includes/Modules/Checkout/Woo_Texts.php:101
+msgid "Free!"
+msgstr "رایگان!"
+
+#: includes/Modules/Checkout/Woo_Texts.php:104
+msgid "Coupon code applied successfully."
+msgstr "کد تخفیف با موفقیت اعمال شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:105
+msgid "Coupon code removed successfully."
+msgstr "کد تخفیف با موفقیت حذف شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:106
+msgid "Coupon has been removed."
+msgstr "کد تخفیف حذف شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:108
+#, php-format
+msgid "Coupon \"%s\" cannot be applied because it does not exist."
+msgstr "کد تخفیف «%s» وجود ندارد و اعمال نشد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:109
+#, php-format
+msgid "Coupon \"%s\" cannot be applied because it is not valid."
+msgstr "کد تخفیف «%s» معتبر نیست و اعمال نشد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:110
+#, php-format
+msgid "Coupon \"%s\" has expired."
+msgstr "مهلت کد تخفیف «%s» تمام شده است."
+
+#: includes/Modules/Checkout/Woo_Texts.php:111
+#, php-format
+msgid "Coupon code \"%s\" already applied!"
+msgstr "کد تخفیف «%s» قبلاً اعمال شده است!"
+
+#: includes/Modules/Checkout/Woo_Texts.php:112
+#, php-format
+msgid "Sorry, coupon \"%s\" is not applicable to your cart contents."
+msgstr "متأسفیم، کد تخفیف «%s» برای محصولات سبد خرید شما قابل استفاده نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:113
+#, php-format
+msgid "Sorry, coupon \"%s\" is not applicable to selected products."
+msgstr "متأسفیم، کد تخفیف «%s» برای محصولات انتخاب‌شده قابل استفاده نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:114
+#, php-format
+msgid "Sorry, coupon \"%s\" has already been applied and cannot be used in conjunction with other coupons."
+msgstr "متأسفیم، کد تخفیف «%s» قبلاً اعمال شده و همراه با کدهای دیگر قابل استفاده نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:115
+#, php-format
+msgid "Sorry, coupon \"%s\" is not valid for sale items."
+msgstr "متأسفیم، کد تخفیف «%s» برای محصولات حراجی معتبر نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:116
+#, php-format
+msgid "The minimum spend for coupon \"%1$s\" is %2$s."
+msgstr "حداقل مبلغ خرید برای کد تخفیف «%1$s»، %2$s است."
+
+#: includes/Modules/Checkout/Woo_Texts.php:117
+#, php-format
+msgid "The maximum spend for coupon \"%1$s\" is %2$s."
+msgstr "حداکثر مبلغ خرید برای کد تخفیف «%1$s»، %2$s است."
+
+#: includes/Modules/Checkout/Woo_Texts.php:118
+#, php-format
+msgid "Usage limit for coupon \"%s\" has been reached."
+msgstr "ظرفیت استفاده از کد تخفیف «%s» تمام شده است."
+
+#: includes/Modules/Checkout/Woo_Texts.php:119
+#, php-format
+msgid "Please enter a valid email to use coupon code \"%s\"."
+msgstr "برای استفاده از کد تخفیف «%s» یک ایمیل معتبر وارد کنید."
+
+#: includes/Modules/Checkout/Woo_Texts.php:122
+#, php-format
+msgid "%s is a required field."
+msgstr "لطفاً %s را وارد کنید."
+
+#: includes/Modules/Checkout/Woo_Texts.php:123
+#, php-format
+msgid "%s is not a valid phone number."
+msgstr "%s یک شمارهٔ تلفن معتبر نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:124
+#, php-format
+msgid "%s is not a valid email address."
+msgstr "%s یک نشانی ایمیل معتبر نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:125
+#, php-format
+msgid "%s is not a valid postcode / ZIP."
+msgstr "%s یک کد پستی معتبر نیست."
+
+#: includes/Modules/Checkout/Woo_Texts.php:126
+msgid "Please read and accept the terms and conditions to proceed with your order."
+msgstr "برای ادامهٔ سفارش، لطفاً شرایط و قوانین را بخوانید و بپذیرید."
+
+#: includes/Modules/Checkout/Woo_Texts.php:127
+msgid "Invalid payment method."
+msgstr "روش پرداخت نامعتبر است."
+
+#. translators: %s: address of the customer's order history.
+#: includes/Modules/Checkout/Woo_Texts.php:129
+#, php-format
+msgid "There was an error processing your order. Please check for any charges in your payment method and review your <a href=\"%s\">order history</a> before placing the order again."
+msgstr "در پردازش سفارش شما خطایی رخ داد. پیش از ثبت دوبارهٔ سفارش، کسر مبلغ از حساب خود و <a href=\"%s\">تاریخچهٔ سفارش‌ها</a> را بررسی کنید."
+
+#: includes/Modules/Checkout/Woo_Texts.php:130
+msgid "Place order"
+msgstr "ثبت سفارش"
+
+#: includes/Modules/Checkout/Woo_Texts.php:133
+msgid "Billing details"
+msgstr "جزئیات صورتحساب"
+
+#: includes/Modules/Checkout/Woo_Texts.php:134
+msgid "Additional information"
+msgstr "اطلاعات تکمیلی"
+
+#: includes/Modules/Checkout/Woo_Texts.php:136
+msgid "Notes about your order, e.g. special notes for delivery."
+msgstr "توضیحات سفارش، مثلاً نکته‌ای دربارهٔ ارسال."
+
+#: includes/Modules/Checkout/Woo_Texts.php:137
+msgid "Returning customer?"
+msgstr "قبلاً خرید کرده‌اید؟"
+
+#: includes/Modules/Checkout/Woo_Texts.php:138
+msgid "Click here to login"
+msgstr "برای ورود کلیک کنید"
+
+#: includes/Modules/Checkout/Woo_Texts.php:140
+msgid "Click here to enter your code"
+msgstr "برای وارد کردن کد کلیک کنید"
+
+#: includes/Modules/Checkout/Woo_Texts.php:141
+msgid "optional"
+msgstr "اختیاری"
+
+#: includes/Modules/Checkout/Module.php:179
+#: includes/Modules/Checkout/Woo_Texts.php:144
+msgid "First name"
+msgstr "نام"
+
+#: includes/Modules/Checkout/Module.php:180
+#: includes/Modules/Checkout/Woo_Texts.php:145
+msgid "Last name"
+msgstr "نام خانوادگی"
+
+#: includes/Modules/Checkout/Module.php:182
+#: includes/Modules/Checkout/Woo_Texts.php:147
+msgid "Email address"
+msgstr "نشانی ایمیل"
+
+#: includes/Modules/Checkout/Module.php:183
+#: includes/Modules/Checkout/Woo_Texts.php:148
+msgid "Company name"
+msgstr "نام شرکت"
+
+#: includes/Modules/Checkout/Module.php:184
+#: includes/Modules/Checkout/Woo_Texts.php:149
+msgid "Country / Region"
+msgstr "کشور / منطقه"
+
+#: includes/Modules/Checkout/Module.php:187
+#: includes/Modules/Checkout/Woo_Texts.php:150
+msgid "Street address"
+msgstr "نشانی"
+
+#: includes/Modules/Checkout/Woo_Texts.php:151
+msgid "House number and street name"
+msgstr "خیابان، کوچه و پلاک"
+
+#: includes/Modules/Checkout/Module.php:188
+#: includes/Modules/Checkout/Woo_Texts.php:152
+msgid "Apartment, suite, unit, etc. (optional)"
+msgstr "واحد، طبقه و … (اختیاری)"
+
+#: includes/Modules/Checkout/Module.php:186
+#: includes/Modules/Checkout/Woo_Texts.php:153
+msgid "Town / City"
+msgstr "شهر"
+
+#: includes/Modules/Checkout/Module.php:185
+#: includes/Modules/Checkout/Woo_Texts.php:154
+msgid "State / County"
+msgstr "استان"
+
+#: includes/Modules/Checkout/Woo_Texts.php:155
+msgid "Province"
+msgstr "استان"
+
+#: includes/Modules/Checkout/Module.php:189
+#: includes/Modules/Checkout/Woo_Texts.php:156
+msgid "Postcode / ZIP"
+msgstr "کد پستی"
+
+#: includes/Modules/Checkout/views/thankyou.php:32
+#: includes/Modules/Checkout/Woo_Texts.php:159
+msgid "Thank you. Your order has been received."
+msgstr "سپاسگزاریم. سفارش شما دریافت شد."
+
+#: includes/Modules/Checkout/Woo_Texts.php:160
+msgid "Order details"
+msgstr "جزئیات سفارش"
+
+#. Description of the plugin
+#: studiare-extensions.php
+msgid "Extra features for the Studiare LMS theme: a customizable mobile bottom navigation, Elementor page templates for courses, products, headers, footers and the blog, a floating support button, cart and checkout designs with billing field settings, and a \"Save as PDF\" button and podcast player for blog posts."
+msgstr "امکانات تکمیلی قالب آموزشی استادیار: منوی پایین موبایل قابل‌تنظیم، قالب‌های المنتوری برای دوره‌ها، محصولات، سربرگ، پابرگ و وبلاگ، دکمه‌ی شناور پشتیبانی، طراحی سبد خرید و تسویه حساب با تنظیم فیلدهای صورت‌حساب، و دکمه‌ی «ذخیره به‌صورت PDF» و پخش‌کننده‌ی پادکست برای نوشته‌های وبلاگ."
+
+#: includes/Modules/Checkout/Thank_You.php:143
+msgid "Payment successful"
+msgstr "پرداخت موفق"
+
+#: includes/Modules/Checkout/Thank_You.php:144
+#: includes/Modules/Checkout/Thank_You.php:468
+msgid "Order confirmed"
+msgstr "سفارش تأیید شد"
+
+#: includes/Modules/Checkout/Thank_You.php:145
+msgid "Awaiting payment"
+msgstr "در انتظار پرداخت"
+
+#: includes/Modules/Checkout/Thank_You.php:146
+msgid "Payment failed"
+msgstr "پرداخت ناموفق"
+
+#: includes/Modules/Checkout/Thank_You.php:157
+msgid "Your payment did not go through"
+msgstr "پرداخت شما انجام نشد"
+
+#. translators: %s: the customer's first name.
+#: includes/Modules/Checkout/Thank_You.php:163
+#, php-format
+msgid "Thank you, %s!"
+msgstr "%s عزیز، از خرید شما ممنونیم!"
+
+#. translators: %s: the customer's first name.
+#: includes/Modules/Checkout/Thank_You.php:163
+msgid "Thank you for your order!"
+msgstr "از خرید شما ممنونیم!"
+
+#: includes/Modules/Checkout/Thank_You.php:176
+msgid "The payment was not completed. If any amount was taken from your account, the bank returns it within 72 hours. Your order is kept, so you can try again."
+msgstr "پرداخت کامل نشد. اگر مبلغی از حسابتان کم شده باشد، بانک تا ۷۲ ساعت آن را برمی‌گرداند. سفارش شما ذخیره شده است و می‌توانید دوباره پرداخت کنید."
+
+#: includes/Modules/Checkout/Thank_You.php:184
+msgid "We have received your payment and are getting your order ready."
+msgstr "پرداخت شما را دریافت کردیم و در حال آماده‌سازی سفارشتان هستیم."
+
+#: includes/Modules/Checkout/Thank_You.php:187
+msgid "Your order is confirmed. You pay when it is delivered."
+msgstr "سفارش شما تأیید شد. هزینه را هنگام تحویل پرداخت می‌کنید."
+
+#: includes/Modules/Checkout/Thank_You.php:189
+msgid "Your order is saved. Your courses open as soon as the payment is confirmed."
+msgstr "سفارش شما ثبت شد. به محض تأیید پرداخت، دوره‌ها برایتان باز می‌شوند."
+
+#: includes/Modules/Checkout/Thank_You.php:190
+msgid "Your order is saved. We send it as soon as the payment is confirmed."
+msgstr "سفارش شما ثبت شد. به محض تأیید پرداخت، آن را ارسال می‌کنیم."
+
+#: includes/Modules/Checkout/Thank_You.php:208
+msgid "Order number"
+msgstr "شماره سفارش"
+
+#: includes/Modules/Checkout/Thank_You.php:223
+msgid "Payment method"
+msgstr "روش پرداخت"
+
+#: includes/Modules/Checkout/Thank_You.php:250
+msgid "Try paying again"
+msgstr "پرداخت دوباره"
+
+#: includes/Modules/Checkout/Thank_You.php:262
+msgid "View order"
+msgstr "مشاهده سفارش"
+
+#: includes/Modules/Checkout/Thank_You.php:301
+msgid "Go to my courses"
+msgstr "رفتن به دوره‌های من"
+
+#: includes/Modules/Checkout/Thank_You.php:304
+msgid "Go to my account"
+msgstr "رفتن به حساب کاربری"
+
+#: includes/Modules/Checkout/Thank_You.php:458
+msgid "Order saved"
+msgstr "سفارش ثبت شد"
+
+#: includes/Modules/Checkout/Thank_You.php:458
+msgid "We have your order and its details."
+msgstr "سفارش و جزئیات آن به دست ما رسید."
+
+#: includes/Modules/Checkout/Thank_You.php:459
+msgid "Payment confirmation"
+msgstr "تأیید پرداخت"
+
+#: includes/Modules/Checkout/Thank_You.php:459
+msgid "We confirm the order once the payment arrives."
+msgstr "پس از رسیدن مبلغ، سفارش را تأیید می‌کنیم."
+
+#: includes/Modules/Checkout/Thank_You.php:461
+msgid "Your courses open in your account right after."
+msgstr "بلافاصله پس از آن، دوره‌ها در حسابتان باز می‌شوند."
+
+#: includes/Modules/Checkout/Thank_You.php:462
+msgid "Packing and sending"
+msgstr "بسته‌بندی و ارسال"
+
+#: includes/Modules/Checkout/Thank_You.php:462
+msgid "We send your order and let you know."
+msgstr "سفارش را ارسال می‌کنیم و به شما خبر می‌دهیم."
+
+#: includes/Modules/Checkout/Thank_You.php:467
+msgid "Payment confirmed"
+msgstr "پرداخت تأیید شد"
+
+#: includes/Modules/Checkout/Thank_You.php:467
+msgid "Your payment went through."
+msgstr "پرداخت شما با موفقیت انجام شد."
+
+#: includes/Modules/Checkout/Thank_You.php:468
+msgid "You pay when the order is delivered."
+msgstr "هزینه را هنگام تحویل سفارش می‌پردازید."
+
+#: includes/Modules/Checkout/Thank_You.php:473
+msgid "Added to your account"
+msgstr "به حساب شما اضافه شد"
+
+#: includes/Modules/Checkout/Thank_You.php:479
+msgid "Start learning"
+msgstr "یادگیری را شروع کنید"
+
+#: includes/Modules/Checkout/Thank_You.php:485
+msgid "Packing your order"
+msgstr "آماده‌سازی سفارش"
+
+#: includes/Modules/Checkout/Thank_You.php:485
+msgid "We are getting your order ready to send."
+msgstr "در حال آماده کردن سفارش برای ارسال هستیم."
+
+#: includes/Modules/Checkout/Thank_You.php:486
+msgid "On its way"
+msgstr "در راه"
+
+#: includes/Modules/Checkout/Thank_You.php:486
+msgid "You can follow your order in your account."
+msgstr "وضعیت سفارش را در حساب کاربری دنبال کنید."
+
+#: includes/Modules/Checkout/views/admin.php:232
+msgid "Thank-you page"
+msgstr "صفحه خرید موفق"
+
+#: includes/Modules/Checkout/views/admin.php:233
+msgid "The page after payment: the order's state with the buyer's name, buttons to their courses or order, the courses ready to start and what happens next."
+msgstr "صفحه‌ی پس از پرداخت: وضعیت سفارش با نام خریدار، دکمه‌های رفتن به دوره‌ها یا سفارش، دوره‌های آماده‌ی شروع و مراحل بعدی."
+
+#: includes/Modules/Checkout/views/admin.php:241
+msgid "\"What happens next\" card"
+msgstr "کارت «مراحل بعدی»"
+
+#: includes/Modules/Checkout/views/admin.php:244
+msgid "Three short steps from payment to learning, or to delivery for shipped products."
+msgstr "سه مرحله‌ی کوتاه از پرداخت تا شروع یادگیری، یا تا تحویل برای محصولات ارسالی."
+
+#: includes/Modules/Checkout/views/admin.php:249
+msgid "Celebration animation"
+msgstr "انیمیشن جشن"
+
+#: includes/Modules/Checkout/views/admin.php:252
+msgid "A little confetti around the tick after a successful payment. Visitors who turned motion off see none."
+msgstr "کمی کاغذرنگی دور تیک پس از پرداخت موفق. بازدیدکنندگانی که حرکت را خاموش کرده‌اند آن را نمی‌بینند."
+
+#: includes/Modules/Checkout/views/admin.php:257
+msgid "Message to buyers"
+msgstr "پیام به خریداران"
+
+#: includes/Modules/Checkout/views/admin.php:260
+msgid "e.g. Join our support group to ask the teacher your questions."
+msgstr "مثلاً: برای پرسیدن سؤال‌هایتان از مدرس، عضو گروه پشتیبانی شوید."
+
+#: includes/Modules/Checkout/views/admin.php:261
+msgid "Shown under the buttons, except when a payment failed. Empty shows nothing."
+msgstr "زیر دکمه‌ها نمایش داده می‌شود، جز وقتی پرداخت ناموفق باشد. خالی یعنی چیزی نشان داده نشود."
+
+#. translators: %s: the customer's email address.
+#: includes/Modules/Checkout/views/thankyou.php:82
+#, php-format
+msgid "The order details are also sent to %s."
+msgstr "جزئیات سفارش به %s هم ارسال می‌شود."
+
+#: includes/Modules/Checkout/views/thankyou.php:115
+msgid "Ready to start"
+msgstr "آماده‌ی شروع"
+
+#: includes/Modules/Checkout/views/thankyou.php:144
+msgid "What happens next"
+msgstr "مراحل بعدی"
+
+#: includes/Modules/Checkout/Thank_You.php:183
+msgid "Your purchase is ready in your account. You can start right now."
+msgstr "خرید شما در حساب کاربری‌تان آماده است. همین حالا می‌توانید شروع کنید."
+
+#: includes/Modules/Checkout/Thank_You.php:389
+msgid "Start the course"
+msgstr "شروع دوره"
+
+#. translators: %s: number of download files.
+#: includes/Modules/Checkout/Thank_You.php:399
+#, php-format
+msgid "All downloads (%s)"
+msgstr "همه‌ی دانلودها (%s)"
+
+#: includes/Modules/Checkout/Thank_You.php:473
+msgid "Your purchases are waiting for you in your account."
+msgstr "خریدهایتان در حساب کاربری منتظر شماست."
+
+#: includes/Modules/Checkout/Thank_You.php:479
+msgid "Watch, listen or download whenever you like, on any device."
+msgstr "هر زمان که بخواهید و روی هر دستگاهی، ببینید، بشنوید یا دانلود کنید."
+
+#: includes/Modules/Checkout/Thank_You.php:474
+msgid "Sent to your email"
+msgstr "به ایمیل شما ارسال شد"
+
+#: includes/Modules/Checkout/Thank_You.php:474
+msgid "Your order and its links are in your email."
+msgstr "سفارش و لینک‌های آن در ایمیل شماست."
+
+#: includes/Modules/Checkout/views/admin.php:159
+msgid "Mini cart"
+msgstr "سبد خرید کشویی"
+
+#: includes/Modules/Checkout/views/admin.php:160
+msgid "The cart that opens from the header and the bottom navigation: items as cards, the total and a checkout button that always stays in view."
+msgstr "سبدی که از سربرگ و منوی پایین باز می‌شود: محصولات به‌صورت کارت، جمع کل و دکمه‌ی تسویه حساب که همیشه در دید می‌ماند."
+
+#: includes/Modules/Checkout/views/admin.php:167
+msgid "\"You save\" line"
+msgstr "خط «سود شما»"
+
+#: includes/Modules/Checkout/views/admin.php:170
+msgid "What sale prices and coupons save the buyer, above the total."
+msgstr "مبلغی که تخفیف‌ها و کدهای تخفیف برای خریدار صرفه‌جویی می‌کنند، بالای جمع کل."
+
+#. translators: %s: product name.
+#: includes/Modules/Checkout/views/mini-cart.php:95
+#, php-format
+msgid "\"%s\" has been removed from your cart"
+msgstr "«%s» از سبد خرید شما حذف شد"
+
+#: includes/Modules/Checkout/views/mini-cart.php:114
+msgid "You save"
+msgstr "سود شما از این خرید"
+
+#: includes/Modules/Checkout/views/mini-cart.php:132
+msgid "Your cart is empty"
+msgstr "سبد خرید شما خالی است"
+
+#: includes/Modules/Checkout/views/mini-cart.php:133
+msgid "Find a course you like and take the first step."
+msgstr "دوره‌ی دلخواهتان را پیدا کنید و قدم اول را بردارید."
+
+#: includes/Modules/Theme_Fixes/Safe_Checkout.php:49
+msgid "When the theme or another plugin fails while an order is being placed (for example while sending the order email), WooCommerce shows \"There was an error processing your order\" and the buyer stays on the checkout page, even though the order was already placed (a free order, or a bank transfer or cheque order waiting on hold). With this fix a placed order still opens its thank-you page, any other order gets a clear message, and the real error is saved in the order notes and in WooCommerce > Status > Logs (source: studiare-extensions), so it can be repaired."
+msgstr "وقتی پوسته یا افزونه‌ی دیگری هنگام ثبت سفارش خطا می‌دهد (مثلاً هنگام ارسال ایمیل سفارش)، ووکامرس پیام «خطایی در پردازش سفارش شما رخ داد» را نشان می‌دهد و خریدار در صفحه‌ی پرداخت می‌ماند، در حالی که سفارش ثبت شده است (سفارش رایگان، یا سفارش انتقال بانکی و چک که در انتظار بررسی است). با این اصلاح، سفارشِ ثبت‌شده صفحه‌ی خرید موفق خود را باز می‌کند، سفارش‌های دیگر پیام روشنی می‌گیرند و خطای اصلی در یادداشت‌های سفارش و در ووکامرس › وضعیت › گزارش‌ها (منبع: studiare-extensions) ذخیره می‌شود تا بتوان آن را رفع کرد."
+
+#. translators: %s: name of the account tab, e.g. "My audio".
+#: includes/Modules/Audio_Products/My_Account.php:109
+#, php-format
+msgid "Go to %s"
+msgstr "رفتن به %s"
+
+#: includes/Modules/Checkout/Thank_You.php:186
+msgid "Your order is confirmed and ready in your account. You pay later, in the way you chose."
+msgstr "سفارش شما تأیید شد و در حساب کاربری‌تان آماده است. هزینه را بعداً، به روشی که انتخاب کردید، می‌پردازید."
+
+#: includes/Modules/Checkout/Thank_You.php:468
+msgid "You pay later, in the way you chose."
+msgstr "هزینه را بعداً، به روشی که انتخاب کردید، می‌پردازید."
+
+#: includes/Modules/Audio_Products/views/admin.php:142
+msgid "Open audio courses here from \"My courses\""
+msgstr "باز شدن دوره‌های صوتی از «دوره‌های من» در این بخش"
+
+#: includes/Modules/Audio_Products/views/admin.php:145
+msgid "The \"Study and learning\" button of Studiare's \"My courses\" tab opens the course's player in this tab instead of an empty lesson list. Only for courses with audio and no lessons; courses with lessons open as before."
+msgstr "دکمه‌ی «مطالعه و یادگیری» در تب «دوره‌های من» استادیار، به‌جای فهرست خالی درس‌ها، پخش‌کننده‌ی همان دوره را در این بخش باز می‌کند. فقط برای دوره‌هایی که صوت دارند و درسی ندارند؛ دوره‌های دارای درس مثل قبل باز می‌شوند."
+
+#: includes/Modules/Audio_Products/views/admin.php:29
+msgid "Automatic (after Downloads)"
+msgstr "خودکار (بعد از دانلودها)"
+
+#. translators: %s: place in the menu, 1 = top.
+#: includes/Modules/Audio_Products/views/admin.php:32
+#, php-format
+msgid "Item %s"
+msgstr "مورد %s"
+
+#: includes/Modules/Audio_Products/views/admin.php:133
+msgid "Place in the account menu"
+msgstr "جایگاه در منوی حساب کاربری"
+
+#: includes/Modules/Audio_Products/views/admin.php:137
+msgid "Counted from the top of the account menu (all of Studiare's account menus follow it). \"Log out\" always stays last."
+msgstr "از بالای منوی حساب کاربری شمرده می‌شود (همه‌ی منوهای حساب کاربری استادیار از آن پیروی می‌کنند). «خروج» همیشه آخرین گزینه می‌ماند."

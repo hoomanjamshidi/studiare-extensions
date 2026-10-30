@@ -15,6 +15,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const config = window.stxPodcasts || {};
 	const i18n = config.i18n || {};
 	const doc = document;
@@ -427,24 +436,24 @@
 
 		list.stxDeck = deck;
 
-		ui.play.addEventListener( 'click', () => toggle( deck.ep ) );
+		ui.play.addEventListener( 'click', () => toggle( deck.ep ), UNDELAYED );
 
 		root.querySelectorAll( '[data-deck-skip]' ).forEach( ( button ) => {
 			button.addEventListener( 'click', () => {
 				const jump = parseFloat( button.dataset.deckSkip ) || 0;
 				const from = current === deck.ep && audio ? audio.currentTime : savedTime( deck.ep );
 				seekTo( deck.ep, from + jump );
-			} );
+			}, UNDELAYED );
 		} );
 
 		steps.forEach( ( button ) => {
-			button.addEventListener( 'click', () => deck.step( parseInt( button.dataset.deckStep, 10 ) ) );
+			button.addEventListener( 'click', () => deck.step( parseInt( button.dataset.deckStep, 10 ) ), UNDELAYED );
 		} );
 
 		ui.seek.addEventListener( 'input', () => {
 			dragging = true;
 			deck.showTime( parseFloat( ui.seek.value ) || 0 );
-		} );
+		}, UNDELAYED );
 		ui.seek.addEventListener( 'change', () => {
 			dragging = false;
 			seekTo( deck.ep, parseFloat( ui.seek.value ) || 0 );
@@ -464,7 +473,7 @@
 				button.textContent = speedLabel( rate );
 			} );
 			showSpeed();
-		} );
+		}, UNDELAYED );
 
 		showSpeed();
 		deck.showEpisode( deck.ep );
@@ -494,7 +503,7 @@
 						listDeck.showEpisode( ep );
 					}
 					toggle( ep );
-				} );
+				}, UNDELAYED );
 			} );
 		} );
 

@@ -117,16 +117,10 @@ final class Otp_Digits extends Fix {
 	 * @param string $value Value as sent.
 	 */
 	private static function normalize( string $name, string $value ): string {
-		$digits = (string) preg_replace( '/\D/u', '', Persian::latin_digits( $value ) );
-
-		if ( '_phone' !== substr( $name, -6 ) ) {
-			return $digits;
+		if ( '_phone' === substr( $name, -6 ) ) {
+			return Persian::iran_mobile( $value );
 		}
 
-		if ( preg_match( '/^(?:00)?989\d{9}$/', $digits ) ) {
-			return '0' . substr( $digits, -10 );
-		}
-
-		return preg_match( '/^9\d{9}$/', $digits ) ? '0' . $digits : $digits;
+		return (string) preg_replace( '/\D/u', '', Persian::latin_digits( $value ) );
 	}
 }

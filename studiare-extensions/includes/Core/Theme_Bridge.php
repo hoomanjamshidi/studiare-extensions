@@ -151,6 +151,34 @@ final class Theme_Bridge {
 	}
 
 	/**
+	 * Sections of a product's Studiare lessons (`lessons_group`: each with
+	 * `title` and the lesson IDs in `lessons_list`); empty without lessons.
+	 *
+	 * @param int $product_id Product ID.
+	 */
+	public static function lesson_sections( int $product_id ): array {
+		$groups = get_post_meta( $product_id, 'lessons_group', true );
+
+		return is_array( $groups ) ? array_filter( $groups, 'is_array' ) : array();
+	}
+
+	/**
+	 * Whether a product lists at least one lesson. Studiare saves an empty
+	 * section when the curriculum is left blank, so sections alone say nothing.
+	 *
+	 * @param int $product_id Product ID.
+	 */
+	public static function has_lessons( int $product_id ): bool {
+		foreach ( self::lesson_sections( $product_id ) as $section ) {
+			if ( ! empty( $section['lessons_list'] ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Whether a product is a Studiare course (`_studiare_course = yes`).
 	 *
 	 * @param int $product_id Product ID.

@@ -46,6 +46,44 @@ final class Persian {
 	}
 
 	/**
+	 * An Iranian mobile number in its local form (09…, 11 digits) from what
+	 * people type: Persian digits, spaces, +98, 0098, 98 or a bare 9….
+	 * Anything else comes back as its digits, for the caller to reject.
+	 *
+	 * @param string $value Typed number.
+	 */
+	public static function iran_mobile( string $value ): string {
+		$digits = (string) preg_replace( '/\D/u', '', self::latin_digits( $value ) );
+
+		if ( preg_match( '/^(?:00)?989\d{9}$/', $digits ) ) {
+			return '0' . substr( $digits, -10 );
+		}
+
+		return preg_match( '/^9\d{9}$/', $digits ) ? '0' . $digits : $digits;
+	}
+
+	/**
+	 * Whether a value is a valid Iranian national code (کد ملی): ten digits
+	 * whose last one is the check digit of the first nine.
+	 *
+	 * @param string $code Code, Latin digits.
+	 */
+	public static function is_national_code( string $code ): bool {
+		if ( ! preg_match( '/^\d{10}$/', $code ) || preg_match( '/^(\d)\1{9}$/', $code ) ) {
+			return false;
+		}
+
+		$sum = 0;
+		for ( $i = 0; $i < 9; $i++ ) {
+			$sum += (int) $code[ $i ] * ( 10 - $i );
+		}
+		$rest  = $sum % 11;
+		$check = (int) $code[9];
+
+		return $rest < 2 ? $rest === $check : 11 - $rest === $check;
+	}
+
+	/**
 	 * Converts the digits in the text nodes of trusted markup (e.g. WooCommerce
 	 * price HTML), leaving tags, attributes and entities such as `&#x62A;` intact.
 	 *

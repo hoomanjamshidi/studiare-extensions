@@ -14,6 +14,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const nav = document.getElementById( 'stx-bottom-nav' );
 	if ( ! nav ) {
 		return;
@@ -25,6 +34,9 @@
 
 	/** Sheet close duration; must match `.stx-sheet__panel` transition in CSS. */
 	const SHEET_CLOSE_MS = 450;
+
+	/** How long WooCommerce trusts the cart fragments it stored (cart-fragments.js). */
+	const DAY_MS = 24 * 60 * 60 * 1000;
 
 	/**
 	 * Runs `callback( jQuery )` now, or as soon as jQuery arrives. Our scripts
@@ -168,7 +180,7 @@
 				}
 			}
 
-			document.addEventListener( 'keydown', onKeydown );
+			document.addEventListener( 'keydown', onKeydown, UNDELAYED );
 			return true;
 		}
 
@@ -188,7 +200,7 @@
 
 			el.classList.remove( 'is-open' );
 			root.classList.remove( 'stx-sheet-open' );
-			document.removeEventListener( 'keydown', onKeydown );
+			document.removeEventListener( 'keydown', onKeydown, UNDELAYED );
 
 			const panel = el.querySelector( '.stx-sheet__panel' );
 			panel.style.transform = '';
@@ -303,7 +315,7 @@
 					event.preventDefault();
 					navigate( () => window.location.assign( link.href ) );
 				}
-			} );
+			}, UNDELAYED );
 
 			el.addEventListener( 'submit', ( event ) => {
 				const form = event.target;
@@ -463,7 +475,7 @@
 				}
 
 				timer = window.setTimeout( () => search( term ), DEBOUNCE_MS );
-			} );
+			}, UNDELAYED );
 
 			// Arrow keys move between the field and the results, like a suggestion list.
 			body.addEventListener( 'keydown', ( event ) => {
@@ -480,7 +492,7 @@
 				event.preventDefault();
 				const next = index + ( event.key === 'ArrowDown' ? 1 : -1 );
 				stops[ Math.max( 0, Math.min( stops.length - 1, next ) ) ].focus();
-			} );
+			}, UNDELAYED );
 		}
 
 		function init() {
@@ -607,7 +619,38 @@
 		lastCartCount = count;
 	}
 
+	/**
+	 * Shows the cart count WooCommerce stored in this tab before its cart
+	 * fragments script runs: a cached page carries the count of the moment it
+	 * was cached, and WP Rocket's or LiteSpeed's "Delay JavaScript" holds that
+	 * script back until the first tap. The checks follow cart-fragments.js:
+	 * the stored cart hash matches the cookie and the copy is under a day old.
+	 * An empty cart has no hash; cached pages already show it as empty.
+	 */
+	function restoreStoredBadge() {
+		const params = window.wc_cart_fragments_params;
+		const badge = nav.querySelector( '.stx-bn-cart-count' );
+		if ( ! params || ! badge ) {
+			return;
+		}
+
+		try {
+			const fragments = JSON.parse( window.sessionStorage.getItem( params.fragment_name ) || 'null' );
+			const html = fragments && fragments[ 'span.stx-bn-cart-count' ];
+			const hash = window.sessionStorage.getItem( params.cart_hash_key ) || '';
+			const created = parseInt( window.sessionStorage.getItem( 'wc_cart_created' ), 10 ) || 0;
+			const cookie = ( document.cookie.match( /(?:^|;\s*)woocommerce_cart_hash=([^;]*)/ ) || [] )[ 1 ] || '';
+
+			if ( html && hash && hash === decodeURIComponent( cookie ) && created + DAY_MS > Date.now() ) {
+				badge.outerHTML = html;
+			}
+		} catch ( error ) {
+			// No storage (private mode) or nothing usable stored: the page's own count stays.
+		}
+	}
+
 	function watchCart() {
+		restoreStoredBadge();
 		syncCartBadge();
 
 		// WooCommerce triggers its cart events through jQuery.
@@ -682,7 +725,7 @@
 			toggle.addEventListener( 'click', () => {
 				const open = li.classList.toggle( 'is-open' );
 				toggle.setAttribute( 'aria-expanded', String( open ) );
-			} );
+			}, UNDELAYED );
 		} );
 	}
 
@@ -692,7 +735,7 @@
 
 	const initialActive = nav.querySelector( '.stx-bn__item.is-active' );
 
-	nav.addEventListener( 'click', onNavClick );
+	nav.addEventListener( 'click', onNavClick, UNDELAYED );
 	Sheets.init();
 	LiveSearch.init();
 	enhanceMenus();

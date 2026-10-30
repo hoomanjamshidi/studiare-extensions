@@ -9,6 +9,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const root = document.querySelector( '[data-stx-sb]' );
 	if ( ! root ) {
 		return;
@@ -66,7 +75,7 @@
 				event.preventDefault();
 				closeMenu( false );
 			}
-		} );
+		}, UNDELAYED );
 
 		menu.addEventListener( 'toggle', () => {
 			if ( menu.open ) {
@@ -78,20 +87,20 @@
 			if ( menu.open && ! root.contains( event.target ) ) {
 				closeMenu( false );
 			}
-		} );
+		}, UNDELAYED );
 
 		document.addEventListener( 'keydown', ( event ) => {
 			if ( event.key === 'Escape' && menu.open ) {
 				closeMenu( root.contains( document.activeElement ) );
 			}
-		} );
+		}, UNDELAYED );
 
 		// Messenger links open another app or tab; tidy up behind them.
 		menu.addEventListener( 'click', ( event ) => {
 			if ( event.target.closest( '.stx-sb__channel' ) ) {
 				window.setTimeout( () => closeMenu( false ), 150 );
 			}
-		} );
+		}, UNDELAYED );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -138,7 +147,7 @@
 			}
 		}, delay );
 
-		greeting.querySelector( '[data-stx-sb-dismiss]' ).addEventListener( 'click', () => hideGreeting( true ) );
+		greeting.querySelector( '[data-stx-sb-dismiss]' ).addEventListener( 'click', () => hideGreeting( true ), UNDELAYED );
 
 		greeting.querySelector( '[data-stx-sb-greeting]' ).addEventListener( 'click', () => {
 			hideGreeting( true );
@@ -148,7 +157,7 @@
 			} else {
 				toggle.click(); // A single channel: the button is the link.
 			}
-		} );
+		}, UNDELAYED );
 	}
 
 	if ( menu ) {

@@ -1,0 +1,59 @@
+/**
+ * Studiare Extensions — colour and shape tokens of the cart & checkout module.
+ *
+ * Shared by the cart, checkout and thank-you pages (body class .stx-co-page,
+ * checkout.css) and the mini cart on every page (.stx-mc and Studiare's
+ * panel around it, mini-cart.css), so all read one set of values. Colours come from Studiare: --primary_color
+ * for the accent (the admin's colour overrides it with an inline rule,
+ * Module::color_css()), --font_body-color for text, and the theme's dark
+ * surfaces under body.scdarkcolors.
+ */
+
+.stx-co-page,
+.stx-mc,
+.stx-mc-on .sc-cart-offcanvas {
+	--stx-co-accent: var(--primary_color, #2563eb);
+	--stx-co-on-accent: #fff;
+	--stx-co-text: var(--font_body-color, #1f2937);
+	--stx-co-muted: color-mix(in srgb, var(--stx-co-text) 62%, transparent);
+	--stx-co-bg: #fff;
+	--stx-co-soft: #f6f7fb;
+	--stx-co-line: #e5e7ef;
+	--stx-co-accent-soft: color-mix(in srgb, var(--stx-co-accent) 10%, var(--stx-co-bg));
+	--stx-co-accent-ink: color-mix(in srgb, var(--stx-co-accent) 78%, #000);
+	--stx-co-success: #0d7a52;
+	--stx-co-success-bg: #e9f7f0;
+	--stx-co-danger: #c0283a;
+	--stx-co-danger-bg: #fdedef;
+	--stx-co-info: #1f5fd1;
+	--stx-co-info-bg: #ecf2fe;
+	--stx-co-radius: 16px;
+	--stx-co-radius-sm: 12px;
+	--stx-co-shadow: 0 1px 2px rgb(16 24 40 / 4%), 0 10px 28px -16px rgb(16 24 40 / 18%);
+	--stx-co-top: calc(var(--wp-admin--admin-bar--height, 0px) + var(--stx-header-offset, 0px) + 24px);
+}
+
+body.scdarkcolors.stx-co-page,
+body.scdarkcolors .stx-mc,
+body.scdarkcolors.stx-mc-on .sc-cart-offcanvas {
+	--stx-co-text: var(--dark_light_color, #e6e8ef);
+	--stx-co-bg: var(--dark_primary_color, #1e2230);
+	--stx-co-soft: color-mix(in srgb, var(--dark_secondary_color, #151821) 55%, var(--stx-co-bg));
+	--stx-co-line: rgb(255 255 255 / 9%);
+	--stx-co-accent-soft: color-mix(in srgb, var(--stx-co-accent) 18%, var(--stx-co-bg));
+	--stx-co-accent-ink: color-mix(in srgb, var(--stx-co-accent) 70%, #fff);
+	--stx-co-success: #5ddba3;
+	--stx-co-success-bg: rgb(93 219 163 / 12%);
+	--stx-co-danger: #ff8d99;
+	--stx-co-danger-bg: rgb(255 141 153 / 12%);
+	--stx-co-info: #93b8ff;
+	--stx-co-info-bg: rgb(147 184 255 / 12%);
+	--stx-co-shadow: none;
+}
+
+@media (max-width: 599px) {
+	.stx-co-page {
+		/* WordPress's admin bar scrolls away with the page here. */
+		--stx-co-top: calc(var(--stx-header-offset, 0px) + 16px);
+	}
+}

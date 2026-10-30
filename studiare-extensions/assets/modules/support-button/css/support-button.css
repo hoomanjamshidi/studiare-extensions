@@ -129,8 +129,9 @@ body.stx-bn-on.stx-bn-is-hidden .stx-sb {
 	}
 }
 
-/* Sticky buy bars: Studiare's product bar and the Studiare+ "Mobile buy bar" widget. */
-body.sc_add_to_cart_fixed_active .stx-sb {
+/* Sticky bars: Studiare's product bar, the Studiare+ "Mobile buy bar" widget and the cart's total bar. */
+body.sc_add_to_cart_fixed_active .stx-sb,
+body.stx-cartpage-bar-on .stx-sb {
 	--stx-sb-bar: 76px;
 }
 

@@ -12,6 +12,7 @@
 
 use StudiareExt\Admin\Fields;
 use StudiareExt\Core\Icon_Library;
+use StudiareExt\Core\Persian;
 use StudiareExt\Core\Site;
 use StudiareExt\Core\Theme_Bridge;
 use StudiareExt\Modules\Audio_Products\Player;
@@ -23,6 +24,13 @@ defined( 'ABSPATH' ) || exit;
 
 $settings = $module->settings();
 $palette  = Theme_Bridge::palette();
+
+// Places of the "My audio" tab: automatic, or counted from the top of the account menu.
+$menu_positions = array( 0 => __( 'Automatic (after Downloads)', 'studiare-extensions' ) );
+for ( $place = 1; $place <= Schema::MAX_MENU_POSITION; $place++ ) {
+	/* translators: %s: place in the menu, 1 = top. */
+	$menu_positions[ $place ] = sprintf( __( 'Item %s', 'studiare-extensions' ), Persian::is_site_persian() ? Persian::number( $place ) : $place );
+}
 
 // Studiare's CSS variables, recreated so the preview resolves the same defaults as the site.
 $preview_vars = sprintf(
@@ -118,6 +126,23 @@ $preview_vars = sprintf(
 						array(
 							'placeholder' => Schema::defaults()['account']['label'],
 							'show_if'     => 'account.enabled',
+						)
+					);
+					Fields::select(
+						'account.position',
+						__( 'Place in the account menu', 'studiare-extensions' ),
+						$menu_positions,
+						array(
+							'show_if' => 'account.enabled',
+							'help'    => __( 'Counted from the top of the account menu (all of Studiare\'s account menus follow it). "Log out" always stays last.', 'studiare-extensions' ),
+						)
+					);
+					Fields::toggle(
+						'account.courses',
+						__( 'Open audio courses here from "My courses"', 'studiare-extensions' ),
+						array(
+							'show_if' => 'account.enabled',
+							'help'    => __( 'The "Study and learning" button of Studiare\'s "My courses" tab opens the course\'s player in this tab instead of an empty lesson list. Only for courses with audio and no lessons; courses with lessons open as before.', 'studiare-extensions' ),
 						)
 					);
 					?>

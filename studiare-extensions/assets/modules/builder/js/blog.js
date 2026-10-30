@@ -15,6 +15,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const config = window.stxBlog || {};
 	const i18n = config.i18n || {};
 	const doc = document;
@@ -121,7 +130,7 @@
 				// Closing the share sheet rejects the promise; nothing to report.
 				navigator.share( { title: share.dataset.title, url: share.dataset.url } ).catch( () => {} );
 			}
-		} );
+		}, UNDELAYED );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -213,20 +222,20 @@
 			bar.classList.toggle( 'is-open', open );
 		}
 
-		toggle.addEventListener( 'click', () => setOpen( panel.hidden ) );
+		toggle.addEventListener( 'click', () => setOpen( panel.hidden ), UNDELAYED );
 		// The jump itself is the link's own; the list gets out of the way first.
-		links.forEach( ( link ) => link.addEventListener( 'click', () => setOpen( false ) ) );
+		links.forEach( ( link ) => link.addEventListener( 'click', () => setOpen( false ), UNDELAYED ) );
 		doc.addEventListener( 'click', ( event ) => {
 			if ( ! panel.hidden && ! bar.contains( event.target ) ) {
 				setOpen( false );
 			}
-		} );
+		}, UNDELAYED );
 		doc.addEventListener( 'keydown', ( event ) => {
 			if ( event.key === 'Escape' && ! panel.hidden ) {
 				setOpen( false );
 				toggle.focus();
 			}
-		} );
+		}, UNDELAYED );
 
 		return {
 			/** Marks the section being read (a link of the original list, or null). */
@@ -325,14 +334,14 @@
 			if ( menu.open && ! menu.contains( event.target ) ) {
 				menu.open = false;
 			}
-		} );
+		}, UNDELAYED );
 
 		menu.addEventListener( 'keydown', ( event ) => {
 			if ( 'Escape' === event.key && menu.open ) {
 				menu.open = false;
 				toggle.focus();
 			}
-		} );
+		}, UNDELAYED );
 
 		menu.addEventListener( 'focusout', ( event ) => {
 			if ( menu.open && event.relatedTarget && ! menu.contains( event.relatedTarget ) ) {
@@ -359,7 +368,7 @@
 			const open = box.classList.toggle( 'is-open' );
 			button.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
 			button.textContent = open ? button.getAttribute( 'data-less' ) : more;
-		} );
+		}, UNDELAYED );
 	}
 
 	/* ---------------------------------------------------------------------

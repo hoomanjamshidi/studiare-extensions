@@ -95,6 +95,27 @@ final class Player {
 	}
 
 	/**
+	 * The album's size for its header or card: "3 tracks", "16 minutes"
+	 * (the length left out when unknown).
+	 *
+	 * @param int $count   Number of tracks.
+	 * @param int $seconds Total length.
+	 * @return string[]
+	 */
+	public static function facts( int $count, int $seconds ): array {
+		/* translators: %s: number of audio tracks. */
+		$facts = array( sprintf( _n( '%s track', '%s tracks', $count, 'studiare-extensions' ), Persian::number( $count ) ) );
+
+		if ( $seconds ) {
+			$minutes = max( 1, (int) round( $seconds / 60 ) );
+			/* translators: %s: total length in minutes. */
+			$facts[] = sprintf( _n( '%s minute', '%s minutes', $minutes, 'studiare-extensions' ), Persian::number( $minutes ) );
+		}
+
+		return $facts;
+	}
+
+	/**
 	 * "3:07" or "1:02:03", in Persian digits on Persian sites.
 	 *
 	 * @param int $seconds Seconds.

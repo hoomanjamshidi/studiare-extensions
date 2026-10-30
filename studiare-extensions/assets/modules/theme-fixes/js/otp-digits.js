@@ -112,6 +112,9 @@
 		} );
 	}
 
+	// `isRocket`: WP Rocket's "Delay JavaScript" (3.17+) would hold these
+	// listeners back until the first tap, also for this script, which it does
+	// not delay; its own option lets them through. Browsers ignore it.
 	document.addEventListener( 'input', ( event ) => {
 		const input = otpField( event.target );
 		if ( ! input || event.isComposing ) {
@@ -120,7 +123,7 @@
 
 		const caret = input.selectionStart === null ? input.value.length : input.selectionStart;
 		write( input, digits( input.value ), digits( input.value.slice( 0, caret ) ).length );
-	}, true );
+	}, { capture: true, isRocket: true } );
 
 	// The theme caps the phone field at 11 characters, so a pasted "+98 912 345 6789"
 	// would be cut short before it could be cleaned: clean the whole text instead.
@@ -150,7 +153,7 @@
 		if ( 'Enter' === event.key && otpField( event.target ) ) {
 			finishForm( event.target );
 		}
-	}, true );
+	}, { capture: true, isRocket: true } );
 
 	// Values the browser restored or autofilled never went through a keystroke.
 	document.addEventListener( 'click', ( event ) => {
@@ -158,7 +161,7 @@
 		if ( button ) {
 			finishForm( button );
 		}
-	}, true );
+	}, { capture: true, isRocket: true } );
 
 	document.addEventListener( 'submit', ( event ) => {
 		if ( event.target instanceof HTMLFormElement ) {

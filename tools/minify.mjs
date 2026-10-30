@@ -39,10 +39,16 @@ const FILES = [
   'modules/support-button/js/support-button.js',
   'modules/theme-fixes/js/otp-digits.js',
   'modules/theme-fixes/css/sold-out-button.css',
+  'modules/theme-fixes/css/owned-course.css',
   'modules/article-tools/css/article-tools.css',
   'modules/article-tools/js/article-tools.js',
   'modules/audio-products/css/audio-products.css',
   'modules/audio-products/js/audio-products.js',
+  'modules/checkout/css/tokens.css',
+  'modules/checkout/css/checkout.css',
+  'modules/checkout/css/mini-cart.css',
+  'modules/checkout/js/checkout.js',
+  'core/js/rocket-taps.js',
 ];
 
 for (const file of FILES) {

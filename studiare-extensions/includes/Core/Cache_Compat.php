@@ -9,16 +9,25 @@
  *   not replay that tap and WP Rocket replays it as an untrusted event
  *   (iOS then refuses to start audio), so the first tap on play, a sheet
  *   or the menu button would be lost. The plugin's scripts are small and
- *   already `defer`; they stay out of delaying.
+ *   already `defer`; they stay out of delaying. WP Rocket (3.17+) also holds
+ *   back the tap listeners of scripts it does not delay: the scripts pass
+ *   its `isRocket` option, and rocket-taps.js keeps Rocket from cancelling
+ *   and replaying taps they already handled.
+ * - "Load JavaScript deferred" wraps inline scripts that mention jQuery in a
+ *   DOMContentLoaded listener, which runs after the deferred file that needs
+ *   them; "Combine JavaScript files" would copy each page's own settings
+ *   into a new combined file. The plugin's inline settings (`window.stx…`)
+ *   stay as they are.
  * - "Remove unused CSS" keeps only the CSS the page's HTML uses when it is
  *   analysed, so states the scripts add later (`is-playing`, open sheets,
  *   dark mode) would lose their styles. The plugin's stylesheets and inline
  *   styles are kept whole.
  *
  * Filter names and matching were read from WP Rocket 3.24 and LiteSpeed
- * Cache 7.9 (Engine/Optimization/DelayJS/HTML.php, RUCSS/Controller/UsedCSS.php;
- * src/optimize.cls.php, src/ucss.cls.php). Without those plugins the
- * filters simply never run.
+ * Cache 7.9 (Engine/Optimization/DelayJS/HTML.php, DeferJS/DeferJS.php,
+ * Minify/JS/Combine.php, RUCSS/Controller/UsedCSS.php,
+ * assets/js/lazyload-scripts.min.js; src/optimize.cls.php, src/ucss.cls.php).
+ * Without those plugins the filters simply never run.
  *
  * @package StudiareExt
  */
@@ -32,9 +41,15 @@ final class Cache_Compat {
 	/** Every handle of the plugin starts with this, so do the tag ids WordPress prints. */
 	private const HANDLE_PREFIX = 'stx-';
 
+	/** The plugin's inline settings scripts start with their object, `window.stx…`. */
+	private const INLINE_MARKER = 'window.stx';
+
 	public function register(): void {
 		// WP Rocket.
 		add_filter( 'rocket_delay_js_exclusions', array( $this, 'rocket_delay_js' ) );
+		add_filter( 'rocket_defer_inline_exclusions', array( $this, 'rocket_inline_js' ) );
+		add_filter( 'rocket_excluded_inline_js_content', array( $this, 'rocket_inline_js' ) );
+		add_action( 'wp_head', array( $this, 'print_rocket_taps' ), 1 );
 		add_filter( 'rocket_rucss_safelist', array( $this, 'rocket_rucss_files' ) );
 		add_filter( 'rocket_rucss_inline_atts_exclusions', array( $this, 'rocket_rucss_inline' ) );
 
@@ -56,6 +71,32 @@ final class Cache_Compat {
 		$patterns[] = 'id=["\']' . self::HANDLE_PREFIX;
 
 		return $patterns;
+	}
+
+	/**
+	 * Inline scripts "Load JavaScript deferred" and "Combine JavaScript files"
+	 * leave in place; both match a substring of the script's text. The defer
+	 * filter may hand over a `|`-separated string (older Rocket versions).
+	 *
+	 * @param array|string $exclusions Excluded snippets.
+	 */
+	public function rocket_inline_js( $exclusions ): array {
+		$exclusions   = is_string( $exclusions ) ? explode( '|', $exclusions ) : (array) $exclusions;
+		$exclusions[] = self::INLINE_MARKER;
+
+		return $exclusions;
+	}
+
+	/**
+	 * Prints rocket-taps.js while WP Rocket delays JavaScript; its own id
+	 * keeps it out of delaying like the plugin's other scripts.
+	 */
+	public function print_rocket_taps(): void {
+		if ( ! function_exists( 'get_rocket_option' ) || ! get_rocket_option( 'delay_js' ) ) {
+			return;
+		}
+
+		wp_print_inline_script_tag( Asset::contents( 'assets/core/js/rocket-taps.js' ), array( 'id' => self::HANDLE_PREFIX . 'rocket-taps' ) );
 	}
 
 	/**
@@ -94,7 +135,7 @@ final class Cache_Compat {
 	public function litespeed_js( $exclusions ): array {
 		$exclusions   = (array) $exclusions;
 		$exclusions[] = wp_make_link_relative( STUDIARE_EXT_URL ) . 'assets/';
-		$exclusions[] = 'window.stx';
+		$exclusions[] = self::INLINE_MARKER;
 
 		return $exclusions;
 	}

@@ -8,6 +8,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const config = window.stxHome || {};
 	const i18n = config.i18n || {};
 	const doc = document;
@@ -70,7 +79,7 @@
 		dots.forEach( ( dot, index ) => dot.addEventListener( 'click', () => {
 			go( index );
 			restart();
-		} ) );
+		}, UNDELAYED ) );
 
 		function stop() {
 			window.clearInterval( timer );
@@ -98,7 +107,7 @@
 				hold( false )();
 			}
 		} );
-		track.addEventListener( 'touchstart', hold( true ), { passive: true } );
+		track.addEventListener( 'touchstart', hold( true ), { passive: true, isRocket: true } );
 		doc.addEventListener( 'visibilitychange', restart );
 
 		restart();
@@ -131,7 +140,7 @@
 					target.hidden = ! active;
 				}
 			} );
-		} ) );
+		}, UNDELAYED ) );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -185,7 +194,7 @@
 			// One view at a time; snapping lines the first card up with the edge.
 			const step = parseInt( arrow.dataset.stxStep, 10 ) * track.clientWidth * ( rtl ? -1 : 1 );
 			track.scrollBy( { left: step, behavior: reducedMotion.matches ? 'auto' : 'smooth' } );
-		} ) );
+		}, UNDELAYED ) );
 
 		track.addEventListener( 'scroll', schedule, { passive: true } );
 		// Also fires when a hidden category panel is shown (its size changes from zero).
@@ -244,7 +253,7 @@
 				event.preventDefault();
 				event.stopPropagation();
 			}
-		}, true );
+		}, { capture: true, isRocket: true } );
 		// Links and pictures would otherwise start the browser's own drag and drop.
 		track.addEventListener( 'dragstart', ( event ) => event.preventDefault() );
 	}

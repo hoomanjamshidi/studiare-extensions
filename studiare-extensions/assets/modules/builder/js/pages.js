@@ -7,6 +7,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const config = window.stxPages || {};
 	const i18n = config.i18n || {};
 	const doc = document;
@@ -52,7 +61,7 @@
 			if ( event.target.hasAttribute( 'aria-invalid' ) ) {
 				event.target.removeAttribute( 'aria-invalid' );
 			}
-		} );
+		}, UNDELAYED );
 
 		form.addEventListener( 'submit', async ( event ) => {
 			if ( ! config.ajaxUrl || ! window.fetch ) {
@@ -117,7 +126,7 @@
 			facade.replaceWith( frame );
 			// The button is gone; keep keyboard users where they were.
 			frame.focus();
-		} );
+		}, UNDELAYED );
 	}
 
 	/* ---------------------------------------------------------------------

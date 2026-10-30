@@ -1,0 +1,26 @@
+/**
+ * Studiare Extensions — cart & checkout panel. The rest comes from admin.css
+ * (the same list rows as the support button's channels).
+ */
+
+.stx-co-fields .stx-item.is-off .stx-item__label {
+	opacity: 0.55;
+}
+
+.stx-co-fields .stx-item__chips {
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.stx-co-fields-add {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 14px;
+	margin-block-start: 14px;
+}
+
+.stx-co-fields-add .stx-field__help {
+	flex: 1 1 260px;
+	margin: 0;
+}

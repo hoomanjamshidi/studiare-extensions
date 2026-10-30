@@ -9,6 +9,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const config = window.stxBuilder || {};
 	const i18n = config.i18n || {};
 	const doc = document;
@@ -327,7 +336,7 @@
 					const next = ( parseFloat( input.value ) || min ) + ( sign === '+' ? step : -step );
 					input.value = String( Math.min( max, Math.max( min, next ) ) );
 					input.dispatchEvent( new Event( 'change', { bubbles: true } ) );
-				} );
+				}, UNDELAYED );
 				return button;
 			};
 
@@ -368,7 +377,7 @@
 					window.jQuery( select ).trigger( 'change' );
 				}
 				buildChoices( select );
-			} );
+			}, UNDELAYED );
 			holder.appendChild( button );
 		} );
 	}
@@ -707,14 +716,14 @@
 				if ( form && event.target.classList.contains( 'stx-search__input' ) ) {
 					onInput( form );
 				}
-			} );
+			}, UNDELAYED );
 
 			doc.addEventListener( 'keydown', ( event ) => {
 				const form = formOf( event.target );
 				if ( form && ( event.key === 'ArrowDown' || event.key === 'ArrowUp' ) ) {
 					onArrow( form, event );
 				}
-			} );
+			}, UNDELAYED );
 
 			// Reopen the last results when the field gets focus from outside the form
 			// (not when Escape or the arrow keys move focus back to it).
@@ -895,7 +904,7 @@
 		}
 
 		closeMenus();
-	} );
+	}, UNDELAYED );
 
 	doc.addEventListener( 'keydown', ( event ) => {
 		if ( event.key === 'Escape' ) {
@@ -921,7 +930,7 @@
 			event.preventDefault();
 			selectTab( tabs[ ( index + ( forward ? 1 : -1 ) + tabs.length ) % tabs.length ], true );
 		}
-	} );
+	}, UNDELAYED );
 
 	window.addEventListener( 'hashchange', () => revealTarget( window.location.hash.slice( 1 ) ) );
 

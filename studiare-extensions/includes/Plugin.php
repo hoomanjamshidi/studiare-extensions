@@ -14,6 +14,7 @@ use StudiareExt\Modules\Article_Tools\Module as Article_Tools_Module;
 use StudiareExt\Modules\Audio_Products\Module as Audio_Products_Module;
 use StudiareExt\Modules\Bottom_Nav\Module as Bottom_Nav_Module;
 use StudiareExt\Modules\Builder\Module as Builder_Module;
+use StudiareExt\Modules\Checkout\Module as Checkout_Module;
 use StudiareExt\Modules\Support_Button\Module as Support_Button_Module;
 use StudiareExt\Modules\Theme_Fixes\Module as Theme_Fixes_Module;
 
@@ -57,7 +58,7 @@ final class Plugin {
 	 * (a subclass of Core\Module) through the `studiare_ext_modules` filter.
 	 */
 	private function register_modules(): void {
-		$classes = apply_filters( 'studiare_ext_modules', array( Bottom_Nav_Module::class, Builder_Module::class, Support_Button_Module::class, Article_Tools_Module::class, Audio_Products_Module::class, Theme_Fixes_Module::class ) );
+		$classes = apply_filters( 'studiare_ext_modules', array( Bottom_Nav_Module::class, Builder_Module::class, Support_Button_Module::class, Article_Tools_Module::class, Audio_Products_Module::class, Checkout_Module::class, Theme_Fixes_Module::class ) );
 
 		foreach ( (array) $classes as $class ) {
 			if ( ! is_string( $class ) || ! is_subclass_of( $class, Module::class ) ) {

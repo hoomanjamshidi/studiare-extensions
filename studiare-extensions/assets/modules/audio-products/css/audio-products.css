@@ -11,7 +11,8 @@
  * itself out by its own width (container queries), not the screen's.
  */
 
-.stx-ap {
+.stx-ap,
+.stx-ap-account {
 	--stx-ap-a: var(--stx-ap-accent, var(--primary_color, #26a69a));
 	--stx-ap-ink: var(--stx-ap-on-accent, #fff);
 	/* Accent as text on a light surface: darkened until it reads well. */
@@ -26,6 +27,9 @@
 	--stx-ap-hover: color-mix(in srgb, var(--stx-ap-a) 10%, transparent);
 	--stx-ap-current: color-mix(in srgb, var(--stx-ap-a) 12%, transparent);
 	--stx-ap-shadow: color-mix(in srgb, var(--stx-ap-a) 40%, transparent);
+}
+
+.stx-ap {
 	container-type: inline-size;
 	margin: 0 0 28px;
 	/* The page can link to #stx-audio: land below a sticky header. */
@@ -36,7 +40,7 @@
 	text-align: start;
 }
 
-.scdarkcolors .stx-ap--soft {
+.scdarkcolors :is(.stx-ap--soft, .stx-ap-account) {
 	--stx-ap-a-text: color-mix(in srgb, var(--stx-ap-a) 55%, #fff);
 	--stx-ap-surface: color-mix(in srgb, var(--stx-ap-a) 12%, var(--dark_primary_color, #150550));
 	--stx-ap-panel: color-mix(in srgb, #fff 5%, var(--dark_primary_color, #150550));
@@ -133,7 +137,7 @@
 	box-shadow: 0 10px 22px -14px var(--stx-ap-shadow);
 }
 
-.stx-ap .stx-ap__cover {
+:is(.stx-ap, .stx-ap-lib) .stx-ap__cover {
 	display: block;
 	width: 100%;
 	max-width: none;
@@ -143,7 +147,7 @@
 	object-fit: cover;
 }
 
-.stx-ap .stx-ap__cover--empty {
+:is(.stx-ap, .stx-ap-lib) .stx-ap__cover--empty {
 	display: grid;
 	place-items: center;
 	background: linear-gradient(140deg, var(--stx-ap-a), color-mix(in srgb, var(--stx-ap-a) 55%, #000));
@@ -827,13 +831,144 @@
 
 /* Studiare's dark mode paints every link white (`body.scdarkcolors a:not(…)`,
    0,3,5); these links keep their own colour. */
-body.scdarkcolors a:is(.stx-ap__buy, .stx-ap__login, .stx-ap__dl) {
+body.scdarkcolors a:is(.stx-ap__buy, .stx-ap__login, .stx-ap__dl, .stx-ap-lib__item, .stx-ap-back) {
 	color: var(--stx-link) !important;
 }
 
-/* Account tab: one player under the other. */
-.stx-ap-account .stx-ap + .stx-ap {
-	margin-top: 8px;
+/* Account tab: the library, a card per owned product; each opens the
+   product's player on its own page. */
+.stx-ap-account {
+	container-type: inline-size;
+	color: var(--stx-ap-text);
+	font-family: inherit;
+	line-height: 1.6;
+	text-align: start;
+}
+
+.stx-ap-account .stx-ap-lib {
+	display: grid;
+	gap: 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+@container (min-width: 640px) {
+	.stx-ap-account .stx-ap-lib {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.stx-ap-account .stx-ap-lib > li {
+	margin: 0;
+	padding: 0;
+}
+
+.stx-ap-account .stx-ap-lib__item {
+	--stx-link: var(--stx-ap-text);
+	display: grid;
+	grid-template-columns: 64px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 14px;
+	box-sizing: border-box;
+	height: 100%;
+	padding: 12px;
+	border: 1px solid var(--stx-ap-line);
+	border-radius: 18px;
+	background: var(--stx-ap-surface);
+	color: var(--stx-link);
+	text-decoration: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stx-ap-account .stx-ap-lib__item:hover {
+	border-color: color-mix(in srgb, var(--stx-ap-a) 45%, transparent);
+	box-shadow: 0 14px 30px -22px var(--stx-ap-shadow);
+	color: var(--stx-link);
+}
+
+.stx-ap-account :is(.stx-ap-lib__item, .stx-ap-back):focus-visible {
+	outline: 2px solid var(--stx-ap-a);
+	outline-offset: 2px;
+}
+
+.stx-ap-lib__body {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.stx-ap-lib__title {
+	display: -webkit-box;
+	overflow: hidden;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.6;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+.stx-ap-lib__go {
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+	padding: 6px 12px;
+	border-radius: 999px;
+	background: var(--stx-ap-current);
+	color: var(--stx-ap-a-text);
+	font-size: 13px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+/* chevron-down turned to point forward (backward for the back link). */
+.stx-ap-account :is(.stx-ap-lib__go, .stx-ap-back) svg {
+	flex: none;
+	width: 16px;
+	height: 16px;
+}
+
+.stx-ap-lib__go svg {
+	transform: rotate(-90deg);
+}
+
+.rtl .stx-ap-lib__go svg,
+.stx-ap-back svg {
+	transform: rotate(90deg);
+}
+
+.rtl .stx-ap-back svg {
+	transform: rotate(-90deg);
+}
+
+/* Narrow account columns: the arrow alone says "open". */
+@container (max-width: 340px) {
+	.stx-ap-lib__go {
+		padding: 8px;
+	}
+
+	.stx-ap-lib__go span {
+		display: none;
+	}
+}
+
+.stx-ap-account .stx-ap-back {
+	--stx-link: var(--stx-ap-a-text);
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 44px;
+	margin: 0 0 8px;
+	color: var(--stx-link);
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.stx-ap-account .stx-ap-back:hover {
+	color: var(--stx-link);
+	text-decoration: underline;
 }
 
 /* Windows high contrast: keep the controls visible. */

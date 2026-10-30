@@ -14,6 +14,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const config = window.stxAudioProducts || {};
 	const i18n = config.i18n || {};
 	const doc = document;
@@ -403,24 +412,24 @@
 
 		root.stxPlayer = player;
 
-		ui.main.addEventListener( 'click', () => toggle( player.track ) );
+		ui.main.addEventListener( 'click', () => toggle( player.track ), UNDELAYED );
 
 		deck.querySelectorAll( '[data-ap-skip]' ).forEach( ( button ) => {
 			button.addEventListener( 'click', () => {
 				const jump = parseFloat( button.dataset.apSkip ) || 0;
 				const from = current === player.track && audio ? audio.currentTime : savedTime( player.track );
 				seekTo( player.track, from + jump );
-			} );
+			}, UNDELAYED );
 		} );
 
 		steps.forEach( ( button ) => {
-			button.addEventListener( 'click', () => player.step( parseInt( button.dataset.apStep, 10 ) ) );
+			button.addEventListener( 'click', () => player.step( parseInt( button.dataset.apStep, 10 ) ), UNDELAYED );
 		} );
 
 		ui.seek.addEventListener( 'input', () => {
 			dragging = true;
 			player.showTime( parseFloat( ui.seek.value ) || 0 );
-		} );
+		}, UNDELAYED );
 		ui.seek.addEventListener( 'change', () => {
 			dragging = false;
 			seekTo( player.track, parseFloat( ui.seek.value ) || 0 );
@@ -440,7 +449,7 @@
 				}
 				store.set( SPEED_KEY, rate === 1 ? null : String( rate ) );
 				showSpeed();
-			} );
+			}, UNDELAYED );
 			showSpeed();
 		}
 
@@ -450,7 +459,7 @@
 					player.showTrack( track );
 				}
 				toggle( track );
-			} );
+			}, UNDELAYED );
 		} );
 
 		// Start on the track the listener was in the middle of, else the first one.

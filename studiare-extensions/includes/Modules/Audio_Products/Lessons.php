@@ -17,6 +17,8 @@
 
 namespace StudiareExt\Modules\Audio_Products;
 
+use StudiareExt\Core\Theme_Bridge;
+
 defined( 'ABSPATH' ) || exit;
 
 final class Lessons {
@@ -61,9 +63,7 @@ final class Lessons {
 	 * @param int $product_id Product ID.
 	 */
 	private static function sections( int $product_id ): array {
-		$groups = get_post_meta( $product_id, 'lessons_group', true );
-
-		return is_array( $groups ) ? array_filter( $groups, 'is_array' ) : array();
+		return Theme_Bridge::lesson_sections( $product_id );
 	}
 
 	/**

@@ -14,6 +14,15 @@
 ( function () {
 	'use strict';
 
+	/**
+	 * Options for tap, click and key listeners. WP Rocket's "Delay JavaScript"
+	 * (3.17+) holds such listeners back, also in scripts it does not delay like
+	 * this one, until the scripts it delays have loaded, and then replays the
+	 * first tap as an untrusted copy (iOS will not start audio from one). Its
+	 * own `isRocket` option lets a listener through; browsers ignore it.
+	 */
+	const UNDELAYED = { isRocket: true };
+
 	const doc = document;
 	const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' );
 	const isEditor = () => doc.body && doc.body.classList.contains( 'elementor-editor-active' );
@@ -344,7 +353,7 @@
 					event.stopPropagation();
 					dragged = false;
 				}
-			}, true );
+			}, { capture: true, isRocket: true } );
 		}
 
 		/* -- Wiring ------------------------------------------------------ */
@@ -365,17 +374,17 @@
 			} else {
 				prev();
 			}
-		} ) );
+		}, UNDELAYED ) );
 
 		picks.forEach( ( pick ) => pick.addEventListener( 'click', () => {
 			const index = parseInt( pick.dataset.stxGo, 10 );
 			if ( index !== current ) {
 				go( index );
 			}
-		} ) );
+		}, UNDELAYED ) );
 
 		if ( pauseButton ) {
-			pauseButton.addEventListener( 'click', () => setStopped( ! holds.has( 'stopped' ) ) );
+			pauseButton.addEventListener( 'click', () => setStopped( ! holds.has( 'stopped' ) ), UNDELAYED );
 		}
 
 		main.addEventListener( 'keydown', ( event ) => {
@@ -388,7 +397,7 @@
 			} else {
 				prev();
 			}
-		} );
+		}, UNDELAYED );
 
 		if ( fade ) {
 			let start = null;
@@ -425,7 +434,7 @@
 					event.preventDefault();
 					swiped = false;
 				}
-			}, true );
+			}, { capture: true, isRocket: true } );
 		} else {
 			track.addEventListener( 'scroll', () => {
 				if ( ! ownScroll ) {
@@ -443,8 +452,8 @@
 		// No autoplay while the visitor points at, touches or keyboard-focuses the slider.
 		main.addEventListener( 'pointerenter', ( event ) => hold( 'hover', event.pointerType === 'mouse' ) );
 		main.addEventListener( 'pointerleave', () => hold( 'hover', false ) );
-		track.addEventListener( 'touchstart', () => hold( 'touch', true ), { passive: true } );
-		track.addEventListener( 'touchend', () => hold( 'touch', false ), { passive: true } );
+		track.addEventListener( 'touchstart', () => hold( 'touch', true ), { passive: true, isRocket: true } );
+		track.addEventListener( 'touchend', () => hold( 'touch', false ), { passive: true, isRocket: true } );
 		main.addEventListener( 'focusin', ( event ) => {
 			if ( event.target !== pauseButton && event.target.matches( ':focus-visible' ) ) {
 				hold( 'focus', true );

@@ -19,6 +19,8 @@ final class Fixes {
 		Otp_Digits::class,
 		Sold_Out_Button::class,
 		Fresh_Account_Page::class,
+		No_Repeat_Purchase::class,
+		Safe_Checkout::class,
 	);
 
 	/** @var array<string, Fix>|null Memoized instances keyed by fix id. */

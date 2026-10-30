@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.9.2
+Stable tag: 1.11.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,15 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 * Rises automatically above the Studiare+ bottom navigation, sticky buy bars and the theme's "back to top" button, and follows Studiare's colours and dark mode.
 * Works without JavaScript (a native disclosure), is cache friendly, and is keyboard and screen reader accessible.
 
+= Cart & checkout =
+
+* New designs for WooCommerce's cart and checkout pages (the classic pages Studiare uses): purchase steps (cart, details & payment, access to the courses or order tracking), items as cards, a sticky order summary beside the form (a folding bar on phones), payment methods as cards and a total bar at the bottom of phones. The cart updates a moment after a quantity changes.
+* A coupon box in the summary that shows its answer, right or wrong, under the box instead of a bar at the top; removing a coupon answers there too. WooCommerce's notices are restyled, and cart and checkout messages are in Persian even without WooCommerce's Persian language pack.
+* A mini cart to match (the cart that opens from the header and the bottom navigation): items as cards with "Free" for free courses, the total and what sale prices and coupons save, the checkout button first and always in view while the list scrolls, and an inviting empty state. Works in dark mode; the theme's design can be kept.
+* A thank-you page to match: an animated tick (with a little confetti after a successful payment), the buyer's name, buttons to their courses or order, the order number, date, total and payment method, a "Ready to start" card for each purchase with its own buttons (start the course, download each file, listen to an audio product in "My audio") and a "What happens next" timeline. Bank transfer, cash on delivery and failed payments each get their own wording and colours (a failed payment offers to pay again). The gateways' details, downloads and addresses are restyled as cards.
+* Billing field settings: switch each field on or off, rename it, make it required or optional, choose half or full width and drag fields into order. A cart of only courses and downloads asks only for the fields marked for it (by default name, mobile and email). Add your own fields (text, number, phone, email, list, checkbox, national code with check-digit validation); their answers are saved with the order and shown in the order screen, emails and order details. Mobile numbers typed with Persian digits, +98 or 0098 are accepted and saved as 09….
+* Works with Persian WooCommerce and Persian WooCommerce Shipping (Iranian provinces, cities and districts, Pishtaz, courier), shipping to another address, free shipping and every payment gateway. Each page can keep the theme's design while the field settings still apply. Off until switched on.
+
 = Article tools =
 
 * "Save as PDF" on every blog post: a button above the text, a box after it, or both. It opens the browser's print window, where "Save as PDF" is one of the printers, so Persian text, fonts and pictures come out exactly as on the site. Only the article is printed (title, author, date, featured picture, text, a link back to the post and page numbers), also with the browser's own Print command and in dark mode. Authors can hide the button on a single post.
@@ -64,9 +73,42 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 
 1. Upload the `studiare-extensions` folder to `/wp-content/plugins/`.
 2. Activate the plugin.
-3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button** or **Studiare+ → Theme fixes** in the admin menu.
+3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button**, **Studiare+ → Cart & checkout** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.11.1 =
+* Fix: the thank-you page showed packing and delivery steps for courses that are not marked "virtual" (for example paid cash on delivery). Courses (the theme's course switch or lessons), audio products, virtual and downloadable products now always get the learning steps, and cash on delivery for them reads "you pay later, in the way you chose".
+* Audio products: choose the place of the "My audio" tab in the account menu (Audio products → Customer account): automatic (after Downloads) or any place counted from the top; "Log out" stays last.
+* Audio courses: the "Study and learning" button in Studiare's "My courses" tab opens the course's player in "My audio" instead of an empty lesson list (courses with lessons open as before). A switch in Audio products → Customer account turns it off.
+* Audio products on the thank-you page open the buyer's audio in "My audio" ("Listen", also the main button; several audio products lead to the "My audio" tab) instead of "Start the course" with an empty lesson list.
+
+= 1.11.0 =
+* New: thank-you page design (Cart & checkout → Checkout page → Thank-you page). An animated tick (confetti after a successful payment), the buyer's name, the order number, date, total and payment method, its own wording and colour for paid, cash on delivery, awaiting payment (bank transfer, cheque) and failed payments ("Try paying again"), and a "What happens next" timeline. The gateway's details (bank account), downloads and addresses are cards.
+* New: "Ready to start" on the thank-you page: each purchase with its own buttons, "Start the course", one per download file (then "All downloads"), and "Listen" for audio products, which opens that product's player in "My audio". With one item, its button is the main button of the page.
+* New: mini cart design (Cart & checkout → Cart page → Mini cart) for the cart that opens from the header and the bottom navigation: items as cards, "Free" for free courses, what sale prices and coupons save, the checkout button first and always in view, a designed empty cart, dark mode. The theme's design can be kept.
+* Fix: with bank transfer or cheque, the buyer saw "Your order could not be completed because of an error on the site" when the order email (or another plugin) failed while the order was put on hold, although the order was placed. Such an order now opens its thank-you page; the error is still saved in the order notes and WooCommerce's log.
+* WP Rocket (Delay JavaScript): the thank-you page's buttons open on the first tap.
+
+= 1.10.2 =
+* Fix: on sites with a Studiare+ header the cart page lost its layout: the items and the order summary sat apart at different heights (and squeezed together on phones), because the header's cart button shared a class name with the cart page. The cart page now has its own class names.
+* Fix: the cart's order summary stays beside the items and sticks while scrolling; the theme's own cart rules moved it 150px down.
+* Fix: the phone total bar sits at the bottom of the screen above the bottom navigation; with Studiare's page wrapper it appeared near the footer.
+* Cart & checkout: a free course reads "Free" instead of a zero price.
+
+= 1.10.1 =
+* Fix: with the Cart & checkout module on, the cart page stopped loading on WooCommerce older than 11.2 (only the theme's preloader showed) as soon as the cart held a product. The cart works with every recent WooCommerce again.
+
+= 1.10.0 =
+* New: Cart & checkout module (Studiare+ → Cart & checkout). New cart and checkout designs with purchase steps, a sticky order summary, a coupon box with its messages under it, a phone total bar and restyled notices; billing field settings (order, labels, required, width, fields for courses and downloads, your own fields such as a national code). Compatible with Persian WooCommerce and Persian WooCommerce Shipping.
+* Compatibility: WP Rocket's "Delay JavaScript" (3.17 and newer) held back the plugin's tap listeners until the delayed scripts had loaded, even though the plugin's scripts are excluded from delaying, and then replayed the first tap: the bottom navigation, support button and audio players reacted only after a second or more on phones, iOS refused to start audio from the replay, and a replayed tap could close a sheet that had just opened. The plugin's listeners now react at once and Rocket no longer replays taps they handled.
+* Compatibility: WP Rocket's "Load JavaScript deferred" and "Combine JavaScript files" leave the plugin's inline settings in place.
+* Bottom navigation: the cart badge shows the right count at once on pages served from a page cache, also before the first tap under "Delay JavaScript".
+
+= 1.9.3 =
+* Theme fix: no second purchase of an owned course. A course added to the cart before logging in, or through a learning path bundle, used to reach checkout again. Students now see "You are a student of this course" instead of the buy button, an owned course leaves the cart with a short note, and checkout never takes it (products set to "can be bought again" are not affected).
+* Theme fix: checkout error after placing an order. When another plugin fails while an order is placed (for example the order email on a host without mail()), a completed free or 100% coupon order now opens its thank-you page instead of "There was an error processing your order", other orders get a clear message, and the error is saved in the order notes and WooCommerce > Status > Logs.
+* Audio products: the "My audio" account tab lists each product as a card; a card opens that product's player on its own page.
 
 = 1.9.2 =
 * Compatibility: WP Rocket and LiteSpeed Cache. The plugin's scripts stay out of "Delay JavaScript" (LiteSpeed does not replay the first tap, so the first tap on play, a sheet or the menu button was lost), and its stylesheets are kept whole by "Remove Unused CSS" / "UCSS" (states the scripts add later would lose their styles). Hooks that need jQuery attach whenever it arrives, also when the cache plugin delays it.

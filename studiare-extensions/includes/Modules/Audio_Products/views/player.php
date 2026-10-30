@@ -28,8 +28,6 @@ defined( 'ABSPATH' ) || exit;
 
 $options = $settings['player'];
 $label   = '' !== $options['label'] ? $options['label'] : __( 'Audio files of this product', 'studiare-extensions' );
-$count   = count( $player['tracks'] );
-$minutes = $player['total'] ? max( 1, (int) round( $player['total'] / 60 ) ) : 0;
 $first   = null;
 $section = '';
 $icon    = static function ( string $key ): string {
@@ -74,12 +72,9 @@ foreach ( $player['tracks'] as $track ) {
 				<span class="stx-ap__eyebrow"><?php echo $icon( 'headphones' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- bundled SVG. ?><span><?php echo esc_html( $label ); ?></span></span>
 				<span class="stx-ap__title"><?php echo esc_html( $player['title'] ); ?></span>
 				<span class="stx-ap__meta">
-					<?php /* translators: %s: number of audio tracks. */ ?>
-					<span><?php echo esc_html( sprintf( _n( '%s track', '%s tracks', $count, 'studiare-extensions' ), Persian::number( $count ) ) ); ?></span>
-					<?php if ( $minutes ) : ?>
-						<?php /* translators: %s: total length in minutes. */ ?>
-						<span><?php echo esc_html( sprintf( _n( '%s minute', '%s minutes', $minutes, 'studiare-extensions' ), Persian::number( $minutes ) ) ); ?></span>
-					<?php endif; ?>
+					<?php foreach ( Player::facts( count( $player['tracks'] ), $player['total'] ) as $fact_text ) : ?>
+						<span><?php echo esc_html( $fact_text ); ?></span>
+					<?php endforeach; ?>
 				</span>
 			</span>
 			<?php if ( $player['owned'] ) : ?>
