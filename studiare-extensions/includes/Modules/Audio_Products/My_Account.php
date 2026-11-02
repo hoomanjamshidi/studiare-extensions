@@ -28,6 +28,9 @@ final class My_Account {
 
 	public const ENDPOINT = 'stx-audio';
 
+	/** Set for an hour after maybe_flush_rules() rebuilt the rewrite rules. */
+	private const FLUSHED_TRANSIENT = 'studiare_ext_rules_flushed';
+
 	/** @var Module */
 	private $module;
 
@@ -128,6 +131,9 @@ final class My_Account {
 	/**
 	 * Rebuilds the rewrite rules when they lack the endpoint (first run, or
 	 * rules rebuilt while the tab was off), after WooCommerce added it.
+	 *
+	 * At most once an hour: if another plugin keeps the endpoint out of the
+	 * rules, a flush on every request would rebuild them on every page view.
 	 */
 	public function maybe_flush_rules(): void {
 		$rules = get_option( 'rewrite_rules' );
@@ -141,6 +147,11 @@ final class My_Account {
 			}
 		}
 
+		if ( get_transient( self::FLUSHED_TRANSIENT ) ) {
+			return;
+		}
+
+		set_transient( self::FLUSHED_TRANSIENT, 1, HOUR_IN_SECONDS );
 		flush_rewrite_rules( false );
 	}
 

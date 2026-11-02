@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.11.1
+Stable tag: 1.11.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,10 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button**, **Studiare+ → Cart & checkout** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.11.2 =
+* Performance: whether a logged-in student owns a course is remembered until their next order change. The theme's purchase check is a slow database query and ran once per listed product on every page a student opened (shop page: 16 queries from the plugin, now 2).
+* Performance: the "My audio" tab rebuilds the site's rewrite rules at most once an hour when its address is missing, never on every page view.
 
 = 1.11.1 =
 * Fix: the thank-you page showed packing and delivery steps for courses that are not marked "virtual" (for example paid cash on delivery). Courses (the theme's course switch or lessons), audio products, virtual and downloadable products now always get the learning steps, and cash on delivery for them reads "you pay later, in the way you chose".

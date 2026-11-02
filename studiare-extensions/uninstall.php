@@ -39,6 +39,11 @@ function studiare_ext_uninstall_site(): void {
 	delete_post_meta_by_key( '_stx_pdf_off' );
 
 	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( 'studiare_ext_' ) . '%' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- one-off cleanup.
+
+	// Cached purchase checks (Core\Purchase_Cache) and their expiry rows.
+	foreach ( array( '_transient_', '_transient_timeout_' ) as $studiare_ext_prefix ) {
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( $studiare_ext_prefix . 'studiare_ext_' ) . '%' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- one-off cleanup.
+	}
 	wp_cache_flush();
 }
 

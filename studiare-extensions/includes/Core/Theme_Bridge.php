@@ -134,6 +134,9 @@ final class Theme_Bridge {
 	 * Note that `studi_has_bought_items()` returns the *strings* "true" and
 	 * "false"; casting its result to bool would make every user a buyer.
 	 *
+	 * Answers are remembered until the next order change (Purchase_Cache):
+	 * the theme's check is a slow query and shop pages ask for every product.
+	 *
 	 * @param int $user_id    User ID.
 	 * @param int $product_id Product ID.
 	 */
@@ -142,6 +145,22 @@ final class Theme_Bridge {
 			return false;
 		}
 
+		$bought = Purchase_Cache::get( $user_id, $product_id );
+		if ( null === $bought ) {
+			$bought = self::check_purchase( $user_id, $product_id );
+			Purchase_Cache::set( $user_id, $product_id, $bought );
+		}
+
+		return $bought;
+	}
+
+	/**
+	 * The uncached test behind user_bought_product().
+	 *
+	 * @param int $user_id    User ID.
+	 * @param int $product_id Product ID.
+	 */
+	private static function check_purchase( int $user_id, int $product_id ): bool {
 		$user = get_userdata( $user_id );
 		if ( $user && function_exists( 'wc_customer_bought_product' ) && wc_customer_bought_product( (string) $user->user_email, $user_id, $product_id ) ) {
 			return true;
