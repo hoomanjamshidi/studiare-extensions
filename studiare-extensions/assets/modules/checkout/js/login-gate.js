@@ -49,12 +49,39 @@
 
 	function openLogin() {
 		remember();
+		// Studiare's opener toggles the popup: clicking it while the popup is
+		// open (opened by a tap or the header button) closes it mid-login.
+		if ( doc.body.classList.contains( 'modal-login-open' ) ) {
+			return;
+		}
 		const opener = popupOpener();
 		if ( opener ) {
 			opener.click();
 		} else {
 			window.location.href = config.accountUrl;
 		}
+	}
+
+	/**
+	 * Runs `callback( jQuery )` now, or as soon as jQuery arrives: cache
+	 * plugins may load it later.
+	 *
+	 * @param {Function} callback Callback.
+	 */
+	function withJQuery( callback ) {
+		if ( window.jQuery ) {
+			callback( window.jQuery );
+			return;
+		}
+		const events = [ 'load', 'rocket-allScriptsLoaded', 'DOMContentLiteSpeedLoaded' ];
+		const retry = () => {
+			if ( ! window.jQuery ) {
+				return;
+			}
+			events.forEach( ( name ) => window.removeEventListener( name, retry ) );
+			callback( window.jQuery );
+		};
+		events.forEach( ( name ) => window.addEventListener( name, retry ) );
 	}
 
 	doc.addEventListener(
@@ -82,10 +109,9 @@
 	url.searchParams.delete( config.queryVar );
 	window.history.replaceState( window.history.state, '', url.href );
 
-	// Studiare binds the opener when its script runs on jQuery's ready.
-	if ( 'complete' === doc.readyState ) {
-		openLogin();
-	} else {
-		window.addEventListener( 'load', openLogin, { once: true } );
-	}
+	// Studiare binds the opener in a jQuery ready handler of its footer
+	// script, which jQuery runs before this one's. Not on `load`: on a slow
+	// site that came many seconds later, after the visitor had opened the
+	// popup and started typing, and the extra click closed it.
+	withJQuery( ( $ ) => $( openLogin ) );
 }() );

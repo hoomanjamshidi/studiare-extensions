@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.11.4
+Stable tag: 1.11.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,10 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button**, **Studiare+ → Cart & checkout** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.11.5 =
+* Checkout: "Login before checkout" opened the login popup only once the whole page had loaded, which on a slow site came while the visitor was already typing their number, and closed the popup. It now opens as soon as the page is ready and never closes an open popup.
+* Page templates: the "added to cart" message of Studiare+ product cards and the Offer price widget was in English ("Notification", "Product added to cart!"); it now names the product in the site's language.
 
 = 1.11.4 =
 * Checkout: new "Login before checkout" setting (Cart & checkout → Checkout page). Guests cannot open the checkout from any link; they get the theme's login popup over the cart or the account page, with your own message, and go straight on to the checkout after logging in instead of their account.

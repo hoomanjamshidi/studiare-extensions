@@ -10,6 +10,7 @@ namespace StudiareExt\Modules\Builder\Elementor\Widgets;
 
 use Elementor\Controls_Manager;
 use StudiareExt\Modules\Builder\Context;
+use StudiareExt\Modules\Builder\Elementor\Cards;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -171,10 +172,11 @@ final class Offer_Price extends Home_Base {
 		}
 
 		return sprintf(
-			'<a href="%1$s" class="stx-btn stx-btn--accent stx-btn--lg%2$s" data-quantity="1" data-product_id="%3$d" rel="nofollow"><span>%4$s</span></a>',
+			'<a href="%1$s" class="stx-btn stx-btn--accent stx-btn--lg%2$s" data-quantity="1" data-product_id="%3$d"%4$s rel="nofollow"><span>%5$s</span></a>',
 			esc_url( $ajax ? $product->add_to_cart_url() : $product->get_permalink() ),
 			$ajax ? ' add_to_cart_button ajax_add_to_cart' : '',
 			$product->get_id(),
+			$ajax ? Cards::toast_attributes( $product ) : '',
 			esc_html( $text )
 		);
 	}

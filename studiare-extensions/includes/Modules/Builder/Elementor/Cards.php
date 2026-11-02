@@ -351,13 +351,36 @@ final class Cards {
 		$label = $ajax ? $product->add_to_cart_description() : $product->add_to_cart_text();
 
 		return sprintf(
-			'<a href="%1$s" class="%2$s" data-quantity="1" data-product_id="%3$d" data-product_sku="%4$s" rel="nofollow" aria-label="%5$s">%6$s</a>',
+			'<a href="%1$s" class="%2$s" data-quantity="1" data-product_id="%3$d" data-product_sku="%4$s"%5$s rel="nofollow" aria-label="%6$s">%7$s</a>',
 			esc_url( $ajax ? $product->add_to_cart_url() : $product->get_permalink() ),
 			esc_attr( $css_class . ( $ajax ? ' add_to_cart_button ajax_add_to_cart' : '' ) ),
 			$product->get_id(),
 			esc_attr( $product->get_sku() ),
+			$ajax ? self::toast_attributes( $product ) : '',
 			esc_attr( wp_strip_all_tags( $label ) ),
 			$inner
+		);
+	}
+
+	/**
+	 * The text of Studiare's "added to cart" toast. Its global.js reads it
+	 * from the clicked button (`data-toast-*`) on WooCommerce's
+	 * `added_to_cart` event and falls back to untranslated English
+	 * ("Notification", "Product added to cart!"), as its own shop cards
+	 * always carry these attributes.
+	 *
+	 * @param \WC_Product $product Product.
+	 */
+	public static function toast_attributes( \WC_Product $product ): string {
+		/* translators: %s: product name. */
+		$message = sprintf( __( '"%s" has been added to your cart.', 'studiare-extensions' ), $product->get_name() );
+
+		// toastr prints both texts as HTML, so they are escaped twice: once for
+		// toastr, once for the attribute (esc_attr() leaves entities as they are).
+		return sprintf(
+			' data-toast-title="%1$s" data-toast-message="%2$s" data-toast-type="success"',
+			htmlspecialchars( esc_html__( 'Added to cart', 'studiare-extensions' ), ENT_QUOTES, 'UTF-8' ),
+			htmlspecialchars( esc_html( $message ), ENT_QUOTES, 'UTF-8' )
 		);
 	}
 

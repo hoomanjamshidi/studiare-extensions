@@ -1803,7 +1803,7 @@ msgstr "فقط روی نمایش داخل ویرایشگر اثر دارد."
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:334
 #: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:112
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:108
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:119
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:120
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:671
 #: includes/Modules/Builder/Elementor/Widgets/Slides.php:70
 #: includes/Modules/Support_Button/views/admin.php:379
@@ -1831,7 +1831,7 @@ msgstr "افزودن به سبد خرید"
 #: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:73
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:166
 #: includes/Modules/Builder/Elementor/Widgets/Newsletter_Form.php:80
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:81
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:82
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:288
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:93
 #: includes/Modules/Support_Button/views/admin.php:330
@@ -2340,7 +2340,7 @@ msgstr "مدرس دوره"
 #: includes/Modules/Builder/Elementor/Widgets/Icon_List.php:98
 #: includes/Modules/Builder/Elementor/Widgets/Logo_Strip.php:96
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:96
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:101
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:102
 #: includes/Modules/Builder/Elementor/Widgets/Podcast_List.php:220
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:156
 #: includes/Modules/Builder/Elementor/Widgets/Product_Info.php:107
@@ -2583,8 +2583,8 @@ msgid "Text for enrolled students"
 msgstr "متن برای دانشجویان دوره"
 
 #: includes/Modules/Builder/Elementor/Widgets/Mobile_Buy_Bar.php:108
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:61
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:114
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:62
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:115
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:60
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:153
 #: includes/Modules/Builder/Elementor/Widgets/Product_Grid.php:340
@@ -2699,7 +2699,7 @@ msgid "Button in drawer"
 msgstr "دکمه داخل منوی کشویی"
 
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:270
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:91
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:92
 #: includes/Modules/Builder/Elementor/Widgets/Pricing_Plans.php:101
 #: includes/Modules/Builder/Elementor/Widgets/Slider.php:201
 msgid "Button link"
@@ -3145,7 +3145,7 @@ msgstr "{percent} با درصد تخفیف جایگزین می‌شود."
 msgid "Text for free items"
 msgstr "متن برای موارد رایگان"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:115
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:116
 #: includes/Modules/Builder/Elementor/Widgets/Product_Price.php:117
 msgid "Old price"
 msgstr "قیمت قبلی"
@@ -4666,7 +4666,7 @@ msgstr "خرید"
 msgid "Sale"
 msgstr "حراج"
 
-#: includes/Modules/Builder/Elementor/Cards.php:386
+#: includes/Modules/Builder/Elementor/Cards.php:408
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:191
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:290
 #: includes/Modules/Builder/Presets/Home.php:726
@@ -5221,53 +5221,53 @@ msgstr "شورت‌کد فرم افزونه خبرنامه‌تان را این�
 msgid "Email"
 msgstr "ایمیل"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:23
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:24
 msgid "Offer price"
 msgstr "قیمت پیشنهاد"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:31
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:113
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:32
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:114
 msgid "Offer"
 msgstr "پیشنهاد"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:36
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:37
 msgid "Price from"
 msgstr "قیمت از"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:40
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:41
 msgid "Typed below"
 msgstr "متن زیر"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:41
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:42
 msgid "A product"
 msgstr "یک محصول"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:49
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:50
 #: includes/Modules/Builder/Elementor/Widgets/Product_Spotlight.php:61
 msgid "Product ID"
 msgstr "شناسه محصول"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:53
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:54
 msgid "The button adds this product to the cart."
 msgstr "دکمه این محصول را به سبد خرید اضافه می‌کند."
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:71
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:72
 msgid "Old price (crossed out)"
 msgstr "قیمت قبلی (خط‌خورده)"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:83
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:84
 msgid "Buy now"
 msgstr "همین حالا بخرید"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:105
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:106
 msgid "Price above the button"
 msgstr "قیمت بالای دکمه"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:106
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:107
 msgid "Price beside the button"
 msgstr "قیمت کنار دکمه"
 
-#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:138
+#: includes/Modules/Builder/Elementor/Widgets/Offer_Price.php:139
 msgid "Enter the ID of a published product."
 msgstr "شناسه یک محصول منتشرشده را وارد کنید."
 
@@ -11301,3 +11301,13 @@ msgstr "صفحه حساب کاربری"
 #: includes/Modules/Checkout/views/admin.php:246
 msgid "The popup opens over the cart. It needs the theme's header button set to the account page; without it, guests go to the account page."
 msgstr "پنجره ورود روی سبد خرید باز می‌شود. برای این کار دکمه سربرگ قالب باید روی «حساب کاربری» تنظیم شده باشد؛ در غیر این صورت مهمان به صفحه حساب کاربری می‌رود."
+
+#. translators: %s: product name.
+#: includes/Modules/Builder/Elementor/Cards.php:376
+#, php-format
+msgid "\"%s\" has been added to your cart."
+msgstr "«%s» به سبد خرید شما اضافه شد."
+
+#: includes/Modules/Builder/Elementor/Cards.php:381
+msgid "Added to cart"
+msgstr "به سبد خرید اضافه شد"
