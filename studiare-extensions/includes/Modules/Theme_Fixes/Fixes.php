@@ -21,6 +21,7 @@ final class Fixes {
 		Fresh_Account_Page::class,
 		No_Repeat_Purchase::class,
 		Safe_Checkout::class,
+		Mail_Without_Php_Mail::class,
 	);
 
 	/** @var array<string, Fix>|null Memoized instances keyed by fix id. */

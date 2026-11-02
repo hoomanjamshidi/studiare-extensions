@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.11.2
+Stable tag: 1.11.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,10 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button**, **Studiare+ → Cart & checkout** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.11.3 =
+* Theme fixes: on hosts that switch off PHP's mail(), every order email crashed the order half way, so Persian WooCommerce SMS never sent the buyer's and the admin's texts and the payment return page failed. The new "Order emails on hosts without PHP mail()" fix sends through sendmail when possible, or skips the email, and the order carries on (install an SMTP plugin to deliver the emails).
+* Checkout: while Persian WooCommerce SMS is active, the mobile field it reads always stays in the checkout form (that plugin refuses an order without it).
 
 = 1.11.2 =
 * Performance: whether a logged-in student owns a course is remembered until their next order change. The theme's purchase check is a slow database query and ran once per listed product on every page a student opened (shop page: 16 queries from the plugin, now 2).

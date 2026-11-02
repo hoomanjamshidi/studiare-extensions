@@ -9952,7 +9952,7 @@ msgstr "محصولات صوتی"
 msgid "Buyers listen to audio products on the site with a dedicated player, and visitors hear a free preview before buying."
 msgstr "خریداران محصولات صوتی را با پلیر اختصاصی روی خود سایت گوش می‌دهند و بازدیدکنندگان پیش از خرید، پیش‌نمایش رایگان را می‌شنوند."
 
-#: includes/Modules/Audio_Products/My_Account.php:189
+#: includes/Modules/Audio_Products/My_Account.php:200
 #: includes/Modules/Audio_Products/Schema.php:48
 msgid "My audio"
 msgstr "صوت‌های من"
@@ -10205,7 +10205,7 @@ msgstr "صفحه حساب کاربری پس از ورود با پاپ‌آپ"
 msgid "After logging in through the login popup, the account page still shows the login form until the page is refreshed: the browser had loaded it in advance while the visitor was a guest. This fix stops the browser from loading the account, cart and checkout pages in advance, so they always open up to date."
 msgstr "پس از ورود از پاپ‌آپ ورود، صفحه حساب کاربری تا وقتی صفحه دوباره بارگذاری نشود همچنان فرم ورود را نشان می‌دهد؛ چون مرورگر آن را وقتی بازدیدکننده هنوز مهمان بود از قبل بارگذاری کرده بود. این اصلاح جلوی پیش‌بارگذاری صفحه‌های حساب کاربری، سبد خرید و تسویه‌حساب را می‌گیرد تا همیشه به‌روز باز شوند."
 
-#: includes/Modules/Audio_Products/My_Account.php:105
+#: includes/Modules/Audio_Products/My_Account.php:108
 #: includes/Modules/Audio_Products/views/account.php:53
 msgid "Listen"
 msgstr "شنیدن"
@@ -10272,15 +10272,15 @@ msgstr "%s باید عدد باشد."
 msgid "Please choose %s from the list."
 msgstr "لطفاً %s را از فهرست انتخاب کنید."
 
-#: includes/Modules/Checkout/Billing_Fields.php:432
+#: includes/Modules/Checkout/Billing_Fields.php:448
 msgid "Choose an option"
 msgstr "یک گزینه را انتخاب کنید"
 
-#: includes/Modules/Checkout/Billing_Fields.php:521
+#: includes/Modules/Checkout/Billing_Fields.php:537
 msgid "Yes"
 msgstr "بله"
 
-#: includes/Modules/Checkout/Billing_Fields.php:521
+#: includes/Modules/Checkout/Billing_Fields.php:537
 msgid "No"
 msgstr "خیر"
 
@@ -11221,7 +11221,7 @@ msgid "When the theme or another plugin fails while an order is being placed (fo
 msgstr "وقتی پوسته یا افزونه‌ی دیگری هنگام ثبت سفارش خطا می‌دهد (مثلاً هنگام ارسال ایمیل سفارش)، ووکامرس پیام «خطایی در پردازش سفارش شما رخ داد» را نشان می‌دهد و خریدار در صفحه‌ی پرداخت می‌ماند، در حالی که سفارش ثبت شده است (سفارش رایگان، یا سفارش انتقال بانکی و چک که در انتظار بررسی است). با این اصلاح، سفارشِ ثبت‌شده صفحه‌ی خرید موفق خود را باز می‌کند، سفارش‌های دیگر پیام روشنی می‌گیرند و خطای اصلی در یادداشت‌های سفارش و در ووکامرس › وضعیت › گزارش‌ها (منبع: studiare-extensions) ذخیره می‌شود تا بتوان آن را رفع کرد."
 
 #. translators: %s: name of the account tab, e.g. "My audio".
-#: includes/Modules/Audio_Products/My_Account.php:109
+#: includes/Modules/Audio_Products/My_Account.php:112
 #, php-format
 msgid "Go to %s"
 msgstr "رفتن به %s"
@@ -11259,3 +11259,11 @@ msgstr "جایگاه در منوی حساب کاربری"
 #: includes/Modules/Audio_Products/views/admin.php:137
 msgid "Counted from the top of the account menu (all of Studiare's account menus follow it). \"Log out\" always stays last."
 msgstr "از بالای منوی حساب کاربری شمرده می‌شود (همه‌ی منوهای حساب کاربری استادیار از آن پیروی می‌کنند). «خروج» همیشه آخرین گزینه می‌ماند."
+
+#: includes/Modules/Theme_Fixes/Mail_Without_Php_Mail.php:47
+msgid "Order emails on hosts without PHP mail()"
+msgstr "ایمیل سفارش در هاست‌های بدون mail() پی‌اچ‌پی"
+
+#: includes/Modules/Theme_Fixes/Mail_Without_Php_Mail.php:51
+msgid "This host has switched off PHP's mail() function. Every email WordPress sends then crashes the page that sends it: after a purchase the order stops half way, so the SMS texts to the buyer and the admin (Persian WooCommerce SMS), the order emails and the payment return page all fail. With this fix the email is sent through the server's sendmail program when possible, or skipped, and the order carries on normally. To deliver the emails themselves, install an SMTP plugin (for example WP Mail SMTP or FluentSMTP) or ask the host to enable mail()."
+msgstr "هاست این سایت تابع mail() پی‌اچ‌پی را خاموش کرده است. در این حالت هر ایمیلی که وردپرس می‌فرستد صفحه‌ی فرستنده را از کار می‌اندازد: بعد از خرید، سفارش نیمه‌کاره می‌ماند و پیامک‌های خریدار و مدیر (افزونه‌ی پیامک ووکامرس)، ایمیل‌های سفارش و صفحه‌ی بازگشت از درگاه پرداخت همه خطا می‌دهند. با این اصلاح، ایمیل در صورت امکان با برنامه‌ی sendmail سرور فرستاده می‌شود یا کنار گذاشته می‌شود و سفارش به‌طور عادی ادامه پیدا می‌کند. برای اینکه خود ایمیل‌ها هم برسند، یک افزونه‌ی SMTP (مثلاً WP Mail SMTP یا FluentSMTP) نصب کنید یا از هاست بخواهید mail() را فعال کند."

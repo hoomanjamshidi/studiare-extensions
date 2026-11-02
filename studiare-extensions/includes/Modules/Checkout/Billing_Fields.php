@@ -277,6 +277,18 @@ final class Billing_Fields {
 		return function_exists( 'PW' ) && 'no' !== PW()->get_options( 'fix_postcode_persian_number', 'yes' ) && 'yes' === PW()->get_options( 'phone_validation', 'yes' );
 	}
 
+	/**
+	 * Whether Persian WooCommerce SMS reads the buyer's mobile from this
+	 * field (`billing_phone` unless filtered). It refuses every checkout
+	 * whose posted data lacks a valid mobile there, so the field stays in
+	 * the form even when the panel hides it.
+	 *
+	 * @param string $key Billing field key.
+	 */
+	private static function sms_mobile_field( string $key ): bool {
+		return function_exists( 'PWSMS' ) && method_exists( PWSMS(), 'buyer_mobile_meta' ) && PWSMS()->buyer_mobile_meta() === $key;
+	}
+
 	/** Whether the cart holds only courses and downloads (virtual or downloadable products). */
 	public static function cart_is_digital(): bool {
 		if ( ! function_exists( 'WC' ) || ! WC()->cart || WC()->cart->is_empty() ) {
@@ -370,7 +382,11 @@ final class Billing_Fields {
 		if ( isset( $this->settings['billing'][ $key ] ) ) {
 			$setting = $this->settings['billing'][ $key ];
 			// Missing: WooCommerce's own settings or the theme took it out.
-			if ( empty( $setting['enabled'] ) || ! isset( $billing[ $key ] ) || ( $digital && empty( $setting['digital'] ) ) ) {
+			if ( ! isset( $billing[ $key ] ) ) {
+				return null;
+			}
+			$hidden = empty( $setting['enabled'] ) || ( $digital && empty( $setting['digital'] ) );
+			if ( $hidden && ! self::sms_mobile_field( $key ) ) {
 				return null;
 			}
 
