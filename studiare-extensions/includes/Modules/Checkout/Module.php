@@ -60,6 +60,9 @@ final class Module extends Base_Module {
 		$settings = $this->settings();
 		( new Billing_Fields( $settings['fields'] ) )->register();
 		( new Pages( $settings ) )->register();
+		if ( $settings['login']['required'] ) {
+			( new Login_Gate( $settings['login'] ) )->register();
+		}
 		( new Mini_Cart( $settings ) )->register();
 		( new Woo_Texts() )->register();
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_tokens' ), 5 );

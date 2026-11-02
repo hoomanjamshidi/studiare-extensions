@@ -421,8 +421,8 @@ msgstr "«%s» از نوار حذف می‌شود."
 #: includes/Modules/Bottom_Nav/Module.php:156
 #: includes/Modules/Bottom_Nav/views/admin.php:540
 #: includes/Modules/Builder/Module.php:384
-#: includes/Modules/Checkout/Module.php:144
-#: includes/Modules/Checkout/views/admin.php:356
+#: includes/Modules/Checkout/Module.php:147
+#: includes/Modules/Checkout/views/admin.php:388
 #: includes/Modules/Support_Button/Module.php:125
 #: includes/Modules/Support_Button/views/admin.php:227
 msgid "Delete"
@@ -1025,8 +1025,8 @@ msgid "Tap the buttons to try the animation. On your site the Studiare font is u
 msgstr "روی دکمه‌ها بزنید تا انیمیشن را ببینید. در سایت از فونت قالب استادیار استفاده می‌شود."
 
 #: includes/Modules/Bottom_Nav/views/admin.php:521
-#: includes/Modules/Checkout/views/admin.php:297
-#: includes/Modules/Checkout/views/admin.php:344
+#: includes/Modules/Checkout/views/admin.php:329
+#: includes/Modules/Checkout/views/admin.php:376
 #: includes/Modules/Support_Button/views/admin.php:133
 #: includes/Modules/Support_Button/views/admin.php:211
 msgid "Drag to reorder"
@@ -1048,8 +1048,8 @@ msgstr "وسط"
 #: includes/Modules/Audio_Products/views/edit-box.php:50
 #: includes/Modules/Bottom_Nav/views/admin.php:533
 #: includes/Modules/Builder/Module.php:407
-#: includes/Modules/Checkout/views/admin.php:303
-#: includes/Modules/Checkout/views/admin.php:350
+#: includes/Modules/Checkout/views/admin.php:335
+#: includes/Modules/Checkout/views/admin.php:382
 #: includes/Modules/Support_Button/views/admin.php:143
 #: includes/Modules/Support_Button/views/admin.php:221
 msgid "Move up"
@@ -1058,8 +1058,8 @@ msgstr "انتقال به بالا"
 #: includes/Modules/Audio_Products/views/edit-box.php:52
 #: includes/Modules/Bottom_Nav/views/admin.php:534
 #: includes/Modules/Builder/Module.php:408
-#: includes/Modules/Checkout/views/admin.php:304
-#: includes/Modules/Checkout/views/admin.php:351
+#: includes/Modules/Checkout/views/admin.php:336
+#: includes/Modules/Checkout/views/admin.php:383
 #: includes/Modules/Support_Button/views/admin.php:144
 #: includes/Modules/Support_Button/views/admin.php:222
 msgid "Move down"
@@ -1087,9 +1087,9 @@ msgstr "نوع دکمه"
 #: includes/Modules/Builder/Elementor/Widgets/Product_Spotlight.php:72
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:54
 #: includes/Modules/Builder/Elementor/Widgets/Stats.php:122
-#: includes/Modules/Checkout/views/admin.php:315
-#: includes/Modules/Checkout/views/admin.php:363
-#: includes/Modules/Checkout/views/admin.php:425
+#: includes/Modules/Checkout/views/admin.php:347
+#: includes/Modules/Checkout/views/admin.php:395
+#: includes/Modules/Checkout/views/admin.php:457
 #: includes/Modules/Support_Button/views/admin.php:165
 msgid "Label"
 msgstr "عنوان"
@@ -1863,7 +1863,7 @@ msgstr "وقتی ووکامرس اجازه دهد"
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:51
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:150
 #: includes/Modules/Builder/Elementor/Widgets/Product_Gallery.php:42
-#: includes/Modules/Checkout/Module.php:135
+#: includes/Modules/Checkout/Module.php:138
 #: includes/Modules/Checkout/views/admin.php:128
 #: includes/Modules/Checkout/views/admin.php:213
 msgid "Hidden"
@@ -3445,8 +3445,8 @@ msgid "Optional. Shown when Studiare's dark mode is on."
 msgstr "اختیاری. وقتی حالت تاریک استادیار روشن است نمایش داده می‌شود."
 
 #: includes/Modules/Builder/Elementor/Widgets/Site_Logo.php:84
-#: includes/Modules/Checkout/views/admin.php:324
-#: includes/Modules/Checkout/views/admin.php:381
+#: includes/Modules/Checkout/views/admin.php:356
+#: includes/Modules/Checkout/views/admin.php:413
 msgid "Width"
 msgstr "عرض"
 
@@ -4847,6 +4847,7 @@ msgstr "یک پیام نمایش داده شود"
 #: includes/Modules/Builder/Contact_Inbox.php:63
 #: includes/Modules/Builder/Contact_Messages.php:494
 #: includes/Modules/Builder/Elementor/Widgets/Countdown.php:95
+#: includes/Modules/Checkout/views/admin.php:252
 #: includes/Modules/Support_Button/views/admin.php:412
 msgid "Message"
 msgstr "پیام"
@@ -6459,7 +6460,7 @@ msgstr "اسلایدر تصویری"
 #: includes/Modules/Checkout/views/admin.php:105
 #: includes/Modules/Checkout/views/admin.php:164
 #: includes/Modules/Checkout/views/admin.php:197
-#: includes/Modules/Checkout/views/admin.php:237
+#: includes/Modules/Checkout/views/admin.php:269
 #: includes/Modules/Support_Button/views/admin.php:291
 #: includes/Modules/Support_Button/views/admin.php:294
 msgid "Design"
@@ -6789,7 +6790,7 @@ msgstr "هدست"
 #: includes/Modules/Builder/Contact_Messages.php:374
 #: includes/Modules/Builder/Contact_Messages.php:490
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:58
-#: includes/Modules/Checkout/Module.php:181
+#: includes/Modules/Checkout/Module.php:184
 #: includes/Modules/Checkout/Woo_Texts.php:146
 #: includes/Modules/Support_Button/views/admin.php:40
 msgid "Phone"
@@ -6854,7 +6855,7 @@ msgstr "نمایش این راه ارتباطی"
 
 #. translators: %s: field label.
 #. translators: %s: channel name, e.g. Telegram.
-#: includes/Modules/Checkout/views/admin.php:306
+#: includes/Modules/Checkout/views/admin.php:338
 #: includes/Modules/Support_Button/views/admin.php:146
 #, php-format
 msgid "Show %s"
@@ -7301,7 +7302,7 @@ msgid "The second choice shows what you set in Studiare+ → Floating support bu
 msgstr "گزینه دوم همان راه‌هایی را نشان می‌دهد که در استادیار+ ← دکمه شناور پشتیبانی تنظیم کرده‌اید؛ این‌طور شماره‌ها و نام‌های کاربری را فقط یک بار وارد می‌کنید."
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Details.php:93
-#: includes/Modules/Checkout/views/admin.php:367
+#: includes/Modules/Checkout/views/admin.php:399
 msgid "Type"
 msgstr "نوع"
 
@@ -7342,14 +7343,14 @@ msgid "Contact form"
 msgstr "فرم تماس"
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:49
-#: includes/Modules/Checkout/Module.php:133
+#: includes/Modules/Checkout/Module.php:136
 #: includes/Modules/Checkout/views/admin.php:40
-#: includes/Modules/Checkout/views/admin.php:404
+#: includes/Modules/Checkout/views/admin.php:436
 msgid "Required"
 msgstr "الزامی"
 
 #: includes/Modules/Builder/Elementor/Widgets/Contact_Form.php:50
-#: includes/Modules/Checkout/Module.php:134
+#: includes/Modules/Checkout/Module.php:137
 #: includes/Modules/Checkout/views/admin.php:41
 msgid "Optional"
 msgstr "اختیاری"
@@ -10292,39 +10293,39 @@ msgstr "سبد خرید و پرداخت"
 msgid "A clear, quick cart and checkout: steps, a sticky order summary, coupon and payment in one place, and your own billing fields."
 msgstr "سبد خرید و صورتحسابی روشن و سریع: مراحل خرید، خلاصهٔ سفارش ثابت، کد تخفیف و پرداخت در یک جا، و فیلدهای صورتحساب دلخواه شما."
 
-#: includes/Modules/Checkout/Module.php:136
+#: includes/Modules/Checkout/Module.php:139
 #: includes/Modules/Checkout/views/admin.php:45
 msgid "Half width"
 msgstr "نیم‌عرض"
 
-#: includes/Modules/Checkout/Module.php:137
+#: includes/Modules/Checkout/Module.php:140
 msgid "Shipped products only"
 msgstr "فقط کالای ارسالی"
 
-#: includes/Modules/Checkout/Module.php:138
+#: includes/Modules/Checkout/Module.php:141
 msgid "Add a label"
 msgstr "برچسب بگذارید"
 
-#: includes/Modules/Checkout/Module.php:139
+#: includes/Modules/Checkout/Module.php:142
 msgid "New field"
 msgstr "فیلد تازه"
 
-#: includes/Modules/Checkout/Module.php:140
+#: includes/Modules/Checkout/Module.php:143
 msgid "Add choices"
 msgstr "گزینه‌ها را بنویسید"
 
-#: includes/Modules/Checkout/Module.php:141
+#: includes/Modules/Checkout/Module.php:144
 msgid "Delete this field?"
 msgstr "این فیلد حذف شود؟"
 
 #. translators: %s: field label.
-#: includes/Modules/Checkout/Module.php:143
+#: includes/Modules/Checkout/Module.php:146
 #, php-format
 msgid "\"%s\" will be removed from the checkout. Orders keep the values they already have."
 msgstr "«%s» از صورتحساب حذف می‌شود. سفارش‌های قبلی مقدارهایشان را نگه می‌دارند."
 
 #. translators: %d: maximum number of fields.
-#: includes/Modules/Checkout/Module.php:146
+#: includes/Modules/Checkout/Module.php:149
 #, php-format
 msgid "You can add up to %d fields of your own."
 msgstr "حداکثر %d فیلد دلخواه می‌توانید بسازید."
@@ -10352,7 +10353,7 @@ msgid "Checkout page"
 msgstr "صفحهٔ صورتحساب"
 
 #: includes/Modules/Checkout/views/admin.php:32
-#: includes/Modules/Checkout/views/admin.php:284
+#: includes/Modules/Checkout/views/admin.php:316
 msgid "Billing fields"
 msgstr "فیلدهای صورتحساب"
 
@@ -10410,7 +10411,7 @@ msgstr "محصولات به‌صورت کارت، با جمع کل و دکمهٔ
 
 #: includes/Modules/Checkout/views/admin.php:108
 #: includes/Modules/Checkout/views/admin.php:198
-#: includes/Modules/Checkout/views/admin.php:238
+#: includes/Modules/Checkout/views/admin.php:270
 #: includes/Modules/Checkout/views/steps.php:25
 msgid "Purchase steps"
 msgstr "مراحل خرید"
@@ -10508,82 +10509,82 @@ msgstr "مثلاً پرداخت و شروع یادگیری"
 msgid "Empty keeps WooCommerce's text. Some gateways show their own text, such as \"Proceed to PayPal\"."
 msgstr "خالی یعنی متن ووکامرس. برخی درگاه‌ها متن خودشان را نشان می‌دهند، مثل «انتقال به درگاه»."
 
-#: includes/Modules/Checkout/views/admin.php:273
+#: includes/Modules/Checkout/views/admin.php:305
 msgid "Rules"
 msgstr "قواعد"
 
-#: includes/Modules/Checkout/views/admin.php:277
+#: includes/Modules/Checkout/views/admin.php:309
 msgid "Iranian mobile number"
 msgstr "شمارهٔ موبایل ایران"
 
-#: includes/Modules/Checkout/views/admin.php:277
+#: includes/Modules/Checkout/views/admin.php:309
 msgid "The phone must be a mobile number such as 09123456789. Persian digits, +98 and 0098 are accepted and saved as 09…."
 msgstr "تلفن باید شمارهٔ موبایل باشد، مثل 09123456789. ارقام فارسی، ‎+98 و 0098 پذیرفته و به‌صورت ۰۹… ذخیره می‌شوند."
 
-#: includes/Modules/Checkout/views/admin.php:285
+#: includes/Modules/Checkout/views/admin.php:317
 msgid "Switch fields on or off, rename them, make them required or optional and drag them into order. Empty texts keep WooCommerce's."
 msgstr "فیلدها را روشن یا خاموش کنید، نامشان را تغییر دهید، اجباری یا اختیاری‌شان کنید و با کشیدن مرتبشان کنید. متن‌های خالی همان متن ووکامرس می‌مانند."
 
-#: includes/Modules/Checkout/views/admin.php:286
+#: includes/Modules/Checkout/views/admin.php:318
 msgid "A cart of only courses and downloads (virtual or downloadable products) needs no address: it asks only for the fields marked \"Also for courses and downloads\". By default these are the name, mobile and email."
 msgstr "سبدی که فقط دوره و فایل دانلودی (محصول مجازی یا دانلودی) دارد به نشانی نیاز ندارد: فقط فیلدهایی پرسیده می‌شوند که «برای دوره‌ها و فایل‌های دانلودی هم» آن‌ها روشن است. به‌طور پیش‌فرض نام، موبایل و ایمیل."
 
-#: includes/Modules/Checkout/views/admin.php:305
-#: includes/Modules/Checkout/views/admin.php:352
-#: includes/Modules/Checkout/views/admin.php:353
+#: includes/Modules/Checkout/views/admin.php:337
+#: includes/Modules/Checkout/views/admin.php:384
+#: includes/Modules/Checkout/views/admin.php:385
 msgid "Show this field"
 msgstr "نمایش این فیلد"
 
-#: includes/Modules/Checkout/views/admin.php:319
-#: includes/Modules/Checkout/views/admin.php:377
-#: includes/Modules/Checkout/views/admin.php:426
+#: includes/Modules/Checkout/views/admin.php:351
+#: includes/Modules/Checkout/views/admin.php:409
+#: includes/Modules/Checkout/views/admin.php:458
 msgid "Hint inside the field"
 msgstr "راهنمای داخل فیلد"
 
-#: includes/Modules/Checkout/views/admin.php:323
+#: includes/Modules/Checkout/views/admin.php:355
 msgid "Filling in"
 msgstr "تکمیل"
 
-#: includes/Modules/Checkout/views/admin.php:325
-#: includes/Modules/Checkout/views/admin.php:394
+#: includes/Modules/Checkout/views/admin.php:357
+#: includes/Modules/Checkout/views/admin.php:426
 msgid "Also for courses and downloads"
 msgstr "برای دوره‌ها و فایل‌های دانلودی هم"
 
-#: includes/Modules/Checkout/views/admin.php:325
-#: includes/Modules/Checkout/views/admin.php:395
+#: includes/Modules/Checkout/views/admin.php:357
+#: includes/Modules/Checkout/views/admin.php:427
 msgid "Off: asked only when the cart holds a product that is shipped."
 msgstr "خاموش: فقط وقتی پرسیده می‌شود که سبد کالای ارسالی داشته باشد."
 
-#: includes/Modules/Checkout/views/admin.php:336
+#: includes/Modules/Checkout/views/admin.php:368
 msgid "Add a field"
 msgstr "افزودن فیلد"
 
-#: includes/Modules/Checkout/views/admin.php:338
+#: includes/Modules/Checkout/views/admin.php:370
 msgid "Your own fields, such as a national code, field of study or \"How did you hear about us?\". Their answers are saved with the order and shown in the order screen and emails."
 msgstr "فیلدهای دلخواه شما، مثل کد ملی، رشتهٔ تحصیلی یا «از کجا با ما آشنا شدید؟». پاسخ‌ها همراه سفارش ذخیره و در صفحهٔ سفارش و ایمیل‌ها نمایش داده می‌شوند."
 
-#: includes/Modules/Checkout/views/admin.php:364
+#: includes/Modules/Checkout/views/admin.php:396
 msgid "e.g. National code"
 msgstr "مثلاً کد ملی"
 
-#: includes/Modules/Checkout/views/admin.php:389
+#: includes/Modules/Checkout/views/admin.php:421
 msgid "Choices, one per line"
 msgstr "گزینه‌ها، هر کدام در یک خط"
 
-#: includes/Modules/Checkout/views/admin.php:405
+#: includes/Modules/Checkout/views/admin.php:437
 msgid "Checked like a real national code: ten digits with a valid check digit."
 msgstr "مانند کد ملی واقعی بررسی می‌شود: ده رقم با رقم کنترل درست."
 
-#: includes/Modules/Checkout/views/admin.php:420
+#: includes/Modules/Checkout/views/admin.php:452
 #: includes/Modules/Checkout/Woo_Texts.php:135
 msgid "Order notes"
 msgstr "توضیحات سفارش"
 
-#: includes/Modules/Checkout/views/admin.php:424
+#: includes/Modules/Checkout/views/admin.php:456
 msgid "Order notes field"
 msgstr "فیلد توضیحات سفارش"
 
-#: includes/Modules/Checkout/views/admin.php:424
+#: includes/Modules/Checkout/views/admin.php:456
 msgid "A free text box for a message with the order."
 msgstr "کادری برای نوشتن پیام همراه سفارش."
 
@@ -10890,32 +10891,32 @@ msgstr "برای وارد کردن کد کلیک کنید"
 msgid "optional"
 msgstr "اختیاری"
 
-#: includes/Modules/Checkout/Module.php:179
+#: includes/Modules/Checkout/Module.php:182
 #: includes/Modules/Checkout/Woo_Texts.php:144
 msgid "First name"
 msgstr "نام"
 
-#: includes/Modules/Checkout/Module.php:180
+#: includes/Modules/Checkout/Module.php:183
 #: includes/Modules/Checkout/Woo_Texts.php:145
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: includes/Modules/Checkout/Module.php:182
+#: includes/Modules/Checkout/Module.php:185
 #: includes/Modules/Checkout/Woo_Texts.php:147
 msgid "Email address"
 msgstr "نشانی ایمیل"
 
-#: includes/Modules/Checkout/Module.php:183
+#: includes/Modules/Checkout/Module.php:186
 #: includes/Modules/Checkout/Woo_Texts.php:148
 msgid "Company name"
 msgstr "نام شرکت"
 
-#: includes/Modules/Checkout/Module.php:184
+#: includes/Modules/Checkout/Module.php:187
 #: includes/Modules/Checkout/Woo_Texts.php:149
 msgid "Country / Region"
 msgstr "کشور / منطقه"
 
-#: includes/Modules/Checkout/Module.php:187
+#: includes/Modules/Checkout/Module.php:190
 #: includes/Modules/Checkout/Woo_Texts.php:150
 msgid "Street address"
 msgstr "نشانی"
@@ -10924,17 +10925,17 @@ msgstr "نشانی"
 msgid "House number and street name"
 msgstr "خیابان، کوچه و پلاک"
 
-#: includes/Modules/Checkout/Module.php:188
+#: includes/Modules/Checkout/Module.php:191
 #: includes/Modules/Checkout/Woo_Texts.php:152
 msgid "Apartment, suite, unit, etc. (optional)"
 msgstr "واحد، طبقه و … (اختیاری)"
 
-#: includes/Modules/Checkout/Module.php:186
+#: includes/Modules/Checkout/Module.php:189
 #: includes/Modules/Checkout/Woo_Texts.php:153
 msgid "Town / City"
 msgstr "شهر"
 
-#: includes/Modules/Checkout/Module.php:185
+#: includes/Modules/Checkout/Module.php:188
 #: includes/Modules/Checkout/Woo_Texts.php:154
 msgid "State / County"
 msgstr "استان"
@@ -10943,7 +10944,7 @@ msgstr "استان"
 msgid "Province"
 msgstr "استان"
 
-#: includes/Modules/Checkout/Module.php:189
+#: includes/Modules/Checkout/Module.php:192
 #: includes/Modules/Checkout/Woo_Texts.php:156
 msgid "Postcode / ZIP"
 msgstr "کد پستی"
@@ -11102,39 +11103,39 @@ msgstr "در راه"
 msgid "You can follow your order in your account."
 msgstr "وضعیت سفارش را در حساب کاربری دنبال کنید."
 
-#: includes/Modules/Checkout/views/admin.php:232
+#: includes/Modules/Checkout/views/admin.php:264
 msgid "Thank-you page"
 msgstr "صفحه خرید موفق"
 
-#: includes/Modules/Checkout/views/admin.php:233
+#: includes/Modules/Checkout/views/admin.php:265
 msgid "The page after payment: the order's state with the buyer's name, buttons to their courses or order, the courses ready to start and what happens next."
 msgstr "صفحه‌ی پس از پرداخت: وضعیت سفارش با نام خریدار، دکمه‌های رفتن به دوره‌ها یا سفارش، دوره‌های آماده‌ی شروع و مراحل بعدی."
 
-#: includes/Modules/Checkout/views/admin.php:241
+#: includes/Modules/Checkout/views/admin.php:273
 msgid "\"What happens next\" card"
 msgstr "کارت «مراحل بعدی»"
 
-#: includes/Modules/Checkout/views/admin.php:244
+#: includes/Modules/Checkout/views/admin.php:276
 msgid "Three short steps from payment to learning, or to delivery for shipped products."
 msgstr "سه مرحله‌ی کوتاه از پرداخت تا شروع یادگیری، یا تا تحویل برای محصولات ارسالی."
 
-#: includes/Modules/Checkout/views/admin.php:249
+#: includes/Modules/Checkout/views/admin.php:281
 msgid "Celebration animation"
 msgstr "انیمیشن جشن"
 
-#: includes/Modules/Checkout/views/admin.php:252
+#: includes/Modules/Checkout/views/admin.php:284
 msgid "A little confetti around the tick after a successful payment. Visitors who turned motion off see none."
 msgstr "کمی کاغذرنگی دور تیک پس از پرداخت موفق. بازدیدکنندگانی که حرکت را خاموش کرده‌اند آن را نمی‌بینند."
 
-#: includes/Modules/Checkout/views/admin.php:257
+#: includes/Modules/Checkout/views/admin.php:289
 msgid "Message to buyers"
 msgstr "پیام به خریداران"
 
-#: includes/Modules/Checkout/views/admin.php:260
+#: includes/Modules/Checkout/views/admin.php:292
 msgid "e.g. Join our support group to ask the teacher your questions."
 msgstr "مثلاً: برای پرسیدن سؤال‌هایتان از مدرس، عضو گروه پشتیبانی شوید."
 
-#: includes/Modules/Checkout/views/admin.php:261
+#: includes/Modules/Checkout/views/admin.php:293
 msgid "Shown under the buttons, except when a payment failed. Empty shows nothing."
 msgstr "زیر دکمه‌ها نمایش داده می‌شود، جز وقتی پرداخت ناموفق باشد. خالی یعنی چیزی نشان داده نشود."
 
@@ -11267,3 +11268,36 @@ msgstr "ایمیل سفارش در هاست‌های بدون mail() پی‌اچ
 #: includes/Modules/Theme_Fixes/Mail_Without_Php_Mail.php:51
 msgid "This host has switched off PHP's mail() function. Every email WordPress sends then crashes the page that sends it: after a purchase the order stops half way, so the SMS texts to the buyer and the admin (Persian WooCommerce SMS), the order emails and the payment return page all fail. With this fix the email is sent through the server's sendmail program when possible, or skipped, and the order carries on normally. To deliver the emails themselves, install an SMTP plugin (for example WP Mail SMTP or FluentSMTP) or ask the host to enable mail()."
 msgstr "هاست این سایت تابع mail() پی‌اچ‌پی را خاموش کرده است. در این حالت هر ایمیلی که وردپرس می‌فرستد صفحه‌ی فرستنده را از کار می‌اندازد: بعد از خرید، سفارش نیمه‌کاره می‌ماند و پیامک‌های خریدار و مدیر (افزونه‌ی پیامک ووکامرس)، ایمیل‌های سفارش و صفحه‌ی بازگشت از درگاه پرداخت همه خطا می‌دهند. با این اصلاح، ایمیل در صورت امکان با برنامه‌ی sendmail سرور فرستاده می‌شود یا کنار گذاشته می‌شود و سفارش به‌طور عادی ادامه پیدا می‌کند. برای اینکه خود ایمیل‌ها هم برسند، یک افزونه‌ی SMTP (مثلاً WP Mail SMTP یا FluentSMTP) نصب کنید یا از هاست بخواهید mail() را فعال کند."
+
+#: includes/Modules/Checkout/Login_Gate.php:142
+#: includes/Modules/Checkout/views/admin.php:254
+msgid "Please log in to continue your purchase."
+msgstr "برای ادامه خرید، وارد حساب کاربری خود شوید."
+
+#: includes/Modules/Checkout/views/admin.php:232
+msgid "Login before checkout"
+msgstr "ورود پیش از تسویه حساب"
+
+#: includes/Modules/Checkout/views/admin.php:233
+msgid "Guests cannot open the checkout, from any link. After logging in they go straight on to the checkout, not to their account."
+msgstr "کاربر مهمان از هیچ مسیری به صفحه تسویه حساب دسترسی ندارد. پس از ورود، مستقیم به تسویه حساب می‌رود، نه به حساب کاربری."
+
+#: includes/Modules/Checkout/views/admin.php:237
+msgid "Require login to check out"
+msgstr "ورود برای تسویه حساب اجباری باشد"
+
+#: includes/Modules/Checkout/views/admin.php:240
+msgid "Ask guests to log in"
+msgstr "درخواست ورود از مهمان"
+
+#: includes/Modules/Checkout/views/admin.php:242
+msgid "Login popup"
+msgstr "پنجره ورود (پاپ‌آپ)"
+
+#: includes/Modules/Checkout/views/admin.php:243
+msgid "Account page"
+msgstr "صفحه حساب کاربری"
+
+#: includes/Modules/Checkout/views/admin.php:246
+msgid "The popup opens over the cart. It needs the theme's header button set to the account page; without it, guests go to the account page."
+msgstr "پنجره ورود روی سبد خرید باز می‌شود. برای این کار دکمه سربرگ قالب باید روی «حساب کاربری» تنظیم شده باشد؛ در غیر این صورت مهمان به صفحه حساب کاربری می‌رود."

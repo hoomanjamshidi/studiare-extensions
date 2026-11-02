@@ -48,6 +48,7 @@ const FILES = [
   'modules/checkout/css/checkout.css',
   'modules/checkout/css/mini-cart.css',
   'modules/checkout/js/checkout.js',
+  'modules/checkout/js/login-gate.js',
   'core/js/rocket-taps.js',
 ];
 

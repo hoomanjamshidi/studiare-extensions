@@ -64,6 +64,11 @@ final class Schema {
 				'button'  => '',
 				'note'    => __( 'Your details stay private and are only used for this order.', 'studiare-extensions' ),
 			),
+			'login'    => array(
+				'required' => false,
+				'mode'     => 'popup',
+				'message'  => '',
+			),
 			'thankyou' => array(
 				'design'    => 'stx',
 				'steps'     => true,
@@ -137,6 +142,20 @@ final class Schema {
 						'max_length' => 40,
 					),
 					'note'    => array(
+						'type'       => 'text',
+						'max_length' => 160,
+					),
+				),
+			),
+			'login'    => array(
+				'type'   => 'group',
+				'fields' => array(
+					'required' => array( 'type' => 'bool' ),
+					'mode'     => array(
+						'type'    => 'enum',
+						'options' => array( 'popup', 'account' ),
+					),
+					'message'  => array(
 						'type'       => 'text',
 						'max_length' => 160,
 					),

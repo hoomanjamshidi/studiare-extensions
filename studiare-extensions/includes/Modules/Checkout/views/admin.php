@@ -229,6 +229,38 @@ $types      = array(
 
 		<div class="stx-card">
 			<header class="stx-card__head">
+				<h2><?php esc_html_e( 'Login before checkout', 'studiare-extensions' ); ?></h2>
+				<p><?php esc_html_e( 'Guests cannot open the checkout, from any link. After logging in they go straight on to the checkout, not to their account.', 'studiare-extensions' ); ?></p>
+			</header>
+			<div class="stx-fields">
+				<?php
+				Fields::toggle( 'login.required', __( 'Require login to check out', 'studiare-extensions' ) );
+				Fields::segmented(
+					'login.mode',
+					__( 'Ask guests to log in', 'studiare-extensions' ),
+					array(
+						'popup'   => __( 'Login popup', 'studiare-extensions' ),
+						'account' => __( 'Account page', 'studiare-extensions' ),
+					),
+					array(
+						'help'    => __( 'The popup opens over the cart. It needs the theme\'s header button set to the account page; without it, guests go to the account page.', 'studiare-extensions' ),
+						'show_if' => 'login.required',
+					)
+				);
+				Fields::text(
+					'login.message',
+					__( 'Message', 'studiare-extensions' ),
+					array(
+						'placeholder' => __( 'Please log in to continue your purchase.', 'studiare-extensions' ),
+						'show_if'     => 'login.required',
+					)
+				);
+				?>
+			</div>
+		</div>
+
+		<div class="stx-card">
+			<header class="stx-card__head">
 				<h2><?php esc_html_e( 'Thank-you page', 'studiare-extensions' ); ?></h2>
 				<p><?php esc_html_e( 'The page after payment: the order\'s state with the buyer\'s name, buttons to their courses or order, the courses ready to start and what happens next.', 'studiare-extensions' ); ?></p>
 			</header>

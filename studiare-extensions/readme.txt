@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.11.3
+Stable tag: 1.11.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,9 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button**, **Studiare+ → Cart & checkout** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.11.4 =
+* Checkout: new "Login before checkout" setting (Cart & checkout → Checkout page). Guests cannot open the checkout from any link; they get the theme's login popup over the cart or the account page, with your own message, and go straight on to the checkout after logging in instead of their account.
 
 = 1.11.3 =
 * Theme fixes: on hosts that switch off PHP's mail(), every order email crashed the order half way, so Persian WooCommerce SMS never sent the buyer's and the admin's texts and the payment return page failed. The new "Order emails on hosts without PHP mail()" fix sends through sendmail when possible, or skips the email, and the order carries on (install an SMTP plugin to deliver the emails).
