@@ -3,3 +3,6 @@ CDesign/.thumbnail
 dist/
 studiare-online-learning-wordpress-theme-update-13.4.zip
 node_modules/
+
+# Holds the private unlock key of the page templates feature: never push it (the repository is public).
+BUILDER-ACCESS.md

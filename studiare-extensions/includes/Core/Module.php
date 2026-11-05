@@ -75,6 +75,14 @@ abstract class Module {
 		return $this->settings;
 	}
 
+	/**
+	 * Whether the admin lists this module (menu, dashboard card, settings page).
+	 * A module sold separately overrides this to stay out of sight until unlocked.
+	 */
+	public function is_listed(): bool {
+		return true;
+	}
+
 	public function is_enabled(): bool {
 		return ! empty( $this->settings()['enabled'] );
 	}

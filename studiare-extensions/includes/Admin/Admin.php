@@ -63,7 +63,7 @@ final class Admin {
 			array( $this, 'render' )
 		);
 
-		foreach ( $this->plugin->modules() as $module ) {
+		foreach ( $this->listed_modules() as $module ) {
 			$this->page_hooks[] = add_submenu_page(
 				self::MENU_SLUG,
 				$module->title(),
@@ -81,7 +81,7 @@ final class Admin {
 		}
 
 		$admin   = $this;
-		$modules = $this->plugin->modules();
+		$modules = $this->listed_modules();
 		$module  = $this->current_module();
 
 		require __DIR__ . '/views/layout.php';
@@ -149,13 +149,27 @@ final class Admin {
 	public function current_module(): ?Module {
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only routing.
 
-		foreach ( $this->plugin->modules() as $module ) {
+		foreach ( $this->listed_modules() as $module ) {
 			if ( $module->admin_slug() === $page ) {
 				return $module;
 			}
 		}
 
 		return null;
+	}
+
+	/**
+	 * Modules the admin shows; hidden ones get no menu item, card or page.
+	 *
+	 * @return array<string, Module>
+	 */
+	public function listed_modules(): array {
+		return array_filter(
+			$this->plugin->modules(),
+			static function ( Module $module ) {
+				return $module->is_listed();
+			}
+		);
 	}
 
 	/**

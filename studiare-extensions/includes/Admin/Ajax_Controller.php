@@ -80,7 +80,8 @@ final class Ajax_Controller {
 		$id     = isset( $_POST['module'] ) ? sanitize_key( wp_unslash( $_POST['module'] ) ) : '';
 		$module = $this->plugin->module( $id );
 
-		if ( null === $module ) {
+		// A hidden module answers like a missing one, so its settings cannot be changed from outside its page.
+		if ( null === $module || ! $module->is_listed() ) {
 			wp_send_json_error( array( 'message' => __( 'Unknown feature.', 'studiare-extensions' ) ), 404 );
 		}
 

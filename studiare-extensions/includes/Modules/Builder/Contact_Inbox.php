@@ -43,6 +43,11 @@ final class Contact_Inbox {
 	}
 
 	public function add_menu(): void {
+		// While the feature is hidden the inbox still shows once a contact form has received messages.
+		if ( ! Access::granted() && ! self::has_messages() ) {
+			return;
+		}
+
 		add_submenu_page(
 			Admin::MENU_SLUG,
 			__( 'Contact messages', 'studiare-extensions' ),
@@ -50,6 +55,13 @@ final class Contact_Inbox {
 			Admin::CAPABILITY,
 			'edit.php?post_type=' . Contact_Messages::POST_TYPE
 		);
+	}
+
+	/** Whether any contact message (read or not) exists. */
+	private static function has_messages(): bool {
+		$counts = wp_count_posts( Contact_Messages::POST_TYPE );
+
+		return ! empty( $counts->private );
 	}
 
 	/**

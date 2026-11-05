@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Studiare Extensions 1.11.4\n"
+"Project-Id-Version: Studiare Extensions 1.11.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/studiare-extensions\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-02T15:46:24+00:00\n"
+"POT-Creation-Date: 2026-11-05T10:49:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: studiare-extensions\n"
@@ -47,73 +47,73 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:180
+#: includes/Admin/Admin.php:194
 msgid "Settings saved."
 msgstr ""
 
-#: includes/Admin/Admin.php:181
+#: includes/Admin/Admin.php:195
 msgid "Saving failed. Please try again."
 msgstr ""
 
-#: includes/Admin/Admin.php:182
+#: includes/Admin/Admin.php:196
 msgid "Saving…"
 msgstr ""
 
-#: includes/Admin/Admin.php:183
+#: includes/Admin/Admin.php:197
 #: includes/Admin/views/layout.php:36
 msgid "Save changes"
 msgstr ""
 
-#: includes/Admin/Admin.php:184
+#: includes/Admin/Admin.php:198
 msgid "Settings were reset to defaults."
 msgstr ""
 
-#: includes/Admin/Admin.php:185
+#: includes/Admin/Admin.php:199
 msgid "Reset all settings?"
 msgstr ""
 
-#: includes/Admin/Admin.php:186
+#: includes/Admin/Admin.php:200
 msgid "Every option of this feature goes back to its default. This cannot be undone."
 msgstr ""
 
-#: includes/Admin/Admin.php:187
+#: includes/Admin/Admin.php:201
 msgid "Yes, reset"
 msgstr ""
 
-#: includes/Admin/Admin.php:188
-#: includes/Modules/Builder/Module.php:430
+#: includes/Admin/Admin.php:202
+#: includes/Modules/Builder/Module.php:436
 msgid "Cancel"
 msgstr ""
 
-#: includes/Admin/Admin.php:189
+#: includes/Admin/Admin.php:203
 msgid "You have unsaved changes. Leave anyway?"
 msgstr ""
 
-#: includes/Admin/Admin.php:190
+#: includes/Admin/Admin.php:204
 msgid "Feature enabled."
 msgstr ""
 
-#: includes/Admin/Admin.php:191
+#: includes/Admin/Admin.php:205
 msgid "Feature disabled."
 msgstr ""
 
-#: includes/Admin/Admin.php:192
+#: includes/Admin/Admin.php:206
 msgid "Theme default"
 msgstr ""
 
-#: includes/Admin/Admin.php:193
+#: includes/Admin/Admin.php:207
 msgid "Use theme default"
 msgstr ""
 
-#: includes/Admin/Admin.php:194
+#: includes/Admin/Admin.php:208
 msgid "Choose an icon image"
 msgstr ""
 
-#: includes/Admin/Admin.php:195
+#: includes/Admin/Admin.php:209
 msgid "Use this image"
 msgstr ""
 
-#: includes/Admin/Admin.php:196
+#: includes/Admin/Admin.php:210
 msgid "No icons match your search."
 msgstr ""
 
@@ -132,7 +132,7 @@ msgstr ""
 msgid "You are not allowed to change these settings."
 msgstr ""
 
-#: includes/Admin/Ajax_Controller.php:84
+#: includes/Admin/Ajax_Controller.php:85
 msgid "Unknown feature."
 msgstr ""
 
@@ -179,7 +179,7 @@ msgstr ""
 #: includes/Modules/Builder/Assets.php:93
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:445
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:239
-#: includes/Modules/Builder/Module.php:417
+#: includes/Modules/Builder/Module.php:423
 #: includes/Modules/Support_Button/Module.php:119
 #: includes/Modules/Support_Button/views/button.php:77
 msgid "Close"
@@ -754,8 +754,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Modules/Audio_Products/Player.php:138
-#: includes/Modules/Builder/Module.php:380
-#: includes/Modules/Builder/Module.php:418
+#: includes/Modules/Builder/Module.php:386
+#: includes/Modules/Builder/Module.php:424
 msgid "Preview"
 msgstr ""
 
@@ -915,7 +915,7 @@ msgstr ""
 
 #: includes/Modules/Audio_Products/views/edit-box.php:50
 #: includes/Modules/Bottom_Nav/views/admin.php:533
-#: includes/Modules/Builder/Module.php:407
+#: includes/Modules/Builder/Module.php:413
 #: includes/Modules/Checkout/views/admin.php:335
 #: includes/Modules/Checkout/views/admin.php:382
 #: includes/Modules/Support_Button/views/admin.php:143
@@ -925,7 +925,7 @@ msgstr ""
 
 #: includes/Modules/Audio_Products/views/edit-box.php:52
 #: includes/Modules/Bottom_Nav/views/admin.php:534
-#: includes/Modules/Builder/Module.php:408
+#: includes/Modules/Builder/Module.php:414
 #: includes/Modules/Checkout/views/admin.php:336
 #: includes/Modules/Checkout/views/admin.php:383
 #: includes/Modules/Support_Button/views/admin.php:144
@@ -1282,7 +1282,7 @@ msgstr ""
 
 #: includes/Modules/Bottom_Nav/Module.php:156
 #: includes/Modules/Bottom_Nav/views/admin.php:540
-#: includes/Modules/Builder/Module.php:384
+#: includes/Modules/Builder/Module.php:390
 #: includes/Modules/Checkout/Module.php:147
 #: includes/Modules/Checkout/views/admin.php:388
 #: includes/Modules/Support_Button/Module.php:125
@@ -1844,7 +1844,7 @@ msgid "Show this button"
 msgstr ""
 
 #: includes/Modules/Bottom_Nav/views/admin.php:539
-#: includes/Modules/Builder/Module.php:382
+#: includes/Modules/Builder/Module.php:388
 msgid "Duplicate"
 msgstr ""
 
@@ -2153,8 +2153,8 @@ msgstr ""
 msgid "Link copied."
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Inbox.php:48
-#: includes/Modules/Builder/Contact_Inbox.php:49
+#: includes/Modules/Builder/Contact_Inbox.php:53
+#: includes/Modules/Builder/Contact_Inbox.php:54
 #: includes/Modules/Builder/Contact_Messages.php:62
 #: includes/Modules/Builder/Contact_Messages.php:64
 #: includes/Modules/Builder/Contact_Messages.php:65
@@ -2163,11 +2163,11 @@ msgstr ""
 msgid "Contact messages"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Inbox.php:62
+#: includes/Modules/Builder/Contact_Inbox.php:74
 msgid "From"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Inbox.php:63
+#: includes/Modules/Builder/Contact_Inbox.php:75
 #: includes/Modules/Builder/Contact_Messages.php:494
 #: includes/Modules/Builder/Elementor/Widgets/Countdown.php:95
 #: includes/Modules/Checkout/views/admin.php:252
@@ -2175,22 +2175,22 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Inbox.php:64
+#: includes/Modules/Builder/Contact_Inbox.php:76
 #: includes/Modules/Builder/Contact_Messages.php:382
 msgid "Page"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Inbox.php:65
+#: includes/Modules/Builder/Contact_Inbox.php:77
 msgid "Received"
 msgstr ""
 
 #. translators: %s: time since the message arrived, e.g. "5 minutes".
-#: includes/Modules/Builder/Contact_Inbox.php:108
+#: includes/Modules/Builder/Contact_Inbox.php:120
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Inbox.php:125
+#: includes/Modules/Builder/Contact_Inbox.php:137
 #: includes/Modules/Builder/Elementor/Cards.php:281
 #: includes/Modules/Builder/Elementor/Parts.php:296
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:207
@@ -2199,12 +2199,12 @@ msgid "New"
 msgstr ""
 
 #. translators: %s: topic of the message being answered.
-#: includes/Modules/Builder/Contact_Inbox.php:164
+#: includes/Modules/Builder/Contact_Inbox.php:176
 #, php-format
 msgid "Re: %s"
 msgstr ""
 
-#: includes/Modules/Builder/Contact_Inbox.php:165
+#: includes/Modules/Builder/Contact_Inbox.php:177
 msgid "Reply by email"
 msgstr ""
 
@@ -2277,7 +2277,7 @@ msgstr ""
 #: includes/Modules/Builder/Elementor/Widgets/Testimonials.php:52
 #: includes/Modules/Builder/Elementor/Widgets/Testimonials.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Trust_Badges.php:44
-#: includes/Modules/Builder/Module.php:422
+#: includes/Modules/Builder/Module.php:428
 #: includes/Modules/Support_Button/views/admin.php:235
 msgid "Name"
 msgstr ""
@@ -2352,7 +2352,7 @@ msgstr ""
 
 #: includes/Modules/Builder/Design_Pages.php:86
 #: includes/Modules/Builder/Module.php:55
-#: includes/Modules/Builder/Module.php:450
+#: includes/Modules/Builder/Module.php:456
 msgid "Home page"
 msgstr ""
 
@@ -2412,11 +2412,11 @@ msgstr ""
 msgid "\"%s\" has been added to your cart."
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Cards.php:381
+#: includes/Modules/Builder/Elementor/Cards.php:382
 msgid "Added to cart"
 msgstr ""
 
-#: includes/Modules/Builder/Elementor/Cards.php:408
+#: includes/Modules/Builder/Elementor/Cards.php:409
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:191
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:290
 #: includes/Modules/Builder/Presets/Home.php:726
@@ -6535,7 +6535,7 @@ msgstr ""
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Highlights.php:47
 #: includes/Modules/Builder/Elementor/Widgets/Product_Tabs.php:247
-#: includes/Modules/Builder/Product_Meta_Box.php:96
+#: includes/Modules/Builder/Product_Meta_Box.php:101
 msgid "What you will learn"
 msgstr ""
 
@@ -7480,7 +7480,7 @@ msgid "Studiare+ dark"
 msgstr ""
 
 #: includes/Modules/Builder/Library_Ajax.php:59
-#: includes/Modules/Builder/Module.php:435
+#: includes/Modules/Builder/Module.php:441
 msgid "Elementor is required to edit templates."
 msgstr ""
 
@@ -7494,7 +7494,7 @@ msgid "Page not found."
 msgstr ""
 
 #: includes/Modules/Builder/Library_Ajax.php:83
-#: includes/Modules/Builder/Module.php:421
+#: includes/Modules/Builder/Module.php:427
 #: includes/Modules/Builder/views/admin.php:330
 msgid "New template"
 msgstr ""
@@ -7545,318 +7545,318 @@ msgstr ""
 msgid "Contact us page"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:249
+#: includes/Modules/Builder/Module.php:255
 msgid "Home pages"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:250
+#: includes/Modules/Builder/Module.php:256
 msgid "About us pages"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:251
+#: includes/Modules/Builder/Module.php:257
 msgid "Contact us pages"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:371
-#: includes/Modules/Builder/Product_Meta_Box.php:70
-#: includes/Modules/Builder/Product_Meta_Box.php:83
+#: includes/Modules/Builder/Module.php:377
+#: includes/Modules/Builder/Product_Meta_Box.php:75
+#: includes/Modules/Builder/Product_Meta_Box.php:88
 msgid "Theme layout"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:372
+#: includes/Modules/Builder/Module.php:378
 msgid "Theme header"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:373
+#: includes/Modules/Builder/Module.php:379
 msgid "Theme footer"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:374
+#: includes/Modules/Builder/Module.php:380
 msgid "Keep Studiare's own design."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:375
+#: includes/Modules/Builder/Module.php:381
 msgid "Nothing"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:376
+#: includes/Modules/Builder/Module.php:382
 msgid "Hide it on this device."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:377
+#: includes/Modules/Builder/Module.php:383
 msgid "Same as desktop"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:378
+#: includes/Modules/Builder/Module.php:384
 msgid "Use the desktop choice on phones too."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:379
+#: includes/Modules/Builder/Module.php:385
 msgid "Custom template"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:381
+#: includes/Modules/Builder/Module.php:387
 msgid "Edit with Elementor"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:383
+#: includes/Modules/Builder/Module.php:389
 msgid "Restore original"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:385
+#: includes/Modules/Builder/Module.php:391
 msgid "Rename"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:386
+#: includes/Modules/Builder/Module.php:392
 msgid "Delete this template?"
 msgstr ""
 
 #. translators: %s: template name.
-#: includes/Modules/Builder/Module.php:388
+#: includes/Modules/Builder/Module.php:394
 #, php-format
 msgid "\"%s\" goes to the trash. Pages using it fall back to the theme layout."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:389
+#: includes/Modules/Builder/Module.php:395
 msgid "Restore the original design?"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:390
+#: includes/Modules/Builder/Module.php:396
 msgid "Your Elementor changes to this template will be replaced by the original design. Duplicate it first if you want to keep your version."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:391
+#: includes/Modules/Builder/Module.php:397
 msgid "Restore"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:392
+#: includes/Modules/Builder/Module.php:398
 msgid "Template created."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:393
+#: includes/Modules/Builder/Module.php:399
 msgid "Template duplicated."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:394
+#: includes/Modules/Builder/Module.php:400
 msgid "Original design restored."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:395
+#: includes/Modules/Builder/Module.php:401
 msgid "Template deleted."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:396
+#: includes/Modules/Builder/Module.php:402
 msgid "Ready-made designs installed."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:397
+#: includes/Modules/Builder/Module.php:403
 msgid "Template renamed."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:398
+#: includes/Modules/Builder/Module.php:404
 #: includes/Modules/Builder/views/admin.php:161
 msgid "Add rule"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:399
+#: includes/Modules/Builder/Module.php:405
 msgid "Choose categories"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:400
+#: includes/Modules/Builder/Module.php:406
 msgid "Search categories…"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:401
+#: includes/Modules/Builder/Module.php:407
 msgid "No categories found."
 msgstr ""
 
 #. translators: %d: number of categories.
-#: includes/Modules/Builder/Module.php:403
+#: includes/Modules/Builder/Module.php:409
 #, php-format
 msgid "%d categories"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:404
+#: includes/Modules/Builder/Module.php:410
 msgid "Include subcategories"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:405
+#: includes/Modules/Builder/Module.php:411
 msgid "Use"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:406
+#: includes/Modules/Builder/Module.php:412
 msgid "Remove rule"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:409
+#: includes/Modules/Builder/Module.php:415
 msgid "You reached the maximum number of rules."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:410
+#: includes/Modules/Builder/Module.php:416
 msgid "No rules yet. Every item uses the layout above."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:411
+#: includes/Modules/Builder/Module.php:417
 msgid "Pick at least one category — this rule is ignored until then."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:412
+#: includes/Modules/Builder/Module.php:418
 #: includes/Modules/Builder/views/admin.php:46
 msgid "Newest item (automatic)"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:413
+#: includes/Modules/Builder/Module.php:419
 #: includes/Modules/Builder/views/admin.php:191
 msgid "Desktop"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:414
+#: includes/Modules/Builder/Module.php:420
 msgid "Tablet"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:415
+#: includes/Modules/Builder/Module.php:421
 msgid "Mobile"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:416
+#: includes/Modules/Builder/Module.php:422
 msgid "Open in new tab"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:419
+#: includes/Modules/Builder/Module.php:425
 msgid "Previews show a design right away — nothing changes for visitors until you save."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:420
+#: includes/Modules/Builder/Module.php:426
 msgid "Add a published product (or blog post) first to preview it with real data."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:423
+#: includes/Modules/Builder/Module.php:429
 msgid "Kind"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:424
+#: includes/Modules/Builder/Module.php:430
 msgid "Start from"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:425
+#: includes/Modules/Builder/Module.php:431
 msgid "Blank canvas"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:426
+#: includes/Modules/Builder/Module.php:432
 msgid "Create & open Elementor"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:427
+#: includes/Modules/Builder/Module.php:433
 msgid "Create"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:428
+#: includes/Modules/Builder/Module.php:434
 msgid "New name"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:429
+#: includes/Modules/Builder/Module.php:435
 msgid "Save"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:431
+#: includes/Modules/Builder/Module.php:437
 msgid "In use"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:432
+#: includes/Modules/Builder/Module.php:438
 msgid "Ready-made"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:433
+#: includes/Modules/Builder/Module.php:439
 msgid "Edited"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:434
+#: includes/Modules/Builder/Module.php:440
 msgid "No templates of this kind yet."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:436
+#: includes/Modules/Builder/Module.php:442
 msgid "Studiare colours applied — save to keep them."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:437
+#: includes/Modules/Builder/Module.php:443
 msgid "Brand colours added to Elementor's global colours."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:438
+#: includes/Modules/Builder/Module.php:444
 msgid "Flexbox containers activated."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:439
+#: includes/Modules/Builder/Module.php:445
 msgid "Create page"
 msgstr ""
 
 #. translators: %s: design name.
-#: includes/Modules/Builder/Module.php:441
+#: includes/Modules/Builder/Module.php:447
 #, php-format
 msgid "New page from \"%s\""
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:442
+#: includes/Modules/Builder/Module.php:448
 msgid "Page name"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:443
+#: includes/Modules/Builder/Module.php:449
 msgid "Publish now"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:444
+#: includes/Modules/Builder/Module.php:450
 msgid "Off: the page is saved as a draft that only you can see."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:445
+#: includes/Modules/Builder/Module.php:451
 msgid "Use it as the site's home page"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:446
+#: includes/Modules/Builder/Module.php:452
 msgid "Visitors see it at the site address. The page is published."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:447
+#: includes/Modules/Builder/Module.php:453
 msgid "Page created."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:448
+#: includes/Modules/Builder/Module.php:454
 msgid "The ready-made designs are not installed. Use \"Reinstall missing designs\" in the Templates tab."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:449
+#: includes/Modules/Builder/Module.php:455
 msgid "No pages yet. Create one from a design above."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:451
+#: includes/Modules/Builder/Module.php:457
 msgid "Draft"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:452
+#: includes/Modules/Builder/Module.php:458
 msgid "Published"
 msgstr ""
 
 #. translators: %s: design name.
-#: includes/Modules/Builder/Module.php:454
+#: includes/Modules/Builder/Module.php:460
 #, php-format
 msgid "From \"%s\""
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:455
+#: includes/Modules/Builder/Module.php:461
 #: includes/Modules/Builder/Presets/Home.php:726
 #: includes/Modules/Checkout/Thank_You.php:403
 msgid "View"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:456
+#: includes/Modules/Builder/Module.php:462
 msgid "Make it the home page"
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:457
+#: includes/Modules/Builder/Module.php:463
 msgid "This page is now the site's home page."
 msgstr ""
 
-#: includes/Modules/Builder/Module.php:458
+#: includes/Modules/Builder/Module.php:464
 msgid "Edit the design"
 msgstr ""
 
@@ -9414,29 +9414,29 @@ msgstr ""
 msgid "Picked for you"
 msgstr ""
 
-#: includes/Modules/Builder/Product_Meta_Box.php:37
+#: includes/Modules/Builder/Product_Meta_Box.php:42
 msgid "Studiare+ page template"
 msgstr ""
 
-#: includes/Modules/Builder/Product_Meta_Box.php:75
+#: includes/Modules/Builder/Product_Meta_Box.php:80
 msgid "Layout of this page"
 msgstr ""
 
 #. translators: %s: template picked by the category rules.
-#: includes/Modules/Builder/Product_Meta_Box.php:80
+#: includes/Modules/Builder/Product_Meta_Box.php:85
 #, php-format
 msgid "Automatic (%s)"
 msgstr ""
 
-#: includes/Modules/Builder/Product_Meta_Box.php:93
+#: includes/Modules/Builder/Product_Meta_Box.php:98
 msgid "Page templates are switched off, so the theme layout is used until you enable them."
 msgstr ""
 
-#: includes/Modules/Builder/Product_Meta_Box.php:97
+#: includes/Modules/Builder/Product_Meta_Box.php:102
 msgid "One item per line"
 msgstr ""
 
-#: includes/Modules/Builder/Product_Meta_Box.php:98
+#: includes/Modules/Builder/Product_Meta_Box.php:103
 msgid "Shown by the \"Highlights\" widget of the page templates. One item per line."
 msgstr ""
 
@@ -11242,6 +11242,14 @@ msgstr ""
 
 #: includes/Modules/Theme_Fixes/No_Repeat_Purchase.php:109
 msgid "You are a student of this course"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Order_List_Checkboxes.php:42
+msgid "Order list checkboxes"
+msgstr ""
+
+#: includes/Modules/Theme_Fixes/Order_List_Checkboxes.php:46
+msgid "In the WooCommerce orders list, ticking an order's checkbox opens the order instead of selecting it, so bulk actions cannot be used. This happens with WordPress 7.1 and WooCommerce versions before 11.1. This fix makes the checkboxes select orders again."
 msgstr ""
 
 #: includes/Modules/Theme_Fixes/Otp_Digits.php:49

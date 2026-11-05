@@ -91,6 +91,7 @@ final class Module extends Base_Module {
 		}
 
 		if ( is_admin() ) {
+			( new Access( $this ) )->register();
 			add_action( 'admin_init', array( Library::class, 'maybe_upgrade' ) );
 			( new Product_Meta_Box( $this ) )->register();
 			( new Library_Ajax( $this ) )->register();
@@ -98,6 +99,11 @@ final class Module extends Base_Module {
 		}
 
 		parent::register();
+	}
+
+	/** Hidden from the admin until the unlock link is opened (see Access). */
+	public function is_listed(): bool {
+		return Access::granted();
 	}
 
 	/** Nothing extra: see register(). */

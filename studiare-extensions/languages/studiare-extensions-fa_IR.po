@@ -42,61 +42,61 @@ msgstr "پیشخوان"
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: includes/Admin/Admin.php:180
+#: includes/Admin/Admin.php:194
 msgid "Settings saved."
 msgstr "تنظیمات ذخیره شد."
 
-#: includes/Admin/Admin.php:181
+#: includes/Admin/Admin.php:195
 msgid "Saving failed. Please try again."
 msgstr "ذخیره انجام نشد. دوباره تلاش کنید."
 
-#: includes/Admin/Admin.php:182
+#: includes/Admin/Admin.php:196
 msgid "Saving…"
 msgstr "در حال ذخیره…"
 
-#: includes/Admin/Admin.php:183
+#: includes/Admin/Admin.php:197
 #: includes/Admin/views/layout.php:36
 msgid "Save changes"
 msgstr "ذخیره تغییرات"
 
-#: includes/Admin/Admin.php:184
+#: includes/Admin/Admin.php:198
 msgid "Settings were reset to defaults."
 msgstr "تنظیمات به حالت پیش‌فرض برگشت."
 
-#: includes/Admin/Admin.php:185
+#: includes/Admin/Admin.php:199
 msgid "Reset all settings?"
 msgstr "همه تنظیمات بازنشانی شود؟"
 
-#: includes/Admin/Admin.php:186
+#: includes/Admin/Admin.php:200
 msgid "Every option of this feature goes back to its default. This cannot be undone."
 msgstr "همه گزینه‌های این بخش به حالت پیش‌فرض برمی‌گردند. این کار قابل بازگشت نیست."
 
-#: includes/Admin/Admin.php:187
+#: includes/Admin/Admin.php:201
 msgid "Yes, reset"
 msgstr "بله، بازنشانی کن"
 
-#: includes/Admin/Admin.php:188
-#: includes/Modules/Builder/Module.php:430
+#: includes/Admin/Admin.php:202
+#: includes/Modules/Builder/Module.php:436
 msgid "Cancel"
 msgstr "انصراف"
 
-#: includes/Admin/Admin.php:189
+#: includes/Admin/Admin.php:203
 msgid "You have unsaved changes. Leave anyway?"
 msgstr "تغییرات ذخیره‌نشده دارید. با این حال خارج می‌شوید؟"
 
-#: includes/Admin/Admin.php:190
+#: includes/Admin/Admin.php:204
 msgid "Feature enabled."
 msgstr "امکان فعال شد."
 
-#: includes/Admin/Admin.php:191
+#: includes/Admin/Admin.php:205
 msgid "Feature disabled."
 msgstr "امکان غیرفعال شد."
 
-#: includes/Admin/Admin.php:192
+#: includes/Admin/Admin.php:206
 msgid "Theme default"
 msgstr "پیش‌فرض قالب"
 
-#: includes/Admin/Admin.php:193
+#: includes/Admin/Admin.php:207
 msgid "Use theme default"
 msgstr "استفاده از رنگ قالب"
 
@@ -115,7 +115,7 @@ msgstr "نشست شما منقضی شده است. صفحه را دوباره ب�
 msgid "You are not allowed to change these settings."
 msgstr "شما اجازه تغییر این تنظیمات را ندارید."
 
-#: includes/Admin/Ajax_Controller.php:84
+#: includes/Admin/Ajax_Controller.php:85
 msgid "Unknown feature."
 msgstr "امکان ناشناخته."
 
@@ -420,7 +420,7 @@ msgstr "«%s» از نوار حذف می‌شود."
 
 #: includes/Modules/Bottom_Nav/Module.php:156
 #: includes/Modules/Bottom_Nav/views/admin.php:540
-#: includes/Modules/Builder/Module.php:384
+#: includes/Modules/Builder/Module.php:390
 #: includes/Modules/Checkout/Module.php:147
 #: includes/Modules/Checkout/views/admin.php:388
 #: includes/Modules/Support_Button/Module.php:125
@@ -434,15 +434,15 @@ msgstr "حذف"
 msgid "You can add up to %d buttons."
 msgstr "حداکثر %d دکمه می‌توانید اضافه کنید."
 
-#: includes/Admin/Admin.php:194
+#: includes/Admin/Admin.php:208
 msgid "Choose an icon image"
 msgstr "انتخاب تصویر آیکون"
 
-#: includes/Admin/Admin.php:195
+#: includes/Admin/Admin.php:209
 msgid "Use this image"
 msgstr "استفاده از این تصویر"
 
-#: includes/Admin/Admin.php:196
+#: includes/Admin/Admin.php:210
 msgid "No icons match your search."
 msgstr "آیکونی با این جستجو پیدا نشد."
 
@@ -1047,7 +1047,7 @@ msgstr "وسط"
 
 #: includes/Modules/Audio_Products/views/edit-box.php:50
 #: includes/Modules/Bottom_Nav/views/admin.php:533
-#: includes/Modules/Builder/Module.php:407
+#: includes/Modules/Builder/Module.php:413
 #: includes/Modules/Checkout/views/admin.php:335
 #: includes/Modules/Checkout/views/admin.php:382
 #: includes/Modules/Support_Button/views/admin.php:143
@@ -1057,7 +1057,7 @@ msgstr "انتقال به بالا"
 
 #: includes/Modules/Audio_Products/views/edit-box.php:52
 #: includes/Modules/Bottom_Nav/views/admin.php:534
-#: includes/Modules/Builder/Module.php:408
+#: includes/Modules/Builder/Module.php:414
 #: includes/Modules/Checkout/views/admin.php:336
 #: includes/Modules/Checkout/views/admin.php:383
 #: includes/Modules/Support_Button/views/admin.php:144
@@ -1071,7 +1071,7 @@ msgid "Show this button"
 msgstr "نمایش این دکمه"
 
 #: includes/Modules/Bottom_Nav/views/admin.php:539
-#: includes/Modules/Builder/Module.php:382
+#: includes/Modules/Builder/Module.php:388
 msgid "Duplicate"
 msgstr "تکثیر"
 
@@ -1316,7 +1316,7 @@ msgstr "انتخاب آیکون"
 #: includes/Modules/Builder/Assets.php:93
 #: includes/Modules/Builder/Elementor/Widgets/Nav_Menu.php:445
 #: includes/Modules/Builder/Elementor/Widgets/Search.php:239
-#: includes/Modules/Builder/Module.php:417
+#: includes/Modules/Builder/Module.php:423
 #: includes/Modules/Support_Button/Module.php:119
 #: includes/Modules/Support_Button/views/button.php:77
 msgid "Close"
@@ -1484,7 +1484,7 @@ msgstr "جزوه و چک‌لیست قابل دانلود"
 msgid "Quiz"
 msgstr "آزمون"
 
-#: includes/Modules/Builder/Contact_Inbox.php:125
+#: includes/Modules/Builder/Contact_Inbox.php:137
 #: includes/Modules/Builder/Elementor/Cards.php:281
 #: includes/Modules/Builder/Elementor/Parts.php:296
 #: includes/Modules/Builder/Elementor/Widgets/Product_Badges.php:207
@@ -2397,7 +2397,7 @@ msgstr "اندازه عکس"
 #: includes/Modules/Builder/Elementor/Widgets/Testimonials.php:52
 #: includes/Modules/Builder/Elementor/Widgets/Testimonials.php:140
 #: includes/Modules/Builder/Elementor/Widgets/Trust_Badges.php:44
-#: includes/Modules/Builder/Module.php:422
+#: includes/Modules/Builder/Module.php:428
 #: includes/Modules/Support_Button/views/admin.php:235
 msgid "Name"
 msgstr "نام"
@@ -3062,7 +3062,7 @@ msgstr "موارد از باکس «در این دوره یاد می‌گیرید
 
 #: includes/Modules/Builder/Elementor/Widgets/Product_Highlights.php:47
 #: includes/Modules/Builder/Elementor/Widgets/Product_Tabs.php:247
-#: includes/Modules/Builder/Product_Meta_Box.php:96
+#: includes/Modules/Builder/Product_Meta_Box.php:101
 msgid "What you will learn"
 msgstr "در این دوره یاد می‌گیرید"
 
@@ -3521,7 +3521,7 @@ msgid "Studiare+ dark"
 msgstr "استادیار+ · تیره"
 
 #: includes/Modules/Builder/Library_Ajax.php:59
-#: includes/Modules/Builder/Module.php:435
+#: includes/Modules/Builder/Module.php:441
 msgid "Elementor is required to edit templates."
 msgstr "برای ویرایش قالب‌ها به المنتور نیاز است."
 
@@ -3531,7 +3531,7 @@ msgid "Template not found."
 msgstr "قالب پیدا نشد."
 
 #: includes/Modules/Builder/Library_Ajax.php:83
-#: includes/Modules/Builder/Module.php:421
+#: includes/Modules/Builder/Module.php:427
 #: includes/Modules/Builder/views/admin.php:330
 msgid "New template"
 msgstr "قالب جدید"
@@ -3568,234 +3568,234 @@ msgstr "هدر"
 msgid "Footer"
 msgstr "فوتر"
 
-#: includes/Modules/Builder/Module.php:371
-#: includes/Modules/Builder/Product_Meta_Box.php:70
-#: includes/Modules/Builder/Product_Meta_Box.php:83
+#: includes/Modules/Builder/Module.php:377
+#: includes/Modules/Builder/Product_Meta_Box.php:75
+#: includes/Modules/Builder/Product_Meta_Box.php:88
 msgid "Theme layout"
 msgstr "طرح قالب"
 
-#: includes/Modules/Builder/Module.php:372
+#: includes/Modules/Builder/Module.php:378
 msgid "Theme header"
 msgstr "هدر قالب"
 
-#: includes/Modules/Builder/Module.php:373
+#: includes/Modules/Builder/Module.php:379
 msgid "Theme footer"
 msgstr "فوتر قالب"
 
-#: includes/Modules/Builder/Module.php:374
+#: includes/Modules/Builder/Module.php:380
 msgid "Keep Studiare's own design."
 msgstr "طراحی خود قالب استادیار حفظ شود."
 
-#: includes/Modules/Builder/Module.php:375
+#: includes/Modules/Builder/Module.php:381
 msgid "Nothing"
 msgstr "هیچ‌کدام"
 
-#: includes/Modules/Builder/Module.php:376
+#: includes/Modules/Builder/Module.php:382
 msgid "Hide it on this device."
 msgstr "در این دستگاه نمایش داده نشود."
 
-#: includes/Modules/Builder/Module.php:377
+#: includes/Modules/Builder/Module.php:383
 msgid "Same as desktop"
 msgstr "مثل دسکتاپ"
 
-#: includes/Modules/Builder/Module.php:378
+#: includes/Modules/Builder/Module.php:384
 msgid "Use the desktop choice on phones too."
 msgstr "همان انتخاب دسکتاپ در موبایل هم استفاده شود."
 
-#: includes/Modules/Builder/Module.php:379
+#: includes/Modules/Builder/Module.php:385
 msgid "Custom template"
 msgstr "قالب سفارشی"
 
 #: includes/Modules/Audio_Products/Player.php:138
-#: includes/Modules/Builder/Module.php:380
-#: includes/Modules/Builder/Module.php:418
+#: includes/Modules/Builder/Module.php:386
+#: includes/Modules/Builder/Module.php:424
 msgid "Preview"
 msgstr "پیش‌نمایش"
 
-#: includes/Modules/Builder/Module.php:381
+#: includes/Modules/Builder/Module.php:387
 msgid "Edit with Elementor"
 msgstr "ویرایش با المنتور"
 
-#: includes/Modules/Builder/Module.php:383
+#: includes/Modules/Builder/Module.php:389
 msgid "Restore original"
 msgstr "بازگردانی طرح اولیه"
 
-#: includes/Modules/Builder/Module.php:385
+#: includes/Modules/Builder/Module.php:391
 msgid "Rename"
 msgstr "تغییر نام"
 
-#: includes/Modules/Builder/Module.php:386
+#: includes/Modules/Builder/Module.php:392
 msgid "Delete this template?"
 msgstr "این قالب حذف شود؟"
 
 #. translators: %s: template name.
-#: includes/Modules/Builder/Module.php:388
+#: includes/Modules/Builder/Module.php:394
 #, php-format
 msgid "\"%s\" goes to the trash. Pages using it fall back to the theme layout."
 msgstr "«%s» به زباله‌دان منتقل می‌شود. صفحاتی که از آن استفاده می‌کنند به طرح قالب برمی‌گردند."
 
-#: includes/Modules/Builder/Module.php:389
+#: includes/Modules/Builder/Module.php:395
 msgid "Restore the original design?"
 msgstr "طرح اولیه بازگردانده شود؟"
 
-#: includes/Modules/Builder/Module.php:390
+#: includes/Modules/Builder/Module.php:396
 msgid "Your Elementor changes to this template will be replaced by the original design. Duplicate it first if you want to keep your version."
 msgstr "تغییراتی که در المنتور روی این قالب داده‌اید با طرح اولیه جایگزین می‌شود. اگر می‌خواهید نسخه خودتان بماند، ابتدا از آن کپی بگیرید."
 
-#: includes/Modules/Builder/Module.php:391
+#: includes/Modules/Builder/Module.php:397
 msgid "Restore"
 msgstr "بازگردانی"
 
-#: includes/Modules/Builder/Module.php:392
+#: includes/Modules/Builder/Module.php:398
 msgid "Template created."
 msgstr "قالب ساخته شد."
 
-#: includes/Modules/Builder/Module.php:393
+#: includes/Modules/Builder/Module.php:399
 msgid "Template duplicated."
 msgstr "از قالب کپی گرفته شد."
 
-#: includes/Modules/Builder/Module.php:394
+#: includes/Modules/Builder/Module.php:400
 msgid "Original design restored."
 msgstr "طرح اولیه بازگردانده شد."
 
-#: includes/Modules/Builder/Module.php:395
+#: includes/Modules/Builder/Module.php:401
 msgid "Template deleted."
 msgstr "قالب حذف شد."
 
-#: includes/Modules/Builder/Module.php:396
+#: includes/Modules/Builder/Module.php:402
 msgid "Ready-made designs installed."
 msgstr "طرح‌های آماده نصب شدند."
 
-#: includes/Modules/Builder/Module.php:397
+#: includes/Modules/Builder/Module.php:403
 msgid "Template renamed."
 msgstr "نام قالب تغییر کرد."
 
-#: includes/Modules/Builder/Module.php:398
+#: includes/Modules/Builder/Module.php:404
 #: includes/Modules/Builder/views/admin.php:161
 msgid "Add rule"
 msgstr "افزودن قانون"
 
-#: includes/Modules/Builder/Module.php:399
+#: includes/Modules/Builder/Module.php:405
 msgid "Choose categories"
 msgstr "انتخاب دسته‌بندی‌ها"
 
-#: includes/Modules/Builder/Module.php:400
+#: includes/Modules/Builder/Module.php:406
 msgid "Search categories…"
 msgstr "جستجوی دسته‌بندی‌ها…"
 
-#: includes/Modules/Builder/Module.php:401
+#: includes/Modules/Builder/Module.php:407
 msgid "No categories found."
 msgstr "دسته‌بندی‌ای پیدا نشد."
 
 #. translators: %d: number of categories.
-#: includes/Modules/Builder/Module.php:403
+#: includes/Modules/Builder/Module.php:409
 #, php-format
 msgid "%d categories"
 msgstr "%d دسته‌بندی"
 
-#: includes/Modules/Builder/Module.php:404
+#: includes/Modules/Builder/Module.php:410
 msgid "Include subcategories"
 msgstr "شامل زیردسته‌ها"
 
-#: includes/Modules/Builder/Module.php:405
+#: includes/Modules/Builder/Module.php:411
 msgid "Use"
 msgstr "استفاده از"
 
-#: includes/Modules/Builder/Module.php:406
+#: includes/Modules/Builder/Module.php:412
 msgid "Remove rule"
 msgstr "حذف قانون"
 
-#: includes/Modules/Builder/Module.php:409
+#: includes/Modules/Builder/Module.php:415
 msgid "You reached the maximum number of rules."
 msgstr "به حداکثر تعداد قانون‌ها رسیده‌اید."
 
-#: includes/Modules/Builder/Module.php:410
+#: includes/Modules/Builder/Module.php:416
 msgid "No rules yet. Every item uses the layout above."
 msgstr "هنوز قانونی ندارید؛ همه موارد از طرح بالا استفاده می‌کنند."
 
-#: includes/Modules/Builder/Module.php:411
+#: includes/Modules/Builder/Module.php:417
 msgid "Pick at least one category — this rule is ignored until then."
 msgstr "حداقل یک دسته‌بندی انتخاب کنید؛ تا آن موقع این قانون نادیده گرفته می‌شود."
 
-#: includes/Modules/Builder/Module.php:412
+#: includes/Modules/Builder/Module.php:418
 #: includes/Modules/Builder/views/admin.php:46
 msgid "Newest item (automatic)"
 msgstr "جدیدترین مورد (خودکار)"
 
-#: includes/Modules/Builder/Module.php:413
+#: includes/Modules/Builder/Module.php:419
 #: includes/Modules/Builder/views/admin.php:191
 msgid "Desktop"
 msgstr "دسکتاپ"
 
-#: includes/Modules/Builder/Module.php:414
+#: includes/Modules/Builder/Module.php:420
 msgid "Tablet"
 msgstr "تبلت"
 
-#: includes/Modules/Builder/Module.php:415
+#: includes/Modules/Builder/Module.php:421
 msgid "Mobile"
 msgstr "موبایل"
 
-#: includes/Modules/Builder/Module.php:416
+#: includes/Modules/Builder/Module.php:422
 msgid "Open in new tab"
 msgstr "باز کردن در تب جدید"
 
-#: includes/Modules/Builder/Module.php:419
+#: includes/Modules/Builder/Module.php:425
 msgid "Previews show a design right away — nothing changes for visitors until you save."
 msgstr "پیش‌نمایش طرح را فوراً نشان می‌دهد؛ تا وقتی ذخیره نکنید چیزی برای بازدیدکننده‌ها تغییر نمی‌کند."
 
-#: includes/Modules/Builder/Module.php:423
+#: includes/Modules/Builder/Module.php:429
 msgid "Kind"
 msgstr "نوع"
 
-#: includes/Modules/Builder/Module.php:424
+#: includes/Modules/Builder/Module.php:430
 msgid "Start from"
 msgstr "شروع از"
 
-#: includes/Modules/Builder/Module.php:425
+#: includes/Modules/Builder/Module.php:431
 msgid "Blank canvas"
 msgstr "صفحه خالی"
 
-#: includes/Modules/Builder/Module.php:426
+#: includes/Modules/Builder/Module.php:432
 msgid "Create & open Elementor"
 msgstr "ساختن و باز کردن المنتور"
 
-#: includes/Modules/Builder/Module.php:427
+#: includes/Modules/Builder/Module.php:433
 msgid "Create"
 msgstr "ساختن"
 
-#: includes/Modules/Builder/Module.php:428
+#: includes/Modules/Builder/Module.php:434
 msgid "New name"
 msgstr "نام جدید"
 
-#: includes/Modules/Builder/Module.php:429
+#: includes/Modules/Builder/Module.php:435
 msgid "Save"
 msgstr "ذخیره"
 
-#: includes/Modules/Builder/Module.php:431
+#: includes/Modules/Builder/Module.php:437
 msgid "In use"
 msgstr "در حال استفاده"
 
-#: includes/Modules/Builder/Module.php:432
+#: includes/Modules/Builder/Module.php:438
 msgid "Ready-made"
 msgstr "آماده"
 
-#: includes/Modules/Builder/Module.php:433
+#: includes/Modules/Builder/Module.php:439
 msgid "Edited"
 msgstr "ویرایش‌شده"
 
-#: includes/Modules/Builder/Module.php:434
+#: includes/Modules/Builder/Module.php:440
 msgid "No templates of this kind yet."
 msgstr "هنوز قالبی از این نوع ندارید."
 
-#: includes/Modules/Builder/Module.php:436
+#: includes/Modules/Builder/Module.php:442
 msgid "Studiare colours applied — save to keep them."
 msgstr "رنگ‌های استادیار اعمال شد؛ برای ماندگاری ذخیره کنید."
 
-#: includes/Modules/Builder/Module.php:437
+#: includes/Modules/Builder/Module.php:443
 msgid "Brand colours added to Elementor's global colours."
 msgstr "رنگ‌های برند به رنگ‌های سراسری المنتور اضافه شد."
 
-#: includes/Modules/Builder/Module.php:438
+#: includes/Modules/Builder/Module.php:444
 msgid "Flexbox containers activated."
 msgstr "کانتینرهای فلکس‌باکس فعال شد."
 
@@ -4159,29 +4159,29 @@ msgstr "آدم‌های واقعی به سوال‌هایتان جواب می‌
 msgid "Picked for you"
 msgstr "پیشنهاد ما برای شما"
 
-#: includes/Modules/Builder/Product_Meta_Box.php:37
+#: includes/Modules/Builder/Product_Meta_Box.php:42
 msgid "Studiare+ page template"
 msgstr "قالب صفحه استادیار+"
 
-#: includes/Modules/Builder/Product_Meta_Box.php:75
+#: includes/Modules/Builder/Product_Meta_Box.php:80
 msgid "Layout of this page"
 msgstr "طرح این صفحه"
 
 #. translators: %s: template picked by the category rules.
-#: includes/Modules/Builder/Product_Meta_Box.php:80
+#: includes/Modules/Builder/Product_Meta_Box.php:85
 #, php-format
 msgid "Automatic (%s)"
 msgstr "خودکار (%s)"
 
-#: includes/Modules/Builder/Product_Meta_Box.php:93
+#: includes/Modules/Builder/Product_Meta_Box.php:98
 msgid "Page templates are switched off, so the theme layout is used until you enable them."
 msgstr "قالب‌ساز صفحات خاموش است؛ تا وقتی آن را فعال نکنید، طرح قالب استفاده می‌شود."
 
-#: includes/Modules/Builder/Product_Meta_Box.php:97
+#: includes/Modules/Builder/Product_Meta_Box.php:102
 msgid "One item per line"
 msgstr "هر مورد در یک خط"
 
-#: includes/Modules/Builder/Product_Meta_Box.php:98
+#: includes/Modules/Builder/Product_Meta_Box.php:103
 msgid "Shown by the \"Highlights\" widget of the page templates. One item per line."
 msgstr "در ویجت «نکات کلیدی» قالب‌ساز صفحات نمایش داده می‌شود. هر مورد در یک خط."
 
@@ -4666,7 +4666,7 @@ msgstr "خرید"
 msgid "Sale"
 msgstr "حراج"
 
-#: includes/Modules/Builder/Elementor/Cards.php:408
+#: includes/Modules/Builder/Elementor/Cards.php:409
 #: includes/Modules/Builder/Elementor/Widgets/Archive_Title.php:191
 #: includes/Modules/Builder/Elementor/Widgets/Post_Grid.php:290
 #: includes/Modules/Builder/Presets/Home.php:726
@@ -4844,7 +4844,7 @@ msgstr "صفرها نمایش داده شوند"
 msgid "Show a message"
 msgstr "یک پیام نمایش داده شود"
 
-#: includes/Modules/Builder/Contact_Inbox.php:63
+#: includes/Modules/Builder/Contact_Inbox.php:75
 #: includes/Modules/Builder/Contact_Messages.php:494
 #: includes/Modules/Builder/Elementor/Widgets/Countdown.php:95
 #: includes/Modules/Checkout/views/admin.php:252
@@ -5734,81 +5734,81 @@ msgstr "برگه پیدا نشد."
 
 #: includes/Modules/Builder/Design_Pages.php:86
 #: includes/Modules/Builder/Module.php:55
-#: includes/Modules/Builder/Module.php:450
+#: includes/Modules/Builder/Module.php:456
 msgid "Home page"
 msgstr "صفحه اصلی"
 
-#: includes/Modules/Builder/Module.php:439
+#: includes/Modules/Builder/Module.php:445
 msgid "Create page"
 msgstr "ساخت برگه"
 
 #. translators: %s: design name.
-#: includes/Modules/Builder/Module.php:441
+#: includes/Modules/Builder/Module.php:447
 #, php-format
 msgid "New page from \"%s\""
 msgstr "برگه جدید از «%s»"
 
-#: includes/Modules/Builder/Module.php:442
+#: includes/Modules/Builder/Module.php:448
 msgid "Page name"
 msgstr "نام برگه"
 
-#: includes/Modules/Builder/Module.php:443
+#: includes/Modules/Builder/Module.php:449
 msgid "Publish now"
 msgstr "همین حالا منتشر شود"
 
-#: includes/Modules/Builder/Module.php:444
+#: includes/Modules/Builder/Module.php:450
 msgid "Off: the page is saved as a draft that only you can see."
 msgstr "خاموش: برگه به صورت پیش‌نویس ذخیره می‌شود و فقط شما آن را می‌بینید."
 
-#: includes/Modules/Builder/Module.php:445
+#: includes/Modules/Builder/Module.php:451
 msgid "Use it as the site's home page"
 msgstr "صفحه اصلی سایت شود"
 
-#: includes/Modules/Builder/Module.php:446
+#: includes/Modules/Builder/Module.php:452
 msgid "Visitors see it at the site address. The page is published."
 msgstr "بازدیدکنندگان آن را در نشانی اصلی سایت می‌بینند. برگه منتشر می‌شود."
 
-#: includes/Modules/Builder/Module.php:447
+#: includes/Modules/Builder/Module.php:453
 msgid "Page created."
 msgstr "برگه ساخته شد."
 
-#: includes/Modules/Builder/Module.php:448
+#: includes/Modules/Builder/Module.php:454
 msgid "The ready-made designs are not installed. Use \"Reinstall missing designs\" in the Templates tab."
 msgstr "طرح‌های آماده نصب نشده‌اند. در تب «قالب‌ها» از «نصب دوباره طرح‌های حذف‌شده» استفاده کنید."
 
-#: includes/Modules/Builder/Module.php:449
+#: includes/Modules/Builder/Module.php:455
 msgid "No pages yet. Create one from a design above."
 msgstr "هنوز برگه‌ای ساخته نشده است. از یکی از طرح‌های بالا یک برگه بسازید."
 
-#: includes/Modules/Builder/Module.php:451
+#: includes/Modules/Builder/Module.php:457
 msgid "Draft"
 msgstr "پیش‌نویس"
 
-#: includes/Modules/Builder/Module.php:452
+#: includes/Modules/Builder/Module.php:458
 msgid "Published"
 msgstr "منتشرشده"
 
 #. translators: %s: design name.
-#: includes/Modules/Builder/Module.php:454
+#: includes/Modules/Builder/Module.php:460
 #, php-format
 msgid "From \"%s\""
 msgstr "از طرح «%s»"
 
-#: includes/Modules/Builder/Module.php:455
+#: includes/Modules/Builder/Module.php:461
 #: includes/Modules/Builder/Presets/Home.php:726
 #: includes/Modules/Checkout/Thank_You.php:403
 msgid "View"
 msgstr "مشاهده"
 
-#: includes/Modules/Builder/Module.php:456
+#: includes/Modules/Builder/Module.php:462
 msgid "Make it the home page"
 msgstr "صفحه اصلی سایت شود"
 
-#: includes/Modules/Builder/Module.php:457
+#: includes/Modules/Builder/Module.php:463
 msgid "This page is now the site's home page."
 msgstr "این برگه اکنون صفحه اصلی سایت است."
 
-#: includes/Modules/Builder/Module.php:458
+#: includes/Modules/Builder/Module.php:464
 msgid "Edit the design"
 msgstr "ویرایش طرح"
 
@@ -6408,7 +6408,7 @@ msgstr "سال سابقه"
 msgid "Learners"
 msgstr "یادگیرنده"
 
-#: includes/Modules/Builder/Module.php:249
+#: includes/Modules/Builder/Module.php:255
 msgid "Home pages"
 msgstr "صفحه‌های اصلی"
 
@@ -7046,8 +7046,8 @@ msgstr " ثانیه"
 msgid "Link copied."
 msgstr "لینک کپی شد."
 
-#: includes/Modules/Builder/Contact_Inbox.php:48
-#: includes/Modules/Builder/Contact_Inbox.php:49
+#: includes/Modules/Builder/Contact_Inbox.php:53
+#: includes/Modules/Builder/Contact_Inbox.php:54
 #: includes/Modules/Builder/Contact_Messages.php:62
 #: includes/Modules/Builder/Contact_Messages.php:64
 #: includes/Modules/Builder/Contact_Messages.php:65
@@ -7056,32 +7056,32 @@ msgstr "لینک کپی شد."
 msgid "Contact messages"
 msgstr "پیام‌های تماس"
 
-#: includes/Modules/Builder/Contact_Inbox.php:62
+#: includes/Modules/Builder/Contact_Inbox.php:74
 msgid "From"
 msgstr "فرستنده"
 
-#: includes/Modules/Builder/Contact_Inbox.php:64
+#: includes/Modules/Builder/Contact_Inbox.php:76
 #: includes/Modules/Builder/Contact_Messages.php:382
 msgid "Page"
 msgstr "برگه"
 
-#: includes/Modules/Builder/Contact_Inbox.php:65
+#: includes/Modules/Builder/Contact_Inbox.php:77
 msgid "Received"
 msgstr "زمان دریافت"
 
 #. translators: %s: time since the message arrived, e.g. "5 minutes".
-#: includes/Modules/Builder/Contact_Inbox.php:108
+#: includes/Modules/Builder/Contact_Inbox.php:120
 #, php-format
 msgid "%s ago"
 msgstr "%s پیش"
 
 #. translators: %s: topic of the message being answered.
-#: includes/Modules/Builder/Contact_Inbox.php:164
+#: includes/Modules/Builder/Contact_Inbox.php:176
 #, php-format
 msgid "Re: %s"
 msgstr "پاسخ: %s"
 
-#: includes/Modules/Builder/Contact_Inbox.php:165
+#: includes/Modules/Builder/Contact_Inbox.php:177
 msgid "Reply by email"
 msgstr "پاسخ با ایمیل"
 
@@ -8463,15 +8463,15 @@ msgstr "صفحه درباره ما"
 msgid "Contact us page"
 msgstr "صفحه تماس با ما"
 
-#: includes/Modules/Builder/Module.php:250
+#: includes/Modules/Builder/Module.php:256
 msgid "About us pages"
 msgstr "صفحه‌های درباره ما"
 
-#: includes/Modules/Builder/Module.php:251
+#: includes/Modules/Builder/Module.php:257
 msgid "Contact us pages"
 msgstr "صفحه‌های تماس با ما"
 
-#: includes/Modules/Builder/Module.php:420
+#: includes/Modules/Builder/Module.php:426
 msgid "Add a published product (or blog post) first to preview it with real data."
 msgstr "اول یک محصول (یا نوشته وبلاگ) منتشر کنید تا پیش‌نمایش با اطلاعات واقعی نمایش داده شود."
 
@@ -11308,6 +11308,14 @@ msgstr "پنجره ورود روی سبد خرید باز می‌شود. برا�
 msgid "\"%s\" has been added to your cart."
 msgstr "«%s» به سبد خرید شما اضافه شد."
 
-#: includes/Modules/Builder/Elementor/Cards.php:381
+#: includes/Modules/Builder/Elementor/Cards.php:382
 msgid "Added to cart"
 msgstr "به سبد خرید اضافه شد"
+
+#: includes/Modules/Theme_Fixes/Order_List_Checkboxes.php:42
+msgid "Order list checkboxes"
+msgstr "تیک فهرست سفارش‌ها"
+
+#: includes/Modules/Theme_Fixes/Order_List_Checkboxes.php:46
+msgid "In the WooCommerce orders list, ticking an order's checkbox opens the order instead of selecting it, so bulk actions cannot be used. This happens with WordPress 7.1 and WooCommerce versions before 11.1. This fix makes the checkboxes select orders again."
+msgstr "در فهرست سفارش‌های ووکامرس، زدن تیک یک سفارش به‌جای انتخاب آن، خود سفارش را باز می‌کند و کارهای گروهی ممکن نیست. این مشکل در وردپرس ۷٫۱ با نسخه‌های ووکامرس پیش از ۱۱٫۱ پیش می‌آید. این رفع باعث می‌شود تیک‌ها دوباره سفارش‌ها را انتخاب کنند."

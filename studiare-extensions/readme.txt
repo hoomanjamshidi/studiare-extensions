@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.11.5
+Stable tag: 1.11.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,12 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button**, **Studiare+ → Cart & checkout** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.11.7 =
+* Page templates: the feature is now hidden in the admin (menu, dashboard card, settings page, product template box) until an administrator opens its private unlock link. Templates already in use keep working for visitors, and pages are still edited in Elementor with every Studiare+ widget.
+
+= 1.11.6 =
+* Theme fixes: with WordPress 7.1 and WooCommerce before 11.1, ticking an order's checkbox in the WooCommerce orders list opened the order instead of selecting it. The new "Order list checkboxes" fix makes the checkboxes select orders again, so bulk actions work.
 
 = 1.11.5 =
 * Checkout: "Login before checkout" opened the login popup only once the whole page had loaded, which on a slow site came while the visitor was already typing their number, and closed the popup. It now opens as soon as the page is ready and never closes an open popup.

@@ -140,11 +140,13 @@ final class Template_Post_Type {
 	 * @param object $document Elementor document.
 	 */
 	public function exit_url( $url, $document ) {
-		if ( is_object( $document ) && method_exists( $document, 'get_main_id' ) && self::POST_TYPE === get_post_type( $document->get_main_id() ) ) {
-			return $this->module->library_url();
+		if ( ! is_object( $document ) || ! method_exists( $document, 'get_main_id' ) || self::POST_TYPE !== get_post_type( $document->get_main_id() ) ) {
+			return $url;
 		}
 
-		return $url;
+		// While the library is hidden its page does not exist, and Elementor's own link (the edit screen)
+		// is sent straight back into the editor by redirect_classic_editor(), so exit to the dashboard.
+		return Access::granted() ? $this->module->library_url() : admin_url();
 	}
 
 	/**

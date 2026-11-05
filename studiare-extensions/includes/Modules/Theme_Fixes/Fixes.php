@@ -22,6 +22,7 @@ final class Fixes {
 		No_Repeat_Purchase::class,
 		Safe_Checkout::class,
 		Mail_Without_Php_Mail::class,
+		Order_List_Checkboxes::class,
 	);
 
 	/** @var array<string, Fix>|null Memoized instances keyed by fix id. */

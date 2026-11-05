@@ -32,6 +32,11 @@ final class Product_Meta_Box {
 	}
 
 	public function add(): void {
+		// Without the box save() finds no nonce and leaves a chosen template as it is.
+		if ( ! Access::granted() ) {
+			return;
+		}
+
 		add_meta_box(
 			'stx-builder-product',
 			__( 'Studiare+ page template', 'studiare-extensions' ),
