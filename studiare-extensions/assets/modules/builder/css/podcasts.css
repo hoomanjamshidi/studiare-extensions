@@ -141,6 +141,78 @@
 	background: color-mix(in srgb, var(--stx-pods-accent) 22%, transparent);
 }
 
+/* Handle over the progress line: a transparent slider, 20px tall around the
+   3px line so a finger can catch it. Its thumb shows on the episode being
+   played, on hover and while focused or dragged. */
+.stx-pods .stx-ep__seek {
+	position: absolute;
+	z-index: 2;
+	display: block;
+	height: 20px;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.stx-ep__seek::-webkit-slider-runnable-track {
+	height: 20px;
+	background: transparent;
+}
+
+.stx-ep__seek::-moz-range-track {
+	height: 20px;
+	background: transparent;
+}
+
+.stx-ep__seek::-webkit-slider-thumb {
+	width: 14px;
+	height: 14px;
+	margin-top: 3px;
+	border: 2px solid var(--stx-pods-accent);
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.stx-ep__seek::-moz-range-thumb {
+	box-sizing: border-box;
+	width: 14px;
+	height: 14px;
+	border: 2px solid var(--stx-pods-accent);
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+:is(.stx-ep:hover, .stx-ep.is-current, .stx-ep.is-playing) .stx-ep__seek::-webkit-slider-thumb,
+.stx-ep__seek:is(:focus-visible, .is-dragging)::-webkit-slider-thumb {
+	opacity: 1;
+}
+
+:is(.stx-ep:hover, .stx-ep.is-current, .stx-ep.is-playing) .stx-ep__seek::-moz-range-thumb,
+.stx-ep__seek:is(:focus-visible, .is-dragging)::-moz-range-thumb {
+	opacity: 1;
+}
+
+.stx-pods .stx-ep__seek:focus-visible {
+	outline: 2px solid var(--stx-pods-accent);
+	outline-offset: -4px;
+	border-radius: 10px;
+}
+
 /* ==========================================================================
    Episode text (rows, playlist, cards)
    ========================================================================== */
@@ -329,7 +401,14 @@ body.scdarkcolors a:is(.stx-ep__open) {
 
 .stx-ep--row .stx-ep__bar {
 	inset-inline: 14px;
-	bottom: 2px;
+	bottom: 4px;
+}
+
+/* Centred on the line: 4px + 1.5px − 10px. */
+.stx-ep--row .stx-ep__seek {
+	inset-inline: 14px;
+	bottom: -4.5px;
+	width: calc(100% - 28px);
 }
 
 .stx-ep__num {
@@ -460,6 +539,13 @@ body.scdarkcolors a:is(.stx-ep__open) {
 	border-radius: 0;
 }
 
+/* Centred on the line at the foot of the picture, above the card's link. */
+.stx-ep--card .stx-ep__seek {
+	inset-inline: 0;
+	bottom: -8.5px;
+	width: 100%;
+}
+
 .stx-ep--card .stx-ep__body {
 	padding: 14px 16px 18px;
 }
@@ -485,6 +571,15 @@ body.scdarkcolors a:is(.stx-ep__open) {
 	.stx-pods--side .stx-pods__inner {
 		grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.15fr);
 		gap: 28px;
+	}
+
+	/* "Player side: end": the list first, the player at the inline end. */
+	.stx-pods--deck-end .stx-pods__inner {
+		grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+	}
+
+	.stx-pods--deck-end .stx-pdeck {
+		order: 1;
 	}
 
 	/* Stays in view while the visitor looks down a long list. */
@@ -812,8 +907,12 @@ body.scdarkcolors a:is(.stx-ep__open) {
 		padding: 10px 8px;
 	}
 
-	.stx-ep--row .stx-ep__bar {
+	.stx-ep--row :is(.stx-ep__bar, .stx-ep__seek) {
 		inset-inline: 8px;
+	}
+
+	.stx-ep--row .stx-ep__seek {
+		width: calc(100% - 16px);
 	}
 
 	.stx-ep__thumb.has-cover {
@@ -1088,6 +1187,7 @@ body.scdarkcolors a:is(.stx-ep__open) {
 
 @media (scripting: none) {
 	.stx-pods__play,
+	.stx-ep__seek,
 	.stx-pdeck__bar,
 	.stx-pdeck__controls {
 		display: none !important;
@@ -1118,6 +1218,14 @@ body.scdarkcolors a:is(.stx-ep__open) {
 	.stx-pods .stx-pods__link:hover .stx-pods__go svg {
 		transform: none;
 		translate: none;
+	}
+
+	.stx-ep__seek::-webkit-slider-thumb {
+		transition: none;
+	}
+
+	.stx-ep__seek::-moz-range-thumb {
+		transition: none;
 	}
 
 	:is(.stx-ep, .stx-pdeck).is-loading .stx-pods__spinner {

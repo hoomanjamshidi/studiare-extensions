@@ -3,7 +3,7 @@ Tags: studiare, bottom navigation, elementor, woocommerce, rtl
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.11.7
+Stable tag: 1.11.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,21 @@ Extra features for the Studiare LMS theme: a customizable mobile bottom navigati
 3. Open **Studiare+ → Mobile bottom navigation**, **Studiare+ → Page templates**, **Studiare+ → Floating support button**, **Studiare+ → Cart & checkout** or **Studiare+ → Theme fixes** in the admin menu.
 
 == Changelog ==
+
+= 1.11.11 =
+* Theme fixes: "Change mobile number" in the mobile sign-up now starts over from the number. 1.11.10 kept refusing the old email after the change, while the email field was hidden. Now a member's number logs in, and a new number brings the sign-up fields back (still filled in) to be checked again. The send button also comes back after "Change mobile number" once a code has been sent; the theme left it hidden until the page was reloaded.
+
+= 1.11.10 =
+* Theme fixes: "Taken email or mobile in the mobile sign-up" also checks the details after "Change mobile number". The theme hid the sign-up fields but kept the terms box ticked, and then sent a code to the new number without checking the email again.
+
+= 1.11.9 =
+* Podcast list: every row and card now has a handle on its progress line, so an episode can be moved forward or back right in the list, like the player's timeline. The handle shows on the episode being played and on hover.
+* Podcasts: the volume control added in 1.11.8 is removed again; the player looks as before.
+
+= 1.11.8 =
+* Podcasts: every podcast player has a volume control: the post player, the Podcast list player, and the current row or card of the list. One level and mute switch for all players on the page, remembered between visits (on iPhone and iPad the button mutes; their volume buttons set the level).
+* Podcast list: new "Player side" setting for the player beside the list, so the player can sit on the other side.
+* Theme fixes: new "Taken email or mobile in the mobile sign-up" fix. When someone signs up through the theme's mobile login with an email, username or mobile number that already has an account, they now see which one is already registered, before any code is sent, instead of "unknown error".
 
 = 1.11.7 =
 * Page templates: the feature is now hidden in the admin (menu, dashboard card, settings page, product template box) until an administrator opens its private unlock link. Templates already in use keep working for visitors, and pages are still edited in Elementor with every Studiare+ widget.

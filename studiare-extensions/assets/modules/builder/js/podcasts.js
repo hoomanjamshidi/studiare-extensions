@@ -7,10 +7,12 @@
  * is paused by it through the `stx:podcast-play` event. The playlist look
  * has a player (the deck) that shows the chosen episode, with seeking,
  * 15/30 second jumps, previous/next and speed, and goes on to the next
- * episode at the end. Positions are kept per episode under the same key as
- * the post player (`stxPodcast:<post id>`), so listening continues across
- * the two, and the speed under `stxPodcastSpeed`. Progress only changes a
- * transform. Without JavaScript the titles are plain links to the posts.
+ * episode at the end. Every row and card has a handle on its progress line
+ * to move the episode forward or back. Positions are kept per episode under
+ * the same key as the post player (`stxPodcast:<post id>`), so listening
+ * continues across the two, and the speed under `stxPodcastSpeed`. Progress
+ * only changes a transform. Without JavaScript the titles are plain links
+ * to the posts.
  */
 ( function () {
 	'use strict';
@@ -142,11 +144,19 @@
 		}
 	}
 
-	/** Moves the progress line of the episode (and of the deck showing it). */
+	/** Moves the progress line and handle of the episode (and the deck showing it). */
 	function showTime( ep, time ) {
 		const duration = durationOf( ep );
 		const ratio = duration ? Math.min( 1, time / duration ) : 0;
 		ep.style.setProperty( '--stx-ep-p', ratio.toFixed( 4 ) );
+
+		const seek = ep.querySelector( '[data-ep-seek]' );
+		if ( seek ) {
+			if ( ! seek.classList.contains( 'is-dragging' ) ) {
+				seek.value = String( Math.floor( time ) );
+			}
+			seek.setAttribute( 'aria-valuetext', format( i18n.position, [ clock( time ), duration ? clock( duration ) : '--:--' ] ) );
+		}
 
 		const deck = deckOf( ep );
 		if ( deck && deck.ep === ep ) {
@@ -160,6 +170,10 @@
 		}
 		ep.dataset.duration = String( Math.floor( value ) );
 		ep.dataset.time = clock( value );
+		const seek = ep.querySelector( '[data-ep-seek]' );
+		if ( seek ) {
+			seek.max = ep.dataset.duration;
+		}
 		const deck = deckOf( ep );
 		if ( deck && deck.ep === ep ) {
 			deck.showEpisode( ep );
@@ -270,6 +284,11 @@
 
 		const player = media();
 		current = ep;
+		// Lists without a player mark the episode in the audio themselves (its
+		// handle then stays in view); the player marks the one it shows.
+		if ( ! deckOf( ep ) ) {
+			listOf( ep ).querySelectorAll( '[data-stx-ep]' ).forEach( ( item ) => item.classList.toggle( 'is-current', item === ep ) );
+		}
 		startAt = savedTime( ep );
 		lastSaved = startAt;
 		player.src = ep.dataset.audio;
@@ -332,6 +351,22 @@
 		}
 	} );
 	window.addEventListener( 'pagehide', () => save( true ) );
+
+	/**
+	 * The handle on an episode's progress line: the line follows a drag, and
+	 * the episode jumps there on release (or, when it is not the one in the
+	 * audio, starts there next time).
+	 */
+	function initSeek( ep, seek ) {
+		seek.addEventListener( 'input', () => {
+			seek.classList.add( 'is-dragging' );
+			showTime( ep, parseFloat( seek.value ) || 0 );
+		}, UNDELAYED );
+		seek.addEventListener( 'change', () => {
+			seek.classList.remove( 'is-dragging' );
+			seekTo( ep, parseFloat( seek.value ) || 0 );
+		} );
+	}
 
 	/* ---------------------------------------------------------------------
 	 * Deck (the player of the playlist look)
@@ -495,6 +530,10 @@
 		}
 
 		episodes.forEach( ( ep ) => {
+			const seek = ep.querySelector( '[data-ep-seek]' );
+			if ( seek ) {
+				initSeek( ep, seek );
+			}
 			showTime( ep, savedTime( ep ) );
 			ep.querySelectorAll( '[data-ep-play]' ).forEach( ( button ) => {
 				button.addEventListener( 'click', () => {

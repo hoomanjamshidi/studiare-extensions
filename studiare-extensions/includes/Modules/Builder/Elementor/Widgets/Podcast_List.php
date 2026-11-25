@@ -4,7 +4,8 @@
  * four looks. Three play the episodes in place (podcasts.js), the fourth is
  * a list of links beside a picture:
  *
- * - playlist: a player for the chosen episode beside or above the episodes;
+ * - playlist: a player for the chosen episode beside (on either side) or
+ *             above the episodes;
  * - cards:    a grid of episode covers with a play button;
  * - rows:     compact rows with a play button and a progress line;
  * - list:     numbered rows that open the post's player, beside a picture.
@@ -245,6 +246,31 @@ final class Podcast_List extends Base {
 			)
 		);
 
+		$this->add_control(
+			'deck_place',
+			array(
+				'label'       => __( 'Player side', 'studiare-extensions' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'default'     => 'start',
+				'toggle'      => false,
+				'options'     => array(
+					'start' => array(
+						'title' => __( 'Start', 'studiare-extensions' ),
+						'icon'  => 'eicon-h-align-' . self::start_icon(),
+					),
+					'end'   => array(
+						'title' => __( 'End', 'studiare-extensions' ),
+						'icon'  => 'eicon-h-align-' . self::end_icon(),
+					),
+				),
+				'description' => __( 'On narrow screens the player stays above the list.', 'studiare-extensions' ),
+				'condition'   => array(
+					'look'      => 'playlist',
+					'deck_side' => 'side',
+				),
+			)
+		);
+
 		$this->add_columns_control( '.stx-pods__grid', array( 4, 2, 1 ), 6, array( 'condition' => array( 'look' => 'cards' ) ) );
 
 		$this->add_control(
@@ -475,6 +501,9 @@ final class Podcast_List extends Base {
 		$classes = array( 'stx-pods', 'stx-pods--' . $look );
 		if ( 'playlist' === $look && 'side' === $s['deck_side'] ) {
 			$classes[] = 'stx-pods--side';
+			if ( 'end' === $s['deck_place'] ) {
+				$classes[] = 'stx-pods--deck-end';
+			}
 		}
 		if ( 'cards' === $look && 'yes' === $s['swipe'] ) {
 			$classes[] = 'stx-pods--swipe';
@@ -615,7 +644,7 @@ final class Podcast_List extends Base {
 		}
 
 		echo $this->open_link( $episode, (string) $s['open_text'], false ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by open_link().
-		echo '<span class="stx-ep__bar" aria-hidden="true"><i></i></span>';
+		echo '<span class="stx-ep__bar" aria-hidden="true"><i></i></span>' . self::seek_handle( $episode ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by seek_handle().
 		echo '</li>';
 	}
 
@@ -636,7 +665,7 @@ final class Podcast_List extends Base {
 		if ( 'yes' === $s['duration'] && '' !== $episode['time'] ) {
 			echo '<span class="stx-ep__time"><bdi dir="ltr">' . esc_html( $episode['time'] ) . '</bdi></span>';
 		}
-		echo '<span class="stx-ep__bar" aria-hidden="true"><i></i></span>';
+		echo '<span class="stx-ep__bar" aria-hidden="true"><i></i></span>' . self::seek_handle( $episode ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by seek_handle().
 		echo '</span>';
 
 		echo '<span class="stx-ep__body">';
@@ -676,6 +705,22 @@ final class Podcast_List extends Base {
 			esc_url( $episode['url'] ),
 			esc_attr( $text . ': ' . $episode['pod']['title'] ),
 			self::CHEVRON
+		);
+	}
+
+	/**
+	 * Slider over an episode's progress line, so a row or card can be moved
+	 * forward or back like the player's timeline. It reads left to right in
+	 * every language, like the line under it; podcasts.js moves it.
+	 *
+	 * @param array $episode episode().
+	 */
+	private static function seek_handle( array $episode ): string {
+		return sprintf(
+			'<input type="range" class="stx-ep__seek" min="0" max="%1$s" step="1" value="0" dir="ltr" aria-label="%2$s" data-ep-seek>',
+			esc_attr( (string) (int) $episode['pod']['duration'] ),
+			/* translators: %s: episode title. */
+			esc_attr( sprintf( __( 'Playback position: %s', 'studiare-extensions' ), $episode['pod']['title'] ) )
 		);
 	}
 

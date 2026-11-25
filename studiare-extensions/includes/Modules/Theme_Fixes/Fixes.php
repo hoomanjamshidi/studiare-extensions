@@ -17,6 +17,7 @@ final class Fixes {
 	/** Fix classes, in the order the admin lists them. */
 	private const CLASSES = array(
 		Otp_Digits::class,
+		Otp_Taken_Account::class,
 		Sold_Out_Button::class,
 		Fresh_Account_Page::class,
 		No_Repeat_Purchase::class,
